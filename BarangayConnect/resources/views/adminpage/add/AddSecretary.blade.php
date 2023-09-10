@@ -29,19 +29,19 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/ManageResidents">
             <i class='bx bx-list-ul' ></i>
             <span class="links_name">Manage Residents</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/ManageServices">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/AdminTransaction">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>

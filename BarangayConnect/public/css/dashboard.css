@@ -314,6 +314,14 @@ nav .profile-details i{
   background:  #0d3073;
 }
 
+.box {
+  background-color: #31323364;
+  transition: background-color 0.3s;
+  cursor: pointer; 
+}
+.box:hover {
+  background-color: #0d3073;
+}
 /* Right box */
 .home-content .sales-boxes .top-sales{
   width: 35%;

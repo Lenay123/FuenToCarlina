@@ -46,7 +46,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/AdminTransaction">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>

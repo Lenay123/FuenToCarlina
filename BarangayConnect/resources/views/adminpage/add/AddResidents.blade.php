@@ -35,19 +35,19 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/ManageServices">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/ManageServices">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/AdminTransaction">
             <i class='bx bx-book-alt' ></i>
             <span class="links_name">Logout</span>
           </a>

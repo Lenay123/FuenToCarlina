@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -42,7 +41,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/AdminTransaction">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>
@@ -53,7 +52,6 @@
             <span class="links_name">Logout</span>
           </a>
         </li>
-
       </ul>
   </div>
   <section class="home-section">
@@ -75,49 +73,49 @@
 
     <div class="home-content">
       <div class="overview-boxes">
-        <div class="box">
+        <div class="box" style=" background-color: #31323364;">
           <div class="right-side">
-            <div class="box-topic">Total Order</div>
-            <div class="number">40,876</div>
+            <div class="box-topic">Total Users</div>
+            <div class="number">1,000</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
+              <span class="text">January 2023</span>
             </div>
           </div>
-          <i class='bx bx-cart-alt cart'></i>
+          <box-icon name='git-pull-request'></box-icon>
         </div>
-        <div class="box">
+        <div class="box" style=" background-color: #31323364;">
           <div class="right-side">
-            <div class="box-topic">Total Sales</div>
-            <div class="number">38,876</div>
+            <div class="box-topic">Total Secretary</div>
+            <div class="number">2</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
+              <span class="text">January 2023</span>
             </div>
           </div>
-          <i class='bx bxs-cart-add cart two' ></i>
+          <box-icon name='child'></box-icon>
         </div>
-        <div class="box">
+        <div class="box" style=" background-color: #31323364;">
           <div class="right-side">
-            <div class="box-topic">Total Profit</div>
-            <div class="number">$12,876</div>
+            <div class="box-topic">Total Officials</div>
+            <div class="number">15</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
+              <span class="text">September 2022</span>
             </div>
           </div>
-          <i class='bx bx-cart cart three' ></i>
+          <box-icon name='child'></box-icon>
         </div>
-        <div class="box">
+        <div class="box" style=" background-color: #31323364;">
           <div class="right-side">
-            <div class="box-topic">Total Return</div>
-            <div class="number">11,086</div>
+            <div class="box-topic">Visitors</div>
+            <div class="number">36</div>
             <div class="indicator">
-              <i class='bx bx-down-arrow-alt down'></i>
-              <span class="text">Down From Today</span>
+              <i class='bx bx-up-arrow-alt'></i>
+              <span class="text">September 2023</span>
             </div>
           </div>
-          <i class='bx bxs-cart-download cart four' ></i>
+          <box-icon name='child'></box-icon>
         </div>
       </div>
 
@@ -168,8 +166,8 @@
             <li><a href="#">$56.56</a></li>
             <li><a href="#">$44.95</a></li>
             <li><a href="#">$67.33</a></li>
-             <li><a href="#">$23.53</a></li>
-             <li><a href="#">$46.52</a></li>
+            <li><a href="#">$23.53</a></li>
+            <li><a href="#">$46.52</a></li>
           </ul>
           </div>
           <div class="button">
@@ -181,55 +179,55 @@
           <ul class="top-sales-details">
             <li>
             <a href="#">
-              <img src="images/sunglasses.jpg" alt="">
+              <img src="https://bisayatraveler.com/wp-content/uploads/2019/04/DLAY0110.jpg" alt="">
               <span class="product">Vuitton Sunglasses</span>
             </a>
             <span class="price">$1107</span>
           </li>
           <li>
             <a href="#">
-               <img src="images/jeans.jpg" alt="">
+               <img src="https://sugbo.ph/wp-content/uploads/2020/07/Blue-Space-Resort-Barili-Cebu-4.jpg" alt="">
               <span class="product">Hourglass Jeans </span>
             </a>
             <span class="price">$1567</span>
           </li>
           <li>
             <a href="#">
-             <img src="images/nike.jpg" alt="">
+             <img src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
               <span class="product">Nike Sport Shoe</span>
             </a>
             <span class="price">$1234</span>
           </li>
           <li>
             <a href="#">
-              <img src="images/scarves.jpg" alt="">
+              <img src="https://bisayatraveler.com/wp-content/uploads/2019/04/DLAY0110.jpg" alt="">
               <span class="product">Hermes Silk Scarves.</span>
             </a>
             <span class="price">$2312</span>
           </li>
           <li>
             <a href="#">
-              <img src="images/blueBag.jpg" alt="">
+              <img src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
               <span class="product">Succi Ladies Bag</span>
             </a>
             <span class="price">$1456</span>
           </li>
           <li>
             <a href="#">
-              <img src="images/bag.jpg" alt="">
+              <img src="https://sugbo.ph/wp-content/uploads/2020/09/Anahaw-Beach-Barili-Cebu-11.jpg" alt="">
               <span class="product">Gucci Womens's Bags</span>
             </a>
             <span class="price">$2345</span>
           <li>
             <a href="#">
-              <img src="images/addidas.jpg" alt="">
+              <img src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
               <span class="product">Addidas Running Shoe</span>
             </a>
             <span class="price">$2345</span>
           </li>
 <li>
             <a href="#">
-             <img src="images/shirt.jpg" alt="">
+             <img src="https://nopostcode.com/wp-content/uploads/2021/10/Ibo-Falls-11-1024x682.jpg" alt="">
               <span class="product">Bilack Wear's Shirt</span>
             </a>
             <span class="price">$1245</span>
@@ -242,15 +240,16 @@
 
   <script>
    let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function() {
-  sidebar.classList.toggle("active");
-  if(sidebar.classList.contains("active")){
-  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-}else
-  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+   let sidebarBtn = document.querySelector(".sidebarBtn");
+   sidebarBtn.onclick = function() {
+   sidebar.classList.toggle("active");
+   if(sidebar.classList.contains("active")){
+   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+  }else
+   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 }
- </script>
+</script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 </body>
 </html>

@@ -35,13 +35,13 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/ManageServices">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/adminpage/AdminTransaction">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>
@@ -469,13 +469,13 @@
 
 <script>
    let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function() {
-  sidebar.classList.toggle("active");
-  if(sidebar.classList.contains("active")){
-  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-}else
-  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+   let sidebarBtn = document.querySelector(".sidebarBtn");
+   sidebarBtn.onclick = function() {
+   sidebar.classList.toggle("active");
+   if(sidebar.classList.contains("active")){
+   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+  }else
+   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 }
  </script>
 
