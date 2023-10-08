@@ -11,23 +11,46 @@
   <div class="vertical-line"></div>
     <section>
         <div class="container">
+
+         
           <div class="user signinBx">
             <div class="imgBx"><img src="/img/logo.png" alt="" /></div>
            
             <div class="formBx">
-              <form action="" onsubmit="return false;">
+              <div class="mt-5">
+                @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{$error}}</div>
+    
+                        @endforeach
+                    </div>
+                @endif
+    
+                @if(session()->has('error'))
+                <div class="alert alert-danger">{{session('error')}}</div>
+    
+                @endif
+    
+                @if(session()->has('success'))
+                <div class="alert alert-success">{{session('success')}}</div>
+    
+                @endif
+            </div>
+              <form action="{{route('login.post')}}" method="POST">
+                @csrf
                 <h2>Sign In</h2>
-                <input type="text" name="" placeholder="Email" />
-                <input type="password" name="" placeholder="Password" />
+                <input type="text" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" />
                 <input type="submit" name="" value="Login" />
                 <p class="signup">
                   Don't have an account ?
-                  <a href="#" onclick="toggleForm();">Sign Up.</a>
+                  <a href="{{ route('register') }}">Sign Up.</a>
                 </p>
               </form>
             </div>
           </div>
-          <div class="user signupBx">
+          {{-- <div class="user signupBx">
             <div class="formBx">
               <form action="" onsubmit="return false;">
                 <h2>Register Here</h2>
@@ -90,7 +113,7 @@
             </div>
             
             <div class="imgBx"><img src="/img/logo.png" alt="" /></div>
-          </div>
+          </div> --}}
         </div>
         
       </section>

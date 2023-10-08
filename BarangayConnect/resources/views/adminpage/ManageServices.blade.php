@@ -39,7 +39,7 @@
           </a>
         </li>
         <li>
-          <a href="/adminpage/ManageServices" class="active">
+          <a href="{{ route('adminpage.index') }}" class="active">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>
@@ -92,7 +92,7 @@
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
                             <div class="mx-n1">
-                                <a href="/adminpage/add/AddService" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                <a href="{{ route('adminpage.create') }}" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span class=" pe-2">
                                         <i class="bi bi-plus"></i>
                                     </span>
@@ -104,7 +104,7 @@
                     <!-- Nav -->
                     <ul class="nav nav-tabs mt-4 overflow-x border-0">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">All Residents</a>
+                            <a href="#" class="nav-link active">All Services</a>
                         </li>
                     </ul>
                 </div>
@@ -122,129 +122,34 @@
                     </div>
                 </div>
         </article>  <br><br>
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    <div class="row">
+    @foreach ($services as $service)
+        <div class="col-md-4">
+            <div class="team-cards">
+                <div class="team-card">
+                    <img src="/image/{{ $service->image }}" alt="User 1">
+                    <h3>{{ $service->name }}</h3>
+                    <p>{{ $service->detail }}</p>
+                    <form action="{{ route('adminpage.destroy', $service->id) }}" method="POST">
+                        <a class="btn btn-primary" href="{{ route('adminpage.edit', $service->id) }}">
+                            <i class="fas fa-edit edit-icon"></i>
+                        </a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
 
-        <div class="team-cards">
-            <div class="team-card">
-                <img src="/img/image (5).png" alt="User 1">
-                <h3>Barangay ID</h3>
-                <p>
-                    Proof of a one person that is really and true belonging to that particular Barangay.
-                </p>
-                <div class="card-icons">
-                  <a href="/adminpage/edit/EditService" class="icon-link"><i class="fas fa-edit edit-icon"></i></a>
-                  <i class="fas fa-trash delete-icon"  data-toggle="modal" data-target="#confirmationModal"></i>
-                </div>
-                <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <div class="modal-body">
-                              Are you sure you want to proceed?
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                              <button type="button" class="btn btn-primary">Confirm</button>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-            </div>
-            <div class="team-card">
-                <img src="/img/image (5).png" alt="User 1">
-                <h3>Barangay ID</h3>
-                <p>
-                    Proof of a one person that is really and true belonging to that particular Barangay.
-                </p>
-                <div class="card-icons">
-                  <a href="/adminpage/edit/EditService" class="icon-link"><i class="fas fa-edit edit-icon"></i></a>
-                  <i class="fas fa-trash delete-icon"  data-toggle="modal" data-target="#confirmationModal"></i>
-                </div>
-                <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <div class="modal-body">
-                              Are you sure you want to proceed?
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                              <button type="button" class="btn btn-primary">Confirm</button>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-            </div>
-            <div class="team-card">
-                <img src="/img/image (5).png" alt="User 1">
-                <h3>Barangay ID</h3>
-                <p>
-                    Proof of a one person that is really and true belonging to that particular Barangay.
-                </p>
-                <div class="card-icons">
-                  <a href="/adminpage/edit/EditService" class="icon-link"><i class="fas fa-edit edit-icon"></i></a>
-                  <i class="fas fa-trash delete-icon"  data-toggle="modal" data-target="#confirmationModal"></i>
-                </div>
-                <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <div class="modal-body">
-                              Are you sure you want to proceed?
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                              <button type="button" class="btn btn-primary">Confirm</button>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-            </div>
-            <div class="team-card">
-                <img src="/img/image (5).png" alt="User 1">
-                <h3>Barangay ID</h3>
-                <p>
-                    Proof of a one person that is really and true belonging to that particular Barangay.
-                </p>
-                <div class="card-icons">
-                  <a href="/adminpage/edit/EditService" class="icon-link"><i class="fas fa-edit edit-icon"></i></a>
-                  <i class="fas fa-trash delete-icon"  data-toggle="modal" data-target="#confirmationModal"></i>
-                </div>
-                <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <div class="modal-body">
-                              Are you sure you want to proceed?
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                              <button type="button" class="btn btn-primary">Confirm</button>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-            </div>
-        </div> <br>
+       
         
 <script>
     let sidebar = document.querySelector(".sidebar");

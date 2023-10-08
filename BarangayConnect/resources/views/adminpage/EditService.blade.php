@@ -40,13 +40,13 @@
           </a>
         </li>
         <li>
-          <a href="/adminpage/ManageServices">
+          <a href="{{ route('adminpage.index') }}">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>
         </li>
         <li>
-          <a href="/adminpage/AdminTransaction">
+          <a href="">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>
           </a>
@@ -76,42 +76,40 @@
         <span class="admin_name">Prem Shahi</span>
         <i class='bx bx-chevron-down' ></i>
       </div>
-    </nav> <br><br><br>
+    </nav> <br><br><br> <br><br>
     <section>
-
-
-   
-		<form style="margin-left: 20px;margin-right: 20px;" class="row g-3">
-			<h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Personal Details</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+        There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="" method="POST" enctype="multipart/form-data" style="margin-left: 20px;margin-right: 20px;" class="row g-3">
+        <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Service Details</h2>
 			<div class="col-md-6">
 			  <label for="firstname" class="form-label">Service Name:</label>
-			  <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="firstname" required>
+			  <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="name" value="{{ $service->name }}" required>
 			</div>
 			<div class="col-md-6">
 				<label for="Photo" class="form-label">Photo:</label>
-				<input style=" border: 1px solid rgb(96, 90, 90);" type="file" class="form-control" id="Photo" required>
+				<input style=" border: 1px solid rgb(96, 90, 90);" type="file" class="form-control" name="image"  required>
+        <img src="/image/{{ $service->image }}" width="300px">
 			</div>
 			<div class="col-md-12">
 				<label for="serviceDescription" class="form-label">Service Description:</label>
-				<textarea style=" border: 1px solid rgb(96, 90, 90);" class="form-control" id="serviceDescription" rows="5" required></textarea>
+				<textarea style=" border: 1px solid rgb(96, 90, 90);" class="form-control" name="detail" rows="5" required>{{ $service->detail }}</textarea>
 			</div>
 			<div style="margin-left: 35%;margin-bottom: 2px;" class="col-md-2">
-				<a href="/adminpage/ManageServices" class="btn btn-primary">Cancel</a>
-                <a href="" class="btn btn-primary">Update</a>
+				<a href="{{ route('adminpage.index') }}" class="btn btn-primary" >Cancel</a>
+                <button type="submit" class="btn btn-primary">Update</button>
 			</div>
 			
 			</div>
 		</form>
-        {{-- <div style="margin-left: 60px;" class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#" class="active">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
-        </div> --}}
    
         </section>
 

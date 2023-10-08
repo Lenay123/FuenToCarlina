@@ -35,7 +35,7 @@
           </a>
         </li>
         <li>
-          <a href="/adminpage/ManageServices">
+          <a href="{{ route('adminpage.index') }}">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">Manage Services</span>
           </a>

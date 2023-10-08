@@ -24,7 +24,7 @@
                   <a href="/residentpage/transactions">Transaction</a>
               </li>
               <li>
-                  <a href="#contact">Logout</a>
+                  <a href="{{route('logout')}}">Logout</a>
               </li>
           </ul>
       </nav>
@@ -36,10 +36,14 @@
 <!-- uiView:  --><div class="ng-fadeInLeftShort ng-scope" >
 <div class="container-overlap bg-blue-500 ng-scope">
   <div class="media m0 pv">
-    <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User" class="media-object img-circle thumb64"></a></div>
+    {{-- <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User" class="media-object img-circle thumb64"></a></div> --}}
     <div class="media-body media-middle">
-      <h4 class="media-heading text-white">Christine Matthews</h4>
-      <span class="text-white">Sed eget lacus quis diam molestie mollis.</span>
+      <h1 class="media-heading text-white"> Welcome
+        @auth
+     <b>{{auth()->user()->first_name}}  {{auth()->user()->middle_name}}  {{auth()->user()->last_name}} </b>   
+
+      </h1>
+      {{-- <span class="text-white">Sed eget lacus quis diam molestie mollis.</span> --}}
     </div>
   </div>
 </div>
@@ -48,17 +52,16 @@
     <!-- Left column-->
     <div style="font-weight: 800" class="col-md-7 col-lg-8">
       <form  class="card ng-pristine ng-valid">
-        <h5 class="card-heading pb0">
+        {{-- <h5 class="card-heading pb0">
             About
-        </h5>
-        <div class="card-body">
-          <p class="ng-scope ng-binding editable">Pellentesque porta tincidunt justo, non fringilla erat iaculis in. Sed nisi erat, ornare eu pellentesque quis, pellentesque non nulla. Proin rutrum, est pellentesque commodo mattis, sem justo porttitor odio, id aliquet lacus augue nec nisl.</p>
-        </div>
-        <div class="card-divider"></div>
-        <div class="card-offset">
+        </h5> --}}
+        {{-- <div class="card-body">
+          <p class="ng-scope ng-binding editable"></div> --}}
+        {{-- <div class="card-divider"></div> --}}
+        {{-- <div class="card-offset"> --}}
           <div class="card-offset-item text-right">
-            <button type="button"  class="btn-raised btn btn-warning btn-circle btn-lg"><i class="fa-solid fa-pen-to-square" onclick="openModal()"></i></button>
-            <div id="editProfileModal" class="modal">
+            {{-- <button type="button"  class="btn-raised btn btn-warning btn-circle btn-lg"><i class="fa-solid fa-pen-to-square" onclick="openModal()"></i></button> --}}
+            {{-- <div id="editProfileModal" class="modal">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h2 class="modal-title">Edit Profile</h2>
@@ -92,39 +95,31 @@
                 </div>
               </div>
 
-          </div>
+          </div> --}}
         </div>
         <h5  style="font-weight: 800" class="card-heading pb0">Contact Information</h5>
         <div class="card-body">
           <table style="font-weight: 800" class="table table-striped">
             <tbody>
               <tr>
-                <td><em class="ion-document-text icon-fw mr"></em>Area</td>
-                <td class="ng-binding">Research &amp; development</td>
-              </tr>
-              <tr>
                 <td><em class="ion-egg icon-fw mr"></em>Birthday</td>
-                <td><span class="ng-scope ng-binding editable">10/11/2000</span></td>
-              </tr>
-              <tr>
-                <td><em class="ion-ios-body icon-fw mr"></em>Member since</td>
-                <td><span class="ng-scope ng-binding editable">05/11/2015</span></td>
+                <td><span class="ng-scope ng-binding editable">{{auth()->user()->birthday}}</span></td>
               </tr>
               <tr>
                 <td><em class="ion-man icon-fw mr"></em>Gender</td>
-                <td><span class="ng-scope ng-binding editable">Female</span></td>
+                <td><span class="ng-scope ng-binding editable">{{auth()->user()->gender}}</span></td>
               </tr>
               <tr>
                 <td><em class="ion-android-home icon-fw mr"></em>Address</td>
-                <td><span class="ng-scope ng-binding editable">Some street, 123</span></td>
+                <td><span class="ng-scope ng-binding editable">{{auth()->user()->address}}</span></td>
               </tr>
               <tr>
                 <td><em class="ion-email icon-fw mr"></em>Email</td>
-                <td><span class="ng-scope editable"><a href="" class="ng-binding">user@mail.com</a></span></td>
+                <td><span class="ng-scope editable"><a href="" class="ng-binding">{{auth()->user()->email}}</a></span></td>
               </tr>
               <tr>
                 <td><em class="ion-ios-telephone icon-fw mr"></em>Contact phone</td>
-                <td><span class="ng-scope ng-binding editable">13-123-46578</span></td>
+                <td><span class="ng-scope ng-binding editable">{{auth()->user()->contact_number}}</span></td>
               </tr>
             </tbody>
           </table>
@@ -132,45 +127,25 @@
         <div class="card-divider"></div>
       </form>
     </div>
+
     <!-- Right column-->
     <div class="col-md-5 col-lg-4">
+      
       <div class="card">
         <h5 style="font-weight: 800" class="card-heading">
             LISTS OF DOCUMENTS
         </h5>
         <div class="mda-list">
-          <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="List user" class="mda-list-item-img">
+          @foreach ($services as $service)
+          <div class="mda-list-item"><img src="/image/{{ $service->image }}" alt="List user" class="mda-list-item-img">
             <div class="mda-list-item-text mda-2-line">
-              <h3 style="font-weight: 800">Barangay Indigency</h3>
-              <div class="text-muted text-ellipsis" style="text-align: justify; font-weight: 800; color: black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </div>
+              <h3 style="font-weight: 800">{{$service->name}}</h3>
+              <div class="text-muted text-ellipsis" style="text-align: justify; font-weight: 800; color: black;">{{$service->detail}}</div>
             </div>
             <center><div class="card-body pv0 text-right"><button class="btn btn-flat btn-info" style="font-weight: 800;" onclick="openModal1()">Request Now</button></div></center>
             <!-- <button onclick="openModal1()">sample</button> -->
           </div>
-
-
-          <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="List user" class="mda-list-item-img">
-            <div class="mda-list-item-text mda-2-line">
-                <h3>Barangay Certificate</h3>
-                <div class="text-muted text-ellipsis" style="text-align: justify; font-weight: 800;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </div>
-              </div>
-            <center><div class="card-body pv0 text-right"><a href="" class="btn btn-flat btn-info" style="font-weight: 800;" >Request Now</a></div></center>
-          </div>
-          <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="List user" class="mda-list-item-img">
-            <div class="mda-list-item-text mda-2-line">
-                <h3 style="font-weight: 800;">Barangay ID</h3>
-                <div class="text-muted text-ellipsis" style="text-align: justify; font-weight: 800; color: black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </div>
-              </div>
-            <center><div class="card-body pv0 text-right"><a href="" class="btn btn-flat btn-info " style="font-weight: 800; color:black">Request Now</a></div></center>
-          </div>
-          <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="List user" class="mda-list-item-img">
-            <div class="mda-list-item-text mda-2-line">
-                <h3 style="font-weight: 800;" >Barangay Business Permit</h3>
-                <div class="text-muted text-ellipsis" style="text-align: justify; font-weight:800; color:black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </div>
-              </div>
-          </div>
-          <center><div class="card-body pv0 text-right"><a href="" class="btn btn-flat btn-info" style="font-weight: 800; color:black;">Request Now</a></div></center>
-        </div>  
+          @endforeach
 </div>
 </div>
 </section>
@@ -178,29 +153,37 @@
     <div id="myModal1" class="modal">
         <div class="modal-content">
           <div class="modal-header">
-            <h2 class="modal-title">CONFIRMATION MODAL</h2>
+            <h2 class="modal-title">Request Form</h2>
             <span class="close" onclick="closeModal1()">&times;</span>
           </div>
           <div class="modal-body">
             <div class="form-group">
               <label for="name">Notice:</label>
-              <div class="description">Hello Elena! You are requesting Barangay Indigency!</div>
+              <div class="description">Hello {{auth()->user()->first_name}}! You are requesting a Barangay Nabunturan Document!</div>
             </div>
+            
+            <form action="">
             <div class="form-group">
-                <label for="country" required>Type of ID:</label>
-                <select id="country" name="country">
+              <div class="mb-3">
+                <label for="exampleInputName1" class="form-label" required>Full name</label>
+                <input type="name" class="form-control" id="exampleInputName" value="{{auth()->user()->first_name}} {{auth()->user()->middle_name}} {{auth()->user()->last_name}}"> 
+              </div>
+                <label for="ID" required>Type of ID:</label>
+                <select id="ID" name="ID">
                   <option value="">Select an ID</option>
-                  <option value="USA">NSO with School ID</option>
-                  <option value="Canada">NBI Clearance</option>
-                  <option value="UK">Voter's ID</option>
-                  <option value="UK">Driver's License</option>
-                  <option value="Australia">Voter's Certificate</option>
+                  <option value="NSO with School ID">NSO with School ID</option>
+                  <option value="NBI CLearance">NBI Clearance</option>
+                  <option value="Voter's ID">Voter's ID</option>
+                  <option value="Driver's Licensw">Driver's License</option>
+                  <option value="Voter's Certificate">Voter's Certificate</option>
+                  <option value="National ID">National ID</option>
+                  <option value="SSS">SSS</option>
                 </select>
                 <div class="description">Note: Bring this document for verification</div>
               </div>
             <div class="form-group">
               <label for="message" required>ID Number:</label>
-              <textarea id="message" name="message" placeholder="Enter ID Number"></textarea>
+              <input type="text" class="form-control" name="id_number">
               <div class="description">I certify that all information on this form are true and correct. I understand that any incorrect, false or misleading statement is punishable by law.</div>
             </div>
           </div>
@@ -208,6 +191,7 @@
             <button type="button" class="btn btn-secondary" onclick="closeModal1()">Cancel</button>
             <button type="button" class="btn btn-primary" onclick="openModalProceed()">I Agree</button>
           </div>
+        </form>
           <!-- Modal for Proceed -->
           
         </div>
@@ -222,7 +206,7 @@
             <div class="form-group">
               <label for="name">Note:</label>
               <div class="description">Your REGISTRATION CODE or REFERENCE NUMBER will be provided after you SUBMIT your request. <br> <br> 
-                Your REFERENCE NUMBER shall served as your GATE PASS when you enter the Barangay Indigency Processing Area.     <br> <br>           
+                Your REFERENCE NUMBER shall served as your GATE PASS when you enter the Barangay Document Processing Area.     <br> <br>           
                 To avoid inconvenience and long lines, please bring your REFERENCE NUMBER at the BARANGAY HALL .Thank you! <br> <br>
                 DO YOU WANT TO PROCEED?
                 
@@ -230,72 +214,11 @@
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal3()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="openModal4()">Proceed</button>
+            <button type="button" class="btn btn-primary" onclick="openModal6()">Proceed</button>
           </div>
         </div>
       </div>
       </div>
-<!-- modal 4 -->
-      <div id="myModal4" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title">Barangay Indigency Request Form</h2>
-            <span class="close" onclick="closeModal4()">&times;</span>
-          </div>
-          <div class="modal-body">
-            <form>
-                <div class="mb-3">
-                    <label for="exampleInputName1" class="form-label" required>First name</label>
-                    <input type="name" class="form-control" id="exampleInputName">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputMiddleName1" class="form-label" required>Middle name</label>
-                    <input type="email" class="form-control" id="exampleInputMiddleName" >
-                  </div>
-                <div class="mb-3">
-                  <label for="exampleInputlName1" class="form-label" required>Last name</label>
-                  <input type="email" class="form-control" id="exampleInputLastname" >
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputBdate1" class="form-label" required>Birth Date</label>
-                  <input type="Date" class="form-control" id="exampleInputBdate1">
-                </div>
-                
-                <div class="mb-3">
-                    <textarea id="message" name="message" placeholder="Enter Your Purpose" rows="3" cols="69" required></textarea>
-                  </div>
-              </form>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal4()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="submitInput()">Submit</button>
-          </div>
-        </div>
-      </div>
-      </div>
-<!-- modal 5 -->
-<div id="myModal5" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">IMPORTANT REMINDER</h2>
-        <span class="close" onclick="closeModal5()">&times;</span>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="name">Note:</label>
-          <div class="description">Your REGISTRATION CODE or REFERENCE NUMBER will be provided after you SUBMIT your request. <br> <br> 
-            Your REFERENCE NUMBER shall served as your GATE PASS when you enter the Barangay Indigency Processing Area.     <br> <br>           
-            To avoid inconvenience and long lines, please bring your REFERENCE NUMBER at the BARANGAY HALL .Thank you! <br> <br>
-            DO YOU WANT TO PROCEED?
-            
-            </div>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal5()">Cancel</button>
-        <button type="button" class="btn btn-primary" onclick="openModal5()">Proceed</button>
-      </div>
-    </div>
-  </div>
-  </div>
     
   <!-- modal 6 -->
 <div id="myModal6" class="modal">
@@ -321,6 +244,7 @@
   </div>
 </div>
 </div>
+@endauth
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
@@ -370,29 +294,25 @@
       fileInput.value = "";
       uploadedFileName.textContent = "";
     }
-
-
-
-
      // Open the modal
      function openModal1() {
       const modal1 = document.getElementById("myModal1");
       modal1.style.display = "block";
     }
     function openModalProceed() {
-        const sample = document.getElementById("myModal1");
+      const sample = document.getElementById("myModal1");
       const modal1 = document.getElementById("myModal3");
       sample.style.display = "none";
       modal1.style.display = "block";
     }
     function submitInput(){
-        const sample = document.getElementById("myModal4");
-      const modal1 = document.getElementById("myModal5");
+        const sample = document.getElementById("myModal3");
+      const modal1 = document.getElementById("myModal4");
       sample.style.display = "none"
       modal1.style.display = "block";
     }
-    function openModal5() {
-      const sample = document.getElementById("myModal5");
+    function openModal6() {
+      const sample = document.getElementById("myModal3");
       const modal1 = document.getElementById("myModal6");
       sample.style.display = "none"
       modal1.style.display = "block";
@@ -411,10 +331,13 @@
       const modal1 = document.getElementById("myModal5");
       modal1.style.display = "none";
       
+
     }
+
     function closeModal6(){
       const modal1 = document.getElementById("myModal6");
       modal1.style.display = "none";
+      
     }
  
     
@@ -431,8 +354,6 @@
       // Close the modal
       closeModal1();
     }
-
-
 
         // Open the modal
     function openModal4() {
@@ -454,10 +375,6 @@
       const email = document.getElementById("email").value;
       const country = document.getElementById("country").value;
       const message = document.getElementById("message").value;
-      
-      // Perform actions with the form data (e.g., send it to a server)
-      
-      // Close the modal
       closeModal();
     }
 // fornav

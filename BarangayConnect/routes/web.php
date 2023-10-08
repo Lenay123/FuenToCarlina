@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ServiceController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +103,34 @@ Route::get('adminpage/edit/EditService', function () {
 Route::get('adminpage/AdminTransaction', function () {
     return view('adminpage/AdminTransaction');
 });
+
+
+
+Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistrationController::class, 'registration'])->name('register');
+
+
+
+
+Route::post('/register', [AuthController::class, 'registrationPost'])->name('register.post');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function (){
+    
+    Route::get('residentpage/resident', [AuthController::class, 'showResident'])->name('residentpage.resident');
+
+
+
+});
+
+Route::resource('adminpage', ServiceController::class);
+
+// deletes a post
+Route::delete('/adminpage/{service}', ServiceController::class .'@destroy')->name('adminpage.destroy');
+// returns the form for editing a post
+Route::get('/adminpage/{service}/edit', ServiceController::class .'@edit')->name('adminpage.edit');
+
+

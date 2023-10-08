@@ -34,13 +34,23 @@ return [
     | Supported: "session"
     |
     */
-
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+    
+        // ...
+    
+        'passwords' => [
+            'users' => [
+                'provider' => 'users',
+                'table' => 'password_resets',
+                'expire' => 60,
+            ],
+        ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

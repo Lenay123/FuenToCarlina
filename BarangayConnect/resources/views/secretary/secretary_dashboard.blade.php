@@ -10,7 +10,7 @@
     <script src="/script.js"></script>
     @vite('resources/css/app.css')
   </head>
-
+ 
   <body>
     <div class="w-full max-w-screen-lg mx-auto">
       <table
