@@ -159,7 +159,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal1()">Cancel</button>
-            <button type="submit" class="btn btn-primary" onclick="">Request</button>
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
           </div>
         </form>        
         </div>

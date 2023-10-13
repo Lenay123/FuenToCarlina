@@ -22,4 +22,18 @@ class StatusController extends Controller
     
     ]);
     }
+    public function deleteTransaction($id)
+    {
+        $document_request = DocumentRequest::find($id);
+
+        if (!$document_request) {
+            return redirect()->route('adminpage.AdminTransaction')
+                ->with('error', 'Document request not found');
+        }
+
+        $document_request->delete();
+        return redirect()->route('adminpage.AdminTransaction')
+            ->with('success', 'Document request deleted successfully');
+    }
+
 }

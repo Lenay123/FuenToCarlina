@@ -164,13 +164,13 @@
                 <td>{{ $request->document_type }}</td>
                 <td class="text-end">
                     <div class="d-flex align-items-center">
-                        <form action="" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                    <form action="{{ route('adminpage.deleteTransaction', $request->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this document request?');">
+            <i class="bi bi-trash"></i>
+        </button>
+    </form>
                     </div>
                 </td>
             </tr>
@@ -218,13 +218,13 @@
                 <td>{{ $request->document_type }}</td>
                 <td class="text-end">
                     <div class="d-flex align-items-center">
-                        <form action="" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                    <form action="{{ route('adminpage.deleteTransaction', $request->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this document request?');">
+            <i class="bi bi-trash"></i>
+        </button>
+    </form>
                     </div>
                 </td>
             </tr>
@@ -273,13 +273,13 @@
                 <td>{{ $request->document_type }}</td>
                 <td class="text-end">
                     <div class="d-flex align-items-center">
-                        <form action="" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                    <form action="{{ route('adminpage.deleteTransaction', $request->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this document request?');">
+            <i class="bi bi-trash"></i>
+        </button>
+    </form>
                     </div>
                 </td>
             </tr>
@@ -325,13 +325,13 @@
                 <td>{{ $request->document_type }}</td>
                 <td class="text-end">
                     <div class="d-flex align-items-center">
-                        <form action="" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                    <form action="{{ route('adminpage.deleteTransaction', $request->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this document request?');">
+            <i class="bi bi-trash"></i>
+        </button>
+    </form>
                     </div>
                 </td>
             </tr>

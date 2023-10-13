@@ -137,7 +137,9 @@ Route::get('/adminpage/EditResident/{id}', [RegistrationController::class, 'edit
 Route::put('/adminpage/UpdateResident/{id}', [RegistrationController::class, 'updateResident'])->name('adminpage.updateResident');
 Route::get('/adminpage/AdminDashboard', [DashboardController::class, 'showCount'])->name('dashboard');
 Route::get('/adminpage/AdminTransaction', [StatusController::class, 'showStatuses']);
-
+Route::delete('/adminpage/deleteTransaction/{id}', [StatusController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
+Route::get('/adminpage/AdminTransaction', [StatusController::class, 'showStatuses'])
+    ->name('adminpage.AdminTransaction');
 
 // residentpage routes
 Route::post('/residentpage/resident', [DocumentController::class, 'store'])->name('resident.store');
