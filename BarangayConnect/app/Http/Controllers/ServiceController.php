@@ -41,13 +41,9 @@ class ServiceController extends Controller
         Service::create($input);
    
         return redirect()->route('adminpage.index')
-                        ->with('success','Product created successfully.');
+                        ->with('success','Services created successfully.');
     }
 
-    public function edit(Service $service)
-    {
-        return view('adminpage.EditService',compact('service'));
-    }
 
     public function destroy($id)
     {
@@ -57,30 +53,40 @@ class ServiceController extends Controller
         ->with('success', 'Post deleted successfully');
     }
 
-    public function update(Request $request, Service $service)
+
+    public function edit($id)  
+    {  
+         $service = Service::find($id);  
+         return view('adminpage.EditService', compact('service'));  
+    }
+    
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'detail' => 'required'
+            'detail' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional: Update image if provided
         ]);
-
-        $input = $request->all();
-
-        if ($image = $request->file('image')) {
+    
+        $service = Service::find($id); // Find the service by ID
+        $service->name = $request->input('name');
+        $service->detail = $request->input('detail');
+    
+        if ($request->hasFile('image')) {
+            // Handle image upload if a new image is provided
+            $image = $request->file('image');
             $destinationPath = 'image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }else{
-            unset($input['image']);
+            $service->image = $profileImage;
         }
-        
-        $service->update($input);
-  
-        return redirect()->route('products.index')
-                        ->with('success','Product updated successfully');
+    
+        $service->save();
+    
+        return redirect()->route('adminpage.index')
+                        ->with('success', 'Service updated successfully');
     }
- 
+    
 
   
 }

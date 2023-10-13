@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <link rel="stylesheet" href="/css/Admin.css">
     <!-- Boxicons CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
@@ -136,18 +137,38 @@
                     <h3>{{ $service->name }}</h3>
                     <p>{{ $service->detail }}</p>
                     <form action="{{ route('adminpage.destroy', $service->id) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('adminpage.edit', $service->id) }}">
+                    <a class="btn btn-primary" href="{{ route('adminpage.edit', $service->id) }}">
                             <i class="fas fa-edit edit-icon"></i>
                         </a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
+                    @csrf
+                    @method('DELETE')
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal">
+                          <div class="modal-dialog">
+                          <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you sure you want to delete?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+                          <button type="button" class="btn btn-danger" data-target="#deleteModal" data-toggle="modal"><i class="far fa-trash-alt"></i></button>
+
+                                          </div>
+                                      </div>
+                                  </div>
+                              @endforeach
+                          </div>
 
        
         

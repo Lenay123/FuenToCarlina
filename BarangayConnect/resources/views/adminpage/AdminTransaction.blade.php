@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Boxicons CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -13,6 +14,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
+   <style>
+    .table {
+        border-width: 2px; /* Adjust this value as needed */
+    }
+</style>
+
 <body>
   <div class="sidebar">
     <div class="logo-details">
@@ -78,112 +85,20 @@
     </nav> <br><br> <br>
 
     <section>
-        <!-- Main content -->
-        <section class="main-course">
-            <nav class="course-nav">
-                <a style="" href="#" class="nav-link" data-section="in-progress">In Progress</a>
-                <a href="#" class="nav-link" data-section="pending">Pending</a>
-                <a href="#" class="nav-link" data-section="cancelled" >Cancelled</a>
-                <a href="#" class="nav-link" data-section="claimed" >Claimed</a>
-                <a href="#" class="nav-link" data-section="to-be-claimed">To be Claimed</a>
-            </nav> <br><br><br> <br>
-            <div class="container" style="max-width: 1200px;margin: 20px auto;padding: 20px;background-color: #fff;border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);">
-                <div class="table-section active-section" id="in-progress">
-                    <h2>In Progress</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Document</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           <tr>
-                            <td>1</td>
-                            <td>Elena</td>
-                            <td>Barangay ID</td>
-                           </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-section" id="pending">
-                    <h2>Pending</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Add your table rows for "Pending" here -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-section" id="cancelled">
-                    <h2>Cancelled</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Add your table rows for "Cancelled" here -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-section" id="claimed">
-                    <h2>Claimed</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Add your table rows for "Claimed" here -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-section" id="to-be-claimed">
-                    <h2>To be Claimed</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Add your table rows for "To be Claimed" here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-          </section>
-
-        <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-        <!-- Header -->
-        <header class="bg-surface-primary border-bottom pt-6">
+    <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
                 <div class="mb-npx">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                            <!-- Title -->
-                            {{-- <h1 class="h2 mb-0 ls-tight">Transactions here...</h1> --}}
-                        </div>
-                    </div>
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">All Transactions</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </header>
+
+
         <div class="grid-container">
             <!-- Grid item 1 -->
             <div class="grid-item">
@@ -215,173 +130,220 @@
             </div>
         </div>
 
-        {{-- Barangay Indigency Modal --}}
-        <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Barangay Indigency Transactions</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" >
-                        <table class="table table-bordered" >
-                            <thead >
-                                <tr >
-                                    <th  style="border: 1px solid #111111">Transaction ID</th>
-                                    <th  style="border: 1px solid #111111">Date</th>
-                                    <th  style="border: 1px solid #111111">Requested Document</th>
-                                    <th  style="border: 1px solid #111111">Status</th>
-                                    <th  style="border: 1px solid #111111">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2023-09-10</td>
-                                    <td>Transaction 2</td>
-                                    <td>Barangay Indigency</td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">All Pending Requests</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </header>
+        <table class="table table-bordered table-hover table-nowrap">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Fullname</th>
+            <th scope="col" class="text-center">Date Requested</th>
+            <th scope="col" class="text-center">Reference Number</th>
+            <th scope="col" class="text-center">Document Requested</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @forelse ($document_requests1 as $request)
+        @if ($request->status == 'Pending')
+            <tr>
+                <td>{{ $request->id }}</td>
+                <td>{{ $request->full_name }}</td>
+                <td>{{ $request->created_at }}</td>
+                <td>{{ $request->tracker_number }}</td>
+                <td>{{ $request->document_type }}</td>
+                <td class="text-end">
+                    <div class="d-flex align-items-center">
+                        <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endif
+    @empty
+        <tr>
+            <td colspan="6">No data found</td>
+        </tr>
+    @endforelse
+    </tbody>
+</table>
 
-                {{-- Barangay Certificate Modal --}}
-                <div class="modal fade" id="viewTransactionModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Barangay Certificate Transactions</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" >
-                                <table class="table table-bordered" >
-                                    <thead >
-                                        <tr >
-                                            <th  style="border: 1px solid #111111">Transaction ID</th>
-                                            <th  style="border: 1px solid #111111">Date</th>
-                                            <th  style="border: 1px solid #111111">Status</th>
-                                            <th  style="border: 1px solid #111111">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2023-09-10</td>
-                                            <td>Transaction 2</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-           {{-- Barangay Business Permit Modal --}}
-           <div class="modal fade" id="viewTransactionModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Barangay Business Permit <br> Transactions</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" >
-                        <table class="table table-bordered" >
-                            <thead >
-                                <tr >
-                                    <th  style="border: 1px solid #111111">Transaction ID</th>
-                                    <th  style="border: 1px solid #111111">Date</th>
-                                    <th  style="border: 1px solid #111111">Status</th>
-                                    <th  style="border: 1px solid #111111">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2023-09-10</td>
-                                    <td>Transaction 2</td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+
+<header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">All In Progress Requests</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-                {{-- Barangay ID Modal --}}
-                <div class="modal fade" id="viewTransactionModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Barangay ID Transactions</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" >
-                                <table class="table table-bordered" >
-                                    <thead >
-                                        <tr >
-                                            <th  style="border: 1px solid #111111">Transaction ID</th>
-                                            <th  style="border: 1px solid #111111">Date</th>
-                                            <th  style="border: 1px solid #111111">Status</th>
-                                            <th  style="border: 1px solid #111111">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2023-09-10</td>
-                                            <td>Transaction 2</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+        </header>
+        <table class="table table-bordered table-hover table-nowrap">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Fullname</th>
+            <th scope="col" class="text-center">Date Requested</th>
+            <th scope="col" class="text-center">Reference Number</th>
+            <th scope="col" class="text-center">Document Requested</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @forelse ($document_requests3 as $request)
+        @if ($request->status == 'In Progress')
+            <tr>
+                <td>{{ $request->id }}</td>
+                <td>{{ $request->full_name }}</td>
+                <td>{{ $request->created_at }}</td>
+                <td>{{ $request->tracker_number }}</td>
+                <td>{{ $request->document_type }}</td>
+                <td class="text-end">
+                    <div class="d-flex align-items-center">
+                        <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
                     </div>
+                </td>
+            </tr>
+        @endif
+    @empty
+        <tr>
+            <td colspan="6">No data found</td>
+        </tr>
+    @endforelse
+</tbody>
+
+</table>
+
+
+<header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">All Cancelled Requests</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+        </header>
+        <table class="table table-bordered table-hover table-nowrap">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Fullname</th>
+            <th scope="col" class="text-center">Date Requested</th>
+            <th scope="col" class="text-center">Reference Number</th>
+            <th scope="col" class="text-center">Document Requested</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @forelse ($document_requests2 as $request)
+        @if ($request->status == 'cancelled')
+            <tr>
+                <td>{{ $request->id }}</td>
+                <td>{{ $request->full_name }}</td>
+                <td>{{ $request->created_at }}</td>
+                <td>{{ $request->tracker_number }}</td>
+                <td>{{ $request->document_type }}</td>
+                <td class="text-end">
+                    <div class="d-flex align-items-center">
+                        <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endif
+    @empty
+        <tr>
+            <td colspan="4">No data found</td>
+        </tr>
+    @endforelse
+</tbody>
+</table>
+<header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">All Claimed Requests</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <table class="table table-bordered table-hover table-nowrap">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Fullname</th>
+            <th scope="col" class="text-center">Date Requested</th>
+            <th scope="col" class="text-center">Reference Number</th>
+            <th scope="col" class="text-center">Document Requested</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @forelse ($document_requests4 as $request)
+        @if ($request->status == 'Claimed')
+            <tr>
+                <td>{{ $request->id }}</td>
+                <td>{{ $request->full_name }}</td>
+                <td>{{ $request->created_at }}</td>
+                <td>{{ $request->tracker_number }}</td>
+                <td>{{ $request->document_type }}</td>
+                <td class="text-end">
+                    <div class="d-flex align-items-center">
+                        <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endif
+    @empty
+        <tr>
+            <td colspan="4">No data found</td>
+        </tr>
+    @endforelse
+</tbody>
+</table> <br><br>
 
-
-        </section>
 
 <script>
    let sidebar = document.querySelector(".sidebar");

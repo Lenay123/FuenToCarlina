@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .registration-container {
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -53,37 +53,36 @@
                 <div class="col-12">
                     @foreach($errors->all() as $error)
                         <div class="alert alert-danger">{{$error}}</div>
-
                     @endforeach
                 </div>
             @endif
 
             @if(session()->has('error'))
             <div class="alert alert-danger">{{session('error')}}</div>
-
             @endif
 
             @if(session()->has('success'))
             <div class="alert alert-success">{{session('success')}}</div>
-
             @endif
         </div>
+
         <form method="POST" action="{{route('register.post')}}" method="POST">
             @csrf
 
-            {{-- <div class="form-group">
-                <label for="image">Upload Image:</label>
-                <input type="file" class="form-control" name="image" id="image">
-            </div> --}}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" required>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="first_name">First Name:</label>
-                <input type="text" class="form-control" name="first_name" id="first_name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="last_name">Last Name:</label>
-                <input type="text" class="form-control" name="last_name" id="last_name" required>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" required>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -122,6 +121,7 @@
                     <option value="female">Female</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" name="password" required>

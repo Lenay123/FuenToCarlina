@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Boxicons CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -104,10 +105,19 @@
 				<label for="serviceDescription" class="form-label">Service Description:</label>
 				<textarea style=" border: 1px solid rgb(96, 90, 90);" class="form-control" name="detail" rows="5" required></textarea>
 			</div>
-			<div style="margin-left: 35%;margin-bottom: 2px;" class="col-md-2">
-				<a href="{{ route('adminpage.index') }}" class="btn btn-primary" >Cancel</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
-			</div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex"> 
+                <div class="col-md-2 col-sm-4 float-left">
+                    <a href="{{ route('adminpage.index') }}" class="btn btn-primary btn-block">Cancel</a>
+                </div>
+                <div class="col-md-2 col-sm-4 float-left"> 
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 			
 			</div>
 		</form>

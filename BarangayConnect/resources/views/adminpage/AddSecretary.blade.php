@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,69 +72,93 @@
         <span class="admin_name">Prem Shahi</span>
         <i class='bx bx-chevron-down' ></i>
       </div>
-    </nav> <br><br><br>
-    <form style="margin-left: 20px;margin-right: 20px;" class="row g-3">
-        <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Personal Details</h2>
-        <div class="col-md-6">
-          <label for="firstname" class="form-label">First Name:</label>
-          <input style=" border: 1px solid rgb(96, 90, 90);"  type="text" class="form-control" id="firstname" required>
+    </nav> <br><br><br> <br>
+
+    <div class="mt-5">
+            @if($errors->any())
+                <div class="col-12">
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">{{$error}}</div>
+
+                    @endforeach
+                </div>
+            @endif
+
+            @if(session()->has('error'))
+            <div class="alert alert-danger">{{session('error')}}</div>
+
+            @endif
+
+            @if(session()->has('success'))
+            <div class="alert alert-success">{{session('success')}}</div>
+
+            @endif
         </div>
-        <div class="col-md-6">
-          <label for="lastname" class="form-label">Last Name:</label>
-          <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="lastname" required>
+
+    <form style="margin-left: 20px; margin-right: 20px;" class="row g-3" action="{{ route('adminpage.storeSecretary') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+            <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Personal Details</h2>
+            <div class="col-md-6">
+              <label for="firstname" class="form-label">First Name:</label>
+              <input style=" border: 1px solid rgb(96, 90, 90);"  type="text" class="form-control" name="first_name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="lastname" class="form-label">Last Name:</label>
+              <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="last_name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="lastname" class="form-label">Middle Name:</label>
+              <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="middle_name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email:</label>
+                <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="email" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Phone:</label>
+                <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="contact_number" required>
+              </div>
+              <div class="col-md-6">
+                    <label for="address" >Address:</label>
+                    <select class="form-control" name="address" required style=" border: 1px solid rgb(96, 90, 90);">
+                        <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
+                        <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
+                        <option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                <label for="birthday">Birthday:</label>
+                <input type="date" class="form-control" name="birthday" required  style=" border: 1px solid rgb(96, 90, 90);">
+            </div>
+                <div class="col-md-6">
+                    <label for="gender">Gender:</label>
+                    <select class="form-control" name="gender" required style=" border: 1px solid rgb(96, 90, 90);">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            <div class="col-md-6">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" required style=" border: 1px solid rgb(96, 90, 90);">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="password_confirmation">Confirm Password:</label>
+                    <input type="password" class="form-control" name="password_confirmation" required style=" border: 1px solid rgb(96, 90, 90);">
+                </div>
+            <br><br><br><br>
+            <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex"> <!-- For centering content and displaying buttons in a flex container -->
+                <div class="col-md-2 col-sm-4 float-left"> <!-- Adjust column size for different screen sizes and align to the left -->
+                    <a href="/adminpage/ManageSecretary" class="btn btn-primary btn-block">Cancel</a>
+                </div>
+                <div class="col-md-2 col-sm-4 float-left"> <!-- Adjust column size for different screen sizes and align to the left -->
+                <button type="submit"> <a  class="btn btn-primary btn-block">ADD</a></button>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="email" class="form-label">Email:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="email" required>
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Phone:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="inputPassword4" required>
-          </div>
-        <div class="col-md-6">
-          <label for="inputAddress" class="form-label">Address:</label>
-          <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="inputAddress" placeholder="Place your address here" required>
-        </div>
-        <div class="col-md-6">
-          <label for="Photo" class="form-label">Photo:</label>
-          <input style=" border: 1px solid rgb(96, 90, 90);" type="file" class="form-control" id="Photo" required>
-        </div>
-        <div class="col-md-6">
-          <label for="dateOfBirth" class="form-label">Date of Birth:</label>
-          <input style=" border: 1px solid rgb(96, 90, 90);" type="date" class="form-control" id="dateOfBirth" required>
-        </div>
-        <div class="col-md-6">
-            <label for="placeOfBirth" class="form-label">Place of Birth:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="placeOfBirth" required>
-        </div>
-        <br><br><br><br>
-        <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Education</h2>
-        <div class="col-md-6">
-            <label for="dateOfBirth" class="form-label">University:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="dateOfBirth" required>
-        </div>
-        <div class="col-md-6">
-            <label for="placeOfBirth" class="form-label">Degree:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="placeOfBirth" required>
-        </div>
-        <div class="col-md-3">
-            <label for="startDate" class="form-label">Start Date:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="date" class="form-control" id="startDate" required>
-        </div>
-        <div class="col-md-3">
-            <label for="endDate" class="form-label">End Date:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="date" class="form-control" id="endDate" required>
-        </div>
-        <div class="col-md-6">
-            <label for="placeOfBirth" class="form-label">City:</label>
-            <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" id="placeOfBirth" required>
-        </div>
-        <center>
-        <div  class="col-md-2">
-            <a href="" class="btn btn-primary">Cancel</a>
-            <a href="" class="btn btn-primary">ADD</a>
-        </div>
-    </center>
+    </div>
       </form>
 
 <script>

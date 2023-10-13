@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Boxicons CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -88,26 +89,37 @@
             </ul>
         </div>
     @endif
-    <form action="" method="POST" enctype="multipart/form-data" style="margin-left: 20px;margin-right: 20px;" class="row g-3">
-        <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Service Details</h2>
+    
+    <form action="{{route('adminpage.update',$service->id)}}" method="POST" enctype="multipart/form-data" style="margin-left: 20px;margin-right: 20px;" class="row g-3">
+    @csrf
+    @method('PATCH')     
+    <h2 style="background-color: #1074e6; font-size: 15px; color: white;padding: 10px; font-family: 'Poppins'; border: none;border-radius: 15px; ">Service Details</h2>
 			<div class="col-md-6">
 			  <label for="firstname" class="form-label">Service Name:</label>
-			  <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="name" value="{{ $service->name }}" required>
+			  <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="name" value="{{$service->name}}" required>
 			</div>
 			<div class="col-md-6">
 				<label for="Photo" class="form-label">Photo:</label>
-				<input style=" border: 1px solid rgb(96, 90, 90);" type="file" class="form-control" name="image"  required>
-        <img src="/image/{{ $service->image }}" width="300px">
+				<input style=" border: 1px solid rgb(96, 90, 90);" type="file" class="form-control" name="image"  required> <br>
+        <img src="/image/{{ $service->image}}" width="100px">
 			</div>
 			<div class="col-md-12">
 				<label for="serviceDescription" class="form-label">Service Description:</label>
 				<textarea style=" border: 1px solid rgb(96, 90, 90);" class="form-control" name="detail" rows="5" required>{{ $service->detail }}</textarea>
 			</div>
-			<div style="margin-left: 35%;margin-bottom: 2px;" class="col-md-2">
-				<a href="{{ route('adminpage.index') }}" class="btn btn-primary" >Cancel</a>
-                <button type="submit" class="btn btn-primary">Update</button>
-			</div>
-			
+			<div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex"> 
+                <div class="col-md-2 col-sm-4 float-left">
+                    <a href="{{ route('adminpage.index') }}" class="btn btn-primary btn-block">Cancel</a>
+                </div>
+                <div class="col-md-2 col-sm-4 float-left"> 
+                    <button type="submit" class="btn btn-primary btn-block"onclick="return confirm('Are you sure you want to Update the information of this Service?');">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 			</div>
 		</form>
    

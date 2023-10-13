@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> Barangay Connect </title>
     <link rel="stylesheet" href="/css/Admin.css">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Boxicons CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -93,7 +94,7 @@
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
                             <div class="mx-n1">
-                                <a href="/adminpage/add/AddResidents" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                <a href="/adminpage/AddResidents" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span class=" pe-2">
                                         <i class="bi bi-plus"></i>
                                     </span>
@@ -112,276 +113,58 @@
             </div>
         </header>
 
-        <div class="card shadow border-0 mb-7">
-                    <div class="card-header">
-                        <h5 class="mb-0">Applications</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-nowrap">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Select Items</th> 
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Date Created</th>
-                                    <th scope="col">Sitio/Purok</th>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Robert Fox
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://sugbo.ph/wp-content/uploads/2020/07/Blue-Space-Resort-Barili-Cebu-4.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            StarApple
-                                        </a>
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
+        @if(session('success'))
+       <div class="alert alert-success">
+              {{ session('success') }}
+       </div>
+   @endif
+   <table class="table table-bordered table-hover table-nowrap">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Fullname</th>
+            <th scope="col" class="text-center">Date Created</th>
+            <th scope="col" class="text-center">Sitio/Purok</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if($users->count() > 0)
+        @foreach ($users as $user)
+        <tr>
+            <td>{{$user->id}}</td>
+            <td>{{$user->first_name}} {{$user->last_name}}</td>
+            <td>{{$user->created_at}}</td>
+            <td>{{$user->address}}</td>
 
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Darlene Robertson
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://bisayatraveler.com/wp-content/uploads/2019/04/DLAY0110.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Mangga
-                                        </a>
-                                    </td>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Theresa Webb
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Mar 20, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://sugbo.ph/wp-content/uploads/2020/09/Anahaw-Beach-Barili-Cebu-11.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Atabay
-                                        </a>
-                                    </td>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Kristin Watson
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://nopostcode.com/wp-content/uploads/2021/10/Ibo-Falls-11-1024x682.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Ibo
-                                        </a>
-                                    </td>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Cody Fisher
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 10, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://triptheislands.com/wp-content/uploads/2015/10/7075838053_eb4bfa6d1d_k.jpg.webp" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Tripthe
-                                        </a>
-                                    </td>
-                                    <td>
-                                        5
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Robert Fox
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://sugbo.ph/wp-content/uploads/2020/10/Sayaw-Beach-Resort-Barili-Cebu-1.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Barili
-                                        </a>
-                                    </td>
-                                    <td>
-                                        6
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Darlene Robertson
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://sugbo.ph/wp-content/uploads/2020/10/Sayaw-Beach-Resort-Barili-Cebu-9.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Nangka
-                                        </a>
-                                    </td>
-                                    <td>
-                                        7
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-column">
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Theresa Webb
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Mar 20, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://www.journeyera.com/wp-content/uploads/2020/01/mantayupan-falls-barili-cebu-08138-2.jpg" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Mantayupan
-                                        </a>
-                                    </td>
-                                    <td>
-                                        8
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="/adminpage/edit/EditSecretary" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
-                    </div>
-                </div>
-        {{-- <div style="margin-left: 60px;" class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#" class="active">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
-        </div> --}}
-   
+            <td class="text-end">
+    <div class="d-flex align-items-center">
+        <a href="{{ route('adminpage.editResident', ['id' => $user->id]) }}" class="btn btn-sm btn-neutral me-2">
+            <i class="bi bi-pencil"></i> <!-- Assuming "bi-pencil" is the class for your edit icon -->
+        </a>
+        <form action="{{ route('adminpage.deleteResident', ['id' => $user->id]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
+                <i class="bi bi-trash"></i>
+            </button>
+        </form>
+    </div>
+</td>
+
+
+
+        </tr>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="5">There are no Residents.</td>
+        </tr>
+    @endif
+</tbody>
+
+</table>
+
         </section>
 
 <script>
