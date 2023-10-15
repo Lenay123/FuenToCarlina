@@ -116,6 +116,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth'], function (){
     
     Route::get('residentpage/resident', [AuthController::class, 'showResident'])->name('residentpage.resident');
+    Route::get('residentpage/resident', [DOcumentController::class, 'showStatus'])->name('residentpage.resident');
+    Route::post('/residentpage/Account', [AuthController::class, 'updateProfile'])->name('residentpage.updateProfile');
+
 });
 
 // adminpage routes
@@ -147,4 +150,10 @@ Route::get('/residentpage/transactions', [DocumentController::class, 'showTransa
 Route::delete('/residentpage/{id}',  DocumentController::class .'@destroy')->name('residentpage.destroy');
 Route::get('/residentpage/TrackerNumber', [DocumentController::class, 'showTrackerNumber']);
 Route::patch('/residentpage/transactions/{document_request}/cancel', DocumentController::class .'@cancel')->name('document_requests.cancel');
+Route::get('/residentpage/barangayCertificate', [DocumentController::class, 'barangayCertificate'])->name('residentpage.barangayCertificate');
+Route::get('/residentpage/barangayIndigency', [DocumentController::class, 'barangayIndigency'])->name('residentpage.barangayIndigency');
+Route::get('/residentpage/barangayBusinessPermit', [DocumentController::class, 'barangayBusinessPermit'])->name('residentpage.barangayBusinessPermit');
+Route::get('/residentpage/Account', [DocumentController::class, 'account'])->name('residentpage.Account');
+Route::get('/residentpage/barangayID', [DocumentController::class, 'barangayID'])->name('residentpage.barangayID');
+
 

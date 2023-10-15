@@ -14,23 +14,33 @@ class DocumentController extends Controller
             'full_name' => 'required',
             'purpose' => 'required',
             'id_number' => 'required',
-            'document_type' => 'required|in:Barangay Indigency,Barangay Clearance,Barangay Business Permit',
+            'business_name'=> 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'document_type' => 'required|in:Barangay Indigency,Barangay Certificate,Barangay Business Permit,Barangay ID',
             'id_type' => 'required|in:NSO with School ID,NBI Clearance,Voters ID,Drivers License,Voters Certificate,National ID,SSS',
         ]);
         $userId = Auth::id();
-        $trackerNumber = uniqid();
+        $trackerNumber = uniqid();  
         $emps = new DocumentRequest;
     
         $emps->full_name = $request->input('full_name');
         $emps->purpose = $request->input('purpose');
         $emps->id_number = $request->input('id_number');
         $emps->document_type = $request->input('document_type');
+        $emps->business_name = $request->input('business_name');
         $emps->id_type = $request->input('id_type'); // Use 'id_type' here
         $emps -> user_id = $userId;
         $emps -> tracker_number = $trackerNumber;
         $emps -> status = 'Pending'; #default status
+        
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
         $emps->save();
-    
+
         return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
     }
 
@@ -66,4 +76,43 @@ class DocumentController extends Controller
         return redirect('/residentpage/transactions')->with('success', 'Request has been cancelled successfully');
     }
 
+
+    public function barangayCertificate()
+    {
+        return view('residentpage.barangayCertificate');
+    }
+
+    public function barangayIndigency()
+    {
+        return view('residentpage.barangayIndigency');
+    }
+
+    public function barangayBusinessPermit()
+    {
+        return view('residentpage.barangayBusinessPermit');
+    }
+
+    public function account()
+    {
+        return view('residentpage.Account');
+    }
+
+    public function barangayID()
+    {
+        return view('residentpage.barangayID');
+    }
+
+    public function showStatus()
+    {
+        // Get the authenticated user
+        $user = auth()->user();
+    
+        // Retrieve the document requests for the current user and group them by status
+        $document_requests = DocumentRequest::where('user_id', $user->id)
+            ->select('status', \DB::raw('count(*) as count'))
+            ->groupBy('status')
+            ->get();
+    
+        return view('residentpage.resident', compact('document_requests'));
+    }
 }

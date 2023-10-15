@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('tracker_number')->unique();
             $table->string('full_name');
             $table->text('purpose');
-            $table->enum('document_type', ['Barangay Indigency', 'Barangay Clearance', 'Barangay Business Permit'], 500);
+            $table->enum('document_type', ['Barangay Indigency', 'Barangay Certificate', 'Barangay Business Permit', 'Barangay ID'], 500);
             $table->enum('id_type', ['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate','National ID','SSS'], 500);
             $table->string('id_number');
             $table ->string('status');
+            $table->string('image')->nullable();
+            $table->string('business_name')->nullable();
             $table->timestamps();
         });
         

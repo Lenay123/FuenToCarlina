@@ -96,45 +96,35 @@ class AuthController extends Controller
             Auth::logout();
             return redirect()->route('login');
     }
-
-
-
-
-
-    public function index()
+    public function updateProfile(Request $request)
     {
-        //
-    }
+        // Validate the incoming data
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'password' => 'nullable|min:8|confirmed',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Get the authenticated user
+        $user = auth()->user();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Update the user's name and email
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->middle_name = $request->input('middle_name');
+        $user->email = $request->input('email');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // Update the user's password if a new one was provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Save the user's updated information
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }
