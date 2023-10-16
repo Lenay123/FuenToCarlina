@@ -41,26 +41,15 @@
 						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
 					    </a>
 				    </div><!--//col-->
-		            <div class="search-mobile-trigger d-sm-none col">
-			            <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
-			        </div><!--//col-->
-		            <div class="app-search-box col">
-		                <form class="app-search-form">   
-							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
-				        </form>
-		            </div><!--//app-search-box-->
+		          
 		            
-		            <div class="app-utilities col-auto"><!--//app-utility-item-->
-			            
-			            <div class="app-utility-item app-user-dropdown dropdown">
-				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ auth()->user()->first_name }}   {{ auth()->user()->last_name }}</a>
-				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="account.html">Account</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
-							</ul>
-			            </div><!--//app-user-dropdown--> 
+					<div class="app-utilities col-auto">
+						<div class="app-utility-item app-user-dropdown dropdown">
+							<a  id="user-dropdown-toggle" href="#" role="button" aria-expanded="false">
+								<i class="fas fa-user"></i> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+							</a>
+						</div>
+					</div>
 		            </div><!--//app-utilities-->
 		        </div><!--//row-->
 	            </div><!--//app-header-content-->
@@ -189,30 +178,28 @@
 					                </form>
 					                
 							    </div><!--//col-->
-							    <div class="col-auto">
-								    
-								    <select class="form-select w-auto" >
-										  <option selected value="option-1">All</option>
-										  <option value="option-2">Pending</option>
-										  <option value="option-3">In Progress</option>
-										  <option value="option-4">Cancelled</option>
-										  <option value="option-5">To be Claim</option>
-										  <option value="option-6">Claimed</option>
-										  
+								<div class="col-auto">
+									<select id="status-filter" class="form-select w-auto">
+										<option value="all" selected>All</option>
+										<option value="Pending">Pending</option>
+										<option value="In Progress">In Progress</option>
+										<option value="cancelled">Cancelled</option>
+										<option value="To be Claim">To be Claim</option>
+										<option value="Claimed">Claimed</option>
 									</select>
-							    </div>
+								</div>
+
+
 						    </div><!--//row-->
 					    </div><!--//table-utilities-->
 				    </div><!--//col-auto-->
 			    </div><!--//row-->
 			   
 			    
-			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-				    <a class="flex-sm-fill text-sm-center nav-link"  data-bs-toggle="tab" role="tab" aria-controls="orders-paid" aria-selected="false" disabled></a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"  role="tab" aria-controls="orders-pending" aria-selected="false" disabled></a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"  role="tab" aria-controls="orders-cancelled" aria-selected="false" disabled></a>
+				<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+					<a class="flex-sm-fill text-start text-sm-left nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
 				</nav>
+
 				
 				
 				<div class="tab-content" id="orders-table-tab-content">
@@ -220,92 +207,86 @@
 					    <div class="app-card app-card-orders-table shadow-sm mb-5">
 						    <div class="app-card-body">
 							    <div class="table-responsive">
-							        <table class="table app-table-hover mb-0 text-left">
-										<thead>
-											<tr>
-												<tr>
-													<th class="cell">Requested Documents</th>
-													<th class="cell">Date Requested</th>
-													<th class="cell">Reference Number</th>
-													<th class="cell">Status</th>
-													<th class="cell">Actions</th>
-												</tr>
-										</thead>
-										<tbody>
-											@if(!empty($document_requests) && $document_requests->count())
-												@foreach ($document_requests as $document_request)
-												<tr>
+								<table class="table app-table-hover mb-0 text-left" id="document-list">
+								<thead>
+									<tr>
+										<th class="cell">Requested Documents</th>
+										<th class="cell">Date Requested</th>
+										<th class="cell">Reference Number</th>
+										<th class="cell">Status</th>
+										<th class="cell">Actions</th>
+									</tr>
+								</thead>
+									<tbody>
+										@if(!empty($document_requests) && $document_requests->count())
+											@foreach ($document_requests as $document_request)
+												<tr data-status="{{ $document_request->status }}">
 													<td>{{$document_request->document_type}}</td>
 													<td>{{$document_request->created_at}}</td>
 													<td>{{$document_request->tracker_number}}</td>
 													<td>{{$document_request->status}}</td>
-						
 													<td>
-													<form method="POST" action="{{ route('document_requests.cancel', $document_request) }}">
-														  @csrf
-														  @method('PATCH')
-														  @if (!in_array($document_request->status, ['cancelled', 'In Progress', 'Claimed']))
-							<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#cancelConfirmationModal{{ $document_request->id }}"><i class="fa-solid fa-ban"></i></button>
-						@endif
-						
-											<div class="modal fade" id="cancelConfirmationModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="cancelConfirmationModalLabel{{ $document_request->id }}" aria-hidden="true">
-															<div class="modal-dialog" role="document">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
-																	<div class="modal-body">
-																		<p>Are you sure you want to cancel this request?</p>
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																		<button type="submit" class="btn btn-danger">Yes</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</form>
-														<!-- <button type="button" class="btn btn-warning">Cancel</button> -->
-														<form action="{{ route('residentpage.destroy',$document_request->id) }}" method="POST">
-											
-														  @csrf
-														  @method('DELETE')
-														  <!-- Modal -->
-													   <div class="modal fade" id="deleteModal">
-															<div class="modal-dialog">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
-																	<div class="modal-body">
-																		<p>Are you sure you want to delete?</p>
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																		<button type="submit" class="btn btn-danger">Yes</button>
+														<form method="POST" action="{{ route('document_requests.cancel', $document_request) }}">
+															@csrf
+															@method('PATCH')
+															@if (!in_array($document_request->status, ['cancelled', 'In Progress', 'Claimed']))
+																<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#cancelConfirmationModal{{ $document_request->id }}"><i class="fa-solid fa-ban"></i></button>
+															@endif
+															<div class="modal fade" id="cancelConfirmationModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="cancelConfirmationModalLabel{{ $document_request->id }}" aria-hidden="true">
+																<div class="modal-dialog" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<p>Are you sure you want to cancel this request?</p>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																			<button type="submit" class="btn btn-danger">Yes</button>
+																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>
-														<button type="button" class="btn btn-danger" data-target="#deleteModal" data-toggle="modal"><i class="far fa-trash-alt"></i></button>
-						
-														</form>                              
+														</form>
+														<form action="{{ route('residentpage.destroy', $document_request->id) }}" method="POST">
+															@csrf
+															@method('DELETE')
+															<div class="modal fade" id="deleteModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $document_request->id }}" aria-hidden="true">
+																<div class="modal-dialog" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<p>Are you sure you want to delete?</p>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																			<button type="submit" class="btn btn-danger">Yes</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $document_request->id }}"><i class="far fa-trash-alt"></i></button>
+														</form>
 													</td>
 												</tr>
-												@endforeach
-												@else
-										<tr>
-											<td colspan="10">There are no Requests.</td>
-										</tr>
+											@endforeach
+										@else
+											<tr>
+												<td colspan="5">There are no Requests.</td>
+											</tr>
 										@endif
-											</tbody>
-									</table>
+									</tbody>
+								</table>
+
 						        </div><!--//table-responsive-->
 						       
 						    </div><!--//app-card-body-->		
@@ -344,9 +325,48 @@
     
     <!-- Page Specific JS -->
     <script src="/js/app.js"></script> 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-	
+$(document).ready(function () {
+    $('#status-filter').change(function () {
+        var selectedStatus = $(this).val();
+        updateAllTabLabel(selectedStatus);
+        filterDocuments(selectedStatus);
+    });
+
+    function updateAllTabLabel(selectedStatus) {
+        var allTabLabel = $('#orders-all-tab');
+        if (selectedStatus === 'Pending') {
+            allTabLabel.text('Pending');
+        } else if (selectedStatus === 'In Progress') {
+            allTabLabel.text('In Progress');
+        } else if (selectedStatus === 'Cancelled') {
+            allTabLabel.text('Cancelled');
+        } else if (selectedStatus === 'To be Claim') {
+            allTabLabel.text('To be Claim');
+        } else if (selectedStatus === 'Claimed') {
+            allTabLabel.text('Claimed');
+        } else {
+            allTabLabel.text('All');
+        }
+    }
+
+    function filterDocuments(status) {
+        $('#document-list tbody tr').each(function () {
+            var row = $(this);
+            var rowStatus = row.data('status');
+
+            if (status === 'all' || status === rowStatus) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    }
+});
 </script>
+
 
 </body>
 </html> 

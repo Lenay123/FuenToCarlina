@@ -36,12 +36,6 @@
           </a>
         </li>
         <li>
-          <a href="{{ route('adminpage.index') }}">
-            <i class='bx bx-pie-chart-alt-2' ></i>
-            <span class="links_name">Manage Services</span>
-          </a>
-        </li>
-        <li>
           <a href="/adminpage/AdminTransaction">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">View Transactions</span>

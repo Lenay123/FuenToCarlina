@@ -34,11 +34,21 @@ class DocumentController extends Controller
         $emps -> status = 'Pending'; #default status
         
         if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
+            if ($image->isValid()) {
+                $destinationPath = 'image/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->storeAs($destinationPath, $profileImage);
+                $emps->image = $profileImage; // Assign the 'image' attribute
+            } else {
+                // Log or handle the error here
+                return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
+            }
         }
+        
+        $emps->save();
+        
+        return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
+              
         $emps->save();
 
         return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
@@ -115,4 +125,5 @@ class DocumentController extends Controller
     
         return view('residentpage.resident', compact('document_requests'));
     }
+
 }

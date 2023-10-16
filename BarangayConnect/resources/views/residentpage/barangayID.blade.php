@@ -36,26 +36,14 @@
 						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
 					    </a>
 				    </div><!--//col-->
-		            <div class="search-mobile-trigger d-sm-none col">
-			            <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
-			        </div><!--//col-->
-		            <div class="app-search-box col">
-		                <form class="app-search-form">   
-							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
-				        </form>
-		            </div><!--//app-search-box-->
 		            
-		            <div class="app-utilities col-auto"><!--//app-utility-item-->
-			            <div class="app-utility-item app-user-dropdown dropdown">
-				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> {{ auth()->user()->first_name }}   {{ auth()->user()->last_name }}</a>
-				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="account.html">Account</a></li>
-								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
-							</ul>
-			            </div><!--//app-user-dropdown--> 
+					<div class="app-utilities col-auto">
+						<div class="app-utility-item app-user-dropdown dropdown">
+							<a  id="user-dropdown-toggle" href="#" role="button" aria-expanded="false">
+								<i class="fas fa-user"></i> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+							</a>
+						</div>
+					</div>
 		            </div><!--//app-utilities-->
 		        </div><!--//row-->
 	            </div><!--//app-header-content-->
@@ -192,7 +180,7 @@
 	                </div>
 	                <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">
-								<form class="settings-form" action="{{ route('resident.store') }}" method="POST">
+						<form class="settings-form" action="{{ route('resident.store') }}" method="POST" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
 										<label for="exampleInputName1" class="form-label" >Full name:</label>
@@ -234,6 +222,7 @@
 									</div>
 				
 									<div class="modal-footer">
+									<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
 										<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
 									</div>
 								</form>

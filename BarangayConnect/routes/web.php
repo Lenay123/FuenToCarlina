@@ -122,10 +122,6 @@ Route::group(['middleware' => 'auth'], function (){
 });
 
 // adminpage routes
-Route::resource('adminpage', ServiceController::class);
-Route::delete('/adminpage/{service}', ServiceController::class .'@destroy')->name('adminpage.destroy');
-Route::get('/adminpage/{id}/edit', ServiceController::class . '@edit')->name('adminpage.edit');
-Route::put('/adminpage/{id}',  ServiceController::class . '@update')->name('adminpage.update');
 Route::get('/adminpage/AddSecretary', [SecretaryUserController::class, 'createSecretary']);
 Route::post('/adminpage/ManageSecretary', [SecretaryUserController::class, 'storeSecretary'])->name('adminpage.storeSecretary');
 Route::delete('/adminpage/DeleteSecretary/{id}', [SecretaryUserController::class, 'deleteSecretary'])->name('adminpage.deleteSecretary');
@@ -155,5 +151,4 @@ Route::get('/residentpage/barangayIndigency', [DocumentController::class, 'baran
 Route::get('/residentpage/barangayBusinessPermit', [DocumentController::class, 'barangayBusinessPermit'])->name('residentpage.barangayBusinessPermit');
 Route::get('/residentpage/Account', [DocumentController::class, 'account'])->name('residentpage.Account');
 Route::get('/residentpage/barangayID', [DocumentController::class, 'barangayID'])->name('residentpage.barangayID');
-
 
