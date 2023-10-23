@@ -1,255 +1,394 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <title> Barangay Connect </title>
-    <link rel="stylesheet" href="/css/Admin.css">
-    <link rel="icon" href="{{ asset('img/image (5).png') }}">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-<body>
-<body>
-  <div class="sidebar">
-    <div class="logo-details">
-      <i><img src="/img/logo.png" alt="" style="margin-top:3px"></i>
-      <span class="logo_name">Barangay Connect</span>
-    </div>
-      <ul class="nav-links" style="margin-left: -14%">
-        <li>
-          <a href="/adminpage/AdminDashboard" class="active">
-            <i class='bx bx-grid-alt' ></i>
-            <span class="links_name" class="active">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="/adminpage/ManageSecretary" >
-            <i class='bx bx-box' ></i>
-            <span class="links_name" >Manage Secretary</span>
-          </a>
-        </li>
-        <li>
-          <a href="/adminpage/ManageResidents">
-            <i class='bx bx-list-ul' ></i>
-            <span class="links_name">Manage Residents</span>
-          </a>
-        </li>
-        <li>
-          <a href="/adminpage/AdminTransaction">
-            <i class='bx bx-coin-stack' ></i>
-            <span class="links_name">View Transactions</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-book-alt' ></i>
-            <span class="links_name">Logout</span>
-          </a>
-        </li>
+<html lang="en">
 
-      </ul>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Barangay Connect</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Barangay Connect</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/adminpage/AdminDashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Interface
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="/adminpage/ManageResidents" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Manage Residents</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/adminpage/ManageSecretary"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Manage Secretary</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>View Transactions</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">  
+            <a class="collapse-item" href="BarangayIndigencyTransaction.html">Barangay Indigency <br> Transactions</a>
+            <a class="collapse-item" href="BarangayCertificateTransaction.html">Barangay Certificate <br> Transactions</a>
+            <a class="collapse-item" href="BarangayIDTransaction.html">Barangay ID Transactions</a>
+            <a class="collapse-item" href="BarangayPermitTransaction.html">Barangay Business <br> Permit Transactions</a>
+          </div>
+        </div>
+      </li>
+
+
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <i class="fas fa-user-circle fa-lg"></i> <!-- Replace with the user icon -->
+            </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+         
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Barangay Secretary</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ empty($secretary) ? 0 : $secretary }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Barangay Residents</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $user > 0 ? $user : '0' }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Barangay Admin</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $admin > 0 ? $admin : '0' }}</div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Barangay Indigency </div>
+                      @php
+                      $barangayIdCount = 0; // Initialize the count to 0
+                  @endphp
+                  @foreach ($document_requests as $count)
+                      @if ($count->document_type === 'Barangay Indigency')
+                          @php
+                              $barangayIdCount = $count->count; // Update the count if a record is found
+                          @endphp
+                      @endif
+                  @endforeach
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $barangayIdCount }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Barangay Certificate</div>
+                      @php
+                      $barangayIdCount = 0; // Initialize the count to 0
+                  @endphp
+                  @foreach ($document_requests as $count)
+                      @if ($count->document_type === 'Barangay Clearance')
+                          @php
+                              $barangayIdCount = $count->count; // Update the count if a record is found
+                          @endphp
+                      @endif
+                  @endforeach
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $barangayIdCount }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Barangay ID</div>
+                      @php
+                      $barangayIdCount = 0; // Initialize the count to 0
+                  @endphp
+                  @foreach ($document_requests as $count)
+                      @if ($count->document_type === 'Barangay ID')
+                          @php
+                              $barangayIdCount = $count->count; // Update the count if a record is found
+                          @endphp
+                      @endif
+                  @endforeach
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $barangayIdCount }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Barangay Business Permit</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          @php
+                      $barangayIdCount = 0; // Initialize the count to 0
+                  @endphp
+                  @foreach ($document_requests as $count)
+                      @if ($count->document_type === 'Barangay Business Permit')
+                          @php
+                              $barangayIdCount = $count->count; // Update the count if a record is found
+                          @endphp
+                      @endif
+                  @endforeach
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $barangayIdCount }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; FuenToCarLina</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <section class="home-section">
-    <nav>
-      <div class="sidebar-button" style="color: black">
-        <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
-      </div>
-      <!-- <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search' ></i>
-      </div> -->
-      <div class="profile-details">
-        <img src="images/profile.jpg" alt="">
-        <span class="admin_name">Prem Shahi</span>
-        <i class='bx bx-chevron-down' ></i>
-      </div>
-    </nav> <br><br><br>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <section>
-      <main class="py-6 bg-surface-secondary">
-            <div class="container-fluid">
-                <!-- Card stats -->
-                <div class="row g-6 mb-6">
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">Clearance</span>
-    @php
-        $barangayIdCount = 0; // Initialize the count to 0
-    @endphp
-    @foreach ($document_requests as $count)
-        @if ($count->document_type === 'Barangay Clearance')
-            @php
-                $barangayIdCount = $count->count; // Update the count if a record is found
-            @endphp
-        @endif
-    @endforeach
-    <span class="h3 font-bold mb-0">{{ $barangayIdCount }}</span>
-</div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                            <i class="bi bi-credit-card"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">Indigency</span>
-    @php
-        $barangayIdCount = 0; // Initialize the count to 0
-    @endphp
-    @foreach ($document_requests as $count)
-        @if ($count->document_type === 'Barangay Indigency')
-            @php
-                $barangayIdCount = $count->count; // Update the count if a record is found
-            @endphp
-        @endif
-    @endforeach
-    <span class="h3 font-bold mb-0">{{ $barangayIdCount }}</span>
-</div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2"> Business Permit</span>
-    @php
-        $barangayIdCount = 0; // Initialize the count to 0
-    @endphp
-    @foreach ($document_requests as $count)
-        @if ($count->document_type === 'Barangay Business Permit')
-            @php
-                $barangayIdCount = $count->count; // Update the count if a record is found
-            @endphp
-        @endif
-    @endforeach
-    <span class="h3 font-bold mb-0">{{ $barangayIdCount }}</span>
-</div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
-                                            <i class="bi bi-clock-history"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                <div class="col">
-    <span class="h6 font-semibold text-muted text-sm d-block mb-2">Barangay ID</span>
-    @php
-        $barangayIdCount = 0; // Initialize the count to 0
-    @endphp
-    @foreach ($document_requests as $count)
-        @if ($count->document_type === 'Barangay ID')
-            @php
-                $barangayIdCount = $count->count; // Update the count if a record is found
-            @endphp
-        @endif
-    @endforeach
-    <span class="h3 font-bold mb-0">{{ $barangayIdCount }}</span>
-</div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                            <i class="bi bi-minecart-loaded"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                <div class="col">
-    <span class="h6 font-semibold text-muted text-sm d-block mb-2">Barangay Secretary</span>
-    <span class="h3 font-bold mb-0">{{ empty($secretary) ? 0 : $secretary }}</span>
-</div>
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                            <i class="bi bi-person"></i> <!-- Replace with user icon class -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                      <div class="card shadow border-0">
-                          <div class="card-body">
-                              <div class="row">
-                              <div class="col">
-    <span class="h6 font-semibold text-muted text-sm d-block mb-2">Barangay Residents</span>
-    <span class="h3 font-bold mb-0">{{ $user > 0 ? $user : '0' }}</span>
-</div>
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
 
-                                  <div class="col-auto">
-                                      <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                          <i class="bi bi-people"></i> <!-- Replace with multiple users icon class -->
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-sm-6 col-12">
-                      <div class="card shadow border-0">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col">
-                                      <span class="h6 font-semibold text-muted text-sm d-block mb-2">Barangay Admin</span>
-                                      <span class="h3 font-bold mb-0">{{ $admin > 0 ? $admin : '0' }}</span>
-                                  </div>
-                                  <div class="col-auto">
-                                      <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                          <i class="bi bi-person-fill"></i> <!-- Replace with secret user icon class -->
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+  <!-- Page level plugins -->
+  <script src="/vendor/chart.js/Chart.min.js"></script>
 
-                </div>
-  </section>
-
-  <script>
-   let sidebar = document.querySelector(".sidebar");
-   let sidebarBtn = document.querySelector(".sidebarBtn");
-   sidebarBtn.onclick = function() {
-   sidebar.classList.toggle("active");
-   if(sidebar.classList.contains("active")){
-   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-  }else
-   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-}
-</script>
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/chart-area-demo.js"></script>
+  <script src="/js/demo/chart-pie-demo.js"></script>
 
 </body>
+
 </html>

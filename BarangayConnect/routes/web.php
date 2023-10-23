@@ -152,3 +152,21 @@ Route::get('/residentpage/barangayBusinessPermit', [DocumentController::class, '
 Route::get('/residentpage/Account', [DocumentController::class, 'account'])->name('residentpage.Account');
 Route::get('/residentpage/barangayID', [DocumentController::class, 'barangayID'])->name('residentpage.barangayID');
 
+// Secretary Routes
+
+Route::get('/secretary/secretary_dashboard', [DashboardController::class, 'showCountSecretary'])->name('dashboard_secretary');
+Route::get('/secretary/manageIndigencyRequest', [DashboardController::class, 'showBarangayIndigencyRequests'])->name('indigency.requests');
+Route::get('/secretary/manageCertificateRequest', [DashboardController::class, 'showBarangayCertificateRequests'])->name('certificate.requests');
+Route::get('/secretary/manageIdRequest', [DashboardController::class, 'showBarangayIdRequests'])->name('id.requests');
+Route::get('/secretary/manageBusinessPermitRequest', [DashboardController::class, 'showBarangayBusinessPermitRequests'])->name('business_permit.requests');
+Route::get('/secretary/bIndigencyPrint', [DashboardController::class, 'showBarangayIndigencyPrint'])->name('indigency.print');
+Route::get('/secretary/bCertificatePrint', [DashboardController::class, 'showBarangayCertificatePrint'])->name('certificate.print');
+Route::get('/secretary/bIdPrint', [DashboardController::class, 'showBarangayIDPrint'])->name('id.print');
+Route::get('/secretary/bBusinessPermitPrint', [DashboardController::class, 'showBarangayBusinessPermitPrint'])->name('business_permit.print');
+Route::get('/secretary/request_history', [DashboardController::class, 'showAllTransactions'])->name('requests.history');
+Route::delete('/secretary/request_history/{document_request}', [DashboardController::class, 'destroy'])->name('document_requests.destroy');
+
+
+// Route::get('secretary/request_history', function () {
+//     return view('secretary/request_history');
+// });
