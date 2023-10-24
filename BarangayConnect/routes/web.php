@@ -135,11 +135,11 @@ Route::delete('/adminpage/DeleteResident/{id}', [RegistrationController::class, 
 Route::get('/adminpage/EditResident/{id}', [RegistrationController::class, 'editResident'])->name('adminpage.editResident');
 Route::put('/adminpage/UpdateResident/{id}', [RegistrationController::class, 'updateResident'])->name('adminpage.updateResident');
 Route::get('/adminpage/AdminDashboard', [DashboardController::class, 'showCount'])->name('dashboard');
-Route::get('/adminpage/AdminTransaction', [StatusController::class, 'showStatuses']);
-Route::delete('/adminpage/deleteTransaction/{id}', [StatusController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
-Route::get('/adminpage/AdminTransaction', [StatusController::class, 'showStatuses'])
-    ->name('adminpage.AdminTransaction');
-
+Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('certificate.transaction');
+Route::get('/adminpage/BarangayIDTransaction', [DashboardController::class, 'showBarangayIDTransaction'])->name('id.transaction');
+Route::get('/adminpage/BarangayIndigencyTransaction', [DashboardController::class, 'showBarangayIndigencyTransaction'])->name('indigency.transaction');
+Route::get('/adminpage/BarangayPermitTransaction', [DashboardController::class, 'showBarangayPermitTransaction'])->name('permit.transaction');
+Route::delete('/adminpage/deleteTransaction/{id}', [DashboardController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
 // residentpage routes
 Route::post('/residentpage/resident', [DocumentController::class, 'store'])->name('resident.store');
 Route::get('/residentpage/transactions', [DocumentController::class, 'showTransactions']);
@@ -165,8 +165,3 @@ Route::get('/secretary/bIdPrint', [DashboardController::class, 'showBarangayIDPr
 Route::get('/secretary/bBusinessPermitPrint', [DashboardController::class, 'showBarangayBusinessPermitPrint'])->name('business_permit.print');
 Route::get('/secretary/request_history', [DashboardController::class, 'showAllTransactions'])->name('requests.history');
 Route::delete('/secretary/request_history/{document_request}', [DashboardController::class, 'destroy'])->name('document_requests.destroy');
-
-
-// Route::get('secretary/request_history', function () {
-//     return view('secretary/request_history');
-// });

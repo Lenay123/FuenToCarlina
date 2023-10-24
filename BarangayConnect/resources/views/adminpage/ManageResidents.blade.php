@@ -10,10 +10,9 @@
   <meta name="author" content="">
 
   <title>Barangay Connect</title>
-  <link rel="stylesheet" href="css/Admin.css">
-
-  <!-- Custom fonts for this template -->
-  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="{{ asset('img/image (5).png') }}">
+ <!-- Custom fonts for this template -->
+ <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
@@ -32,18 +31,16 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+      <div class="sidebar-brand-icon rotate-n-15">
+        <img src="/img/logo.png" alt="Barangay Connect Logo" class="img-responsive" style="width:50px; height:60px; margin-top:30px; margin-left:20px">
         </div>
         <div class="sidebar-brand-text mx-3">Barangay Connect</div>
-      </a>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
+      </a> <br>
+      <hr class="sidebar-divider">
        <!-- Nav Item - Dashboard -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="/adminpage/AdminDashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -80,10 +77,10 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">  
-            <a class="collapse-item" href="BarangayIndigencyTransaction.html">Barangay Indigency <br> Transactions</a>
-            <a class="collapse-item" href="BarangayCertificateTransaction.html">Barangay Certificate <br> Transactions</a>
-            <a class="collapse-item" href="BarangayIDTransaction.html">Barangay ID Transactions</a>
-            <a class="collapse-item" href="BarangayPermitTransaction.html">Barangay Business <br> Permit Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIndigencyTransaction">Barangay Indigency <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayCertificateTransaction">Barangay Certificate <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIDTransaction">Barangay ID Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayPermitTransaction">Barangay Business <br> Permit Transactions</a>
           </div>
         </div>
       </li>
@@ -128,18 +125,11 @@
                 </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" disabled>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Active
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
+               
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -156,67 +146,70 @@
 
     <section>
         <!-- Main content -->
-        
+                @if(session('success'))
+       <div class="alert alert-success">
+              {{ session('success') }}
+       </div>
+   @endif
+
  <!-- Page Heading -->
  <div class="container-fluid">
  <h1 class="h3 mb-2 text-gray-800">Barangay Residents</h1>
  <p class="mb-4">These are the lists of Residents who used the web application. </p>
 
-        <!-- @if(session('success'))
-       <div class="alert alert-success">
-              {{ session('success') }}
-       </div>
-   @endif -->
 
    <div class="card shadow mb-4" >
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Residents</h6>
+    <div class="card-header" >
+            <div class="col-md-12 bg-light text-right" >
+            <a style="margin-bottom:-5px" href="/adminpage/AddResidents"> <button  type="button" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Another Resident</button> </a>
+            </div>
     </div>
 
     <div class="card-body" >
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-nowrap">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col" class="text-center">ID</th>
-                        <th scope="col" class="text-center">Fullname</th>
-                        <th scope="col" class="text-center">Date Created</th>
-                        <th scope="col" class="text-center">Sitio/Purok</th>
-                        <th scope="col" class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if($users->count() > 0)
-                    @foreach ($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->first_name}} {{$user->last_name}}</td>
-                        <td>{{$user->created_at}}</td>
-                        <td>{{$user->address}}</td>
-                        <td class="text-end">
-                            <div class="d-flex align-items-center">
-                                <a href="{{ route('adminpage.editResident', ['id' => $user->id]) }}" class="btn btn-sm btn-neutral me-2">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <form action="{{ route('adminpage.deleteResident', ['id' => $user->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover"
-                                        onclick="return confirm('Are you sure you want to delete this resident?');">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @else
-                    <tr>
-                        <td colspan="5">There are no Residents.</td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
+        <table class="table table-bordered table-hover table-nowrap">
+            <thead class="thead-light">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Fullname</th>
+                    <th class="text-center">Email Address</th>             
+                    <th class="text-center">Sitio/Purok</th>
+                    <th class="text-center">Date Created</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($users->count() > 0)
+                @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->address }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td style="display: flex;">
+                        <a  href="{{ route('adminpage.editResident', ['id' => $user->id]) }}" class="btn btn-sm btn-primary mr-2" title="Edit">
+                        <i class="fas fa-fw fa-edit"></i>
+                        </a>
+                        <form action="{{ route('adminpage.deleteResident', ['id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this resident?');">
+                            <i class="fas fa-fw fa-trash-alt "></i>
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+                @endforeach
+                @else
+                <tr>
+                    <td colspan="5">There are no Residents.</td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+
         </div>
     </div>
 </div>

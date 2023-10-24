@@ -92,7 +92,7 @@ John Abraham</span>is now following you
 John Abraham</h5>
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -144,25 +144,7 @@ John Abraham</h5>
                             <li class="nav-item ">
                                 <a class="nav-link" href="/secretary/request_history" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Print Document</a>
-                                <div id="submenu-5" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bIndigencyPrint">Barangay Indigency</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bCertificatePrint">Barangay Certificate</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bIdPrint">Barangay ID</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bBusinessPermitPrint">Barangay Business Permit</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+
                         </ul>
                     </div>
                 </nav>

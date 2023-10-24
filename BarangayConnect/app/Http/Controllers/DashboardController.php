@@ -119,4 +119,38 @@ class DashboardController extends Controller
 
         return redirect()->route('requests.history')->with('success', 'Document request deleted successfully');
     }
+
+    
+
+    public function showBarangayIndigencyTransaction()
+    {
+    $document_requests = DocumentRequest::where('document_type', 'Barangay Indigency')->get();
+
+    return view('adminpage.BarangayIndigencyTransaction', compact('document_requests'));
+
+    }
+
+    public function showBarangayCertificateTransaction()
+    {
+    $document_requests = DocumentRequest::where('document_type', 'Barangay Certificate')->get();
+
+    return view('adminpage.BarangayCertificateTransaction', compact('document_requests'));
+
+    }
+
+    public function showBarangayIDTransaction()
+    {
+    $document_requests = DocumentRequest::where('document_type', 'Barangay ID')->get();
+
+    return view('adminpage.BarangayIDTransaction', compact('document_requests'));
+
+    }
+
+    public function showBarangayPermitTransaction()
+    {
+    $document_requests = DocumentRequest::where('document_type', 'Barangay Business Permit')->get();
+
+    return view('adminpage.BarangayPermitTransaction', compact('document_requests'));
+
+    }
 }

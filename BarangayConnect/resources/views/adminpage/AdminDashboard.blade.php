@@ -29,12 +29,13 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Barangay Connect</div>
-      </a>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+<div class="sidebar-brand-icon rotate-n-15">
+  <img src="/img/logo.png" alt="Barangay Connect Logo" class="img-responsive" style="width:50px; height:60px; margin-top:30px; margin-left:20px">
+  </div>
+  <div class="sidebar-brand-text mx-3">Barangay Connect</div>
+
+</a> <br>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -54,7 +55,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link collapsed" href="/adminpage/ManageResidents" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Manage Residents</span>
@@ -76,10 +77,10 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">  
-            <a class="collapse-item" href="BarangayIndigencyTransaction.html">Barangay Indigency <br> Transactions</a>
-            <a class="collapse-item" href="BarangayCertificateTransaction.html">Barangay Certificate <br> Transactions</a>
-            <a class="collapse-item" href="BarangayIDTransaction.html">Barangay ID Transactions</a>
-            <a class="collapse-item" href="BarangayPermitTransaction.html">Barangay Business <br> Permit Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIndigencyTransaction">Barangay Indigency <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayCertificateTransaction">Barangay Certificate <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIDTransaction">Barangay ID Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayPermitTransaction">Barangay Business <br> Permit Transactions</a>
           </div>
         </div>
       </li>
@@ -124,18 +125,11 @@
             </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" disabled>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Active
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
+                
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -167,7 +161,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Barangay Secretary</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ empty($secretary) ? 0 : $secretary }}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ empty($secretaries) ? 0 : $secretaries }}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>

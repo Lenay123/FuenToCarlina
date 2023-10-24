@@ -5,8 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Barangay Document</title>
     <link rel="icon" href="{{ asset('img/image (5).png') }}">
+    <title>Barangay Connect</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -91,7 +91,7 @@ John Abraham</span>is now following you
 John Abraham</h5>
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -104,7 +104,7 @@ John Abraham</h5>
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- left sidebar -->
-        <!-- ============================================================== --><br> <br>
+        <!-- ============================================================== --> <br> <br>
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -124,7 +124,6 @@ John Abraham</h5>
                                 <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Manage Request</a>
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
-
                                         <li class="nav-item">
                                             <a class="nav-link" href="/secretary/manageIndigencyRequest">Barangay Indigency</a>
                                         </li>
@@ -137,6 +136,7 @@ John Abraham</h5>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/secretary/manageBusinessPermitRequest">Barangay Business Permit</a>
                                         </li>
+                                       
                                     </ul>
                                 </div>
                             </li>
@@ -144,22 +144,8 @@ John Abraham</h5>
                             <li class="nav-item ">
                                 <a class="nav-link" href="/secretary/request_history" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Print Document</a>
-                                <div id="submenu-5" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bIndigencyPrint">Barangay Indigency</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bCertificatePrint">Barangay Certificate</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bIdPrint">Barangay ID</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/bBusinessPermitPrint">Barangay Business Permit</a>
-                                        </li> 
+                          
+                                      
                                     </ul>
                                 </div>
                             </li>
@@ -182,7 +168,7 @@ John Abraham</h5>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Barangay Certicate Requests</h2>
+                            <h2 class="pageheader-title">Barangay Certificate Requests</h2>
                             <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
@@ -202,39 +188,81 @@ John Abraham</h5>
                     <!-- ============================================================== -->
                     <!-- basic table  -->
                     <!-- ============================================================== -->
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="card">
-                            <h5 class="card-header">Barangay Certificate Requests Table</h5>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered first">
-                                        <thead>
-                                            <tr>
-                                                <th>Requestors</th>
-                                                <th>Reference Number</th>
-                                                <th>Requested Document</th>
-                                                <th>Request Status</th>
-                                                <th>Date Requested</th>
-                                                <th>Action</th>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Barangay Certificate Requests Table</h5>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <!-- Add a search input field -->
+                        <input type="text" id="search" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered first" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Requestors</th>
+                            <th>Reference Number</th>
+                            <th>Requested Document</th>
+                            <th>Request Status</th>
+                            <th>Date Requested</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($document_requests as $document_request)
+                            <tr>
+                                <td>{{ $document_request->full_name }}</td>
+                                <td>{{ $document_request->tracker_number }}</td>
+                                <td>{{ $document_request->document_type }}</td>
+                                <td>{{ $document_request->status }}</td>
+                                <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+                                     <td>
+                                     <button type="button" class="btn btn-danger">Print</button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit</button>
+                                                   
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                                @foreach ($document_requests as $document_request)
-                                                <tr>
-                                                    <td>{{ $document_request->full_name }}</td>
-                                                    <td>{{ $document_request->tracker_number }}</td>
-                                                    <td>{{ $document_request->document_type }}</td>
-                                                    <td>{{ $document_request->status }}</td>
-                                                    <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary">View</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
+                                        @endforeach
+                                        </tbody>
                                     </table>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Type of Document:</label>
+                                                    <input type="text" class="form-control" id="message-text" value="{{ $document_request->document_type }}" readonly>
+                                                </div>
+                                                <label for="recipient-name" class="col-form-label">Change Status:</label>
+                                                <!-- Add a dropdown/select element here -->
+                                                <select class="form-control" id="recipient-name">
+                                                <option value="recipient1">In Progress</option>
+                                                <option value="recipient2">To be Claimed</option>
+                                                <option value="recipient3">Claimed</option>
+                                                </select>
+                                            </div>
+
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -271,6 +299,38 @@ John Abraham</h5>
     <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("search");
+    const table = document.getElementById("dataTable");
+    const tableRows = table.getElementsByTagName("tr");
+
+    searchInput.addEventListener("input", function() {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        for (let i = 1; i < tableRows.length; i++) {
+            const cells = tableRows[i].getElementsByTagName("td");
+            let found = false;
+
+            for (let j = 0; j < cells.length; j++) {
+                const cellText = cells[j].textContent || cells[j].innerText;
+
+                if (cellText.toLowerCase().indexOf(searchTerm) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                tableRows[i].style.display = "";
+            } else {
+                tableRows[i].style.display = "none";
+            }
+        }
+    });
+});
+</script>
+
 </body>
  
 </html>

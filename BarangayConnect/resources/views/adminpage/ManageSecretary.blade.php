@@ -27,148 +27,142 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<!-- Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+<div class="sidebar-brand-icon rotate-n-15">
+  <img src="/img/logo.png" alt="Barangay Connect Logo" class="img-responsive" style="width:50px; height:60px; margin-top:30px; margin-left:20px">
+  </div>
+  <div class="sidebar-brand-text mx-3">Barangay Connect</div>
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Barangay Connect</div>
-      </a>
+</a> <br>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+<hr class="sidebar-divider">
+ <!-- Nav Item - Dashboard -->
+ <li class="nav-item">
+  <a class="nav-link" href="/adminpage/AdminDashboard">
+    <i class="fas fa-fw fa-tachometer-alt"></i>
+    <span>Dashboard</span></a>
+</li>
 
-       <!-- Nav Item - Dashboard -->
-       <li class="nav-item active">
-        <a class="nav-link" href="/adminpage/AdminDashboard">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
+<!-- Divider -->
+<hr class="sidebar-divider">
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+<div class="sidebar-heading">
+  Interface
+</div>
 
-      <div class="sidebar-heading">
-        Interface
-      </div>
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+  <a class="nav-link collapsed" href="/adminpage/ManageResidents" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-fw fa-cog"></i>
+    <span>Manage Residents</span>
+  </a>
+</li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/adminpage/ManageResidents" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Manage Residents</span>
-        </a>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link collapsed" href="/adminpage/ManageSecretary"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Manage Secretary</span>
-        </a>
-      </li>
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="nav-item active">
+  <a class="nav-link collapsed" href="/adminpage/ManageSecretary"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+    <i class="fas fa-fw fa-wrench"></i>
+    <span>Manage Secretary</span>
+  </a>
+</li>
 
 
-      <li class="nav-item ">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>View Transactions</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+<li class="nav-item ">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-fw fa-cog"></i>
+    <span>View Transactions</span>
+  </a>
+  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">  
-            <a class="collapse-item" href="BarangayIndigencyTransaction.html">Barangay Indigency <br> Transactions</a>
-            <a class="collapse-item" href="BarangayCertificateTransaction.html">Barangay Certificate <br> Transactions</a>
-            <a class="collapse-item" href="BarangayIDTransaction.html">Barangay ID Transactions</a>
-            <a class="collapse-item" href="BarangayPermitTransaction.html">Barangay Business <br> Permit Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIndigencyTransaction">Barangay Indigency <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayCertificateTransaction">Barangay Certificate <br> Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayIDTransaction">Barangay ID Transactions</a>
+            <a class="collapse-item" href="/adminpage/BarangayPermitTransaction">Barangay Business <br> Permit Transactions</a>
           </div>
         </div>
-      </li>
+</li>
 
 
-      <hr class="sidebar-divider d-none d-md-block">
+<hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
+<!-- Sidebar Toggler (Sidebar) -->
+<div class="text-center d-none d-md-inline">
+  <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
 
-    </ul>
-    <!-- End of Sidebar -->
+</ul>
+<!-- End of Sidebar -->
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-      <!-- Main Content -->
-      <div id="content">
+<!-- Main Content -->
+<div id="content">
 
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <!-- Topbar -->
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
 
 
-            <div class="topbar-divider d-none d-sm-block"></div>
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                    <i class="fas fa-user-circle fa-lg"></i> <!-- Replace with the user icon -->
-                </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+
+      <div class="topbar-divider d-none d-sm-block"></div>
+
+      <!-- Nav Item - User Information -->
+      <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+              <i class="fas fa-user-circle fa-lg"></i> <!-- Replace with the user icon -->
+          </a>
+        <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" disabled>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Active
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
+               
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
               </div>
-            </li>
+      </li>
 
-          </ul>
+    </ul>
 
-        </nav>
+  </nav>
 
         <!-- body content -->
 
         <section>
+        @if(session('success'))
+           <div class="alert alert-success">
+                  {{ session('success') }}
+           </div>
+       @endif
           <div class="container-fluid">
             <h1 class="h3 mb-2 text-gray-800">Barangay Secretaries</h1>
             <p class="mb-4">These are the lists of Secretaries who used the web application. </p>
             <!-- Main content -->
 
-                 <!-- @if(session('success'))
-           <div class="alert alert-success">
-                  {{ session('success') }}
-           </div>
-       @endif -->
 
        <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Secretaries</h6>
-        </div>
+       <div class="card-header" >
+            <div class="col-md-12 bg-light text-right" >
+            <a style="margin-bottom:-5px" href="/adminpage/AddSecretary"> <button  type="button" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Another Secretary</button> </a>
+            </div>
+    </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -188,20 +182,18 @@
                         <td>{{$secretary->first_name}} {{$secretary->last_name}}</td>
                         <td>{{$secretary->created_at}}</td>
                         <td>{{$secretary->address}}</td>
-                        <td class="text-end">
-                            <div class="d-flex align-items-center">
-                                <a href="{{ route('adminpage.editSecretary', ['id' => $secretary->id]) }}" class="btn btn-sm btn-neutral me-2">
-                                    <i class="bi bi-pencil"></i> <!-- Assuming "bi-pencil" is the class for your edit icon -->
-                                </a>
-                                <form action="{{ route('adminpage.deleteSecretary', ['id' => $secretary->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="return confirm('Are you sure you want to delete this secretary?');">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
+                        <td style="display: flex;">
+                        <a  href="{{ route('adminpage.editSecretary', ['id' => $secretary->id]) }}" class="btn btn-sm btn-primary mr-2" title="Edit">
+                        <i class="fas fa-fw fa-edit"></i>
+                        </a>
+                        <form action="{{ route('adminpage.deleteSecretary', ['id' => $secretary->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this resident?');">
+                            <i class="fas fa-fw fa-trash-alt "></i>
+                            </button>
+                        </form>
+                    </td>
                     </tr>
                     @endforeach
                 @else
