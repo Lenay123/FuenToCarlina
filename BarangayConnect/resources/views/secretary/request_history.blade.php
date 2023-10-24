@@ -205,21 +205,23 @@ John Abraham</h5>
                                         </thead>
                                         <tbody>
                                             @foreach ($document_requests as $document_request)
-                                            <tr>
+                                            <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
                                                 <td>{{ $document_request->full_name }}</td>
                                                 <td>{{ $document_request->tracker_number }}</td>
                                                 <td>{{ $document_request->document_type }}</td>
                                                 <td>{{ $document_request->status }}</td>
                                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+                                               
                                                 <td>
-                                                   
-                                                    <form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
+                                                    <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
+                                                </td>
+                                                    <!-- <form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this document request?')">Delete</button>
 
-                                                    </form>
-                                                </td>
+                                                    </form> -->
+                                              
                                             </tr>
                                         @endforeach
                                         
@@ -261,6 +263,42 @@ John Abraham</h5>
     <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
+
+<script>
+function deleteRow(button) {
+    if (confirm('Are you sure you want to delete this document request?')) {
+        var row = button.closest('tr'); // Find the parent row
+
+        // Retrieve the ID from the data attribute
+        var requestId = row.getAttribute('data-id');
+
+        // Store the deleted row's ID in Local Storage
+        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+        deletedRows.push(requestId);
+        localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+
+        // Hide the row
+        row.style.display = 'none';
+    }
+}
+
+// Load the deleted rows from Local Storage and hide them
+function loadDeletedRows() {
+    var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+    deletedRows.forEach(function (requestId) {
+        var row = document.querySelector(`tr[data-id="${requestId}"]`);
+        if (row) {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// Call the function to load deleted rows on page load
+loadDeletedRows();
+
+</script>
+
+
 </body>
  
 </html>

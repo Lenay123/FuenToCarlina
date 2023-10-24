@@ -147,7 +147,7 @@
                 </thead>
                 <tbody>
                     @foreach ($document_requests as $document_request)
-                        <tr data-status="{{ $document_request->status }}">
+                        <tr data-id="{{ $document_request->id }}" data-status="{{ $document_request->status }}" >
                             <td>{{ $document_request->full_name }}</td>
                             <td>{{ $document_request->document_type }}</td>
                             <td>{{ $document_request->tracker_number }}</td>
@@ -157,11 +157,7 @@
                                 @if ($document_request->status === 'Pending' || $document_request->status === 'To be Claimed' || $document_request->status === 'In Progress')
                                     <button type="button" class="btn btn-danger" disabled>Delete</button>
                                 @else
-                                    <form action="{{ route('adminpage.deleteTransaction', $document_request->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Request?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
                                 @endif
                             </td>
                         </tr>
@@ -287,7 +283,40 @@ function updateHeaderText(selectedStatus) {
         $('h6.m-0').text(selectedStatus);
     }
 }
+
+// Function to delete a row
+function deleteRow(button) {
+    if (confirm('Are you sure you want to delete this document request?')) {
+        var row = button.closest('tr'); // Find the parent row
+        var requestId = row.getAttribute('data-id'); // Retrieve the ID from the data attribute
+
+        // Remove the row from the view
+        row.style.display = 'none';
+
+        // Store the deleted row's ID in Local Storage
+        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+        deletedRows.push(requestId);
+        localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+    }
+}
+
+// Load the deleted rows from Local Storage and hide them
+function loadDeletedRows() {
+    var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+    deletedRows.forEach(function (requestId) {
+        var row = document.querySelector(`tr[data-id="${requestId}"]`);
+        if (row) {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+}
+
+// Call the function to load deleted rows on page load
+loadDeletedRows();
+
 </script>
+
+
 
 </body>
 </html>

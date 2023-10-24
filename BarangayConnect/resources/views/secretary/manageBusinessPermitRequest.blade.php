@@ -212,7 +212,7 @@ John Abraham</h5>
                     </thead>
                     <tbody>
                         @foreach ($document_requests as $document_request)
-                            <tr>
+                            <tr >
                                 <td>{{ $document_request->full_name }}</td>
                                 <td>{{ $document_request->tracker_number }}</td>
                                 <td>{{ $document_request->document_type }}</td>

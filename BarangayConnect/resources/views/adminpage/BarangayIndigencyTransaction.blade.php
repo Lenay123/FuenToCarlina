@@ -147,7 +147,7 @@
                 </thead>
                 <tbody>
                     @foreach ($document_requests as $document_request)
-                        <tr data-status="{{ $document_request->status }}">
+                        <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
                             <td>{{ $document_request->full_name }}</td>
                             <td>{{ $document_request->document_type }}</td>
                             <td>{{ $document_request->tracker_number }}</td>
@@ -157,11 +157,7 @@
                                 @if ($document_request->status === 'Pending' || $document_request->status === 'To be Claimed' || $document_request->status === 'In Progress')
                                     <button type="button" class="btn btn-danger" disabled>Delete</button>
                                 @else
-                                  <form method="POST" action="{{ route('adminpage.deleteTransaction', ['id' => $document_request->id]) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
                                 @endif
                             </td>
                         </tr>
@@ -289,5 +285,37 @@ function updateHeaderText(selectedStatus) {
 }
 </script>
 
+<script>
+function deleteRow(button) {
+    if (confirm('Are you sure you want to delete this document request?')) {
+        var row = button.closest('tr'); // Find the parent row
+
+        // Retrieve the ID from the data attribute
+        var requestId = row.getAttribute('data-id');
+
+        // Store the deleted row's ID in Local Storage
+        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+        deletedRows.push(requestId);
+        localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+
+        // Remove the row from the table
+        row.remove();
+    }
+}
+
+// Rebuild the table when the page loads
+function rebuildTable() {
+    var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+    deletedRows.forEach(function (requestId) {
+        var row = document.querySelector(`tr[data-id="${requestId}"]`);
+        if (row) {
+            row.remove();
+        }
+    });
+}
+
+// Call the function to rebuild the table on page load
+rebuildTable();
+</script>
 </body>
 </html>
