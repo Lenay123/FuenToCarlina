@@ -41,44 +41,32 @@
                                     <div class="notification-title"> Notification</div>
                                     <div class="notification-list">
                                         <div class="list-group">
+                                        @foreach ($latestDocumentRequests as $latestRequest)
                                             <a href="#" class="list-group-item list-group-item-action active">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="../assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
+                                                    <div class="notification-list-user-img">
+                                                        <img src="../assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle">
+                                                    </div>
+                                                    <div class="notification-list-user-block">
+                                                        <span class="notification-list-user-name">{{ $latestRequest->full_name }}</span> requested a {{ $latestRequest->document_type }} with a Reference Number {{ $latestRequest->tracker_number }}.
+                                                        <div class="notification-date">
+                                                            @if($isNewRequest && $latestRequest->created_at->gt(now()->subMinute()))
+                                                                Just now
+                                                            @else
+                                                                {{ $latestRequest->created_at }}
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="../assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">
-John Abraham</span>is now following you
-                                                        <div class="notification-date">2 days ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="../assets/images/avatar-4.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Monaan Pechi</span> is watching your main repository
-                                                        <div class="notification-date">2 min ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="../assets/images/avatar-5.jpg" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                        @endforeach
+
+                        
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                <div class="list-footer"> <a href="{{ route('secretary.notifications') }}">View all notifications</a></div>
                                 </li>
                             </ul>
                         </li>
@@ -168,13 +156,13 @@ John Abraham</h5>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Barangay Certificate Requests</h2>
+                            <h2 class="pageheader-title">Barangay Business Permit Requests</h2>
                             <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Barangay Certificate Requests</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Barangay Business Permit Requests</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -224,7 +212,7 @@ John Abraham</h5>
                                                    
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                    
                                         </tbody>
                                     </table>
 
@@ -232,7 +220,7 @@ John Abraham</h5>
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -247,6 +235,7 @@ John Abraham</h5>
                                                 <label for="recipient-name" class="col-form-label">Change Status:</label>
                                                 <!-- Add a dropdown/select element here -->
                                                 <select class="form-control" id="recipient-name">
+                                                <option value="recipient4">Decline</option>
                                                 <option value="recipient1">In Progress</option>
                                                 <option value="recipient2">To be Claimed</option>
                                                 <option value="recipient3">Claimed</option>
@@ -264,7 +253,7 @@ John Abraham</h5>
                                     </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    @endforeach
                         </div>
                     </div>
                     <!-- ============================================================== -->

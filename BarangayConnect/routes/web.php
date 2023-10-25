@@ -159,9 +159,9 @@ Route::get('/secretary/manageIndigencyRequest', [DashboardController::class, 'sh
 Route::get('/secretary/manageCertificateRequest', [DashboardController::class, 'showBarangayCertificateRequests'])->name('certificate.requests');
 Route::get('/secretary/manageIdRequest', [DashboardController::class, 'showBarangayIdRequests'])->name('id.requests');
 Route::get('/secretary/manageBusinessPermitRequest', [DashboardController::class, 'showBarangayBusinessPermitRequests'])->name('business_permit.requests');
-Route::get('/secretary/bIndigencyPrint', [DashboardController::class, 'showBarangayIndigencyPrint'])->name('indigency.print');
-Route::get('/secretary/bCertificatePrint', [DashboardController::class, 'showBarangayCertificatePrint'])->name('certificate.print');
-Route::get('/secretary/bIdPrint', [DashboardController::class, 'showBarangayIDPrint'])->name('id.print');
-Route::get('/secretary/bBusinessPermitPrint', [DashboardController::class, 'showBarangayBusinessPermitPrint'])->name('business_permit.print');
 Route::get('/secretary/request_history', [DashboardController::class, 'showAllTransactions'])->name('requests.history');
 Route::delete('/secretary/request_history/{document_request}', [DashboardController::class, 'destroy'])->name('document_requests.destroy');
+// Route::get('secretary/notifications', function () {
+//     return view('secretary/notifications');
+// });
+Route::get('/secretary/notifications', [DashboardController::class, 'showAllNotifications'])->name('secretary.notifications');

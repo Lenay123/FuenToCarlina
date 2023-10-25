@@ -96,7 +96,7 @@
                                 <i class="fas fa-user-circle fa-lg"></i> <!-- Replace with the user icon -->
                             </a>
                             <!-- Dropdown - User Information -->
-                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" disabled>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Active
@@ -147,7 +147,7 @@
                 </thead>
                 <tbody>
                     @foreach ($document_requests as $document_request)
-                        <tr data-id="{{ $document_request->id }}" data-status="{{ $document_request->status }}" >
+                        <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
                             <td>{{ $document_request->full_name }}</td>
                             <td>{{ $document_request->document_type }}</td>
                             <td>{{ $document_request->tracker_number }}</td>
@@ -220,7 +220,6 @@
     <script src="/js/sb-admin-2.min.js"></script>
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Page level plugins -->
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Page level custom scripts -->
@@ -283,40 +282,39 @@ function updateHeaderText(selectedStatus) {
         $('h6.m-0').text(selectedStatus);
     }
 }
+</script>
 
-// Function to delete a row
+<script>
 function deleteRow(button) {
     if (confirm('Are you sure you want to delete this document request?')) {
         var row = button.closest('tr'); // Find the parent row
-        var requestId = row.getAttribute('data-id'); // Retrieve the ID from the data attribute
 
-        // Remove the row from the view
-        row.style.display = 'none';
+        // Retrieve the ID from the data attribute
+        var requestId = row.getAttribute('data-id');
 
         // Store the deleted row's ID in Local Storage
         var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
         deletedRows.push(requestId);
         localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+
+        // Remove the row from the table
+        row.remove();
     }
 }
 
-// Load the deleted rows from Local Storage and hide them
-function loadDeletedRows() {
+// Rebuild the table when the page loads
+function rebuildTable() {
     var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
     deletedRows.forEach(function (requestId) {
         var row = document.querySelector(`tr[data-id="${requestId}"]`);
         if (row) {
-            row.style.display = 'none'; // Hide the row
+            row.remove();
         }
     });
 }
 
-// Call the function to load deleted rows on page load
-loadDeletedRows();
-
+// Call the function to rebuild the table on page load
+rebuildTable();
 </script>
-
-
-
 </body>
 </html>

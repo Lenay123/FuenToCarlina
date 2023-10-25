@@ -65,8 +65,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                <div class="list-footer"> <a href="{{ route('secretary.notifications') }}">View all notifications</a></div>
-
+                                    <div class="list-footer"> <a href="{{ route('secretary.notifications') }}">View all notifications</a></div>
                                 </li>
                             </ul>
                         </li>
@@ -150,13 +149,13 @@ John Abraham</h5>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Barangay Connect Transactions</h2>
+                            <h2 class="pageheader-title">Barangay Connect Notifications</h2>
                             <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Barangay Connect Transactions</li>
+                                        <li class="breadcrumb-item active" aria-current="page">All Notifications</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -170,51 +169,29 @@ John Abraham</h5>
                     <!-- ============================================================== -->
                     <!-- basic table  -->
                     <!-- ============================================================== -->
-                    @if(session('success'))
+                    <!-- @if(session('success'))
                     <div class="alert alert-success">
                            {{ session('success') }}
                     </div>
-                @endif
+                @endif -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">Barangay Connect Transaction History Table</h5>
+                            <!-- <h5 class="card-header">Barangay Connect Notifi Table</h5> -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered first">
-                                        <thead>
-                                            <tr>
-                                                <th>Requestors</th>
-                                                <th>Reference Number</th>
-                                                <th>Requested Document</th>
-                                                <th>Request Status</th>
-                                                <th>Date Requested</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
+                                <table class="table">
+                                 
                                         <tbody>
-                                            @foreach ($document_requests as $document_request)
-                                            <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
-                                                <td>{{ $document_request->full_name }}</td>
-                                                <td>{{ $document_request->tracker_number }}</td>
-                                                <td>{{ $document_request->document_type }}</td>
-                                                <td>{{ $document_request->status }}</td>
-                                                <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
-                                               
-                                                <td>
-                                                    <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
-                                                </td>
-                                                    <!-- <form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this document request?')">Delete</button>
-
-                                                    </form> -->
-                                              
-                                            </tr>
+                                        @foreach ($latestDocumentRequests as $latestRequest)
+                                            <tr>
+                                            <td><b>{{ $latestRequest->full_name }}</b></span> requested a <b>{{ $latestRequest->document_type }}</b> with a Reference Number <b>{{ $latestRequest->tracker_number }}</b> on {{ $latestRequest->created_at }}.</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" ><i class="far fa-trash-alt"></i></button>
+                                             </td>
+                                        </tr>
+                                        </tbody>
                                         @endforeach
-                                        
-
-                                    </table>
+                                </table>
                                 </div>
                             </div>
                         </div>

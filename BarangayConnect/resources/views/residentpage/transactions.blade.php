@@ -170,10 +170,7 @@
 							    <div class="col-auto">
 								    <form class="table-search-form row gx-1 align-items-center">
 					                    <div class="col-auto">
-					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
-					                    </div>
-					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search.....">
 					                    </div>
 					                </form>
 					                
@@ -218,13 +215,13 @@
 									</tr>
 								</thead>
 									<tbody>
-										@if(!empty($document_requests) && $document_requests->count())
-											@foreach ($document_requests as $document_request)
-												<tr data-status="{{ $document_request->status }}">
-													<td>{{$document_request->document_type}}</td>
-													<td>{{$document_request->created_at}}</td>
-													<td>{{$document_request->tracker_number}}</td>
-													<td>{{$document_request->status}}</td>
+									@if(!empty($document_requests) && $document_requests->count())
+									@foreach ($document_requests as $document_request)
+										<tr data-status="{{ $document_request->status }}" >
+											<td>{{$document_request->document_type}}</td>
+											<td>{{$document_request->created_at}}</td>
+											<td>{{$document_request->tracker_number}}</td>
+											<td>{{$document_request->status}}</td>
 													<td>
 														<form method="POST" action="{{ route('document_requests.cancel', $document_request) }}">
 															@csrf
@@ -291,9 +288,7 @@
 						       
 						    </div><!--//app-card-body-->		
 						</div><!--//app-card-->
-						<div class="pagination-container">
-							{{ $document_requests->links() }}
-						</div>
+
 						
 			        </div><!--//tab-pane-->
 			        
@@ -327,46 +322,134 @@
     <script src="/js/app.js"></script> 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-$(document).ready(function () {
-    $('#status-filter').change(function () {
-        var selectedStatus = $(this).val();
-        updateAllTabLabel(selectedStatus);
-        filterDocuments(selectedStatus);
-    });
-
-    function updateAllTabLabel(selectedStatus) {
-        var allTabLabel = $('#orders-all-tab');
-        if (selectedStatus === 'Pending') {
-            allTabLabel.text('Pending');
-        } else if (selectedStatus === 'In Progress') {
-            allTabLabel.text('In Progress');
-        } else if (selectedStatus === 'Cancelled') {
-            allTabLabel.text('Cancelled');
-        } else if (selectedStatus === 'To be Claim') {
-            allTabLabel.text('To be Claim');
-        } else if (selectedStatus === 'Claimed') {
-            allTabLabel.text('Claimed');
-        } else {
-            allTabLabel.text('All');
-        }
-    }
-
-    function filterDocuments(status) {
+	<script>
+    // Function to filter the table rows based on the search query
+    function searchTable() {
+        var searchQuery = $('#search-orders').val().toLowerCase();
         $('#document-list tbody tr').each(function () {
             var row = $(this);
-            var rowStatus = row.data('status');
+            var rowText = row.text().toLowerCase();
 
-            if (status === 'all' || status === rowStatus) {
+            if (rowText.includes(searchQuery)) {
                 row.show();
             } else {
                 row.hide();
             }
         });
     }
-});
-</script>
 
+    $(document).ready(function () {
+        // Handle form submission to trigger the search
+        $('.table-search-form').submit(function (e) {
+            e.preventDefault();
+            searchTable();
+        });
+
+        // Handle input changes to perform real-time search
+        $('#search-orders').on('input', function () {
+            searchTable();
+        });
+
+        // Get the initial status from the URL query parameter
+        var selectedStatus = getUrlParameter('status');
+
+        // Set the initial status in the filter dropdown, default to "All" if not specified
+        if (!selectedStatus) {
+            selectedStatus = 'all';
+        }
+        $('#status-filter').val(selectedStatus);
+
+        // Update the tab label based on the selected status
+        updateAllTabLabel(selectedStatus);
+
+        // Filter documents based on the selected status
+        filterDocuments(selectedStatus);
+
+        // Handle status filter change
+        $('#status-filter').change(function () {
+            selectedStatus = $(this).val();
+
+            // Update the URL with the selected status as a query parameter
+            var url = window.location.href.split('?')[0] + '?status=' + selectedStatus;
+            window.history.pushState({ path: url }, '', url);
+
+            updateAllTabLabel(selectedStatus);
+            filterDocuments(selectedStatus);
+        });
+
+        function updateAllTabLabel(selectedStatus) {
+            var allTabLabel = $('#orders-all-tab');
+            allTabLabel.text('All'); // Reset the label to "All"
+            if (selectedStatus === 'Pending') {
+                allTabLabel.text('Pending');
+            } else if (selectedStatus === 'In Progress') {
+                allTabLabel.text('In Progress');
+            } else if (selectedStatus === 'Cancelled') {
+                allTabLabel.text('Cancelled');
+            } else if (selectedStatus === 'To be Claim') {
+                allTabLabel.text('To be Claim');
+            } else if (selectedStatus === 'Claimed') {
+                allTabLabel.text('Claimed');
+            }
+        }
+
+        function filterDocuments(status) {
+            $('#document-list tbody tr').each(function () {
+                var row = $(this);
+                var rowStatus = row.data('status');
+
+                if (status === 'all' || status === rowStatus) {
+                    row.show();
+                } else {
+                    row.hide();
+                }
+            });
+        }
+
+        // Function to get URL query parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        $('#document-list').on('click', '.delete-button', function () {
+            var row = $(this).closest('tr');
+            var documentRequestId = row.data('id'); // Add a data-id attribute to store the document request ID
+
+            // Show a confirmation modal
+            $('#deleteModal').modal('show');
+
+            // When the user confirms deletion
+            $('#confirmDeleteButton').on('click', function () {
+                // Perform an AJAX request to delete the document request on the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/your-delete-endpoint/' + documentRequestId, // Replace with your actual delete route
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for security
+                        _method: 'DELETE', // Use the DELETE HTTP method
+                    },
+                    success: function (response) {
+                        // Check for a successful response and perform actions accordingly
+                        if (response.success) {
+                            // If deletion was successful, remove the row from the table
+                            row.remove();
+                            // Close the confirmation modal
+                            $('#deleteModal').modal('hide');
+                        } else {
+                            // Handle errors or show an error message to the user
+                        }
+                    },
+                    error: function (error) {
+                        // Handle any AJAX errors
+                    },
+                });
+            });
+        });
+    });
+</script>
 
 </body>
 </html> 

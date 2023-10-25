@@ -54,12 +54,15 @@ class DocumentController extends Controller
         return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
     }
 
-    public function showTransactions()
-    {
-        $document_requests = DocumentRequest::where('user_id', Auth::user()->id)->orderBy('created_at')->paginate(5); // You can adjust this query as needed
+public function showTransactions()
+{
+    $document_requests = DocumentRequest::where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc') // Order by created_at in descending order
+        ->get();
     
-        return view('/residentpage/transactions', compact('document_requests'));
-    }
+    return view('/residentpage/transactions', compact('document_requests'));
+}
+
 
     public function destroy($id)
     {
