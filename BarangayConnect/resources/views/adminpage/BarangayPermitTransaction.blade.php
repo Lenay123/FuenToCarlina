@@ -285,7 +285,7 @@ function updateHeaderText(selectedStatus) {
 }
 </script>
 
-<script>
+<!-- <script>
 function deleteRow(button) {
     if (confirm('Are you sure you want to delete this document request?')) {
         var row = button.closest('tr'); // Find the parent row
@@ -316,6 +316,6 @@ function rebuildTable() {
 
 // Call the function to rebuild the table on page load
 rebuildTable();
-</script>
+</script> -->
 </body>
 </html>

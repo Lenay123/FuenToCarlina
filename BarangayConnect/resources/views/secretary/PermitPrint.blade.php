@@ -41,26 +41,9 @@
                                     <div class="notification-title"> Notification</div>
                                     <div class="notification-list">
                                         <div class="list-group">
-                                        @foreach ($latestDocumentRequests as $latestRequest)
-                                            <a href="#" class="list-group-item list-group-item-action active">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img">
-                                                        <img src="../assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle">
-                                                    </div>
-                                                    <div class="notification-list-user-block">
-                                                        <span class="notification-list-user-name">{{ $latestRequest->full_name }}</span> requested a {{ $latestRequest->document_type }} with a Reference Number {{ $latestRequest->tracker_number }}.
-                                                        <div class="notification-date">
-                                                            @if($isNewRequest && $latestRequest->created_at->gt(now()->subMinute()))
-                                                                Just now
-                                                            @else
-                                                                {{ $latestRequest->created_at }}
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        @endforeach
+                                      
 
+                        
                                         </div>
                                     </div>
                                 </li>
@@ -147,128 +130,7 @@ John Abraham</h5>
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
-            <div class="container-fluid  dashboard-content">
-                <!-- ============================================================== -->
-                <!-- pageheader -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-header">
-                            <h2 class="pageheader-title">Barangay Certificate Requests</h2>
-                            <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
-                            <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Barangay Certificate Requests</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- end pageheader -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- ============================================================== -->
-                    <!-- basic table  -->
-                    <!-- ============================================================== -->
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card">
-        <h5 class="card-header">Barangay ID Requests Table</h5>
-        <div class="card-body">
-            <div class="table-responsive">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <!-- Add a search input field -->
-                        <input type="text" id="search" class="form-control" placeholder="Search...">
-                    </div>
-                </div>
-                <table class="table table-striped table-bordered first" id="dataTable">
-                    <thead>
-                        <tr>
-                        <th>Requestors</th>
-                            <th>Reference Number</th>
-                            <th>Valid Document for<br> Verification</th>
-                            <th>ID Number</th>
-                            <th>Request Status</th>
-                            <th>Date Requested</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($document_requests as $document_request)
-                            <tr>
-                                <td>{{ $document_request->full_name }}</td>
-                                <td>{{ $document_request->tracker_number }}</td>
-                                <td>{{ $document_request->id_type }}</td>
-                                <td>{{ $document_request->id_number }}</td>
-                                <td>{{ $document_request->status }}</td>
-                                <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
-                                     <td>
-                                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
-                                                   
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
 
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                            <div class="form-group">
-                                                <div class="form-group">
-                                                    <label for="message-text" class="col-form-label">Type of Document:</label>
-                                                    <input type="text" class="form-control" id="message-text" value="{{ $document_request->document_type }}" readonly>
-                                                </div>
-                                                <label for="recipient-name" class="col-form-label">Change Status:</label>
-                                                <!-- Add a dropdown/select element here -->
-                                                <select class="form-control" id="recipient-name">
-                                                <option value="recipient4">Decline</option>
-                                                <option value="recipient1">In Progress</option>
-                                                <option value="recipient2">To be Claimed</option>
-                                                <option value="recipient3">Claimed</option>
-                                                </select>
-                                            </div>
-
-
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ============================================================== -->
-                    <!-- end basic table  -->
-                    <!-- ============================================================== -->
-                </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper -->
-    <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->

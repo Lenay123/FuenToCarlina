@@ -187,7 +187,29 @@
 										<label for="exampleInputName1" class="form-label" >Full name:</label>
 										<input type="name" class="form-control" name="full_name" value="" required>
 									</div>
-								
+									<div class="form-group">
+										<label for="birthday">Birthday:</label>
+										<input type="date" class="form-control" name="birthday" required>
+									</div>
+
+									<div class="form-group">
+										<label for="address">Address:</label>
+										<select class="form-control" name="address" required>
+											<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
+											<option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
+											<option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="civil_status">Civil Status:</label>
+										<select class="form-control" name="civil_status" required>
+											<option value="Single">Single</option>
+											<option value="Married">Married</option>
+											<option value="Widowed">Widowed</option>
+											<option value="Divorced">Divorced</option>
+										</select>
+									</div>
+
 									<label for="document_type" >Type of Document:</label>
 									<select id="document_type" name="document_type" class="form-control">
 										<option value="Barangay Certificate">Barangay Certificate</option>

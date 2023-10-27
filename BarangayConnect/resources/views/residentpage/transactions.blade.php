@@ -207,6 +207,7 @@
 								<table class="table app-table-hover mb-0 text-left" id="document-list">
 								<thead>
 									<tr>
+										<th class="cell">Name</th>
 										<th class="cell">Requested Documents</th>
 										<th class="cell">Date Requested</th>
 										<th class="cell">Reference Number</th>
@@ -217,7 +218,8 @@
 									<tbody>
 									@if(!empty($document_requests) && $document_requests->count())
 									@foreach ($document_requests as $document_request)
-										<tr data-status="{{ $document_request->status }}" >
+										<tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}" >
+										<td>{{$document_request->full_name}}</td>
 											<td>{{$document_request->document_type}}</td>
 											<td>{{$document_request->created_at}}</td>
 											<td>{{$document_request->tracker_number}}</td>
@@ -249,9 +251,6 @@
 																</div>
 															</div>
 														</form>
-														<form action="{{ route('residentpage.destroy', $document_request->id) }}" method="POST">
-															@csrf
-															@method('DELETE')
 															<div class="modal fade" id="deleteModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $document_request->id }}" aria-hidden="true">
 																<div class="modal-dialog" role="document">
 																	<div class="modal-content">
@@ -266,13 +265,15 @@
 																		</div>
 																		<div class="modal-footer">
 																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																			<button type="submit" class="btn btn-danger">Yes</button>
+																			<button type="submit" class="btn btn-danger" onclick="deleteRow(this)">Yes</button>
 																		</div>
 																	</div>
 																</div>
 															</div>
-															<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $document_request->id }}"><i class="far fa-trash-alt"></i></button>
-														</form>
+				
+															@if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed'|| $document_request->status === 'Declined')
+																<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $document_request->id }}"><i class="far fa-trash-alt"></i></button>
+															@endif												
 													</td>
 												</tr>
 											@endforeach
@@ -450,7 +451,38 @@
         });
     });
 </script>
+<!-- <script>
+   function deleteRow(button) {
 
+            var row = button.closest('tr'); // Find the parent row
+
+            // Retrieve the ID from the data attribute
+            var requestId = row.getAttribute('data-id');
+
+            // Store the deleted row's ID in Local Storage
+            var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+            deletedRows.push(requestId);
+            localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+
+            // Remove the row from the table
+            row.remove();
+        }
+    
+
+    // Rebuild the table when the page loads
+    function rebuildTable() {
+        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+        deletedRows.forEach(function (requestId) {
+            var row = document.querySelector(`tr[data-id="${requestId}"]`);
+            if (row) {
+                row.remove();
+            }
+        });
+    }
+
+    // Call the function to rebuild the table on page load
+    rebuildTable();
+</script> -->
 </body>
 </html> 
 

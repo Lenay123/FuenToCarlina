@@ -128,7 +128,7 @@ John Abraham</h5>
                             </li>
 
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
+                                <a class="nav-link active" href="/secretary/request_history" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
                             </li>
                         </ul>
                     </div>
@@ -230,38 +230,38 @@ John Abraham</h5>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
 
 <script>
-function deleteRow(button) {
-    if (confirm('Are you sure you want to delete this document request?')) {
-        var row = button.closest('tr'); // Find the parent row
+// function deleteRow(button) {
+//     if (confirm('Are you sure you want to delete this document request?')) {
+//         var row = button.closest('tr'); // Find the parent row
 
-        // Retrieve the ID from the data attribute
-        var requestId = row.getAttribute('data-id');
+//         // Retrieve the ID from the data attribute
+//         var requestId = row.getAttribute('data-id');
 
-        // Store the deleted row's ID in Local Storage
-        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
-        deletedRows.push(requestId);
-        localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
+//         // Store the deleted row's ID in Local Storage
+//         var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+//         deletedRows.push(requestId);
+//         localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
 
-        // Hide the row
-        row.style.display = 'none';
-    }
-}
+//         // Hide the row
+//         row.style.display = 'none';
+//     }
+// }
 
-// Load the deleted rows from Local Storage and hide them
-function loadDeletedRows() {
-    var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
-    deletedRows.forEach(function (requestId) {
-        var row = document.querySelector(`tr[data-id="${requestId}"]`);
-        if (row) {
-            row.style.display = 'none';
-        }
-    });
-}
+// // Load the deleted rows from Local Storage and hide them
+// function loadDeletedRows() {
+//     var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
+//     deletedRows.forEach(function (requestId) {
+//         var row = document.querySelector(`tr[data-id="${requestId}"]`);
+//         if (row) {
+//             row.style.display = 'none';
+//         }
+//     });
+// }
 
-// Call the function to load deleted rows on page load
-loadDeletedRows();
+// // Call the function to load deleted rows on page load
+// loadDeletedRows();
 
-</script>
+// </script>
 
 
 </body>

@@ -40,6 +40,7 @@ class DashboardController extends Controller
                 $requestorName = $latestRequest->full_name;
                 $requestedDocument = $latestRequest->document_type;
                 $requestedTracker = $latestRequest->tracker_number;
+
         
                 // Check if the request is very recent (e.g., within a minute)
                 $isNewRequest = $latestRequest->created_at->gt(now()->subMinute());

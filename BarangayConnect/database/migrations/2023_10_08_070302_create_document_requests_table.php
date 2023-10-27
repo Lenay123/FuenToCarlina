@@ -23,6 +23,9 @@ return new class extends Migration
             $table ->string('status');
             $table->string('image')->nullable();
             $table->string('business_name')->nullable();
+            $table->enum('address', ['Proper Nabunturan Barili Cebu', 'Sitio San Roque Nabunturan Barili Cebu', 'Sitio Cabinay Nabunturan Barili Cebu']);
+            $table->date('birthday');
+            $table->enum('civil_status', ['Single', 'Married', 'Widowed', 'Divorced']);
             $table->timestamps();
         });
         

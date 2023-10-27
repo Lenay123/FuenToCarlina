@@ -10,15 +10,20 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
+        $birthday = $request->input('birthday');
         $this->validate($request, [
             'full_name' => 'required',
             'purpose' => 'required',
             'id_number' => 'required',
-            'business_name'=> 'nullable',
+            'business_name' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'document_type' => 'required|in:Barangay Indigency,Barangay Certificate,Barangay Business Permit,Barangay ID',
             'id_type' => 'required|in:NSO with School ID,NBI Clearance,Voters ID,Drivers License,Voters Certificate,National ID,SSS',
+            'birthday' => 'required|date',
+            'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
+            'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
         ]);
+        
         $userId = Auth::id();
         $trackerNumber = uniqid();  
         $emps = new DocumentRequest;
@@ -32,7 +37,9 @@ class DocumentController extends Controller
         $emps -> user_id = $userId;
         $emps -> tracker_number = $trackerNumber;
         $emps -> status = 'Pending'; #default status
-        
+        $emps->birthday = $birthday; // Assign the value of 'bdate'
+        $emps->address = $request->input('address');
+
         if ($image = $request->file('image')) {
             if ($image->isValid()) {
                 $destinationPath = 'image/';
@@ -64,18 +71,18 @@ public function showTransactions()
 }
 
 
-    public function destroy($id)
-    {
-        $document_request = DocumentRequest::find($id);
+    // public function destroy($id)
+    // {
+    //     $document_request = DocumentRequest::find($id);
     
-        if (!$document_request) {
-            return redirect()->route('/residentpage/transactions')
-                ->with('error', 'Document request not found');
-        }
+    //     if (!$document_request) {
+    //         return redirect()->route('/residentpage/transactions')
+    //             ->with('error', 'Document request not found');
+    //     }
     
-        $document_request->delete();
-        return redirect('/residentpage/transactions')->with('success', 'Document request deleted successfully');
-    }
+    //     $document_request->delete();
+    //     return redirect('/residentpage/transactions')->with('success', 'Document request deleted successfully');
+    // }
 
     public function showTrackerNumber()
     {

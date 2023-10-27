@@ -161,7 +161,4 @@ Route::get('/secretary/manageIdRequest', [DashboardController::class, 'showBaran
 Route::get('/secretary/manageBusinessPermitRequest', [DashboardController::class, 'showBarangayBusinessPermitRequests'])->name('business_permit.requests');
 Route::get('/secretary/request_history', [DashboardController::class, 'showAllTransactions'])->name('requests.history');
 Route::delete('/secretary/request_history/{document_request}', [DashboardController::class, 'destroy'])->name('document_requests.destroy');
-// Route::get('secretary/notifications', function () {
-//     return view('secretary/notifications');
-// });
 Route::get('/secretary/notifications', [DashboardController::class, 'showAllNotifications'])->name('secretary.notifications');

@@ -192,7 +192,8 @@ John Abraham</h5>
                         <tr>
                             <th>Requestors</th>
                             <th>Reference Number</th>
-                            <th>Requested Document</th>
+                            <th>Valid Document for<br> Verification</th>
+                            <th>ID Number</th>
                             <th>Request Status</th>
                             <th>Date Requested</th>
                             <th>Action</th>
@@ -203,19 +204,55 @@ John Abraham</h5>
                             <tr>
                                 <td>{{ $document_request->full_name }}</td>
                                 <td>{{ $document_request->tracker_number }}</td>
-                                <td>{{ $document_request->document_type }}</td>
+                                <td>{{ $document_request->id_type }}</td>
+                                <td>{{ $document_request->id_number }}</td>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
                                      <td>
-                                     <button type="button" class="btn btn-danger">Print</button>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit</button>
+                                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
                                                    
                                                 </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
+                                  
+                                    @foreach ($document_requests as $document_request)
+                                    <div class="modal fade" id="myModal{{ $document_request->id }}">
+                                        <div class="modal-dialog" style="max-width: 700px;">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                                                    <div>
+                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Republic of the Philippines</h5>
+                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Office of the Barangay Local Government</h5>
+                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">BARANGAY Nabunturan</h5>
+                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Barili Cebu</h5>
+                                                    </div>
+                                                
+                                                    <hr>
+                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY CERTIFICATE</h4> <br>
+                                                    <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
+                                                    <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
+                                                    <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
+                                                    <p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
+                                                    <div class="form-outline">
+                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="3">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines.{{ $document_request->textarea_content }}</textarea>
+                                                    </div>
+                                                    <div style="text-align: right;">
+                                                    <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                                                    <p>Barangay Captain Almar Gutierrez</p>
+                                                </div>
 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary printButton" data-document-id="{{ $document_request->id }}">Print</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -256,6 +293,7 @@ John Abraham</h5>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     <!-- ============================================================== -->
                     <!-- end basic table  -->
                     <!-- ============================================================== -->
@@ -316,6 +354,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 tableRows[i].style.display = "none";
             }
         }
+    });
+});
+
+document.querySelectorAll(".printButton").forEach(function (printButton) {
+    printButton.addEventListener("click", function () {
+        var documentId = this.getAttribute("data-document-id");
+        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
+        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
+
+        // Modify the modal content with the textAreaValue
+        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p>';
+
+        var printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Print</title></head><body>');
+        printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
+
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
     });
 });
 </script>
