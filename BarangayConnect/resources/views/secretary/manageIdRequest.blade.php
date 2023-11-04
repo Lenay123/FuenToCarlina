@@ -366,7 +366,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
 
         // Modify the modal content with the textAreaValue
-        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p>';
+        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
 
         var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
@@ -376,10 +376,14 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         printWindow.document.write('</body></html>');
         printWindow.document.close();
 
-        printWindow.print();
-        printWindow.close();
+        // Delay the print operation
+        setTimeout(function() {
+            printWindow.print();
+            printWindow.close();
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
+
 </script>
 
 </body>
