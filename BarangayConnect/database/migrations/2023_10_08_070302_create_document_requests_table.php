@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('full_name');
             $table->text('purpose');
             $table->enum('document_type', ['Barangay Indigency', 'Barangay Certificate', 'Barangay Business Permit', 'Barangay ID'], 500);
-            $table->enum('id_type', ['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate','National ID','SSS'], 500);
+            $table->enum('id_type', ['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate', 'National ID', 'SSS'], 500);
             $table->string('id_number');
-            $table ->string('status');
+            $table->string('status');
             $table->string('image')->nullable();
             $table->string('business_name')->nullable();
             $table->enum('address', ['Proper Nabunturan Barili Cebu', 'Sitio San Roque Nabunturan Barili Cebu', 'Sitio Cabinay Nabunturan Barili Cebu']);
             $table->date('birthday');
             $table->enum('civil_status', ['Single', 'Married', 'Widowed', 'Divorced']);
+            $table->date('document_date')->nullable();
             $table->timestamps();
         });
         

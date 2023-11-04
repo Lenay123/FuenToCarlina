@@ -61,9 +61,12 @@
                                             </a>
                                         @endforeach
 
+                        
+                                        </div>
+                                    </div>
+                                </li>
                                 <li>
                                 <div class="list-footer"> <a href="{{ route('secretary.notifications') }}">View all notifications</a></div>
-
                                 </li>
                             </ul>
                         </li>
@@ -186,12 +189,14 @@ John Abraham</h5>
                 </div>
                 <table class="table table-striped table-bordered first" id="dataTable">
                     <thead>
-                            <th>Requestors</th>
+                        <tr>
+                        <th>Requestors</th>
                             <th>Reference Number</th>
                             <th>Valid Document for<br> Verification</th>
                             <th>ID Number</th>
                             <th>Request Status</th>
                             <th>Date Requested</th>
+                            <th>Date for Document <br> Pickup</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -204,6 +209,7 @@ John Abraham</h5>
                                 <td>{{ $document_request->id_number }}</td>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+                                <td>{{ $document_request->document_date}}</td>
                                      <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
@@ -227,7 +233,7 @@ John Abraham</h5>
                                                     </div>
                                                 
                                                     <hr>
-                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY INDIGENCY</h4> <br>
+                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY INDIGENCY </h4> <br>
                                                     <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
                                                     <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
                                                     <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
@@ -248,10 +254,7 @@ John Abraham</h5>
                                             </div>
                                         </div>
                                     </div>
-                               
-
-
-
+                                    
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -290,9 +293,9 @@ John Abraham</h5>
                                     </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    @endforeach
                         </div>
-                    </div> @endforeach
+                    </div>
                     <!-- ============================================================== -->
                     <!-- end basic table  -->
                     <!-- ============================================================== -->
@@ -377,11 +380,6 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         printWindow.close();
     });
 });
-
-
-
-
-
 </script>
 
 </body>

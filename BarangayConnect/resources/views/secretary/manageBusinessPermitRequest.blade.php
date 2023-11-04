@@ -196,6 +196,7 @@ John Abraham</h5>
                             <th>ID Number</th>
                             <th>Request Status</th>
                             <th>Date Requested</th>
+                            <th>Date for Document <br> Pickup</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -208,6 +209,7 @@ John Abraham</h5>
                                 <td>{{ $document_request->id_number }}</td>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+                                <td>{{ $document_request->document_date}}</td>
                                      <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
@@ -354,6 +356,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 tableRows[i].style.display = "none";
             }
         }
+    });
+});
+
+document.querySelectorAll(".printButton").forEach(function (printButton) {
+    printButton.addEventListener("click", function () {
+        var documentId = this.getAttribute("data-document-id");
+        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
+        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
+
+        // Modify the modal content with the textAreaValue
+        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p>';
+
+        var printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Print</title></head><body>');
+        printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
+
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        printWindow.print();
+        printWindow.close();
     });
 });
 </script>

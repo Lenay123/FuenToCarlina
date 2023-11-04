@@ -89,7 +89,7 @@
 		                         <span class="nav-link-text">Transactions</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
-					    <li class="nav-item has-submenu">
+					    <li class="nav-item has-submenu ">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 							<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
 						        <span class="nav-icon">
@@ -99,7 +99,7 @@
 	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
 	</svg>
 						         </span>
-		                         <span class="nav-link-text active">Request Document</span>
+		                         <span class="nav-link-text ">Request Document</span>
 		                         <span class="submenu-arrow">
 		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
@@ -216,6 +216,13 @@
 									<select id="document_type" name="document_type" class="form-control">
 										<option value="Barangay Indigency">Barangay Indigency</option>
 									</select> <br>
+
+									<div class="form-group">
+										<label for="document_date">Date for Document Pickup:</label>
+										<input type="date" class="form-control" name="document_date" required>
+										<p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> You cannot claim your requested document during WEEKENDS (Saturday & Sunday) and HOLIDAYS</p>
+									</div>
+
 				
 									<label for="id_type" >Type of ID:</label>
 									<select id="id_type" name="id_type" class="form-control" required>
@@ -228,7 +235,7 @@
 										<option value="National ID">National ID</option>
 										<option value="SSS">SSS</option>
 									</select>
-									<div class="description">Note: Bring this document for verification</div> <br>
+									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> Note: Bring this document for verification</p></div> 
 				
 									<div class="form-group">
 										<label for="id_number" >ID Number:</label>

@@ -210,6 +210,7 @@
 										<th class="cell">Name</th>
 										<th class="cell">Requested Documents</th>
 										<th class="cell">Date Requested</th>
+										<th class="cell">Date for Document <br>Pickup</th>
 										<th class="cell">Reference Number</th>
 										<th class="cell">Status</th>
 										<th class="cell">Actions</th>
@@ -222,6 +223,7 @@
 										<td>{{$document_request->full_name}}</td>
 											<td>{{$document_request->document_type}}</td>
 											<td>{{$document_request->created_at}}</td>
+											<td>{{$document_request->document_date}}</td>
 											<td>{{$document_request->tracker_number}}</td>
 											<td>{{$document_request->status}}</td>
 													<td>

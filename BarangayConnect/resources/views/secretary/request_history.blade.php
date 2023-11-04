@@ -252,7 +252,7 @@ John Abraham</h5>
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
 
-<script>
+<!-- <script>
 function deleteRow(button) {
     if (confirm('Are you sure you want to delete this document request?')) {
         var row = button.closest('tr'); // Find the parent row
@@ -284,7 +284,7 @@ function loadDeletedRows() {
 // Call the function to load deleted rows on page load
 loadDeletedRows();
 
-</script>
+</script> -->
 
 
 </body>

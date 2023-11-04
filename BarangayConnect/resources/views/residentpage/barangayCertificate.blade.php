@@ -214,6 +214,13 @@
 									<select id="document_type" name="document_type" class="form-control">
 										<option value="Barangay Certificate">Barangay Certificate</option>
 									</select><br>
+
+									<div class="form-group">
+										<label for="document_date">Date for Document Pickup:</label>
+										<input type="date" class="form-control" name="document_date" required>
+										<p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> You cannot claim your requested document during WEEKENDS (Saturday & Sunday) and HOLIDAYS</p>
+									</div>
+
 				
 									<label for="id_type" >Type of ID:</label>
 									<select id="id_type" name="id_type" class="form-control" required>
@@ -226,8 +233,8 @@
 										<option value="National ID">National ID</option>
 										<option value="SSS">SSS</option>
 									</select>
-									<div class="description">Note: Bring this document for verification</div> <br>
-				
+									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
+					
 									<div class="form-group">
 										<label for="id_number" >ID Number:</label>
 										<input type="text" class="form-control" name="id_number" required>

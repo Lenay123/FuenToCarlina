@@ -61,12 +61,12 @@
                                             </a>
                                         @endforeach
 
+                        
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                 <div class="list-footer"> <a href="{{ route('secretary.notifications') }}">View all notifications</a></div>
-
                                 </li>
                             </ul>
                         </li>
@@ -190,12 +190,13 @@ John Abraham</h5>
                 <table class="table table-striped table-bordered first" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Requestors</th>
+                        <th>Requestors</th>
                             <th>Reference Number</th>
                             <th>Valid Document for<br> Verification</th>
                             <th>ID Number</th>
                             <th>Request Status</th>
                             <th>Date Requested</th>
+                            <th>Date for Document <br> Pickup</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -208,6 +209,7 @@ John Abraham</h5>
                                 <td>{{ $document_request->id_number }}</td>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+                                <td>{{ $document_request->document_date}}</td>
                                      <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
@@ -252,7 +254,8 @@ John Abraham</h5>
                                             </div>
                                         </div>
                                     </div>
-                               
+                                    
+
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -290,10 +293,9 @@ John Abraham</h5>
                                     </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    @endforeach
                         </div>
                     </div>
-                    @endforeach
                     <!-- ============================================================== -->
                     <!-- end basic table  -->
                     <!-- ============================================================== -->

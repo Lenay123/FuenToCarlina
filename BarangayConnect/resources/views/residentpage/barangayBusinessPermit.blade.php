@@ -178,76 +178,84 @@
 		                <div class="section-intro">Settings section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 	                </div>
 	                <div class="col-12 col-md-8">
-		                <div class="app-card app-card-settings shadow-sm p-4">
-								<form class="settings-form" action="{{ route('resident.store') }}" method="POST">
-									@csrf
-									<div class="form-group">
-										<label for="exampleInputName1" class="form-label" >Full name:</label>
-										<input type="name" class="form-control" name="full_name" value="" required>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputName1" class="form-label" >Business name:</label>
-										<input type="name" class="form-control" name="business_name" value="" required>
-									</div>
-									<div class="form-group">
-										<label for="birthday">Birthday:</label>
-										<input type="date" class="form-control" name="birthday" required>
-									</div>
+				<div class="app-card app-card-settings shadow-sm p-4">
+					<form class="settings-form" action="{{ route('resident.store') }}" method="POST">
+						@csrf
+						<div class="form-group">
+							<label for="exampleInputName1" class="form-label">Full name:</label>
+							<input type="name" class="form-control" name="full_name" value="" required>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputName1" class="form-label">Business name:</label>
+							<input type="name" class="form-control" name="business_name" value="" required>
+						</div>
+						<div class="form-group">
+							<label for="birthday">Birthday:</label>
+							<input type="date" class="form-control" name="birthday" required>
+						</div>
 
-									<div class="form-group">
-										<label for="address">Address:</label>
-										<select class="form-control" name="address" required>
-											<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
-											<option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
-											<option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="civil_status">Civil Status:</label>
-										<select class="form-control" name="civil_status" required>
-											<option value="Single">Single</option>
-											<option value="Married">Married</option>
-											<option value="Widowed">Widowed</option>
-											<option value="Divorced">Divorced</option>
-										</select>
-									</div>
+						<div class="form-group">
+							<label for="address">Address:</label>
+							<select class="form-control" name="address" required>
+								<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
+								<option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
+								<option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="civil_status">Civil Status:</label>
+							<select class="form-control" name="civil_status" required>
+								<option value="Single">Single</option>
+								<option value="Married">Married</option>
+								<option value="Widowed">Widowed</option>
+								<option value="Divorced">Divorced</option>
+							</select>
+						</div>
 
-									<label for="document_type" >Type of Document:</label>
-									<select id="document_type" name="document_type" class="form-control">
-										<option value="Barangay Business Permit">Barangay Business Permit</option>
-									</select> <br>
-				
-									<label for="id_type" >Type of ID:</label>
-									<select id="id_type" name="id_type" class="form-control" required>
-										<option value="">Select an ID</option>
-										<option value="NSO with School ID">NSO with School ID</option>
-										<option value="NBI Clearance">NBI Clearance</option>
-										<option value="Voters ID">Voters ID</option>
-										<option value="Drivers License">Drivers License</option>
-										<option value="Voters Certificate">Voters Certificate</option>
-										<option value="National ID">National ID</option>
-										<option value="SSS">SSS</option>
-									</select>
-									<div class="description">Note: Bring this document for verification</div> <br>
-				
-									<div class="form-group">
-										<label for="id_number" >ID Number:</label>
-										<input type="text" class="form-control" name="id_number" required>
-									</div>
-		
-									<div class="form-group">
-										<label for="purpose" class="form-label" >Purpose:</label>
-										<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required></textarea>
-										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
-		
-									</div>
-				
-									<div class="modal-footer">
-									<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
-										<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
-									</div>
-								</form>
-						    </div><!--//app-card-body-->
+						<div class="form-group">
+							<label for="document_date">Date for Document Pickup:</label>
+							<input type="date" class="form-control" name="document_date" required>
+							<p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> You cannot claim your requested document during WEEKENDS (Saturday & Sunday) and HOLIDAYS</p>
+						</div>
+
+
+						<label for="document_type">Type of Document:</label>
+						<select id="document_type" name="document_type" class="form-control">
+							<option value="Barangay Business Permit">Barangay Business Permit</option>
+						</select> <br>
+
+						<label for="id_type">Type of ID:</label>
+						<select id="id_type" name="id_type" class="form-control" required>
+							<option value="">Select an ID</option>
+							<option value="NSO with School ID">NSO with School ID</option>
+							<option value="NBI Clearance">NBI Clearance</option>
+							<option value="Voters ID">Voters ID</option>
+							<option value="Drivers License">Drivers License</option>
+							<option value="Voters Certificate">Voters Certificate</option>
+							<option value="National ID">National ID</option>
+							<option value="SSS">SSS</option>
+						</select>
+						<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
+
+						<div class="form-group">
+							<label for="id_number">ID Number:</label>
+							<input type="text" class="form-control" name="id_number" required>
+						</div>
+
+						<div class="form-group">
+							<label for="purpose" class="form-label">Purpose:</label>
+							<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required></textarea>
+							<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
+						</div>
+
+						<div class="modal-footer">
+							<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
+							<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
+						</div>
+					</form>
+				</div><!--//app-card-body-->
+			</div>
+
 						    
 						</div><!--//app-card-->
 	                </div>

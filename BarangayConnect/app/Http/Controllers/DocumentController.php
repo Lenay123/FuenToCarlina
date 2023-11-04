@@ -11,6 +11,7 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $birthday = $request->input('birthday');
+        
         $this->validate($request, [
             'full_name' => 'required',
             'purpose' => 'required',
@@ -22,10 +23,17 @@ class DocumentController extends Controller
             'birthday' => 'required|date',
             'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
             'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
+            'document_date' => 'required|date|after_or_equal:today', // Ensure document_date is not in the past
+            'document_date' => function ($attribute, $value, $fail) {
+                $dayOfWeek = date('N', strtotime($value));
+                if ($dayOfWeek >= 6) { // 6 is Saturday, 7 is Sunday
+                    $fail('Weekends are not allowed for document pickup.');
+                }
+            },
         ]);
         
         $userId = Auth::id();
-        $trackerNumber = uniqid();  
+        $trackerNumber = uniqid();
         $emps = new DocumentRequest;
     
         $emps->full_name = $request->input('full_name');
@@ -33,33 +41,30 @@ class DocumentController extends Controller
         $emps->id_number = $request->input('id_number');
         $emps->document_type = $request->input('document_type');
         $emps->business_name = $request->input('business_name');
-        $emps->id_type = $request->input('id_type'); // Use 'id_type' here
-        $emps -> user_id = $userId;
-        $emps -> tracker_number = $trackerNumber;
-        $emps -> status = 'Pending'; #default status
-        $emps->birthday = $birthday; // Assign the value of 'bdate'
+        $emps->id_type = $request->input('id_type');
+        $emps->user_id = $userId;
+        $emps->tracker_number = $trackerNumber;
+        $emps->status = 'Pending'; // Default status
+        $emps->birthday = $birthday;
         $emps->address = $request->input('address');
-
+        $emps->document_date = $request->input('document_date'); // Assign the document_date field
+    
         if ($image = $request->file('image')) {
             if ($image->isValid()) {
                 $destinationPath = 'image/';
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->storeAs($destinationPath, $profileImage);
-                $emps->image = $profileImage; // Assign the 'image' attribute
+                $emps->image = $profileImage;
             } else {
-                // Log or handle the error here
                 return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
             }
         }
-        
+    
         $emps->save();
-        
-        return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
-              
-        $emps->save();
-
+    
         return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
     }
+    
 
 public function showTransactions()
 {
