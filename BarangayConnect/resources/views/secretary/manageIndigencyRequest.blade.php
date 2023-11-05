@@ -383,7 +383,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
-
+  
 </script>
 
 </body>
