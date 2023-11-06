@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/buttons.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/select.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
+    <link rel="stylesheet" href="/css/IDCard.css">
 </head>
 
 <body>
@@ -225,27 +226,30 @@ John Abraham</h5>
                                         <div class="modal-dialog" style="max-width: 700px;">
                                             <div class="modal-content">
                                                 <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-                                                    <div>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Republic of the Philippines</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Office of the Barangay Local Government</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">BARANGAY Nabunturan</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Barili Cebu</h5>
+                                                    <div class="card-container">                                                        
+                                                            <div class="company-info">
+                                                                <div class="text-info">
+                                                                    <div class="companyname">REPUBLIC OF THE PHILIPPINES <br> MUNICIPALITY OF BARILI <br> Nabunturan, Barili, Cebu</div>
+                                                                </div>
+                                                            </div>
+                                                       
+                                                            <div class="top">
+                                                            <img src="/image/{{ $document_request->image }}" alt="User 1" width="200px" height= "100px">
+                                                            </div>
+                                                            <div class="font">
+                                                            <div class="ename">
+                                                                <p class="p1"><b>{{ $document_request->full_name }}</b></p>
+                                                       
+                                                            </div>
+                                                            <div class="edetails">
+                                                                <p><b>Mobile No :</b> {{ $document_request->user->contact_number }}</p>
+                                                                <p><b>DOB :</b> {{ $document_request->birthday }}</p>
+                                                                <div class="Address"><b>Address : </b>{{ $document_request->address }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="captain-signature"></div>
+                                                        <div class="resident-signature"></div>
                                                     </div>
-                                                
-                                                    <hr>
-                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY ID </h4> <br>
-                                                    <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
-                                                    <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
-                                                    <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
-                                                    <p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
-                                                    <div class="form-outline">
-                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="3">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines.{{ $document_request->textarea_content }}</textarea>
-                                                    </div>
-                                                    <div style="text-align: right;">
-                                                    <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
-                                                    <p>Barangay Captain Almar Gutierrez</p>
-                                                </div>
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -254,7 +258,6 @@ John Abraham</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -359,30 +362,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.querySelectorAll(".printButton").forEach(function (printButton) {
-    printButton.addEventListener("click", function () {
-        var documentId = this.getAttribute("data-document-id");
-        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
-        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
+// document.querySelectorAll(".printButton").forEach(function (printButton) {
+//     printButton.addEventListener("click", function () {
+//         var documentId = this.getAttribute("data-document-id");
+//         var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
+//         var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
 
-        // Modify the modal content with the textAreaValue
-        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
+//         // Modify the modal content with the textAreaValue
+//         modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
 
-        var printWindow = window.open('', '', 'width=600,height=600');
-        printWindow.document.open();
-        printWindow.document.write('<html><head><title>Print</title></head><body>');
-        printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
+//         var printWindow = window.open('', '', 'width=600,height=600');
+//         printWindow.document.open();
+//         printWindow.document.write('<html><head><title>Print</title></head><body>');
+//         printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
 
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
+//         printWindow.document.write('</body></html>');
+//         printWindow.document.close();
 
-        // Delay the print operation
-        setTimeout(function() {
-            printWindow.print();
-            printWindow.close();
-        }, 1000); // Adjust the delay time (in milliseconds) as needed
-    });
-});
+//         // Delay the print operation
+//         setTimeout(function() {
+//             printWindow.print();
+//             printWindow.close();
+//         }, 1000); // Adjust the delay time (in milliseconds) as needed
+//     });
+// });
 
 </script>
 

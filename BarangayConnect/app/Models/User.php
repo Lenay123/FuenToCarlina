@@ -53,4 +53,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function documentRequests()
+{
+    return $this->hasMany(DocumentRequest::class, 'user_id');
+}
 }

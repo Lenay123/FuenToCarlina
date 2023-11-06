@@ -53,12 +53,13 @@ class DocumentController extends Controller
             if ($image->isValid()) {
                 $destinationPath = 'image/';
                 $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                $image->storeAs($destinationPath, $profileImage);
-                $emps->image = $profileImage;
+                $image->move($destinationPath, $profileImage);
+                $emps->image = $profileImage; // Set the image property of the model
             } else {
                 return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
             }
         }
+        
     
         $emps->save();
     
