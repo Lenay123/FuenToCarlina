@@ -221,26 +221,23 @@ class DashboardController extends Controller
     return view('adminpage.BarangayPermitTransaction', compact('document_requests'));
 
     }
+    // change of status
+   
+    public function claimDocument(DocumentRequest $document_request)
+{
+    $document_request->update([
+        'status' => 'Claimed',
+]);
 
-    public function showAllNotifications()
-    {
-        $latestDocumentRequests = DocumentRequest::all();
-        
-        // You can add a variable to check if there's a new request
-        $isNewRequest = false;
-    
-        if ($latestDocumentRequests->isNotEmpty()) {
-            $latestRequest = $latestDocumentRequests[0];
-            $requestorName = $latestRequest->full_name;
-            $requestedDocument = $latestRequest->document_type;
-            $requestedTracker = $latestRequest->tracker_number;
-    
-            // Check if the request is very recent (e.g., within a minute)
-            $isNewRequest = $latestRequest->created_at->gt(now()->subMinute());
-        } else {
-            $requestorName = 'Unknown Requestor';
-            $requestedDocument = 'Unknown Document';
-        }
-        return view('secretary.notifications', compact('latestDocumentRequests', 'requestorName', 'requestedDocument','isNewRequest'));
-    }
+    return redirect()->back()->with('success', 'Document marked as claimed');
+}
+
+public function claimDocumentPermit(DocumentRequest $document_request)
+{
+    $document_request->update([
+        'status' => 'Claimed',
+]);
+
+    return redirect()->back()->with('success', 'Document marked as claimed');
+}
 }

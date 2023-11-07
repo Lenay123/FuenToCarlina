@@ -177,11 +177,17 @@ John Abraham</h5>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
                                 <td>{{ $document_request->document_date}}</td>
-                                     <td>
-                                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}"><i class="fas fa-fw fa-print"></i></button>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-fw fa-edit"></i></button>
-                                                   
-                                                </td>
+                                <td>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'Cancelled' || $document_request->status === 'Claimed') disabled @endif>
+                                    <i class="fas fa-fw fa-print"></i>
+                                </button>
+                                      @if ($document_request->status !== 'Claimed')
+                                    <form action="{{ route('claim-document', ['document_request' => $document_request]) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-success">Mark as Claimed</button>
+                                    </form>
+                                      @endif
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -221,45 +227,7 @@ John Abraham</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    
-
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                            <div class="form-group">
-                                                <div class="form-group">
-                                                    <label for="message-text" class="col-form-label">Type of Document:</label>
-                                                    <input type="text" class="form-control" id="message-text" value="{{ $document_request->document_type }}" readonly>
-                                                </div>
-                                                <label for="recipient-name" class="col-form-label">Change Status:</label>
-                                                <!-- Add a dropdown/select element here -->
-                                                <select class="form-control" id="recipient-name">
-                                                <option value="recipient4">Decline</option>
-                                                <option value="recipient1">In Progress</option>
-                                                <option value="recipient2">To be Claimed</option>
-                                                <option value="recipient3">Claimed</option>
-                                                </select>
-                                            </div>
-
-
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                        
                             </div>    @endforeach
                         </div>
                     </div>
