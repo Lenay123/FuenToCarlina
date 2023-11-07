@@ -224,7 +224,7 @@ John Abraham</h5>
                                     <div class="modal fade" id="myModal{{ $document_request->id }}">
                                         <div class="modal-dialog" style="max-width: 700px;">
                                             <div class="modal-content">
-                                                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                                                <div class="modal-body" style="max-height: 600px; overflow-y: auto; ">
                                                     <div>
                                                         <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Republic of the Philippines</h5>
                                                         <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Office of the Barangay Local Government</h5>
@@ -233,14 +233,35 @@ John Abraham</h5>
                                                     </div>
                                                 
                                                     <hr>
-                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY Business Permit</h4> <br>
-                                                    <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
-                                                    <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
-                                                    <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
-                                                    <p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
-                                                    <div class="form-outline">
-                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="3">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines.{{ $document_request->textarea_content }}</textarea>
-                                                    </div>
+                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY BUSINESS PERMIT</h4>
+                                                    <center>
+                                                        <p>NO. <input type="text" class="form-control" id="inputPermitNumber{{ $document_request->id }}" placeholder="Input Permit Number" style="border: none; border-bottom: 1px solid;"> </p>
+                                                    </center>
+                                                    <br>
+                                                    
+                                          Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee (s) (Quarterly /Semi-Annually / Annually), revoked or cancelledfor cause.         <div class="form-outline">
+                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="1">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines. 
+                                                         {{ $document_request->textarea_content }}</textarea>
+                                                    </div> <br>
+                                                    <div class="row g-3 align-items-center">
+                                                        <div class="col-auto">
+                                                            <label  class="col-form-label" id="inputDateIssued{{ $document_request->id }}">Date Issued:</label>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <input type="date"  id="inputDateIssued{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
+                                                        </div>
+                                                        
+                                                        </div>
+                                                        <div class="row g-3 align-items-center">
+                                                        <div class="col-auto">
+                                                            <label  class="col-form-label" id="inputDateExpired{{ $document_request->id }}">Date Expired</label>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <input type="date" id="inputDateExpired{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
+                                                        </div>
+                                                        
+                                                        </div>
+           
                                                     <div style="text-align: right;">
                                                     <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
                                                     <p>Barangay Captain Almar Gutierrez</p>
@@ -382,6 +403,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
+
 
 </script>
 

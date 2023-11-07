@@ -278,9 +278,6 @@ John Abraham</h5>
                                                 <label for="recipient-name" class="col-form-label">Change Status:</label>
                                                 <!-- Add a dropdown/select element here -->
                                                 <select class="form-control" id="recipient-name">
-                                                <option value="recipient4">Decline</option>
-                                                <option value="recipient1">In Progress</option>
-                                                <option value="recipient2">To be Claimed</option>
                                                 <option value="recipient3">Claimed</option>
                                                 </select>
                                             </div>
