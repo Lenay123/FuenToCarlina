@@ -178,20 +178,19 @@ John Abraham</h5>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
                                 <td>{{ $document_request->document_date}}</td>
                                 <td>
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'Cancelled' || $document_request->status === 'Claimed') disabled @endif>
+                                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed') disabled @endif>
                                     <i class="fas fa-fw fa-print"></i>
                                 </button>
-                                      @if ($document_request->status !== 'Claimed')
-                                    <form action="{{ route('claim-document', ['document_request' => $document_request]) }}" method="POST">
+                                @if ($document_request->status !== 'cancelled' && $document_request->status !== 'Claimed')
+                                    <form action="{{ route('claimDocumentPermit', ['document_request' => $document_request]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-success">Mark as Claimed</button>
                                     </form>
-                                      @endif
-                                            </tr>
+                                @endif
+                                            </td>
                                         @endforeach
                                         </tbody>
-                                    </table>
                                   
                                     @foreach ($document_requests as $document_request)
                                     <div class="modal fade" id="myModal{{ $document_request->id }}">

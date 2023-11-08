@@ -96,6 +96,8 @@ public function showTransactions()
     
         return view('/residentpage/TrackerNumber', compact('tracker_number'));
     }
+
+    
     public function cancel(DocumentRequest $document_request)
     {
         $document_request->update(['status' => 'cancelled']);
