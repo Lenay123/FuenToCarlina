@@ -18,6 +18,127 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
     <link rel="stylesheet" href="/css/IDCard.css">
 </head>
+<style>
+
+
+.id-logo{
+    height: 16vh;
+    width: 100%;
+    background-color: rgb(7, 64, 117);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.id-logo-box1{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.id-logo-box2{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    color: white;
+    
+    
+}
+
+.id-logo-box2 h1{
+    font-size: 1.5rem;
+}
+
+.id-logo-box2 h3{
+    font-size: 1rem;
+}
+.id-logo-box2 h4{
+    font-size: 1rem;
+}
+
+.id-logo-box3{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.id-title{
+    background-color: skyblue;
+    height: 7vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.id-content {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.id-content-image{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+.id-content-info{
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+.id-content-info p{
+    font-size: 12px;
+
+    padding-left: 10px;
+
+
+}
+
+.id-content-info h3{
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.id-content-info h1{
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+
+.id-content-sign{
+    width: 18%;
+    height:100px;
+    margin-top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+</style>
 
 <body>
     <!-- ============================================================== -->
@@ -195,38 +316,62 @@ John Abraham</h5>
                                   
                                     @foreach ($document_requests as $document_request)
                                     <div class="modal fade" id="myModal{{ $document_request->id }}">
-                                        <div class="modal-dialog" style="max-width: 700px;">
+                                        <div class="modal-dialog" style="max-width: 750px;">
                                             <div class="modal-content">
-                                                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-                                                    <div class="card-container">                                                        
-                                                            <div class="company-info">
-                                                                <div class="text-info">
-                                                                    <div class="companyname">REPUBLIC OF THE PHILIPPINES <br> MUNICIPALITY OF BARILI <br> Nabunturan, Barili, Cebu</div>
+                                            <div class="modal-body" style="max-height: 1000px;">
+                                                <section id="printContent" style= "border: 1px solid black;">
+                                                        <div class="id-container">
+                                                            <div class="id-logo" >
+                                                                <div class="id-logo-box1">
+                                                                    <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+                                                                    
+                                                                </div>
+                                                                <div class="id-logo-box2" > <br>
+                                                                    <h1 style="color: white; margin: 0;">REPUBLIC OF THE PHILIPPINES</h1>
+                                                                    <h3 style="color: white; margin: 0;">Barili Cebu, Barangay Nabunturan</h3>
+                                                                </div>
+
+                                                                <div class="id-logo-box3">
+                                                                    <img src="/img/sklogo.png" alt="" style="width: 200px;">
                                                                 </div>
                                                             </div>
-                                                       
-                                                            <div class="top">
-                                                            <img src="/image/{{ $document_request->image }}" alt="User 1" width="200px" height= "100px">
-                                                            </div>
-                                                            <div class="font">
-                                                            <div class="ename">
-                                                                <p class="p1"><b>{{ $document_request->full_name }}</b></p>
-                                                       
-                                                            </div>
-                                                            <div class="edetails">
-                                                                <p><b>Mobile No :</b> {{ $document_request->user->contact_number }}</p>
-                                                                <p><b>DOB :</b> {{ $document_request->birthday }}</p>
-                                                                <div class="Address"><b>Address : </b>{{ $document_request->address }}</div>
+                                                            <div class="id-title">
+                                                                <h2 style="margin-top: 10px;">BARANGAY RESIDENT'S CARD</h2>
+                                                            </div> <br>
+
+                                                            <div class="id-content" style="margin-top:30px" >
+                                                                <div class="id-content-image">
+                                                                    <img src="/image/{{ $document_request->image }}" alt="" style="width: 170px; border: 3px solid black;">
+                                                                    <br><br>
+                                                                
+                                                                    <h4 style="border-top: 1px solid black; padding: 5px 20px;">Resident's Signature</h3>
+                                                                </div>
+                                                                <div class="id-content-info">
+                                                                    <p style="font-size: 12px; margin: 0; padding: 1px;">LAST NAME, FIRST NAME, MI.</p>
+                                                                    <H1 style="font-size: 20px; margin: 0; padding: 1px;">{{ $document_request->full_name }}</H1>
+                                                                    <p style="font-size: 12px; margin: 0; padding: 1px;">DATE OF BIRTH</p>
+                                                                    <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->birthday }}</h3>
+                                                                    <P style="font-size: 12px; margin: 0; padding: 1px;">MOBILE NUMBER</P>
+                                                                    <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->contact_number }}</h3>
+                                                                    <p style="font-size: 12px; margin: 0; padding: 1px;">ADDRESS</p>
+                                                                    <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->address }}</h3>
+                                                                    <p style="font-size: 12px; margin: 0; padding: 1px;">CIVIL STATUS</p>
+                                                                    <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->civil_status }}</h3>
+                                                                    <p style="font-size: 12px; margin: 0; padding: 1px;">GENDER</p>
+                                                                    <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->gender }}</h3>
+                                                                </div>
+
+                                                                <div class="id-content-sign">
+                                                                    <img src="/img/signature.png" alt="" style="width: 100px; ">
+                                                               
+                                                                </div>
+
                                                             </div>
                                                         </div>
-                                                        <div class="captain-signature"></div>
-                                                        <div class="resident-signature"></div>
-                                                    </div>
-                                                </div>
+                                                    </section>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary closeButton" data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-secondary printButton" data-document-id="{{ $document_request->id }}">Print</button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -266,6 +411,9 @@ John Abraham</h5>
     <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <script>
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("search");
@@ -297,30 +445,174 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// document.querySelectorAll(".printButton").forEach(function (printButton) {
-//     printButton.addEventListener("click", function () {
-//         var documentId = this.getAttribute("data-document-id");
-//         var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
-//         var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
 
-//         // Modify the modal content with the textAreaValue
-//         modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
+document.querySelectorAll(".printButton").forEach(function (printButton) {
+    printButton.addEventListener("click", function () {
+        var documentId = this.getAttribute("data-document-id");
+        var modalContent = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
 
-//         var printWindow = window.open('', '', 'width=600,height=600');
-//         printWindow.document.open();
-//         printWindow.document.write('<html><head><title>Print</title></head><body>');
-//         printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
+        // Remove "Print" and "Close" buttons from the cloned modal content
+        var printButtons = modalContent.querySelectorAll(".printButton, .closeButton");
+        printButtons.forEach(function(button) {
+            button.remove();
+        });
 
-//         printWindow.document.write('</body></html>');
-//         printWindow.document.close();
+        var printWindow = window.open('', '', 'width=800, height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Print</title>');
+        
+        // Add your CSS styles to the print window's head
+        printWindow.document.write('<style>');
+        printWindow.document.write(`
+        .id-logo {
+                height: 16vh;
+                width: 100%;
+                background-color: rgb(7, 64, 117)!important;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+            .id-logo-box1{
+                width: 20%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-//         // Delay the print operation
-//         setTimeout(function() {
-//             printWindow.print();
-//             printWindow.close();
-//         }, 1000); // Adjust the delay time (in milliseconds) as needed
-//     });
-// });
+            .id-logo-box2{
+                width: 60%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 10px;
+                color: white;
+                
+                
+            }
+
+            .id-logo-box2 h1{
+                font-size: 1.5rem;
+            }
+
+            .id-logo-box2 h3{
+                font-size: 1rem;
+            }
+            .id-logo-box2 h4{
+                font-size: 1rem;
+            }
+
+            .id-logo-box3{
+                width: 20%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .id-title{
+                background-color: skyblue;
+                height: 7vh;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .id-content {
+                height: 50vh;
+                width: 100%;
+                display: flex;
+                background-color: white;
+                justify-content: space-around;
+                align-items: center;
+                
+            }
+
+            .id-content-image{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+            }
+
+
+            .id-content-info{
+                background-color: white;
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                
+            }
+
+            .id-content-info p{
+                font-size: 12px;
+
+                padding-left: 10px;
+
+
+            }
+
+            .id-content-info h3{
+                font-size: 16px;
+                padding-left: 10px;
+            }
+
+            .id-content-info h1{
+                font-size: 20px;
+                padding-left: 10px;
+            }
+
+
+            .id-content-sign{
+                width: 18%;
+                height:100px;
+                margin-top: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                
+            }
+        `);
+        printWindow.document.write('</style>');
+
+        printWindow.document.write('</head><body>');
+        
+        // Set the background color directly in the print styles
+        printWindow.document.write(`
+        <style>
+            @media print {
+                .id-logo{
+                    background-color: rgb(7, 64, 117);
+                }
+                /* Set up custom paper size to consume only half of the page */
+                @page {
+                    size: 210mm 148.5mm; /* Half of an A4 page */
+                }
+                /* Add other print styles here */
+            }
+        </style>
+        `);
+        
+        printWindow.document.write(modalContent.innerHTML); // Extract the modified modal body content
+
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Delay the print operation
+        setTimeout(function() {
+            printWindow.print();
+            printWindow.close();
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+    });
+});
 
 </script>
 

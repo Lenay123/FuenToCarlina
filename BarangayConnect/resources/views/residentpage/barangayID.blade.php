@@ -194,6 +194,10 @@
 										<label for="birthday">Birthday:</label>
 										<input type="date" class="form-control" name="birthday" required>
 									</div>
+									<div class="form-group">
+										<label for="contact_number">Contact Number:</label>
+										<input type="text" class="form-control" name="contact_number" required>
+									</div>
 
 									<div class="form-group">
 										<label for="address">Address:</label>
@@ -210,6 +214,14 @@
 											<option value="Married">Married</option>
 											<option value="Widowed">Widowed</option>
 											<option value="Divorced">Divorced</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="civil_status">Gender:</label>
+										<select class="form-control" name="gender" required>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
 										</select>
 									</div>
 

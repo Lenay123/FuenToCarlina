@@ -105,7 +105,7 @@ class DashboardController extends Controller
 
     public function showBarangayIDRequests()
     {
-    $document_requests = DocumentRequest::with('user')->where('document_type', 'Barangay ID')->get();
+    $document_requests = DocumentRequest::where('document_type', 'Barangay ID')->get();
     $latestDocumentRequests = DocumentRequest::latest()->get();
         
     // You can add a variable to check if there's a new request
