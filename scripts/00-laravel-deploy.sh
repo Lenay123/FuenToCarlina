@@ -17,3 +17,6 @@ php artisan migrate --force
 
 echo "Linking storage..."
 php artisan storage:link
+
+echo "Refreshing Migration..."
+php artisan migrate:fresh
