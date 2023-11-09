@@ -98,9 +98,9 @@
             <div class="form-group">
                 <label for="address">Address:</label>
                 <select class="form-control" name="address" required>
-                    <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
-                    <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
-                    <option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
+                    <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan Barili Cebu</option>
+                    <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan Barili Cebu</option>
+                    <option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan Barili Cebu</option>
                 </select>
             </div>
 
