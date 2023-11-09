@@ -196,6 +196,11 @@
 									</div>
 
 									<div class="form-group">
+										<label for="contact_number">Contact Number:</label>
+										<input type="date" class="form-control" name="contact_number" required>
+									</div>
+
+									<div class="form-group">
 										<label for="address">Address:</label>
 										<select class="form-control" name="address" required>
 											<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
