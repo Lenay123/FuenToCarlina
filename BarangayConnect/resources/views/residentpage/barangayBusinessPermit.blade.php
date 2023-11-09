@@ -203,14 +203,14 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="civil_status">Civil Status:</label>
-							<select class="form-control" name="civil_status" required>
-								<option value="Single">Single</option>
-								<option value="Married">Married</option>
-								<option value="Widowed">Widowed</option>
-								<option value="Divorced">Divorced</option>
-							</select>
-						</div>
+										<label for="civil_status">Civil Status:</label>
+										<select class="form-control" name="civil_status" required>
+											<option value="Single">Single</option>
+											<option value="Married">Married</option>
+											<option value="Widowed">Widowed</option>
+											<option value="Divorced">Divorced</option>
+										</select>
+									</div>
 
 						<div class="form-group">
 							<label for="document_date">Date for Document Pickup:</label>

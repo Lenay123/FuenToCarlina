@@ -210,6 +210,7 @@
 										</select>
 									</div>
 
+
 									<label for="document_type" >Type of Document:</label>
 									<select id="document_type" name="document_type" class="form-control">
 										<option value="Barangay Certificate">Barangay Certificate</option>
