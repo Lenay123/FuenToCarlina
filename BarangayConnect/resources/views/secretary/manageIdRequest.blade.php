@@ -319,7 +319,7 @@ John Abraham</h5>
                                         <div class="modal-dialog" style="max-width: 750px;">
                                             <div class="modal-content">
                                             <div class="modal-body" style="max-height: 1000px;">
-                                                <section id="printContent" style= "border: 1px solid black;">
+                                                <section id="printContent" >
                                                         <div class="id-container">
                                                             <div class="id-logo" >
                                                                 <div class="id-logo-box1">
