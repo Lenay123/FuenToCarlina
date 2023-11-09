@@ -61,6 +61,7 @@ class AuthController extends Controller
             'contact_number' => 'required|string|max:20',
             'gender' => 'required|in:male,female',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
+            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS), // Use the options from the model
 
         ]);
 
@@ -71,7 +72,6 @@ class AuthController extends Controller
         }
 
         $user = User::create([
-            'address' => 'required|in:Proper Nabunturan Barili Cebu, Sitio San Roque Nabunturan Barili Cebu, Sitio Cabinay Nabunturan Barili Cebu',
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'middle_name' => $request->input('middle_name'),
@@ -81,6 +81,7 @@ class AuthController extends Controller
             'contact_number' => $request->input('contact_number'),
             'gender' => $request->input('gender'),
             'image' => $imagePath,
+            'address' => $request->input('address'),
             'role' => 'user', // Default role for registered users
         ]);
 
