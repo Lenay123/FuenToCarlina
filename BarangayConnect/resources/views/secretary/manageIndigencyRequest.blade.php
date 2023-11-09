@@ -194,18 +194,28 @@ John Abraham</h5>
                                   
                                     @foreach ($document_requests as $document_request)
                                     <div class="modal fade" id="myModal{{ $document_request->id }}">
-                                        <div class="modal-dialog" style="max-width: 700px;">
+                                    <div class="modal-dialog" style="max-width: 700px;">
                                             <div class="modal-content">
                                                 <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-                                                    <div>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Republic of the Philippines</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Office of the Barangay Local Government</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">BARANGAY Nabunturan</h5>
-                                                        <h5 style="text-align: center; font-weight: bold; margin: 4px 0;">Barili Cebu</h5>
-                                                    </div>
+                                                <div class="id-logo" >
+                                                                <div class="id-logo-box1">
+                                                                    <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+                                                                    
+                                                                </div>
+                                                                <div class="id-logo-box2" > <br>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Republic of the Philippines</h5>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h5>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h5>
+
+                                                                </div>
+
+                                                                <div class="id-logo-box3">
+                                                                    <img src="/img/sklogo.png" alt="" style="width: 200px;">
+                                                                </div>
+                                                            </div>
                                                 
                                                     <hr>
-                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY INDIGENCY </h4> <br>
+                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY CERTIFICATE</h4> <br>
                                                     <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
                                                     <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
                                                     <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
@@ -304,7 +314,22 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
 
         var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
-        printWindow.document.write('<html><head><title>Print</title></head><body>');
+        printWindow.document.write('<html><head><title>Print</title>');
+
+        // Create a <style> element and add the CSS rules for .id-logo
+        var styleElement = printWindow.document.createElement('style');
+        styleElement.innerHTML = `
+            .id-logo {
+                height: 16vh;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+        `;
+        printWindow.document.head.appendChild(styleElement);
+
+        printWindow.document.write('</head><body>');
         printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
 
         printWindow.document.write('</body></html>');
