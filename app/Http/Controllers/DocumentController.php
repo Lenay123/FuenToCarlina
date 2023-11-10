@@ -23,8 +23,6 @@ class DocumentController extends Controller
             'birthday' => 'required|date',
             'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
             'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
-            'gender' => 'nullable|in:Male,Female',
-            'contact_number'=> 'nullable',
             'document_date' => 'required|date|after_or_equal:today', // Ensure document_date is not in the past
             'document_date' => function ($attribute, $value, $fail) {
                 $dayOfWeek = date('N', strtotime($value));
@@ -41,7 +39,6 @@ class DocumentController extends Controller
         $emps->full_name = $request->input('full_name');
         $emps->purpose = $request->input('purpose');
         $emps->id_number = $request->input('id_number');
-        $emps->contact_number = $request->input('contact_number');
         $emps->document_type = $request->input('document_type');
         $emps->business_name = $request->input('business_name');
         $emps->id_type = $request->input('id_type');
@@ -50,8 +47,6 @@ class DocumentController extends Controller
         $emps->status = 'Pending'; // Default status
         $emps->birthday = $birthday;
         $emps->address = $request->input('address');
-        $emps->civil_status = $request->input('civil_status');
-        $emps->gender = $request->input('gender');
         $emps->document_date = $request->input('document_date'); // Assign the document_date field
     
         if ($image = $request->file('image')) {

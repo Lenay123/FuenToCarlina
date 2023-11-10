@@ -5,22 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Routing\UrlGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
-
-    public function boots(UrlGenerator $url)
-    {
-        if (env('APP_ENV') == 'production') {
-            $url->forceScheme('https');
-        }
-    }
     /**
      * Register any application services.
      */
-
-     
     public function register(): void
     {
         //

@@ -61,7 +61,6 @@ class AuthController extends Controller
             'contact_number' => 'required|string|max:20',
             'gender' => 'required|in:male,female',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
-            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS), // Use the options from the model
 
         ]);
 
@@ -81,7 +80,6 @@ class AuthController extends Controller
             'contact_number' => $request->input('contact_number'),
             'gender' => $request->input('gender'),
             'image' => $imagePath,
-            'address' => $request->input('address'),
             'role' => 'user', // Default role for registered users
         ]);
 
