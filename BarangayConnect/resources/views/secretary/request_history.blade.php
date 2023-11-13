@@ -38,16 +38,13 @@
                        
                         </li>
 
+                        @if(auth()->check())
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} <i class="fas fa-caret-down"></i></a>
+                                    @endif
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">
-John Abraham</h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{route('secretarylogout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -153,32 +150,28 @@ John Abraham</h5>
                                                 <th>Requestors</th>
                                                 <th>Reference Number</th>
                                                 <th>Requested Document</th>
-                                                <th>Request Status</th>
                                                 <th>Date Requested</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($document_requests as $document_request)
+                                        @foreach ($document_requests as $document_request)
                                             <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
                                                 <td>{{ $document_request->full_name }}</td>
                                                 <td>{{ $document_request->tracker_number }}</td>
                                                 <td>{{ $document_request->document_type }}</td>
-                                                <td>{{ $document_request->status }}</td>
                                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
-                                               
+                                            
                                                 <td>
-                                                    <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
-                                                </td>
-                                                    <!-- <form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
+                                                    <form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this document request?')">Delete</button>
-
-                                                    </form> -->
-                                              
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this document request?')">Remove</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
+
                                         
 
                                     </table>

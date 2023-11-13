@@ -46,17 +46,13 @@
                         <li class="nav-item dropdown notification">
                        
                         </li>
-
+                        @if(auth()->check())
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} <i class="fas fa-caret-down"></i></a>
+                                    @endif
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">
-John Abraham</h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{route('secretarylogout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -206,7 +202,7 @@ John Abraham</h5>
                                         <div class="modal-dialog" style="max-width: 700px;">
                                             <div class="modal-content">
                                                 <div class="modal-body" style="max-height: 600px; overflow-y: auto; ">
-                                                <div class="id-logo" >
+                                                <div class="id-logo">
                                                                 <div class="id-logo-box1">
                                                                     <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
                                                                     
@@ -236,7 +232,7 @@ John Abraham</h5>
                                                     </div> <br>
                                                     <div class="row g-3 align-items-center">
                                                         <div class="col-auto">
-                                                            <label  class="col-form-label" id="inputDateIssued{{ $document_request->id }}">Date Issued:</label>
+                                                            <label  class="col-form-label" >Date Issued:</label>
                                                         </div>
                                                         <div class="col-auto">
                                                             <input type="date"  id="inputDateIssued{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
@@ -245,7 +241,7 @@ John Abraham</h5>
                                                         </div>
                                                         <div class="row g-3 align-items-center">
                                                         <div class="col-auto">
-                                                            <label  class="col-form-label" id="inputDateExpired{{ $document_request->id }}">Date Expired</label>
+                                                            <label  class="col-form-label" >Date Expired</label>
                                                         </div>
                                                         <div class="col-auto">
                                                             <input type="date" id="inputDateExpired{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
@@ -338,42 +334,83 @@ document.addEventListener("DOMContentLoaded", function() {
 document.querySelectorAll(".printButton").forEach(function (printButton) {
     printButton.addEventListener("click", function () {
         var documentId = this.getAttribute("data-document-id");
-        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
-        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
 
-        // Modify the modal content with the textAreaValue
-        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
+        // Retrieve input values
+        var permitNumber = document.querySelector("#inputPermitNumber" + documentId).value;
+        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
+        var dateIssued = document.querySelector("#inputDateIssued" + documentId).value;
+        var dateExpired = document.querySelector("#inputDateExpired" + documentId).value;
+
+
+        // Create a new HTML structure with the input values
+        var printContent = `
+            <style>
+                .id-logo {
+                    height: 16vh;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+                }
+            </style>
+            <div class="id-logo">
+                <div class="id-logo-box1">
+                    <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+                </div>
+                <div class="id-logo-box2" > <br>
+                    <h5 style="text-align: center; font-weight: bold; margin: 0;">Republic of the Philippines</h5>
+                    <h5 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h5>
+                    <h5 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h5>
+                </div>
+                <div class="id-logo-box3">
+                    <img src="/img/sklogo.png" alt="" style="width: 200px;">
+                </div>
+            </div>
+            <hr>
+            <h4 style="text-align: center; font-weight: bold;">BARANGAY BUSINESS PERMIT</h4>
+            <center>
+                <p>NO. <b><u> ${permitNumber}</u></b></p>
+            </center>
+            <br>
+            Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }}, to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee(s) (Quarterly / Semi-Annually / Annually), revoked or canceled for cause.
+            <div class="form-outline">
+                <p>${textAreaValue}</p>
+            </div>
+            <br>
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label">Date Issued:<b> ${new Date(dateIssued).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}</b></label>
+                </div>
+               
+            </div>
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label">Date Expired: <b>${new Date(dateExpired).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}</b></label>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <img id="signatureImage${documentId}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                <p>Barangay Captain Almar Gutierrez</p>
+            </div>
+        `;
 
         var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
-        printWindow.document.write('<html><head><title>Print</title>');
-
-        // Create a <style> element and add the CSS rules for .id-logo
-        var styleElement = printWindow.document.createElement('style');
-        styleElement.innerHTML = `
-            .id-logo {
-                height: 16vh;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-evenly;
-            }
-        `;
-        printWindow.document.head.appendChild(styleElement);
-
-        printWindow.document.write('</head><body>');
-        printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
-
+        printWindow.document.write('<html><head><title>Print</title></head><body>');
+        printWindow.document.write(printContent);
         printWindow.document.write('</body></html>');
         printWindow.document.close();
 
         // Delay the print operation
-        setTimeout(function() {
+        setTimeout(function () {
             printWindow.print();
             printWindow.close();
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
+
+
+
 </script>
 
 </body>

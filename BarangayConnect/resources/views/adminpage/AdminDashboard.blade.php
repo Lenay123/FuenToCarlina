@@ -321,6 +321,19 @@
           </div>
 
         </div>
+        <div class="container-fluid pt-4 px-4">
+                                <div class="row g-4" style="height: 100vh;"> <!-- Set height to 100% of the viewport height -->
+                                    <div class="col-sm-12 col-xl-6" style="height: 90%;"> <!-- Set height to 100% -->
+                                        <div class="bg-light text-center rounded p-4" style="height: 90%;width: 170vh;">
+                                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                                <h6 class="mb-0">Most Requested Documents</h6>
+                                            </div>
+                                            <canvas id="worldwide-sales" style="width: 100%; height: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
         <!-- /.container-fluid -->
 
       </div>
@@ -382,7 +395,59 @@
   <!-- Page level custom scripts -->
   <script src="/js/demo/chart-area-demo.js"></script>
   <script src="/js/demo/chart-pie-demo.js"></script>
-
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('worldwide-sales').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Barangay Indigency',
+                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay ID',
+                data: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Business Permit',
+                data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125],
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                borderColor: 'rgba(255, 205, 86, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Certificate',
+                data: [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Indigency',
+                data: [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
 </body>
 
 </html>

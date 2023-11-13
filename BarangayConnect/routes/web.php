@@ -116,18 +116,18 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth'], function (){
     
     Route::get('residentpage/resident', [AuthController::class, 'showResident'])->name('residentpage.resident');
-    Route::get('residentpage/resident', [DOcumentController::class, 'showStatus'])->name('residentpage.resident');
+    Route::get('residentpage/resident', [DocumentController::class, 'showStatus'])->name('residentpage.resident');
     Route::post('/residentpage/Account', [AuthController::class, 'updateProfile'])->name('residentpage.updateProfile');
 
 });
 
 // adminpage routes
-Route::get('/adminpage/AddSecretary', [SecretaryUserController::class, 'createSecretary']);
-Route::post('/adminpage/ManageSecretary', [SecretaryUserController::class, 'storeSecretary'])->name('adminpage.storeSecretary');
-Route::delete('/adminpage/DeleteSecretary/{id}', [SecretaryUserController::class, 'deleteSecretary'])->name('adminpage.deleteSecretary');
-Route::get('/adminpage/ManageSecretary', [SecretaryUserController::class, 'showSecretary'])->name('adminpage.ManageSecretary');
-Route::get('/adminpage/EditSecretary/{id}', [SecretaryUserController::class, 'editSecretary'])->name('adminpage.editSecretary');
-Route::put('/adminpage/UpdateSecretary/{id}', [SecretaryUserController::class, 'updateSecretary'])->name('adminpage.updateSecretary');
+Route::get('/adminpage/AddSecretary', [RegistrationController::class, 'createSecretary']);
+Route::post('/adminpage/ManageSecretary', [RegistrationController::class, 'storeSecretary'])->name('adminpage.storeSecretary');
+Route::delete('/adminpage/DeleteSecretary/{id}', [RegistrationController::class, 'deleteSecretary'])->name('adminpage.deleteSecretary');
+Route::get('/adminpage/ManageSecretary', [RegistrationController::class, 'showSecretary'])->name('adminpage.ManageSecretary');
+Route::get('/adminpage/EditSecretary/{id}', [RegistrationController::class, 'editSecretary'])->name('adminpage.editSecretary');
+Route::put('/adminpage/UpdateSecretary/{id}', [RegistrationController::class, 'updateSecretary'])->name('adminpage.updateSecretary');
 Route::get('/adminpage/ManageResidents', [RegistrationController::class, 'showResident'])->name('adminpage.ManageResidents');
 Route::get('/adminpage/AddResident', [RegistrationController::class, 'createResident']);
 Route::post('/adminpage/ManageResidents', [RegistrationController::class, 'storeResident'])->name('adminpage.storeResident');
@@ -143,7 +143,7 @@ Route::delete('/adminpage/deleteTransaction/{id}', [DashboardController::class, 
 // residentpage routes
 Route::post('/residentpage/resident', [DocumentController::class, 'store'])->name('resident.store');
 Route::get('/residentpage/transactions', [DocumentController::class, 'showTransactions']);
-Route::delete('/residentpage/{id}',  DocumentController::class .'@destroy')->name('residentpage.destroy');
+Route::delete('/delete/{document_request}', DocumentController::class .'@delete')->name('delete.request');
 Route::get('/residentpage/TrackerNumber', [DocumentController::class, 'showTrackerNumber']);
 Route::patch('/residentpage/transactions/{document_request}/cancel', DocumentController::class .'@cancel')->name('document_requests.cancel');
 Route::get('/residentpage/barangayCertificate', [DocumentController::class, 'barangayCertificate'])->name('residentpage.barangayCertificate');
@@ -153,6 +153,14 @@ Route::get('/residentpage/Account', [DocumentController::class, 'account'])->nam
 Route::get('/residentpage/barangayID', [DocumentController::class, 'barangayID'])->name('residentpage.barangayID');
 
 // Secretary Routes
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('secretary/secretary_dashboard', [AuthController::class, 'dashboard'])->name('dashboard_secretary');
+
+});
+
+Route::get('/secretary/login', [LoginController::class, 'showLoginSecretary'])->name('secretary.login');
+Route::post('/secretary/login', [AuthController::class, 'loginSecretary'])->name('login.secretary');
+Route::get('/secretarylogout', [AuthController::class, 'secretarylogout'])->name('secretarylogout');
 
 Route::get('/secretary/secretary_dashboard', [DashboardController::class, 'showCountSecretary'])->name('dashboard_secretary');
 Route::get('/secretary/manageIndigencyRequest', [DashboardController::class, 'showBarangayIndigencyRequests'])->name('indigency.requests');

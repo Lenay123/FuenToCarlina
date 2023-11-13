@@ -49,7 +49,7 @@ class AuthController extends Controller
         }
         return redirect(route('login'))->with("error", "Login details are not valid");
     }
-
+    
     function registrationPost(Request $request){
         $request->validate([
             'first_name' => 'required|string|max:255',
@@ -129,4 +129,47 @@ class AuthController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
+
+
+    
+    public function loginSecretary(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+    
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            // Check the role of the authenticated user
+            $user = Auth::user();
+    
+            if ($user->role === 'secretary') {
+                // Redirect to the secretary dashboard if the role is 'secretary'
+                return redirect()->route('dashboard_secretary');
+            }
+    
+            // If the role is not 'secretary', logout and redirect with an error message
+            Auth::logout();
+            return redirect()->route('secretary.login')->with("error", "Incorrect credentials for Secretary access");
+        }
+    
+        return redirect()->route('secretary.login')->with("error", "Login details are not valid");
+    }
+    
+    
+
+   public function dashboard(){
+        return view('secretary.secretary_dashboard');
+      
+    }
+    function secretarylogout(){
+        // Session::flush();
+        Auth::logout();
+        return redirect()->route('secretary.login');
 }
+}
+
+
+

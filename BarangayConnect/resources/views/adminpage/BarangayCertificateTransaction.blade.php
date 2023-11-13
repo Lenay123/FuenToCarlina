@@ -125,9 +125,7 @@
         <select id="status-filter" class="form-select w-auto">
 										<option value="all" selected>All</option>
 										<option value="Pending">Pending</option>
-										<option value="In Progress">In Progress</option>
 										<option value="cancelled">Cancelled</option>
-										<option value="To be Claim">To be Claim</option>
 										<option value="Claimed">Claimed</option>
 									</select>
         </div>
@@ -167,9 +165,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
                 </div>

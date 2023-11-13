@@ -169,6 +169,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Fullname</th>
+                        <th>Email Address</th>
                         <th>Date Created</th>
                         <th>Sitio/Purok</th>
                         <th>Action</th>
@@ -180,6 +181,7 @@
                     <tr>
                         <td>{{$secretary->id}}</td>
                         <td>{{$secretary->first_name}} {{$secretary->last_name}}</td>
+                        <td>{{$secretary->email}}</td>
                         <td>{{$secretary->created_at}}</td>
                         <td>{{$secretary->address}}</td>
                         <td style="display: flex;">

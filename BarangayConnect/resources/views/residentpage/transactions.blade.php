@@ -179,9 +179,7 @@
 									<select id="status-filter" class="form-select w-auto">
 										<option value="all" selected>All</option>
 										<option value="Pending">Pending</option>
-										<option value="In Progress">In Progress</option>
 										<option value="cancelled">Cancelled</option>
-										<option value="To be Claim">To be Claim</option>
 										<option value="Claimed">Claimed</option>
 									</select>
 								</div>
@@ -253,25 +251,30 @@
 																</div>
 															</div>
 														</form>
-															<div class="modal fade" id="deleteModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $document_request->id }}" aria-hidden="true">
-																<div class="modal-dialog" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<p>Are you sure you want to delete?</p>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																			<button type="submit" class="btn btn-danger" onclick="deleteRow(this)">Yes</button>
-																		</div>
+														<div class="modal fade" id="deleteModal{{ $document_request->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $document_request->id }}" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<p>Are you sure you want to delete?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+																		<form action="{{ route('delete.request', $document_request->id) }}" method="post">
+																			@csrf
+																			@method('delete')
+																			<button type="submit" class="btn btn-danger">Yes</button>
+																		</form>
 																	</div>
 																</div>
 															</div>
+														</div>
+
 				
 															@if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed'|| $document_request->status === 'Declined')
 																<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $document_request->id }}"><i class="far fa-trash-alt"></i></button>
@@ -417,74 +420,8 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        $('#document-list').on('click', '.delete-button', function () {
-            var row = $(this).closest('tr');
-            var documentRequestId = row.data('id'); // Add a data-id attribute to store the document request ID
-
-            // Show a confirmation modal
-            $('#deleteModal').modal('show');
-
-            // When the user confirms deletion
-            $('#confirmDeleteButton').on('click', function () {
-                // Perform an AJAX request to delete the document request on the server
-                $.ajax({
-                    type: 'POST',
-                    url: '/your-delete-endpoint/' + documentRequestId, // Replace with your actual delete route
-                    data: {
-                        _token: '{{ csrf_token() }}', // Include the CSRF token for security
-                        _method: 'DELETE', // Use the DELETE HTTP method
-                    },
-                    success: function (response) {
-                        // Check for a successful response and perform actions accordingly
-                        if (response.success) {
-                            // If deletion was successful, remove the row from the table
-                            row.remove();
-                            // Close the confirmation modal
-                            $('#deleteModal').modal('hide');
-                        } else {
-                            // Handle errors or show an error message to the user
-                        }
-                    },
-                    error: function (error) {
-                        // Handle any AJAX errors
-                    },
-                });
-            });
-        });
     });
 </script>
-<!-- <script>
-   function deleteRow(button) {
-
-            var row = button.closest('tr'); // Find the parent row
-
-            // Retrieve the ID from the data attribute
-            var requestId = row.getAttribute('data-id');
-
-            // Store the deleted row's ID in Local Storage
-            var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
-            deletedRows.push(requestId);
-            localStorage.setItem('deletedRows', JSON.stringify(deletedRows));
-
-            // Remove the row from the table
-            row.remove();
-        }
-    
-
-    // Rebuild the table when the page loads
-    function rebuildTable() {
-        var deletedRows = JSON.parse(localStorage.getItem('deletedRows')) || [];
-        deletedRows.forEach(function (requestId) {
-            var row = document.querySelector(`tr[data-id="${requestId}"]`);
-            if (row) {
-                row.remove();
-            }
-        });
-    }
-
-    // Call the function to rebuild the table on page load
-    rebuildTable();
-</script> -->
 </body>
 </html> 
 

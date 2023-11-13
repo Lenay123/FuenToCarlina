@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Barangay Connect</title>
 </head>
 
@@ -38,17 +39,13 @@
                         <li class="nav-item dropdown notification">
                        
                         </li>
-
+                        @if(auth()->check())
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} <i class="fas fa-caret-down"></i></a>
+                                    @endif
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">
-John Abraham</h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{route('secretarylogout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -249,6 +246,21 @@ John Abraham</h5>
                                     </div>
                                 </div>
                             </div>
+                            <div class="container-fluid pt-4 px-4">
+                                <div class="row g-4" style="height: 100vh;"> <!-- Set height to 100% of the viewport height -->
+                                    <div class="col-sm-12 col-xl-6" style="height: 90%;"> <!-- Set height to 100% -->
+                                        <div class="bg-light text-center rounded p-4" style="height: 90%;width: 170vh;">
+                                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                                <h6 class="mb-0">Most Requested Documents</h6>
+                                            </div>
+                                            <canvas id="worldwide-sales" style="width: 100%; height: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                </div>
+
                             <!-- ============================================================== -->
                             <!-- end total orders  -->
                             <!-- ============================================================== -->
@@ -264,6 +276,9 @@ John Abraham</h5>
     <!-- ============================================================== -->
     <!-- end main wrapper  -->
     <!-- ============================================================== -->
+
+
+
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
     <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -285,6 +300,59 @@ John Abraham</h5>
     <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('worldwide-sales').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Barangay Indigency',
+                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay ID',
+                data: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Business Permit',
+                data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125],
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                borderColor: 'rgba(255, 205, 86, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Certificate',
+                data: [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Barangay Indigency',
+                data: [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
 </body>
  
 </html>

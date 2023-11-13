@@ -32,4 +32,9 @@ class LoginController extends Controller
         // Authentication failed
         return back()->withErrors(['username' => 'Invalid credentials']);
     }
+
+    public function showLoginSecretary()
+    {
+        return view('secretary.login');
+    }
 }

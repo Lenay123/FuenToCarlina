@@ -72,28 +72,23 @@ class DocumentController extends Controller
     }
     
 
-public function showTransactions()
-{
-    $document_requests = DocumentRequest::where('user_id', Auth::user()->id)
-        ->orderBy('created_at', 'desc') // Order by created_at in descending order
-        ->get();
+    public function showTransactions()
+    {
+        $document_requests = DocumentRequest::where('user_id', Auth::user()->id)
+            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
+            ->orderBy('created_at', 'desc')
+            ->get();
     
-    return view('/residentpage/transactions', compact('document_requests'));
-}
-
-
-    // public function destroy($id)
-    // {
-    //     $document_request = DocumentRequest::find($id);
+        
+        return view('/residentpage/transactions', compact('document_requests'));
+    }
     
-    //     if (!$document_request) {
-    //         return redirect()->route('/residentpage/transactions')
-    //             ->with('error', 'Document request not found');
-    //     }
     
-    //     $document_request->delete();
-    //     return redirect('/residentpage/transactions')->with('success', 'Document request deleted successfully');
-    // }
+    public function delete(DocumentRequest $document_request)
+    {
+        $document_request->update(['status' => 'delete']);
+        return redirect('/residentpage/transactions')->with('success', 'Request has been Deleted successfully');
+    }
 
     public function showTrackerNumber()
     {
