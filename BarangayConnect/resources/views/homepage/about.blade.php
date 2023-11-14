@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Barangay Connect</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="icon" href="./img/image (5).png">
+    <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
@@ -67,23 +67,23 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav me-auto">
                     <a href="/" class="nav-item nav-link active">Home</a>
-                    <a href="homepage/about" class="nav-item nav-link">About</a>
-                    <a href="homepage/service" class="nav-item nav-link">Services</a>
+                    <a href="{{route('about')}}" class="nav-item nav-link">About</a>
+                    <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu fade-up m-0">
-                            <a href="homepage/barangayofficials" class="dropdown-item">Barangay Officials</a>
-                            <a href="homepage/testimonial" class="dropdown-item">Testimonial</a>
-                            <a href="homepage/activities" class="dropdown-item">Activities</a>
+                            <a href="{{route('barangayofficials')}}" class="dropdown-item">Barangay Officials</a>
+                            <a href="{{route('testimonial')}}" class="dropdown-item">Testimonial</a>
+                            <a href="{{route('activities')}}" class="dropdown-item">Activities</a>
                         </div>
                     </div>
-                    <a href="homepage/contact" class="nav-item nav-link">Contact</a>
+                    <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">LOGIN</a>
                         <div class="dropdown-menu fade-up m-0">
-                            <a href="homepage/login" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i>Barangay Resident</a>
-                            <a href="secretary/login" class="dropdown-item"><i class="fa fa-user-secret" aria-hidden="true"></i> Barangay Secretary</a>
-                            <a href="adminpage/login" class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i>  Barangay Captain</a>
+                            <a href="{{route('login')}}" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i>Barangay Resident</a>
+                            <a href="{{route('secretary.login')}}" class="dropdown-item"><i class="fa fa-user-secret" aria-hidden="true"></i> Barangay Secretary</a>
+                            <a href="{{route('adminpage.login')}}" class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i>  Barangay Captain</a>
                         </div>
                     </div>
                 </div>

@@ -55,10 +55,12 @@ class RegistrationController extends Controller
 
     public function showResident()
     {
-        $users = User::all();
-     
+        // Assuming 'user' is the role you want to filter
+        $users = User::where('role', 'user')->get();
+    
         return view('/adminpage/ManageResidents', compact('users'));
     }
+    
 
 
     public function createResident()

@@ -37,4 +37,9 @@ class LoginController extends Controller
     {
         return view('secretary.login');
     }
+    public function showLoginAdmin()
+{
+    return view('adminpage.login');
+}
+
 }

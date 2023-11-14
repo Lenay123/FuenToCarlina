@@ -246,20 +246,74 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-fluid pt-4 px-4">
-                                <div class="row g-4" style="height: 100vh;"> <!-- Set height to 100% of the viewport height -->
-                                    <div class="col-sm-12 col-xl-6" style="height: 90%;"> <!-- Set height to 100% -->
-                                        <div class="bg-light text-center rounded p-4" style="height: 90%;width: 170vh;">
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <h6 class="mb-0">Most Requested Documents</h6>
-                                            </div>
-                                            <canvas id="worldwide-sales" style="width: 100%; height: 100%;"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                                </div>
+                           
+    @if($document_requests->isNotEmpty())
+        <!-- Create a canvas for the bar graph -->
+        <canvas id="documentRequestChart" width="400" height="200"></canvas>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Use Chart.js to create a bar graph for document requests
+                var ctx = document.getElementById('documentRequestChart').getContext('2d');
+
+                // Customize colors and labels based on document types
+                var colors = [];
+                var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
+                    // Customize colors based on document types
+                    @if($documentType == 'Barangay ID')
+                        colors.push('rgba(0, 0, 255, 0.2)'); // Blue
+                    @elseif($documentType == 'Barangay Business Permit')
+                        colors.push('rgba(255, 0, 0, 0.2)'); // Red
+                    @elseif($documentType == 'Barangay Indigency')
+                        colors.push('rgba(75, 192, 192, 0.2)'); // Green
+                    @elseif($documentType == 'Barangay Certificate')
+                        colors.push('rgba(192, 192, 75, 0.2)'); // Yellow
+                    @endif
+                @endforeach
+
+                var dataset = [];
+
+                @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
+                    var counts = @json($document_requests->where('document_type', $documentType)->pluck('count')->toArray());
+                    dataset.push({
+                        label: '{{ $documentType }}',
+                        data: counts,
+                        backgroundColor: colors[{{ array_search($documentType, ['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate']) }}],
+                        borderColor: colors[{{ array_search($documentType, ['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate']) }}].replace('0.2', '1'),
+                        borderWidth: 1
+                    });
+                @endforeach
+
+                var documentRequestChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: dataset
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                min: 0, // Set the minimum value of the y-axis to 0
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top', // You can change the legend position
+                            labels: {
+                                fontColor: 'black', // You can change the legend label color
+                            }
+                        },
+                    }
+                });
+            });
+        </script>
+    @else
+        <p>No document requests yet.</p>
+    @endif
 
                             <!-- ============================================================== -->
                             <!-- end total orders  -->
@@ -301,57 +355,57 @@
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-            const ctx = document.getElementById('worldwide-sales').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'Barangay Indigency',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            },
-            {
-                label: 'Barangay ID',
-                data: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            },
-            {
-                label: 'Barangay Business Permit',
-                data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125],
-                backgroundColor: 'rgba(255, 205, 86, 0.2)',
-                borderColor: 'rgba(255, 205, 86, 1)',
-                borderWidth: 1
-            },
-            {
-                label: 'Barangay Certificate',
-                data: [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            },
-            {
-                label: 'Barangay Indigency',
-                data: [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1
-            }]
-        },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
+//    document.addEventListener('DOMContentLoaded', function () {
+//             const ctx = document.getElementById('worldwide-sales').getContext('2d');
+//             const myChart = new Chart(ctx, {
+//                 type: 'bar',
+//                 data: {
+//             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+//             datasets: [{
+//                 label: 'Barangay Indigency',
+//                 data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+//                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
+//                 borderColor: 'rgba(75, 192, 192, 1)',
+//                 borderWidth: 1
+//             },
+//             {
+//                 label: 'Barangay ID',
+//                 data: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
+//                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//                 borderColor: 'rgba(255, 99, 132, 1)',
+//                 borderWidth: 1
+//             },
+//             {
+//                 label: 'Barangay Business Permit',
+//                 data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125],
+//                 backgroundColor: 'rgba(255, 205, 86, 0.2)',
+//                 borderColor: 'rgba(255, 205, 86, 1)',
+//                 borderWidth: 1
+//             },
+//             {
+//                 label: 'Barangay Certificate',
+//                 data: [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
+//                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
+//                 borderColor: 'rgba(54, 162, 235, 1)',
+//                 borderWidth: 1
+//             },
+//             {
+//                 label: 'Barangay Indigency',
+//                 data: [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
+//                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
+//                 borderColor: 'rgba(153, 102, 255, 1)',
+//                 borderWidth: 1
+//             }]
+//         },
+//                 options: {
+//                     scales: {
+//                         y: {
+//                             beginAtZero: true
+//                         }
+//                     }
+//                 }
+//             });
+//         });
 </script>
 </body>
  

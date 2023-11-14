@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StatusController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,34 +27,34 @@ Route::get('/', function () {
     return view('homepage/index');
 });
 
-Route::get('homepage/about', function () {
-    return view('homepage/about');
-});
+// Route::get('homepage/about', function () {
+//     return view('homepage/about');
+// });
 
-Route::get('homepage/activities', function () {
-    return view('homepage/activities');
-});
+// Route::get('homepage/activities', function () {
+//     return view('homepage/activities');
+// });
 
-Route::get('homepage/barangayofficials', function () {
-    return view('homepage/barangayofficials');
-});
+// Route::get('homepage/barangayofficials', function () {
+//     return view('homepage/barangayofficials');
+// });
 
-Route::get('homepage/contact', function () {
-    return view('homepage/contact');
-});
+// Route::get('homepage/contact', function () {
+//     return view('homepage/contact');
+// });
 
-Route::get('homepage/service', function () {
-    return view('homepage/service');
-});
+// Route::get('homepage/service', function () {
+//     return view('homepage/service');
+// });
 
 
 Route::get('homepage/login', function () {
     return view('homepage/login');
 });
 
-Route::get('homepage/testimonial', function () {
-    return view('homepage/testimonial');
-});
+// Route::get('homepage/testimonial', function () {
+//     return view('homepage/testimonial');
+// });
 
 Route::get('residentpage/resident', function () {
     return view('residentpage/resident');
@@ -105,6 +106,14 @@ Route::get('secretary/login', function () {
     return view('secretary/login');
 });
 
+// Homepage Routes
+Route::get('/homepage/about', [DocumentController::class, 'about'])->name('about');
+Route::get('/homepage/service', [DocumentController::class, 'service'])->name('service');
+Route::get('/homepage/activities', [DocumentController::class, 'activities'])->name('activities');
+Route::get('/homepage/barangayofficials', [DocumentController::class, 'barangayofficials'])->name('barangayofficials');
+Route::get('/homepage/testimonial', [DocumentController::class, 'about'])->name('testimonial');
+Route::get('/homepage/contact', [DocumentController::class, 'contact'])->name('contact');
+
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistrationController::class, 'registration'])->name('register');
 Route::post('/register', [AuthController::class, 'registrationPost'])->name('register.post');
@@ -122,6 +131,15 @@ Route::group(['middleware' => 'auth'], function (){
 });
 
 // adminpage routes
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('adminpage/AdminDashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+
+});
+
+Route::get('/adminpage/login', [LoginController::class, 'showLoginAdmin'])->name('adminpage.login');
+Route::post('/adminpage/login', [AuthController::class, 'loginAdmin'])->name('login.adminpage');
+Route::get('/adminpagelogout', [AuthController::class, 'adminpagelogout'])->name('adminpagelogout');
+
 Route::get('/adminpage/AddSecretary', [RegistrationController::class, 'createSecretary']);
 Route::post('/adminpage/ManageSecretary', [RegistrationController::class, 'storeSecretary'])->name('adminpage.storeSecretary');
 Route::delete('/adminpage/DeleteSecretary/{id}', [RegistrationController::class, 'deleteSecretary'])->name('adminpage.deleteSecretary');

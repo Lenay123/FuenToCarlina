@@ -38,7 +38,7 @@
     
                 @endif
             </div>
-              <form action="{{route('login.post')}}" method="POST">
+              <form action="{{route('login.adminpage')}}" method="POST">
                 @csrf
                 <h2>Sign In</h2>
                 <input type="text" name="email" placeholder="Email"  required/>

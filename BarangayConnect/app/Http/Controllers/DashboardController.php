@@ -11,16 +11,17 @@ class DashboardController extends Controller
 {
     public function showCount()
     {
-        $user = User::count();
-        $secretaries = Secretary::count();
+        $userCount = User::where('role', 'user')->count();
+        $secretaryCount = User::where('role', 'secretary')->count();
         $admin = AdminUser::count();
+    
         $document_requests = DocumentRequest::select('document_type', \DB::raw('count(*) as count'))
-        ->groupBy('document_type')
-        ->get();
-
-
-        return view('/adminpage/AdminDashboard', compact('user', 'secretaries', 'document_requests', 'admin'));
+            ->groupBy('document_type')
+            ->get();
+    
+        return view('/adminpage/AdminDashboard', compact('userCount', 'secretaryCount', 'admin', 'document_requests'));
     }
+    
 
         // Dashboard count for secretary
 

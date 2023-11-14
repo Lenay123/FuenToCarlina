@@ -144,4 +144,37 @@ class DocumentController extends Controller
         return view('residentpage.resident', compact('document_requests'));
     }
 
+
+
+// Homepage Routes
+
+    public function about()
+    {
+        return view('homepage.about');
+    }
+
+    public function activities()
+    {
+        return view('homepage.activities');
+    }
+
+    public function barangayofficials()
+    {
+        return view('homepage.barangayofficials');
+    }
+
+    public function contact()
+    {
+        return view('homepage.contact');
+    }
+
+    public function service()
+    {
+        return view('homepage.service');
+    }
+    public function testimonial()
+    {
+        return view('testimonial.service');
+    }
+
 }

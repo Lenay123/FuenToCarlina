@@ -169,6 +169,38 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('secretary.login');
 }
+
+
+public function loginAdmin(Request $request)
+{
+    // Replace these with your actual admin credentials
+    $adminUsername = 'admin@gmail.com';
+    $adminPassword = 'admin123';
+
+    $request->validate([
+        'email' => 'required',
+        'password' => 'required',
+    ]);
+
+    // Check if provided credentials match admin credentials
+    if ($request->email === $adminUsername && $request->password === $adminPassword) {
+        // Admin login successful
+        auth()->loginUsingId(1); // Replace 1 with the actual admin user ID
+        return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+    }
+
+    // Admin login failed
+    return redirect()->route('adminpage.login')->with('error', 'Invalid email or password');
+}
+
+function adminpagelogout(){
+    // Session::flush();
+    Auth::logout();
+    return redirect()->route('adminpage.login');
+}
+
+
+
 }
 
 

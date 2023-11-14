@@ -356,12 +356,17 @@
                                                                     <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->civil_status }}</h3>
                                                                     <p style="font-size: 12px; margin: 0; padding: 1px;">GENDER</p>
                                                                     <h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->gender }}</h3>
+                                                                </div> <br> 
+                                                                <div class="id-content-sign">
+                                                                    <br><br>
+                                                                    <p>
+                                                                        <img src="/img/signature.png" alt="" style="width: 100px; margin-bottom: -10px;">
+                                                                        <span style="border-top: 1px solid black; display: inline-block; width: 100px; margin-top: -8px;"></span>
+                                                                        Barangay Captain Signature
+                                                                    </p>
                                                                 </div>
 
-                                                                <div class="id-content-sign">
-                                                                    <img src="/img/signature.png" alt="" style="width: 100px; ">
-                                                               
-                                                                </div>
+
 
                                                             </div>
                                                         </div>
