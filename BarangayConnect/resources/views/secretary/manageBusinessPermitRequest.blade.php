@@ -341,7 +341,6 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         var dateIssued = document.querySelector("#inputDateIssued" + documentId).value;
         var dateExpired = document.querySelector("#inputDateExpired" + documentId).value;
 
-
         // Create a new HTML structure with the input values
         var printContent = `
             <style>
@@ -369,10 +368,10 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
             <hr>
             <h4 style="text-align: center; font-weight: bold;">BARANGAY BUSINESS PERMIT</h4>
             <center>
-                <p>NO. <b><u> ${permitNumber}</u></b></p>
+                <p>NO. <b><u>${permitNumber}</u></b></p>
             </center>
             <br>
-            Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }}, to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee(s) (Quarterly / Semi-Annually / Annually), revoked or canceled for cause.
+            Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee (s) (Quarterly /Semi-Annually / Annually), revoked or cancelledfor cause.         <div class="form-outline">
             <div class="form-outline">
                 <p>${textAreaValue}</p>
             </div>
@@ -381,7 +380,6 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
                 <div class="col-auto">
                     <label class="col-form-label">Date Issued:<b> ${new Date(dateIssued).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}</b></label>
                 </div>
-               
             </div>
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
@@ -408,6 +406,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
+
 
 
 
