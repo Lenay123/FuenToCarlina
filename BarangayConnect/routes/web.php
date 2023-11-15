@@ -56,13 +56,7 @@ Route::get('homepage/login', function () {
 //     return view('homepage/testimonial');
 // });
 
-Route::get('residentpage/resident', function () {
-    return view('residentpage/resident');
-});
 
-Route::get('residentpage/transactions', function () {
-    return view('residentpage/transactions');
-});
 
 
 Route::get('adminpage/AdminDashboard', function () {
@@ -92,19 +86,10 @@ Route::get('adminpage/EditResident', function () {
     return view('adminpage/edit/EditResident');
 });
 
-Route::get('adminpage/ManageServices', function () {
-    return view('adminpage/ManageServices');
-});
 
-Route::get('adminpage/AdminTransaction', function () {
-    return view('adminpage/AdminTransaction');
-});
-Route::get('adminpage/login', function () {
-    return view('adminpage/login');
-});
-Route::get('secretary/login', function () {
-    return view('secretary/login');
-});
+
+
+
 
 // Homepage Routes
 Route::get('/homepage/about', [DocumentController::class, 'about'])->name('about');
