@@ -255,7 +255,7 @@
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
-                                <h5 class="fw-bold mb-0">FROILAN P. LLANES</h5>
+                                <h5 class="fw-bold mb-0">FROILAN P. LLANESS</h5>
                                 <small>SK CHAIRMAN</small>
                             </div>
                             <div class="bg-primary">
