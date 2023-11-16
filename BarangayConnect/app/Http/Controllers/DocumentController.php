@@ -174,7 +174,7 @@ class DocumentController extends Controller
     }
     public function testimonial()
     {
-        return view('testimonial.service');
+        return view('homepage.testimonial');
     }
 
 }

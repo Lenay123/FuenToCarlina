@@ -96,7 +96,7 @@ Route::get('/homepage/about', [DocumentController::class, 'about'])->name('about
 Route::get('/homepage/service', [DocumentController::class, 'service'])->name('service');
 Route::get('/homepage/activities', [DocumentController::class, 'activities'])->name('activities');
 Route::get('/homepage/barangayofficials', [DocumentController::class, 'barangayofficials'])->name('barangayofficials');
-Route::get('/homepage/testimonial', [DocumentController::class, 'about'])->name('testimonial');
+Route::get('/homepage/testimonial', [DocumentController::class, 'testimonial'])->name('testimonial');
 Route::get('/homepage/contact', [DocumentController::class, 'contact'])->name('contact');
 
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
