@@ -239,8 +239,9 @@
             </div>
         
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <div class="card-datatable table-responsive">
+                      {{-- <table class="datatables-basic table border-top"> --}}
+                        <table class="datatables-basic table border-top" id="dataTable" width="100%" cellspacing="0">
                             <tr>
                                 <th>ID</th>
                                 <th>Fullname</th>

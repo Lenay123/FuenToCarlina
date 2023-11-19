@@ -19,6 +19,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('img/image (5).png') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -190,11 +191,13 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#backDropModal">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
+                    
+
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -210,6 +213,7 @@
               </ul>
             </div>
           </nav>
+
 
           <!-- / Navbar -->
 
@@ -268,7 +272,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="/adminpage/BarangayIndigencyTransaction">View More</a>
                               </div>
                             </div>
                           </div>
@@ -309,7 +313,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="/adminpage/BarangayPermitTransaction">View More</a>
                               </div>
                             </div>
                           </div>
@@ -337,34 +341,28 @@
                   <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                        <div id="totalRevenueChart" class="px-2"></div>
+                        <h5 class="card-header m-0 me-2 pb-3">Total Requests</h5>
+                        <canvas id="totalRequestsChart" class="px-2"></canvas>
                       </div>
+
                       <div class="col-md-4">
                         <div id="growthChart"></div>
-                        <div class="text-center fw-medium pt-3 mb-2">62% Company Growth</div>
+                        <div class="text-center fw-medium pt-3 mb-2">{{ number_format($percentageGrowth, 2) }}% Requests Growth</div>
 
                         <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2022</small>
-                              <h6 class="mb-0">$32.5k</h6>
-                            </div>
-                          </div>
                           <div class="d-flex">
                             <div class="me-2">
                               <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
                             </div>
                             <div class="d-flex flex-column">
-                              <small>2021</small>
-                              <h6 class="mb-0">$41.2k</h6>
-                            </div>
+                              <small>2023</small>
+                              <h6 class="mb-0">{{ $totalDocumentRequests ?? 0 }} Document Requests</h6>
+                          </div>
+                          
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -389,7 +387,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="/adminpage/BarangayIDTransaction">View More</a>
                               </div>
                             </div>
                           </div>
@@ -427,7 +425,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="/adminpage/BarangayCertificateTransaction">View More</a>
                               </div>
                             </div>
                           </div>
@@ -455,7 +453,7 @@
                             <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                               <div class="card-title">
                                 <h5 class="text-nowrap mb-2">Barangay Residents</h5>
-                                <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                <span class="badge bg-label-warning rounded-pill">Year 2023</span>
                               </div>
                               <div class="mt-sm-auto">
                                 <h3 class="mb-0">{{ $userCount > 0 ? $userCount : '0' }}</h3>
@@ -511,10 +509,123 @@
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
+
+          
         </div>
         <!-- / Layout page -->
       </div>
+                    <!-- Modal Backdrop -->
+                    <div class="col-lg-4 col-md-3">
+                      <div class="mt-3">
+                        <!-- Button trigger modal -->
+                    
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                          <div class="modal-dialog">
+                            <form class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="backDropModalTitle">My Profile</h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBackdrop" class="form-label">Name</label>
+                                    <input
+                                      type="text"
+                                      id="nameBackdrop"
+                                      class="form-control"
+                                      placeholder="Enter Name" value= "Almar Gutierrez" readonly/>
+                                  </div>
+                                </div>
+                                <div class="row g-2">
+                                  <div class="col mb-0">
+                                    <label for="emailBackdrop" class="form-label">Email</label>
+                                    <input
+                                      type="email"
+                                      id="emailBackdrop"
+                                      class="form-control"
+                                      placeholder="xxxx@xxx.xx" value= "admin@gmail.com" readonly/>
+                                  </div>
+                                  <div class="col mb-0">
+                                    <label for="dobBackdrop" class="form-label">DOB</label>
+                                    <input type="date" id="dobBackdrop" class="form-control" />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      // Sample data (replace this with actual data from your database)
+                      const requestLabels = [];
+                      const requestCounts = [];
+                  
+                      @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
+                          requestLabels.push('{{ $documentType }}');
+                          requestCounts.push({{ $document_requests->where('document_type', $documentType)->sum('count') }});
+                      @endforeach
+                  
+                      // Get the  canvas element
+                      const totalRequestsCanvas = document.getElementById('totalRequestsChart');
+                  
+                      if (totalRequestsCanvas) {
+                          const ctx = totalRequestsCanvas.getContext('2d');
+                  
+                          // Create the chart
+                          new Chart(ctx, {
+                              type: 'bar',
+                              data: {
+                                  labels: requestLabels,
+                                  datasets: [{
+                                      label: 'Number of Requests',
+                                      data: requestCounts,
+                                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                      borderColor: 'rgba(75, 192, 192, 1)',
+                                      borderWidth: 1
+                                  }]
+                              },
+                              options: {
+                                  scales: {
+                                      xAxes: [{
+                                          display: false, // Hide x-axis labels
+                                          ticks: {
+                                              autoSkip: true
+                                          }
+                                      }],
+                                      yAxes: [{
+                                          ticks: {
+                                              beginAtZero: true
+                                          }
+                                      }]
+                                  },
+                                  legend: {
+                                      display: false
+                                  },
+                                  tooltips: {
+                                      enabled: false
+                                  }
+                              }
+                          });
+                      } else {
+                          console.error('Canvas element with ID "totalRequestsChart" not found.');
+                      }
+                  </script>
+                  
+                
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
@@ -540,7 +651,7 @@
 
     <!-- Page JS -->
     <script src="/js/dashboards-analytics.js"></script>
-
+  
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

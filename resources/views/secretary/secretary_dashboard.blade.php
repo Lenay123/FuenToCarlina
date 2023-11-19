@@ -1,412 +1,814 @@
-<!doctype html>
-<html lang="en">
- 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <link rel="icon" href="{{ asset('img/image (5).png') }}">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/libs/css/style.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Barangay Connect</title>
-</head>
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>Barangay Connect</title>
 
-<body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">Barangay Connect</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item dropdown notification">
-                       
-                        </li>
-                        @if(auth()->check())
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} <i class="fas fa-caret-down"></i></a>
-                                    @endif
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
-                                <a class="dropdown-item" href="{{route('secretarylogout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== --> <br> <br>
-        <div class="nav-left-sidebar sidebar-dark">
-            <div class="menu-list">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-divider">
-                                Menu
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link active" href="#" aria-expanded="false"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Manage Request</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageIndigencyRequest">Barangay Indigency</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageCertificateRequest">Barangay Certificate</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageIdRequest">Barangay ID</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageBusinessPermitRequest">Barangay Business Permit</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+		<!-- Site favicon -->
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/vendors/images/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/vendors/images/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/vendors/images/favicon-16x16.png"
+		/>
 
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/secretary/request_history" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
-                            </li>
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
 
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end left sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- wrapper  -->
-        <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
-            <div class="dashboard-ecommerce">
-                <div class="container-fluid dashboard-content ">
-                    <!-- ============================================================== -->
-                    <!-- pageheader  -->
-                    <!-- ============================================================== -->
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="page-header">
-                                <h2 class="pageheader-title">Barangay Connect Dashboard </h2>
-                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
-                                <div class="page-breadcrumb">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Barangay Connect Dashboard</li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ============================================================== -->
-                    <!-- end pageheader  -->
-                    <!-- ============================================================== -->
-                    <div class="ecommerce-widget">
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
 
-                        <div class="row">
-                            <!-- ============================================================== -->
-                            <!-- sales  -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                <div class="card border-3 border-top border-top-primary">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Barangay Indigency</h5>
-                                        <div class="metric-value d-inline-block">
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
 
-                                            @php
-                                            $barangayIdCount = 0; // Initialize the count to 0
-                                        @endphp
-                                        @foreach ($document_requests as $count)
-                                            @if ($count->document_type === 'Barangay Indigency')
-                                                @php
-                                                    $barangayIdCount = $count->count; // Update the count if a record is found
-                                                @endphp
-                                            @endif
-                                        @endforeach
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>	
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
 
-                                            <h1 class="mb-1">{{ $barangayIdCount }}</h1>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
-                            <!-- end sales  -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- new customer  -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                <div class="card border-3 border-top border-top-primary">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Barangay Certificate</h5>
-                                        <div class="metric-value d-inline-block">
-                                            @php
-                                            $barangayIdCount = 0; // Initialize the count to 0
-                                        @endphp
-                                        @foreach ($document_requests as $count)
-                                            @if ($count->document_type === 'Barangay Certificate')
-                                                @php
-                                                    $barangayIdCount = $count->count; // Update the count if a record is found
-                                                @endphp
-                                            @endif
-                                        @endforeach
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+			</div>
+			<div class="header-right">
 
-                                            <h1 class="mb-1">{{ $barangayIdCount }}</h1>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
-                            <!-- end new customer  -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- visitor  -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                <div class="card border-3 border-top border-top-primary">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Barangay ID</h5>
-                                        <div class="metric-value d-inline-block">
-                                            @php
-                                            $barangayIdCount = 0; // Initialize the count to 0
-                                        @endphp
-                                        @foreach ($document_requests as $count)
-                                            @if ($count->document_type === 'Barangay ID')
-                                                @php
-                                                    $barangayIdCount = $count->count; // Update the count if a record is found
-                                                @endphp
-                                            @endif
-                                        @endforeach
+				<div class="user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">github-link
+							<div class="notification-list mx-h-350 customscroll">
+								<ul>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/img.jpg" alt="" />
+											<h3>John Doe</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo1.jpg" alt="" />
+											<h3>Lea R. Frith</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo2.jpg" alt="" />
+											<h3>Erik L. Richards</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo3.jpg" alt="" />
+											<h3>John Doe</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo4.jpg" alt="" />
+											<h3>Renee I. Hansen</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/img.jpg" alt="" />
+											<h3>Vicki M. Coleman</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							<span class="user-icon">
+								<img src="/vendors/images/photo1.jpg" alt="" />
+							</span>
+							<span class="user-name">Ross C. Lopez</span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							<a class="dropdown-item" href="profile.html"
+								><i class="dw dw-user1"></i> Profile</a
+							>
+							<a class="dropdown-item" href="profile.html"
+								><i class="dw dw-settings2"></i> Setting</a
+							>
+							<a class="dropdown-item" href="faq.html"
+								><i class="dw dw-help"></i> Help</a
+							>
+							<a class="dropdown-item" href="{{route('secretarylogout')}}"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                                            <h1 class="mb-1">{{ $barangayIdCount }}</h1>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
-                            <!-- end visitor  -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- total orders  -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                <div class="card border-3 border-top border-top-primary">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Barangay Business Permit</h5>
-                                        <div class="metric-value d-inline-block">
-                                            @php
-                                            $barangayIdCount = 0; // Initialize the count to 0
-                                        @endphp
-                                        @foreach ($document_requests as $count)
-                                            @if ($count->document_type === 'Barangay Business Permit')
-                                                @php
-                                                    $barangayIdCount = $count->count; // Update the count if a record is found
-                                                @endphp
-                                            @endif
-                                        @endforeach
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
 
-                                            <h1 class="mb-1">{{ $barangayIdCount }}</h1>
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                            </div>
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
 
-                           
-    @if($document_requests->isNotEmpty())
-        <!-- Create a canvas for the bar graph -->
-        <canvas id="documentRequestChart" width="400" height="200"></canvas>
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Use Chart.js to create a bar graph for document requests
-                var ctx = document.getElementById('documentRequestChart').getContext('2d');
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
 
-                // Customize colors and labels based on document types
-                var colors = [];
-                var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
-                    // Customize colors based on document types
-                    @if($documentType == 'Barangay ID')
-                        colors.push('rgba(0, 0, 255, 0.2)'); // Blue
-                    @elseif($documentType == 'Barangay Business Permit')
-                        colors.push('rgba(255, 0, 0, 0.2)'); // Red
-                    @elseif($documentType == 'Barangay Indigency')
-                        colors.push('rgba(75, 192, 192, 0.2)'); // Green
-                    @elseif($documentType == 'Barangay Certificate')
-                        colors.push('rgba(192, 192, 75, 0.2)'); // Yellow
-                    @endif
-                @endforeach
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				<a href="index.html">
+					<img src="/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+					<img
+						src="/vendors/images/deskapp-logo-white.svg"
+						alt=""
+						class="light-logo"
+					/>
+				</a>
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Dashboard</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageIndigencyRequest" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-textarea-resize"></span
+								><span class="mtext">Barangay Indigency</span>
+							</a>
+					
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageCertificateRequest" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-table"></span
+								><span class="mtext">Barangay Certificate</span>
+							</a>
+							
+						</li>
+						<li>
+							<a href="/secretary/manageIdRequest" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-calendar4-week"></span
+								><span class="mtext">Barangay ID</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageBusinessPermitRequest" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-archive"></span
+								><span class="mtext"> Barangay Business <br> Permit </span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-command"></span
+								><span class="mtext">Transaction History</span>
+							</a>
+					
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-menu-overlay"></div>
 
-                var dataset = [];
+		<div class="main-container">
+			<div class="pd-ltr-20">
+				<div class="card-box pd-20 height-100-p mb-30">
+					<div class="row align-items-center">
+						<div class="col-md-4">
+							<img src="https://media.tenor.com/FUv4qr5HaMsAAAAd/work-working.gif" alt="" />
+						</div>
+						<div class="col-md-8">
+							<h4 class="font-20 weight-500 mb-10 text-capitalize">
+								Welcome back
+								@if(auth()->check())
+								<div class="weight-600 font-30 text-blue">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </div>
+							</h4>
+							@endif
+							<p class="font-18 max-width-600">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+								hic non repellendus debitis iure, doloremque assumenda. Autem
+								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
+								mollitia animi error corporis.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-100-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<div id="chart"></div>
+								</div>
+								<div class="widget-data">
+									@php
+									$barangayIdCount = 0; // Initialize the count to 0
+								@endphp
+								@foreach ($document_requests as $count)
+									@if ($count->document_type === 'Barangay Indigency')
+										@php
+											$barangayIdCount = $count->count; // Update the count if a record is found
+										@endphp
+									@endif
+								@endforeach
 
-                @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
-                    var counts = @json($document_requests->where('document_type', $documentType)->pluck('count')->toArray());
-                    dataset.push({
-                        label: '{{ $documentType }}',
-                        data: counts,
-                        backgroundColor: colors[{{ array_search($documentType, ['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate']) }}],
-                        borderColor: colors[{{ array_search($documentType, ['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate']) }}].replace('0.2', '1'),
-                        borderWidth: 1
-                    });
-                @endforeach
+								
+									<div class="h4 mb-0">{{ $barangayIdCount }}</div>
+									<div class="weight-600 font-14">Barangay Indigency</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-100-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<div id="chart2"></div>
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">400</div>
+									<div class="weight-600 font-14">Deals</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-100-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<div id="chart3"></div>
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">350</div>
+									<div class="weight-600 font-14">Campaign</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-100-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<div id="chart4"></div>
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">$6060</div>
+									<div class="weight-600 font-14">Worth</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-8 mb-30">
+						<div class="card-box height-100-p pd-20">
+							<h2 class="h4 mb-20">Activity</h2>
+							<div id="chart5"></div>
+						</div>
+					</div>
+					<div class="col-xl-4 mb-30">
+						<div class="card-box height-100-p pd-20">
+							<h2 class="h4 mb-20">Lead Target</h2>
+							<div id="chart6"></div>
+						</div>
+					</div>
+				</div>
+				<div class="card-box mb-30">
+					<h2 class="h4 pd-20">Best Selling Products</h2>
+					<table class="data-table table nowrap">
+						<thead>
+							<tr>
+								<th class="table-plus datatable-nosort">Product</th>
+								<th>Name</th>
+								<th>Color</th>
+								<th>Size</th>
+								<th>Price</th>
+								<th>Oty</th>
+								<th class="datatable-nosort">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="table-plus">
+									<img
+										src="/vendors/images/product-1.jpg"
+										width="70"
+										height="70"
+										alt=""
+									/>
+								</td>
+								<td>
+									<h5 class="font-16">Shirt</h5>
+									by John Doe
+								</td>
+								<td>Black</td>
+								<td>M</td>
+								<td>$1000</td>
+								<td>1</td>
+								<td>
+									<div class="dropdown">
+										<a
+											class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+											href="#"
+											role="button"
+											data-toggle="dropdown"
+										>
+											<i class="dw dw-more"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+										>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-eye"></i> View</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-edit2"></i> Edit</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-delete-3"></i> Delete</a
+											>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table-plus">
+									<img
+										src="/vendors/images/product-2.jpg"
+										width="70"
+										height="70"
+										alt=""
+									/>
+								</td>
+								<td>
+									<h5 class="font-16">Boots</h5>
+									by Lea R. Frith
+								</td>
+								<td>brown</td>
+								<td>9UK</td>
+								<td>$900</td>
+								<td>1</td>
+								<td>
+									<div class="dropdown">
+										<a
+											class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+											href="#"
+											role="button"
+											data-toggle="dropdown"
+										>
+											<i class="dw dw-more"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+										>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-eye"></i> View</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-edit2"></i> Edit</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-delete-3"></i> Delete</a
+											>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table-plus">
+									<img
+										src="/vendors/images/product-3.jpg"
+										width="70"
+										height="70"
+										alt=""
+									/>
+								</td>
+								<td>
+									<h5 class="font-16">Hat</h5>
+									by Erik L. Richards
+								</td>
+								<td>Orange</td>
+								<td>M</td>
+								<td>$100</td>
+								<td>4</td>
+								<td>
+									<div class="dropdown">
+										<a
+											class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+											href="#"
+											role="button"
+											data-toggle="dropdown"
+										>
+											<i class="dw dw-more"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+										>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-eye"></i> View</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-edit2"></i> Edit</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-delete-3"></i> Delete</a
+											>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table-plus">
+									<img
+										src="/vendors/images/product-4.jpg"
+										width="70"
+										height="70"
+										alt=""
+									/>
+								</td>
+								<td>
+									<h5 class="font-16">Long Dress</h5>
+									by Renee I. Hansen
+								</td>
+								<td>Gray</td>
+								<td>L</td>
+								<td>$1000</td>
+								<td>1</td>
+								<td>
+									<div class="dropdown">
+										<a
+											class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+											href="#"
+											role="button"
+											data-toggle="dropdown"
+										>
+											<i class="dw dw-more"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+										>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-eye"></i> View</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-edit2"></i> Edit</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-delete-3"></i> Delete</a
+											>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table-plus">
+									<img
+										src="/vendors/images/product-5.jpg"
+										width="70"
+										height="70"
+										alt=""
+									/>
+								</td>
+								<td>
+									<h5 class="font-16">Blazer</h5>
+									by Vicki M. Coleman
+								</td>
+								<td>Blue</td>
+								<td>M</td>
+								<td>$1000</td>
+								<td>1</td>
+								<td>
+									<div class="dropdown">
+										<a
+											class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+											href="#"
+											role="button"
+											data-toggle="dropdown"
+										>
+											<i class="dw dw-more"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+										>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-eye"></i> View</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-edit2"></i> Edit</a
+											>
+											<a class="dropdown-item" href="#"
+												><i class="dw dw-delete-3"></i> Delete</a
+											>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="footer-wrap pd-20 mb-20 card-box">
+					DeskApp - Bootstrap 4 Admin Template By
+					<a href="https://github.com/dropways" target="_blank"
+						>Ankit Hingarajiya</a
+					>
+				</div>
+			</div>
+		</div>
 
-                var documentRequestChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: dataset
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                min: 0, // Set the minimum value of the y-axis to 0
-                            }
-                        },
-                        legend: {
-                            display: true,
-                            position: 'top', // You can change the legend position
-                            labels: {
-                                fontColor: 'black', // You can change the legend label color
-                            }
-                        },
-                    }
-                });
-            });
-        </script>
-    @else
-        <p>No document requests yet.</p>
-    @endif
 
-                            <!-- ============================================================== -->
-                            <!-- end total orders  -->
-                            <!-- ============================================================== -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jquery 3.3.1 -->
-    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
-    <script src="/assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
-<script>
-//    document.addEventListener('DOMContentLoaded', function () {
-//             const ctx = document.getElementById('worldwide-sales').getContext('2d');
-//             const myChart = new Chart(ctx, {
-//                 type: 'bar',
-//                 data: {
-//             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-//             datasets: [{
-//                 label: 'Barangay Indigency',
-//                 data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-//                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-//                 borderColor: 'rgba(75, 192, 192, 1)',
-//                 borderWidth: 1
-//             },
-//             {
-//                 label: 'Barangay ID',
-//                 data: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
-//                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
-//                 borderColor: 'rgba(255, 99, 132, 1)',
-//                 borderWidth: 1
-//             },
-//             {
-//                 label: 'Barangay Business Permit',
-//                 data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125],
-//                 backgroundColor: 'rgba(255, 205, 86, 0.2)',
-//                 borderColor: 'rgba(255, 205, 86, 1)',
-//                 borderWidth: 1
-//             },
-//             {
-//                 label: 'Barangay Certificate',
-//                 data: [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
-//                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
-//                 borderColor: 'rgba(54, 162, 235, 1)',
-//                 borderWidth: 1
-//             },
-//             {
-//                 label: 'Barangay Indigency',
-//                 data: [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
-//                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
-//                 borderColor: 'rgba(153, 102, 255, 1)',
-//                 borderWidth: 1
-//             }]
-//         },
-//                 options: {
-//                     scales: {
-//                         y: {
-//                             beginAtZero: true
-//                         }
-//                     }
-//                 }
-//             });
-//         });
-</script>
-</body>
- 
+		<!-- js -->
+		<script src="/vendors/scripts/core.js"></script>
+		<script src="/vendors/scripts/script.min.js"></script>
+		<script src="/vendors/scripts/process.js"></script>
+		<script src="/vendors/scripts/layout-settings.js"></script>
+		<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	</body>
 </html>
