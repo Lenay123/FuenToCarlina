@@ -121,7 +121,6 @@ Route::group(['middleware' => 'auth'], function (){
 
 });
 
-Route::get('/adminpage/login', [LoginController::class, 'showLoginAdmin'])->name('adminpage.login');
 Route::post('/adminpage/login', [AuthController::class, 'loginAdmin'])->name('login.adminpage');
 Route::get('/adminpagelogout', [AuthController::class, 'adminpagelogout'])->name('adminpagelogout');
 

@@ -220,25 +220,7 @@
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">In Progress</h4>
-								@php
-								$barangayIdCount = 0; // Initialize the count to 0
-							@endphp
-							@foreach ($document_requests as $count)
-								@if ($count->status === 'In Progress')
-									@php
-										$barangayIdCount = $count->count; // Update the count if a record is found
-									@endphp
-								@endif
-							@endforeach
-							    <div class="stats-figure">{{ $barangayIdCount }}</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
+		
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
@@ -258,26 +240,15 @@
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
-					<div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">To be Claimed</h4>
-								@php
-								$barangayIdCount = 0; // Initialize the count to 0
-							@endphp
-							@foreach ($document_requests as $count)
-								@if ($count->status === 'To be Claimed')
-									@php
-										$barangayIdCount = $count->count; // Update the count if a record is found
-									@endphp
-								@endif
-							@endforeach
-							    <div class="stats-figure">{{ $barangayIdCount }}</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
+
 			    </div><!--//row-->
+
+
+
+
+
+
+				
 			    <div class="row g-4 mb-4">
 				    <div class="col-12 col-lg-4">
 					    <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">

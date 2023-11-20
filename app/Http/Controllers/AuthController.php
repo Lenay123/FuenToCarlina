@@ -36,20 +36,71 @@ class AuthController extends Controller
         return view('registration');
     }
 
+
+
+
+    // function loginPost(Request $request){
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'password' => 'required'
+
+    //     ]);
+
+    //     $credentials = $request->only('email', 'password');
+    //     if(Auth::attempt($credentials)){
+    //         return redirect()->intended(route('residentpage.resident'));
+    //     }
+    //     return redirect(route('login'))->with("error", "Login details are not valid");
+    // }
+    
+
+
+
     function loginPost(Request $request){
         $request->validate([
             'email' => 'required',
             'password' => 'required'
-
         ]);
-
+    
         $credentials = $request->only('email', 'password');
-        if(Auth::attempt($credentials)){
-            return redirect()->intended(route('residentpage.resident'));
+        
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            
+            switch ($user->role) {
+                case 'user':
+                    return redirect()->intended(route('residentpage.resident'));
+                    break;
+                case 'secretary':
+                    return redirect()->route('dashboard_secretary');
+                    break;
+                case 'admin':
+                    return redirect()->route('dashboard');
+                    break;
+                // Add more cases for other roles if needed
+                default:
+                    Auth::logout();
+                    return redirect(route('login'))->with("error", "Login details are not valid");
+            }
         }
+    
+        // If no user is authenticated, check for hardcoded admin credentials
+        $adminUsername = 'admin@gmail.com';
+        $adminPassword = 'admin123';
+    
+        if ($request->email === $adminUsername && $request->password === $adminPassword) {
+            // Admin login successful
+            auth()->loginUsingId(1); // Replace 1 with the actual admin user ID
+            return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+        }
+    
         return redirect(route('login'))->with("error", "Login details are not valid");
     }
     
+
+
+
+
     function registrationPost(Request $request){
         $request->validate([
             'first_name' => 'required|string|max:255',
@@ -152,10 +203,10 @@ class AuthController extends Controller
     
             // If the role is not 'secretary', logout and redirect with an error message
             Auth::logout();
-            return redirect()->route('secretary.login')->with("error", "Incorrect credentials for Secretary access");
+            return redirect()->route('login')->with("error", "Incorrect credentials for Secretary access");
         }
     
-        return redirect()->route('secretary.login')->with("error", "Login details are not valid");
+        return redirect()->route('login')->with("error", "Login details are not valid");
     }
     
     
@@ -167,7 +218,7 @@ class AuthController extends Controller
     function secretarylogout(){
         // Session::flush();
         Auth::logout();
-        return redirect()->route('secretary.login');
+        return redirect()->route('login');
 }
 
 
@@ -190,13 +241,13 @@ public function loginAdmin(Request $request)
     }
 
     // Admin login failed
-    return redirect()->route('adminpage.login')->with('error', 'Invalid email or password');
+    return redirect()->route('login')->with('error', 'Invalid email or password');
 }
 
 function adminpagelogout(){
     // Session::flush();
     Auth::logout();
-    return redirect()->route('adminpage.login');
+    return redirect()->route('login');
 }
 
 

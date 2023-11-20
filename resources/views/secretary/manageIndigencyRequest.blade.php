@@ -1,23 +1,80 @@
-<!doctype html>
-<html lang="en">
- 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{{ asset('img/image (5).png') }}">
-    <title>Barangay Connect</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/libs/css/style.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/dataTables.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/buttons.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/select.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
-</head>
-<style>
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>Barangay Connect</title>
+		<link rel="icon" href="{{ asset('img/image (5).png') }}">
+		<!-- Site favicon -->
+
+
+
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>	
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<!-- End Google Tag Manager -->
+	</head>
+    <style>
     .id-logo{
     height: 16vh;
     width: 100%;
@@ -27,130 +84,356 @@
 }
 
 </style>
-<body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">Barangay Connect</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item dropdown notification">
-                       
-                        </li>
+	<body>
 
-                        @if(auth()->check())
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} <i class="fas fa-caret-down"></i></a>
-                                    @endif
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Active</a>
-                                <a class="dropdown-item" href="{{route('secretarylogout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== --> <br> <br>
-        <div class="nav-left-sidebar sidebar-dark">
-            <div class="menu-list">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-divider">
-                                Menu
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="/secretary/secretary_dashboard" aria-expanded="false"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Manage Request</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageIndigencyRequest">Barangay Indigency</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageCertificateRequest">Barangay Certificate</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageIdRequest">Barangay ID</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/secretary/manageBusinessPermitRequest">Barangay Business Permit</a>
-                                        </li>
-                                       
-                                    </ul>
-                                </div>
-                            </li>
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+			</div>
+			<div class="header-right">
 
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/secretary/request_history" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Request History </a>
-                            </li>
-                          
-                                      
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end left sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- wrapper  -->
-        <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
-            <div class="container-fluid  dashboard-content">
-                <!-- ============================================================== -->
-                <!-- pageheader -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-header">
-                            <h2 class="pageheader-title">Barangay Indigency Requests</h2>
-                            <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
-                            <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Barangay Indigency Requests</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- end pageheader -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- ============================================================== -->
-                    <!-- basic table  -->
-                    <!-- ============================================================== -->
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card">
+				<div class="user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">github-link
+							<div class="notification-list mx-h-350 customscroll">
+								<ul>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/img.jpg" alt="" />
+											<h3>John Doe</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo1.jpg" alt="" />
+											<h3>Lea R. Frith</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo2.jpg" alt="" />
+											<h3>Erik L. Richards</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo3.jpg" alt="" />
+											<h3>John Doe</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/photo4.jpg" alt="" />
+											<h3>Renee I. Hansen</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="/vendors/images/img.jpg" alt="" />
+											<h3>Vicki M. Coleman</h3>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed...
+											</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						> 
+							<span class="user-icon">
+								<img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" />
+							</span>
+							@if(auth()->check())
+							<span class="user-name">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </span>
+							@endif
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							<a class="dropdown-item" href="profile.html"
+								><i class="dw dw-user1"></i> My Profile</a
+							>
+							<a class="dropdown-item" href="{{route('secretarylogout')}}"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
+
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				<a href="index.html">
+				<h5>Barangay Connect</h5>
+				</a>
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li class="dropdown">
+							<a href="/secretary/secretary_dashboard" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Dashboard</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageIndigencyRequest" class="dropdown-toggle no-arrow active">
+								<span class="micon bi bi-textarea-resize"></span
+								><span class="mtext">Barangay Indigency</span>
+							</a>
+					
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageCertificateRequest" class="dropdown-toggle no-arrow ">
+								<span class="micon bi bi-table"></span
+								><span class="mtext">Barangay Certificate</span>
+							</a>
+							
+						</li>
+						<li>
+							<a href="/secretary/manageIdRequest" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-calendar4-week"></span
+								><span class="mtext">Barangay ID</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/manageBusinessPermitRequest" class="dropdown-toggle no-arrow ">
+								<span class="micon bi bi-archive"></span
+								><span class="mtext"> Barangay Business <br> Permit </span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="/secretary/request_history" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-command"></span
+								><span class="mtext">Transaction History</span>
+							</a>
+					
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-menu-overlay"></div>
+
+		<div class="main-container">
+        <div class="card">
         <h5 class="card-header">Barangay Indigency Requests Table</h5>
         <div class="card-body">
             <div class="table-responsive">
@@ -185,13 +468,13 @@
                                 <td>{{ $document_request->document_date}}</td>
                                 <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed') disabled @endif>
-                                    <i class="fas fa-fw fa-print"></i>
+                                     <i class="micon bi bi-printer"></i>
                                 </button>
                                 @if ($document_request->status !== 'cancelled' && $document_request->status !== 'Claimed')
                                     <form action="{{ route('claimDocumentPermit', ['document_request' => $document_request]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-success">Mark as Claimed</button>
+                                        <button type="submit" class="btn btn-success"><i class="micon bi bi-check2"></i></button>
                                     </form>
                                 @endif
                                             </td>
@@ -255,30 +538,32 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
-    <script src="/assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
-    <script>
+		</div>
+
+
+		<!-- js -->
+		<script src="/vendors/scripts/core.js"></script>
+		<script src="/vendors/scripts/script.min.js"></script>
+		<script src="/vendors/scripts/process.js"></script>
+		<script src="/vendors/scripts/layout-settings.js"></script>
+		<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+<script>
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("search");
     const table = document.getElementById("dataTable");
@@ -348,9 +633,6 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
-  
 </script>
-
-</body>
- 
+	</body>
 </html>

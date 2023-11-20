@@ -79,12 +79,7 @@
                     </div>
                     <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">LOGIN</a>
-                        <div class="dropdown-menu fade-up m-0">
-                            <a href="{{route('login')}}" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i>Barangay Resident</a>
-                            <a href="{{route('secretary.login')}}" class="dropdown-item"><i class="fa fa-user-secret" aria-hidden="true"></i> Barangay Secretary</a>
-                            <a href="{{route('adminpage.login')}}" class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i>  Barangay Captain</a>
-                        </div>
+                    <a href="{{route('login')}}" class="nav-item nav-link " >LOGIN</a>             
                     </div>
                 </div>
             </div>
@@ -152,7 +147,7 @@
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid" src="img/team-2.jpg" alt="">
+                        <img class="img-fluid" src="{{ asset('img/elena.jpg') }}" alt="">
                     </div>
                     <div class="team-text">
                         <div class="bg-light">
@@ -170,7 +165,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/team-2.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('img/Toqs.jpg') }}" alt="">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
@@ -206,7 +201,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('img/Jean.png') }}" alt="">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">

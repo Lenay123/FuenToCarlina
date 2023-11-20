@@ -46,6 +46,10 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+		<script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
+
   </head>
 
   <body>
@@ -56,11 +60,8 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo"> <br>
-            <a href="index.html" class="app-brand-link">
-              {{-- <span class="app-brand-logo demo">
-                Barangay Connect
-              </span> --}}
-              <h3 class="">Barangay Connect</h3>
+            <a href="" class="app-brand-link">
+              <h4 class="">Barangay Connect</h4>
 
             </a>
 
@@ -168,7 +169,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{{ asset('img/user.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -177,7 +178,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{{ asset('img/user.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -337,37 +338,26 @@
                   </div>
                 </div>
                 <!-- Total Revenue -->
-                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
+                <div class="col-14 col-lg-8 order-2 order-md-3 order-lg-2 mb-7">
+
+                <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Requests</h5>
-                        <canvas id="totalRequestsChart" class="px-2"></canvas>
-                      </div>
+                      <button id="exportChartButton1" data-chart-id="pieChart" style="position: absolute; top: 4; right: 0; margin-right:20px; margin-top: 20px; background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;"><i class="bx bx-download bx-sm"></i> Export</button>
 
-                      <div class="col-md-4">
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-medium pt-3 mb-2">{{ number_format($percentageGrowth, 2) }}% Requests Growth</div>
-
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2023</small>
-                              <h6 class="mb-0">{{ $totalDocumentRequests ?? 0 }} Document Requests</h6>
-                          </div>
-                          
+                          <h5 class="card-header m-0 me-2 pb-3">Total Requests</h5>
+                            @if($document_requests->isNotEmpty())
+                              <canvas id="pieChart"></canvas>
+                            @else
+                              <p style= "margin-left:10px">No document requests available.</p>
+                            @endif
+                      </div>   
                           </div>
                         </div>
                       </div>
-
-                    </div>
-                  </div>
-                </div>
+                
                 <!--/ Total Revenue -->
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2"> <br>
                   <div class="row">
                     <div class="col-6 mb-4">
                       <div class="card">
@@ -484,6 +474,31 @@
                       </div>
                     </div>
                   </div>
+                </div> 
+
+                <div class="col-14 col-lg-8 order-2 order-md-3 order-lg-2 mb-7"> <br>
+                <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                      @if($document_requests->isNotEmpty())
+						<button id="exportChartButton" data-chart-id="barChart" style="position: absolute; top: 4; right: 0; margin-right:20px; margin-top: 20px; background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;" ><i class="bx bx-download bx-sm"></i> Export</button>
+						@endif
+                          <h5 class="card-header m-0 me-2 pb-3"> Requests Status</h5>
+                            @if($document_requests->isNotEmpty())
+                            <canvas id="barChart"></canvas>
+                            @else
+                            <p style="margin-left:10px">No document requests available.</p>
+                            @endif
+                      </div>
+
+						
+
+                    </div>
+                  </div>
+                </div>
+
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -570,60 +585,118 @@
                       </div>
                     </div>
                     <script>
-                      // Sample data (replace this with actual data from your database)
-                      const requestLabels = [];
-                      const requestCounts = [];
-                  
-                      @foreach(['Barangay ID', 'Barangay Business Permit', 'Barangay Indigency', 'Barangay Certificate'] as $documentType)
-                          requestLabels.push('{{ $documentType }}');
-                          requestCounts.push({{ $document_requests->where('document_type', $documentType)->sum('count') }});
-                      @endforeach
-                  
-                      // Get the  canvas element
-                      const totalRequestsCanvas = document.getElementById('totalRequestsChart');
-                  
-                      if (totalRequestsCanvas) {
-                          const ctx = totalRequestsCanvas.getContext('2d');
-                  
-                          // Create the chart
-                          new Chart(ctx, {
-                              type: 'bar',
-                              data: {
-                                  labels: requestLabels,
-                                  datasets: [{
-                                      label: 'Number of Requests',
-                                      data: requestCounts,
-                                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                      borderColor: 'rgba(75, 192, 192, 1)',
-                                      borderWidth: 1
-                                  }]
-                              },
-                              options: {
-                                  scales: {
-                                      xAxes: [{
-                                          display: false, // Hide x-axis labels
-                                          ticks: {
-                                              autoSkip: true
-                                          }
-                                      }],
-                                      yAxes: [{
-                                          ticks: {
-                                              beginAtZero: true
-                                          }
-                                      }]
-                                  },
-                                  legend: {
-                                      display: false
-                                  },
-                                  tooltips: {
-                                      enabled: false
-                                  }
-                              }
-                          });
-                      } else {
-                          console.error('Canvas element with ID "totalRequestsChart" not found.');
-                      }
-                  </script>
+
+document.getElementById('exportChartButton').addEventListener('click', function () {
+    // Get the chart canvas element
+    var chartCanvas = document.getElementById('barChart');
+
+    // Use html2canvas to convert the chart to an image
+    html2canvas(chartCanvas).then(function (canvas) {
+        // Create an anchor element to trigger the download
+        var downloadLink = document.createElement('a');
+        downloadLink.href = canvas.toDataURL('image/png'); // Convert the canvas to a data URL
+        downloadLink.download = 'bar_chart.png'; // You can change the file name and format as needed
+        downloadLink.click();
+    });
+});
+
+document.getElementById('exportChartButton1').addEventListener('click', function () {
+    // Get the chart canvas element
+    var chartCanvas = document.getElementById('pieChart');
+
+    // Use html2canvas to convert the chart to an image
+    html2canvas(chartCanvas).then(function (canvas) {
+        // Create an anchor element to trigger the download
+        var downloadLink = document.createElement('a');
+        downloadLink.href = canvas.toDataURL('image/png'); // Convert the canvas to a data URL
+        downloadLink.download = 'pie_chart.png'; // You can change the file name and format as needed
+        downloadLink.click();
+    });
+});
+
+
+    var ctxPie = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: @json($document_requests->pluck('document_type')),
+            datasets: [{
+                data: @json($document_requests->pluck('count')),
+                backgroundColor: [
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#FF6384',
+                    '#4BC0C0',
+                    '#9966FF',
+                    // Add more colors as needed
+                ],
+            }],
+        },
+        options: {
+            responsive: true,
+        }
+    });
+
+
+     // Function to generate random colors
+     function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Get the status labels and counts from PHP
+    var statusLabels = @json($statusCounts->pluck('status'));
+    var statusCounts = @json($statusCounts->pluck('count'));
+
+    // Exclude "delete" and "deleted" statuses
+    var excludedStatuses = ['delete', 'deleted'];
+    var filteredStatusLabels = statusLabels.filter(function (status) {
+        return !excludedStatuses.includes(status.toLowerCase());
+    });
+    var filteredStatusCounts = statusCounts.filter(function (_, index) {
+        return !excludedStatuses.includes(statusLabels[index].toLowerCase());
+    });
+
+    // Generate an array of random colors for the remaining statuses
+    var backgroundColors = filteredStatusLabels.map(function() {
+        return getRandomColor();
+    });
+
+    var ctxBar = document.getElementById('barChart').getContext('2d');
+    var barChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: filteredStatusLabels,
+            datasets: [{
+                label: 'Number of Requests',
+                data: filteredStatusCounts,
+                backgroundColor: backgroundColors,
+            }],
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Status',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Number of Requests',
+                    },
+                },
+            },
+        },
+    });
+
+</script>
                   
                 
       <!-- Overlay -->

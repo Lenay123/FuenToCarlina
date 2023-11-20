@@ -18,13 +18,17 @@ class DashboardController extends Controller
         // Count all document requests
         $totalDocumentRequests = DocumentRequest::count();
         $percentageGrowth = ($totalDocumentRequests > 0) ? 62 * ($totalDocumentRequests / 100) : 0;
-
+            // Fetch data from the database, grouped by status
+            $statusCounts = DocumentRequest::select('status', \DB::raw('count(*) as count'))
+                ->groupBy('status')
+                ->get();
         // Count document requests based on document type
         $document_requests = DocumentRequest::select('document_type', \DB::raw('count(*) as count'))
             ->groupBy('document_type')
             ->get();
     
-        return view('/adminpage/AdminDashboard', compact('userCount', 'secretaryCount', 'adminCount', 'totalDocumentRequests', 'document_requests', 'percentageGrowth'));
+        return view('/adminpage/AdminDashboard', compact('userCount', 'secretaryCount', 'adminCount', 'totalDocumentRequests', 'document_requests', 'percentageGrowth', 'statusCounts'));
+        
     }
     
 
@@ -32,11 +36,23 @@ class DashboardController extends Controller
 
         public function showCountSecretary()
         {
+            $totalDocumentRequests = DocumentRequest::count();
+            $percentageGrowth = ($totalDocumentRequests > 0) ? 62 * ($totalDocumentRequests / 100) : 0;
+        
             $document_requests = DocumentRequest::select('document_type', \DB::raw('count(*) as count'))
                 ->groupBy('document_type')
                 ->get();
         
+            // Fetch data from the database, grouped by status
+            $statusCounts = DocumentRequest::select('status', \DB::raw('count(*) as count'))
+                ->groupBy('status')
+                ->get();
+        
+            // Fetch the latest document requests
             $latestDocumentRequests = DocumentRequest::latest()->get();
+        
+            // Fetch the first 5 document requests
+            $first5DocumentRequests = DocumentRequest::latest()->take(5)->get();
         
             // You can add a variable to check if there's a new request
             $isNewRequest = false;
@@ -46,7 +62,6 @@ class DashboardController extends Controller
                 $requestorName = $latestRequest->full_name;
                 $requestedDocument = $latestRequest->document_type;
                 $requestedTracker = $latestRequest->tracker_number;
-
         
                 // Check if the request is very recent (e.g., within a minute)
                 $isNewRequest = $latestRequest->created_at->gt(now()->subMinute());
@@ -55,7 +70,7 @@ class DashboardController extends Controller
                 $requestedDocument = 'Unknown Document';
             }
         
-            return view('/secretary/secretary_dashboard', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
+            return view('/secretary/secretary_dashboard', compact('totalDocumentRequests', 'percentageGrowth', 'document_requests', 'latestDocumentRequests', 'first5DocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest', 'statusCounts'));
         }
         
 
@@ -85,6 +100,7 @@ class DashboardController extends Controller
                 $requestorName = 'Unknown Requestor';
                 $requestedDocument = 'Unknown Document';
             }
+            
         
             return view('secretary.manageIndigencyRequest', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
         }

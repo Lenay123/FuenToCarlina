@@ -55,11 +55,8 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo"> <br>
-            <a href="index.html" class="app-brand-link">
-              {{-- <span class="app-brand-logo demo">
-                Barangay Connect
-              </span> --}}
-              <h3 class="">Barangay Connect</h3>
+            <a href="" class="app-brand-link">
+               <h4 class="">Barangay Connect</h4>
 
             </a>
 
@@ -166,7 +163,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{{ asset('img/user.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -175,7 +172,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{{ asset('img/user.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
