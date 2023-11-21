@@ -183,7 +183,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/team-3.jpg" alt="">
+                            <img class="img-fluid" src="{{ asset('img/joseph.png') }}" alt="">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
