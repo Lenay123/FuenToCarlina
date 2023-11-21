@@ -137,40 +137,41 @@
     <!-- Fact End -->
 
 
-    <!-- Team Start -->
+
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-secondary text-uppercase">Our Team</h6>
-                <h1 class="mb-5">Our Expert Team</h1>
+                <h1 class="mb-5">FUENTOCARLINA MEMBERS</h1>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <img class="img-fluid" src="{{ asset('img/elena.jpg') }}" alt="">
-                    </div>
-                    <div class="team-text">
-                        <div class="bg-light">
-                            <h5 class="fw-bold mb-0">Ma. Elena Fuentes</h5>
-                            <small>Development Team Lead</small>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid team-image" src="{{ asset('img/elena.jpg') }}" alt="" height="400px" width="400px">
                         </div>
-                        <div class="bg-primary">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <div class="team-text">
+                            <div class="bg-light">
+                                <h5 class="fw-bold mb-0">Ma. Elena L. Fuentes</h5>
+                                <small>Developer Lead</small>
+                            </div>
+                            <div class="bg-primary">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('img/Toqs.jpg') }}" alt="">
+                            <img class="img-fluid team-image" src="{{ asset('img/Toqs.jpg') }}" alt="" height="400px" width="400px">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
                                 <h5 class="fw-bold mb-0">Christy Toquero</h5>
-                                <small>Project Manager Lead</small>
+                                <small>Project Manager</small>
                             </div>
                             <div class="bg-primary">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -183,12 +184,12 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('img/joseph.png') }}" alt="">
+                            <img class="img-fluid team-image" src="{{ asset('img/joseph.png') }}" alt="" height="400px" width="400px">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
                                 <h5 class="fw-bold mb-0">Mark Joseph Molina</h5>
-                                <small>Quality Assurance Lead</small>
+                                <small>Software QA Lead</small>
                             </div>
                             <div class="bg-primary">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -201,12 +202,12 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('img/Jean.png') }}" alt="">
+                            <img class="img-fluid team-image" src="{{ asset('img/Jean.png') }}" alt="">
                         </div>
                         <div class="team-text">
                             <div class="bg-light">
                                 <h5 class="fw-bold mb-0">Jeanne Cardiente</h5>
-                                <small>Documentation Team Lead</small>
+                                <small>Documentation latestDocumentRequests</small>
                             </div>
                             <div class="bg-primary">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -216,11 +217,11 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
-    <!-- Team End -->
-        
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
