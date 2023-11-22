@@ -475,7 +475,7 @@
                                     <form action="{{ route('claimDocumentPermit', ['document_request' => $document_request]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-success"><i class="micon bi bi-check2"></i></button>
+                                        <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to mark this request as CLAIMED?');"><i class="micon bi bi-check2"></i></button>
 
                                     </form>
                                 @endif
