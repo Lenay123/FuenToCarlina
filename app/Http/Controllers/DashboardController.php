@@ -277,9 +277,7 @@ class DashboardController extends Controller
 
     public function showBarangayPermitTransaction()
     {
-        $document_requests = DocumentRequest::where('document_type', 'Barangay Business Permit')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->get();
+        $document_requests = DocumentRequest::where('document_type', 'Barangay Business Permit')->get();
     
         return view('adminpage.BarangayPermitTransaction', compact('document_requests'));
     }
