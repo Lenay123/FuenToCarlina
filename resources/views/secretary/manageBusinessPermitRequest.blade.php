@@ -478,9 +478,9 @@
                                   
                                     @foreach ($document_requests as $document_request)
                                     <div class="modal fade" id="myModal{{ $document_request->id }}">
-                                        <div class="modal-dialog" style="max-width: 700px;">
+                                        <!-- <div class="modal-dialog" style="max-width: 700px;">
                                             <div class="modal-content">
-                                                <div class="modal-body" style="max-height: 600px; overflow-y: auto; ">
+											<div class="modal-body" style="max-height: 600px; overflow-y: auto;">
                                                 <div class="id-logo">
                                                                 <div class="id-logo-box1">
                                                                     <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
@@ -503,7 +503,7 @@
                                                     <center>
                                                         <p>NO. <input type="text" class="form-control" id="inputPermitNumber{{ $document_request->id }}" placeholder="Input Permit Number" style="border: none; border-bottom: 1px solid;"> </p>
                                                     </center>
-                                                    <br>
+                                                
 													@if(isset($document_request))
 																Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},
 																to operate the business named {{ $document_request->business_name }},
@@ -537,17 +537,91 @@
                                                     <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
                                                     <p>Barangay Captain Almar Gutierrez</p>
                                                 </div>
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-secondary printButton" data-document-id="{{ $document_request->id }}">Print</button>
                                                 </div>
                                             </div>
+                                        </div> -->
+										<div class="modal-dialog" style="max-width: 700px;">
+                                            <div class="modal-content">
+											<div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+                                                <div class="id-logo" >
+                                                                <div class="id-logo-box1">
+                                                                    <img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+                                                                    
+                                                                </div>
+                                                                <div class="id-logo-box2" > <br>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Republic of the Philippines</h5>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h5>
+                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h5>
+
+                                                                </div>
+
+                                                                <div class="id-logo-box3">
+                                                                    <img src="/img/sklogo.png" alt="" style="width: 200px;">
+                                                                </div>
+                                                            </div>
+                                                
+                                                    <hr>
+													<h4 style="text-align: center; font-weight: bold;">BARANGAY BUSINESS PERMIT</h4>
+                                                    <center>
+                                                        <p>NO. <input type="text" class="form-control" id="inputPermitNumber{{ $document_request->id }}" placeholder="Input Permit Number" style="border: none; border-bottom: 1px solid;"> </p>
+                                                    </center>
+                                                
+													@if(isset($document_request))
+																Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},
+																to operate the business named {{ $document_request->business_name }},
+																upon payment of the required license fee(s) (Quarterly/Semi-Annually).
+															@else
+																No business permit request found.
+															@endif <br>
+                                                          <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="1">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines. 
+                                                         {{ $document_request->textarea_content }}</textarea> <br>
+
+
+														 <div class="row g-3 align-items-center">
+                                                        <div class="col-auto">
+                                                            <label  class="col-form-label" >Date Issued:</label>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <input type="date"  id="inputDateIssued{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
+                                                        </div>
+                                                        
+                                                        </div>
+                                                        <div class="row g-3 align-items-center">
+                                                        <div class="col-auto">
+                                                            <label  class="col-form-label" >Date Expired</label>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <input type="date" id="inputDateExpired{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
+                                                        </div>
+                                                        
+                                                        </div>
+           
+                                                    <div style="text-align: right;">
+                                                    <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                                                    <p>Barangay Captain Almar Gutierrez</p>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary printButton" data-document-id="{{ $document_request->id }}">Print</button>
+                                                </div>
+
+
+
+
+
+
+                                                    </div>
+													
+
                                         </div>
                                     </div>
                                     
-
+									</div>
                                 
                                 </div>
                             </div>    @endforeach

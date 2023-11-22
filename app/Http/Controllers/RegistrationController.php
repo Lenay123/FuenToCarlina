@@ -70,37 +70,38 @@ class RegistrationController extends Controller
     
     public function storeResident(Request $request)
     {
-
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:secretaries',
+            'email' => 'required|email|unique:secretaries|unique:users', // Check both 'secretaries' and 'users' tables
             'password' => 'required|string|min:8|confirmed',
             'birthday' => 'required|date',
             'contact_number' => 'required|string|max:20',
             'gender' => 'required|in:male,female',
-            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS), // Use the options from the model
+            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS),
         ]);        
-
-   $user= User::create([
-        'first_name' => $request->input('first_name'),
-        'last_name' => $request->input('last_name'),
-        'middle_name' => $request->input('middle_name'),
-        'email' => $request->input('email'),
-        'password' => Hash::make($request->input('password')),
-        'birthday' => $request->input('birthday'),
-        'contact_number' => $request->input('contact_number'),
-        'gender' => $request->input('gender'),
-        'address' => $request->input('address'),
-        'role' => 'user', // Default role for registered users
-    ]);
-    if(!$user){
-        return redirect(route('/adminpage/AddResident'))->with("error", "Try again");
+    
+        $user = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_name' => $request->input('middle_name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'birthday' => $request->input('birthday'),
+            'contact_number' => $request->input('contact_number'),
+            'gender' => $request->input('gender'),
+            'address' => $request->input('address'),
+            'role' => 'user',
+        ]);
+    
+        if (!$user) {
+            return redirect(route('/adminpage/AddResident'))->with("error", "Try again");
+        }
+    
+        return redirect()->route('adminpage.storeResident')->with("success", "Resident is added successfully");
     }
-    return redirect()->route('adminpage.storeResident')->with("success", "Resident is added successfully");
-    }
-
+    
 
 
 
@@ -158,36 +159,39 @@ class RegistrationController extends Controller
 
     public function storeSecretary(Request $request)
     {
-
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:secretaries',
+            'email' => 'required|email|unique:secretaries|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'birthday' => 'required|date',
             'contact_number' => 'required|string|max:20',
             'gender' => 'required|in:male,female',
-            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS), // Use the options from the model
-        ]);        
+            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS),
+        ]);
+    
+        $secretary = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_name' => $request->input('middle_name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'birthday' => $request->input('birthday'),
+            'contact_number' => $request->input('contact_number'),
+            'gender' => $request->input('gender'),
+            'address' => $request->input('address'),
+            'role' => 'secretary',
+        ]);
+    
+        if (!$secretary) {
+            return redirect(route('/adminpage/AddSecretary'))->with("error", "Try again");
+        }
+    
+        return redirect()->route('adminpage.storeSecretary')->with("success", "Secretary is added successfully");
+    }
+    
 
-   $secretary= User::create([
-        'first_name' => $request->input('first_name'),
-        'last_name' => $request->input('last_name'),
-        'middle_name' => $request->input('middle_name'),
-        'email' => $request->input('email'),
-        'password' => Hash::make($request->input('password')),
-        'birthday' => $request->input('birthday'),
-        'contact_number' => $request->input('contact_number'),
-        'gender' => $request->input('gender'),
-        'address' => $request->input('address'),
-        'role' => 'secretary', // Default role for registered users
-    ]);
-    if(!$secretary){
-        return redirect(route('/adminpage/AddSecretary'))->with("error", "Try again");
-    }
-    return redirect()->route('adminpage.storeSecretary')->with("success", "Secretary is added successfully");
-    }
 
     public function createSecretary()
 {
