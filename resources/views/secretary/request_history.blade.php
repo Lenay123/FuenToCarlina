@@ -444,11 +444,18 @@
                 @endif
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="card">
+						
 						<h5 class="card-header">Barangay Connect Transaction History Table</h5>
 						<div class="card-body">
 							@if($document_requests->isNotEmpty())
 								<div class="table-responsive">
-								<table class="data-table table nowrap" >
+								<div class="row mb-3">
+                    <div class="col-md-6">
+                        <!-- Add a search input field -->
+                        <input type="text" id="search" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+				<table class="data-table table nowrap" id="dataTable">
 										<thead>
 											<tr>
 											<th class="table-plus datatable-nosort">Requestors</th>
@@ -544,6 +551,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
 
 document.querySelectorAll(".printButton").forEach(function (printButton) {
     printButton.addEventListener("click", function () {
