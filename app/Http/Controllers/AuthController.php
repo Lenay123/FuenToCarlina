@@ -187,6 +187,7 @@ class AuthController extends Controller
                     'contact_number' => '09095432419',
                     'gender' => 'Male',
                     'address' => 'Proper Nabunturan Barili Cebu',
+                    'role'=> 'admin',
                     'email' => $adminUsername,
                     'password' => Hash::make($adminPassword),
                     // Add other profile information as needed
@@ -201,7 +202,7 @@ class AuthController extends Controller
         return redirect(route('login'))->with("error", "Login details are not valid");
     }
 
-    
+
     public function updateProfileAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [

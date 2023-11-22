@@ -354,8 +354,9 @@
                 <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
+                      @if($document_requests->isNotEmpty())
                       <button id="exportChartButton1" data-chart-id="pieChart" style="position: absolute; top: 4; right: 0; margin-right:20px; margin-top: 20px; background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;"><i class="bx bx-download bx-sm"></i> Export</button>
-
+                      @endif
                           <h5 class="card-header m-0 me-2 pb-3">Total Requests</h5>
                             @if($document_requests->isNotEmpty())
                               <canvas id="pieChart"></canvas>
