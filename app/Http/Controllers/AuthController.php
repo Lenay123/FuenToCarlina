@@ -185,7 +185,7 @@ class AuthController extends Controller
                     'middle_name' => 'L.',
                     'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
                     'contact_number' => '09095432419',
-                    'gender' => 'Male',
+                    'gender' => 'male',
                     'address' => 'Proper Nabunturan Barili Cebu',
                     'role'=> 'admin',
                     'email' => $adminUsername,
