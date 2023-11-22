@@ -31,6 +31,25 @@
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   
+ 		<!-- CSS -->
+     <link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/vendor/css/theme-default.css" class="template-customizer-theme-css" />
@@ -39,7 +58,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/vendor/libs/apex-charts/apex-charts.css" />
-
+    <!-- Page CSS -->
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -249,25 +268,25 @@
                     <a style="margin-bottom:-5px" href="/adminpage/AddSecretary"> <button  type="button" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Another Secretary</button> </a>
                     </div>
             </div>
-        
-                <div class="card-body">
-                  <div class="card-datatable table-responsive">
-                      {{-- <table class="datatables-basic table border-top"> --}}
-                        <table class="datatables-basic table border-top" id="dataTable" width="100%" cellspacing="0">
-                            <tr>
-                                <th>ID</th>
-                                <th>Fullname</th>
-                                <th>Email Address</th>
-                                <th>Date Created</th>
-                                <th>Sitio/Purok</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if($secretaries->count() > 0)
-                            @foreach ($secretaries as $secretary)
-                            <tr>
-                                <td>{{$secretary->id}}</td>
+              
+            <div class="card-body" >
+              <div class="table-responsive">
+              <table class="data-table table nowrap">
+                  <thead class="thead-light">
+                      <tr>
+                          <th class="table-plus datatable-nosort">ID</th>
+                          <th class="text-center">Fullname</th>
+                          <th class="text-center">Email Address</th>             
+                          <th class="text-center">Sitio/Purok</th>
+                          <th class="text-center">Date Created</th>
+                          <th class="text-center">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @if ($secretaries->count() > 0)
+                      @foreach ($secretaries as $secretary)
+                      <tr>
+                      <td>{{$secretary->id}}</td>
                                 <td>{{$secretary->first_name}} {{$secretary->last_name}}</td>
                                 <td>{{$secretary->email}}</td>
                                 <td>{{$secretary->created_at}}</td>
@@ -283,20 +302,22 @@
                                     <i class="fas fa-fw fa-trash-alt "></i>
                                     </button>
                                 </form>
-                            </td>
-                            </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="5">There are no Secretaries.</td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-            </div>
+                          </td>
+      
+                      </tr>
+                      @endforeach
+                      @else
+                      <tr>
+                          <td colspan="5">There are no Residents.</td>
+                      </tr>
+                      @endif
+                  </tbody>
+              </table>
+      
+              </div>
           </div>
-          </div>
-        </div> 
+      </div>
+      </div>
                     </section>
 
             </div>
@@ -489,6 +510,20 @@
 
     <!-- endbuild -->
 
+    <!-- Custom scripts for all pages -->
+    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/vendors/scripts/core.js"></script>
+		<script src="/vendors/scripts/script.min.js"></script>
+		<script src="/vendors/scripts/process.js"></script>
+		<script src="/vendors/scripts/layout-settings.js"></script>
+		<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/vendors/scripts/dashboard.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Vendors JS -->
     <script src="/vendor/libs/apex-charts/apexcharts.js"></script>
 

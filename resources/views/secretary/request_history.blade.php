@@ -448,10 +448,10 @@
 						<div class="card-body">
 							@if($document_requests->isNotEmpty())
 								<div class="table-responsive">
-									<table class="table table-striped table-bordered first">
+								<table class="data-table table nowrap" >
 										<thead>
 											<tr>
-												<th>Requestors</th>
+											<th class="table-plus datatable-nosort">Requestors</th>
 												<th>Reference Number</th>
 												<th>Requested Document</th>
 												<th>Date Requested</th>

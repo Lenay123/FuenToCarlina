@@ -28,6 +28,24 @@
       rel="stylesheet" />
 
     <link rel="stylesheet" href="/vendor/fonts/boxicons.css" />
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="/vendor/css/core.css" class="template-customizer-core-css" />
@@ -245,10 +263,10 @@
 </div>
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="data-table table nowrap" id="dataTable">
             <thead>
                 <tr>
-                    <th>Requestor</th>
+                <th class="table-plus datatable-nosort">Requestors</th>
                     <th>Requested Document</th>
                     <th>Reference Number</th>
                     <th>Status</th>
@@ -482,11 +500,18 @@
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages -->
     <script src="/js/sb-admin-2.min.js"></script>
-    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendors/scripts/core.js"></script>
+		<script src="/vendors/scripts/script.min.js"></script>
+		<script src="/vendors/scripts/process.js"></script>
+		<script src="/vendors/scripts/layout-settings.js"></script>
+		<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/vendors/scripts/dashboard.js"></script>
     <!-- Page level plugins -->
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
     <script>
 $(document).ready(function() {

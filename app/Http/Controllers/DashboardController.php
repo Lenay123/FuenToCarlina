@@ -14,22 +14,36 @@ class DashboardController extends Controller
         $userCount = User::where('role', 'user')->count();
         $secretaryCount = User::where('role', 'secretary')->count();
         $adminCount = AdminUser::count();
-        
+    
         // Count all document requests
         $totalDocumentRequests = DocumentRequest::count();
         $percentageGrowth = ($totalDocumentRequests > 0) ? 62 * ($totalDocumentRequests / 100) : 0;
-            // Fetch data from the database, grouped by status
-            $statusCounts = DocumentRequest::select('status', \DB::raw('count(*) as count'))
-                ->groupBy('status')
-                ->get();
+    
+        // Fetch data from the database, grouped by status
+        $statusCounts = DocumentRequest::select('status', \DB::raw('count(*) as count'))
+            ->groupBy('status')
+            ->get();
+    
         // Count document requests based on document type
         $document_requests = DocumentRequest::select('document_type', \DB::raw('count(*) as count'))
             ->groupBy('document_type')
             ->get();
     
-        return view('/adminpage/AdminDashboard', compact('userCount', 'secretaryCount', 'adminCount', 'totalDocumentRequests', 'document_requests', 'percentageGrowth', 'statusCounts'));
-        
+        // Fetch the latest 5 document requests
+        $latestDocumentRequests = DocumentRequest::latest()->take(5)->get();
+    
+        return view('/adminpage/AdminDashboard', compact(
+            'userCount',
+            'secretaryCount',
+            'adminCount',
+            'totalDocumentRequests',
+            'document_requests',
+            'percentageGrowth',
+            'statusCounts',
+            'latestDocumentRequests'
+        ));
     }
+    
     
 
         // Dashboard count for secretary

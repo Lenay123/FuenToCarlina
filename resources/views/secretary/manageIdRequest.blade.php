@@ -548,16 +548,11 @@
         <h5 class="card-header">Barangay ID Requests Table</h5>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <!-- Add a search input field -->
-                        <input type="text" id="search" class="form-control" placeholder="Search...">
-                    </div>
-                </div>
-                <table class="table table-striped table-bordered first" id="dataTable">
+                <table class="data-table table nowrap" id="dataTable">
                     <thead>
                         <tr>
-                        <th>Requestors</th>
+						<th class="table-plus datatable-nosort">Requestors</th>
+						<th>Photo</th>
                             <th>Reference Number</th>
                             <th>Valid Document for<br> Verification</th>
                             <th>ID Number</th>
@@ -571,6 +566,9 @@
                         @foreach ($document_requests as $document_request)
                             <tr>
                                 <td>{{ $document_request->full_name }}</td>
+								<td>
+                            <img src="/image/{{ $document_request->image }}" alt="Document Image" width="100" height="100">
+                        </td>
                                 <td>{{ $document_request->tracker_number }}</td>
                                 <td>{{ $document_request->id_type }}</td>
                                 <td>{{ $document_request->id_number }}</td>

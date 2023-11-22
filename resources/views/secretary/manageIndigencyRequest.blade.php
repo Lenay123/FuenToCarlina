@@ -437,16 +437,10 @@
         <h5 class="card-header">Barangay Indigency Requests Table</h5>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <!-- Add a search input field -->
-                        <input type="text" id="search" class="form-control" placeholder="Search...">
-                    </div>
-                </div>
-                <table class="table table-striped table-bordered first" id="dataTable">
+                <table class="data-table table nowrap" id="dataTable">
                     <thead>
                         <tr>
-                        <th>Requestors</th>
+						<th class="table-plus datatable-nosort">Requestors</th>
                             <th>Reference Number</th>
                             <th>Valid Document for<br> Verification</th>
                             <th>ID Number</th>

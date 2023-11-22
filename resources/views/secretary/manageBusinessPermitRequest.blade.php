@@ -437,16 +437,10 @@
         <h5 class="card-header">Barangay Business Permit Requests Table</h5>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <!-- Add a search input field -->
-                        <input type="text" id="search" class="form-control" placeholder="Search...">
-                    </div>
-                </div>
-                <table class="table table-striped table-bordered first" id="dataTable">
+				<table class="data-table table nowrap" id="dataTable">
                     <thead>
                         <tr>
-                        <th>Requestors</th>
+						<th class="table-plus datatable-nosort">Requestors</th>
                             <th>Reference Number</th>
                             <th>Valid Document for<br> Verification</th>
                             <th>ID Number</th>
@@ -510,9 +504,14 @@
                                                         <p>NO. <input type="text" class="form-control" id="inputPermitNumber{{ $document_request->id }}" placeholder="Input Permit Number" style="border: none; border-bottom: 1px solid;"> </p>
                                                     </center>
                                                     <br>
-                                                    
-                                          Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee (s) (Quarterly /Semi-Annually / Annually), revoked or cancelledfor cause.         <div class="form-outline">
-                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="1">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines. 
+													@if(isset($document_request))
+																Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},
+																to operate the business named {{ $document_request->business_name }},
+																upon payment of the required license fee(s) (Quarterly/Semi-Annually).
+															@else
+																No business permit request found.
+															@endif
+                                                                                                            <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="1">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines. 
                                                          {{ $document_request->textarea_content }}</textarea>
                                                     </div> <br>
                                                     <div class="row g-3 align-items-center">
@@ -658,7 +657,13 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
                 <p>NO. <b><u>${permitNumber}</u></b></p>
             </center>
             <br>
-            Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},to operate the business named {{ $document_request->business_name }}, upon payment of the required license fee (s) (Quarterly /Semi-Annually / Annually), revoked or cancelledfor cause.         <div class="form-outline">
+			@if(isset($document_request))
+    Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},
+    to operate the business named {{ $document_request->business_name }},
+    upon payment of the required license fee(s) (Quarterly/Semi-Annually).
+@else
+    No business permit request found.
+@endif
             <div class="form-outline">
                 <p>${textAreaValue}</p>
             </div>

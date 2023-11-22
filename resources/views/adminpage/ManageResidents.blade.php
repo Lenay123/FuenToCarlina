@@ -31,6 +31,25 @@
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   
+ 		<!-- CSS -->
+     <link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/vendor/css/theme-default.css" class="template-customizer-theme-css" />
@@ -39,7 +58,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/vendor/libs/apex-charts/apex-charts.css" />
-
+    <!-- Page CSS -->
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -251,10 +270,10 @@
       
           <div class="card-body" >
               <div class="table-responsive">
-              <table class="table table-bordered table-hover table-nowrap">
+              <table class="data-table table nowrap">
                   <thead class="thead-light">
                       <tr>
-                          <th class="text-center">ID</th>
+                          <th class="table-plus datatable-nosort">ID</th>
                           <th class="text-center">Fullname</th>
                           <th class="text-center">Email Address</th>             
                           <th class="text-center">Sitio/Purok</th>
@@ -490,7 +509,20 @@
     <script src="/vendor/js/menu.js"></script>
 
     <!-- endbuild -->
-
+    <!-- Custom scripts for all pages -->
+    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/vendors/scripts/core.js"></script>
+		<script src="/vendors/scripts/script.min.js"></script>
+		<script src="/vendors/scripts/process.js"></script>
+		<script src="/vendors/scripts/layout-settings.js"></script>
+		<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/vendors/scripts/dashboard.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Vendors JS -->
     <script src="/vendor/libs/apex-charts/apexcharts.js"></script>
 
