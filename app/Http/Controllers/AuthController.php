@@ -55,6 +55,87 @@ class AuthController extends Controller
     //     return redirect(route('login'))->with("error", "Login details are not valid");
     // }
     
+    // function loginPost(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'password' => 'required'
+    //     ]);
+    
+    //     $credentials = $request->only('email', 'password');
+    
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+    
+    //         // Check if the user is an admin
+    //         if ($user->role === 'admin') {
+    //             // Check if the remember_token has been updated
+    //             $rememberTokenName = $user->getRememberTokenName();
+    //            if (!empty($user->$rememberTokenName)) {
+    //                 Auth::logout();
+    //                 return redirect(route('login'))->with("error", "Old password is not valid. Please use your new password.");
+    //             }
+    //         }
+    
+    //         // Redirect based on the user's role
+    //         switch ($user->role) {
+    //             case 'user':
+    //                 return redirect()->intended(route('residentpage.resident'));
+    //                 break;
+    //             case 'secretary':
+    //                 return redirect()->route('dashboard_secretary');
+    //                 break;
+    //             case 'admin':
+    //                 return redirect()->route('dashboard');
+    //                 break;
+    //             // Add more cases for other roles if needed
+    //             default:
+    //                 Auth::logout();
+    //                 return redirect(route('login'))->with("error", "Login details are not valid");
+    //         }
+    //     }
+    
+    // // If no user is authenticated, check for hardcoded admin credentials
+    // $adminUsername = 'admin@gmail.com';
+    // $adminPassword = 'admin123';
+
+    // if ($request->email === $adminUsername && Hash::check($request->password, $adminPassword)) {
+    //     // Admin login successful
+
+    //     // Check if admin user already exists in the database
+    //     $admin = User::where('email', $adminUsername)->first();
+
+    //     if (!$admin) {
+    //         // Create admin user if not exists
+    //         $admin = User::create([
+    //             'first_name' => 'Almar',
+    //             'last_name' => 'Gutierrez',
+    //             'middle_name' => 'L.',
+    //             'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
+    //             'contact_number' => '09095432419',
+    //             'gender' => 'Male',
+    //             'address' => 'Proper Nabunturan Barili Cebu',
+    //             'email' => $adminUsername,
+    //             'password' => Hash::make($adminPassword),
+    //             // Add other profile information as needed
+    //         ]);
+    //     }
+
+    //     // Check if both email and password need to be updated
+    //     if (Hash::check($request->password, $admin->password) && $request->email === $adminUsername) {
+    //         Auth::login($admin);
+
+    //         return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+    //     } else {
+    //         Auth::logout();
+    //         return redirect(route('login'))->with("error", "Old email or password is not valid. Please use your new email and password.");
+    //     }
+    // }
+
+    // return redirect(route('login'))->with("error", "Login details are not valid");
+
+    // }
+    
     function loginPost(Request $request)
     {
         $request->validate([
@@ -69,24 +150,16 @@ class AuthController extends Controller
     
             // Check if the user is an admin
             if ($user->role === 'admin') {
-                // Check if the remember_token has been updated
-                if ($user->getRememberToken()) {
-                    Auth::logout();
-                    return redirect(route('login'))->with("error", "Old password is not valid. Please use your new password.");
-                }
+                // You may add additional checks for admin login if needed
+                return redirect()->route('dashboard');
             }
     
             // Redirect based on the user's role
             switch ($user->role) {
                 case 'user':
                     return redirect()->intended(route('residentpage.resident'));
-                    break;
                 case 'secretary':
                     return redirect()->route('dashboard_secretary');
-                    break;
-                case 'admin':
-                    return redirect()->route('dashboard');
-                    break;
                 // Add more cases for other roles if needed
                 default:
                     Auth::logout();
@@ -94,48 +167,41 @@ class AuthController extends Controller
             }
         }
     
-    // If no user is authenticated, check for hardcoded admin credentials
-    $adminUsername = 'admin@gmail.com';
-    $adminPassword = 'admin123';
-
-    if ($request->email === $adminUsername && Hash::check($request->password, $adminPassword)) {
-        // Admin login successful
-
-        // Check if admin user already exists in the database
-        $admin = User::where('email', $adminUsername)->first();
-
-        if (!$admin) {
-            // Create admin user if not exists
-            $admin = User::create([
-                'first_name' => 'Almar',
-                'last_name' => 'Gutierrez',
-                'middle_name' => 'L.',
-                'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
-                'contact_number' => '09095432419',
-                'gender' => 'Male',
-                'address' => 'Proper Nabunturan Barili Cebu',
-                'email' => $adminUsername,
-                'password' => Hash::make($adminPassword),
-                // Add other profile information as needed
-            ]);
-        }
-
-        // Check if both email and password need to be updated
-        if (Hash::check($adminPassword, $admin->password) && $request->email === $adminUsername) {
-            Auth::login($admin);
-
-            return redirect()->route('dashboard'); // Change to your actual admin dashboard route
-        } else {
-            Auth::logout();
-            return redirect(route('login'))->with("error", "Old email or password is not valid. Please use your new email and password.");
-        }
-    }
-
-    return redirect(route('login'))->with("error", "Login details are not valid");
-
-    }
+        // If no user is authenticated, check for hardcoded admin credentials
+        $adminUsername = 'admin@gmail.com';
+        $adminPassword = 'admin123';
     
+        if ($request->email === $adminUsername && $request->password === $adminPassword) {
+            // Admin login successful
+    
+            // Check if admin user already exists in the database
+            $admin = User::where('email', $adminUsername)->first();
+    
+            if (!$admin) {
+                // Create admin user if not exists
+                $admin = User::create([
+                    'first_name' => 'Almar',
+                    'last_name' => 'Gutierrez',
+                    'middle_name' => 'L.',
+                    'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
+                    'contact_number' => '09095432419',
+                    'gender' => 'Male',
+                    'address' => 'Proper Nabunturan Barili Cebu',
+                    'email' => $adminUsername,
+                    'password' => Hash::make($adminPassword),
+                    // Add other profile information as needed
+                ]);
+            }
+    
+            Auth::login($admin);
+    
+            return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+        }
+    
+        return redirect(route('login'))->with("error", "Login details are not valid");
+    }
 
+    
     public function updateProfileAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
