@@ -176,8 +176,19 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">Almar Gutierrez</span>
-                            <small class="text-muted">Admin</small>
+                          @if(auth()->check())
+                          <span class="fw-medium d-block">
+                              {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                              @if(auth()->user()->role == 'admin')
+                                  (Admin)
+                              @elseif(auth()->user()->role == 'secretary')
+                                  (Secretary)
+                              @elseif(auth()->user()->role == 'user')
+                                  (User)
+                              @endif
+                          </span>
+                      
+                                                  <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>
@@ -186,11 +197,13 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#backDropModal">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
+                    
+
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -205,7 +218,8 @@
                 <!--/ User -->
               </ul>
             </div>
-          </nav><br>
+          </nav>
+          @endif<br>
 
           <!-- / Navbar -->
 
@@ -291,7 +305,155 @@
     </div>
     <!-- / Layout wrapper -->
 
+                    <!-- Modal Backdrop -->
+                    <div class="col-lg-4 col-md-3">
+                      <div class="mt-3">
+                        <!-- Button trigger modal -->
+                    
 
+                        <!-- Modal -->
+  
+<div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog"> 
+    <form id="updateProfileForm" class="modal-content" method="POST" action="{{ route('adminpage.updateProfileAdmin') }}">
+    @csrf
+    <div class="modal-header">
+                <h5 class="modal-title" id="backDropModalTitle">My Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Firstname</label>
+                        <input
+                            type="first_name"
+                            name="first_name"
+                            id="firstnameBackdrop"
+                            class="form-control"
+                            placeholder="xxxx@xxx.xx"
+                            value="{{ auth()->check() ? auth()->user()->first_name : '' }}"
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">Middle Name</label>
+                        <input
+                            type="middlename"
+                            name="middle_name"
+                            id="middlenameBackdrop"
+                            class="form-control"
+                            value="{{ auth()->check() ? auth()->user()->middle_name : '' }}"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Lastname</label>
+                        <input
+                            type="lastname"
+                            name="last_name"
+                            id="lastnameBackdrop"
+                            class="form-control"
+                            placeholder="xxxx@xxx.xx"
+                            value="{{ auth()->check() ? auth()->user()->last_name : '' }}"
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">Contact Number</label>
+                        <input
+                            type="contact"
+                            name="contact_number"
+                            id="middlenameBackdrop"
+                            class="form-control"
+                            value="{{ auth()->check() ? auth()->user()->contact_number : '' }}"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="emailBackdrop"
+                            class="form-control"
+                            name="email"
+                            placeholder="xxxx@xxx.xx"
+                            value="{{ auth()->check() ? auth()->user()->email : '' }}" 
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">DOB</label>
+                        <input
+                            type="date"
+                            id="dobBackdrop"
+                            name="birthday"
+                            class="form-control"
+                            value="{{ auth()->check() ? auth()->user()->birthday : '' }}"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="addressBackdrop" class="form-label">Address</label>
+                        <select id="addressBackdrop" class="form-select" name="address">
+                            <option value="">Select Address</option>
+                            <option value="Proper Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
+                            <option value="Sitio San Roque Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
+                            <option value="Sitio Cabinay Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                        <label for="genderBackdrop" class="form-label">Gender</label>
+                        <select id="genderBackdrop" class="form-select" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male" {{ auth()->check() && auth()->user()->gender === 'male' ? 'selected' : '' }}>male</option>
+                            <option value="female" {{ auth()->check() && auth()->user()->gender === 'female' ? 'selected' : '' }}>female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col mb-0">
+                      <label for="newPasswordBackdrop" class="form-label">New Password</label>
+                      <input
+                          type="password"
+                          id="newPasswordBackdrop"
+                          name="new_password"
+                          class="form-control"
+                          placeholder="Enter new password"
+                      />
+                  </div>
+                  <div class="col mb-0">
+                      <label for="confirmPasswordBackdrop" class="form-label">Confirm Password</label>
+                      <input
+                          type="password"
+                          id="confirmPasswordBackdrop"
+                          name="new_password_confirmation"
+                          class="form-control"
+                          placeholder="Confirm new password"
+                      />
+                  </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Update your Profile?');">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 

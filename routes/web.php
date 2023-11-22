@@ -27,37 +27,9 @@ Route::get('/', function () {
     return view('homepage/index');
 });
 
-// Route::get('homepage/about', function () {
-//     return view('homepage/about');
-// });
-
-// Route::get('homepage/activities', function () {
-//     return view('homepage/activities');
-// });
-
-// Route::get('homepage/barangayofficials', function () {
-//     return view('homepage/barangayofficials');
-// });
-
-// Route::get('homepage/contact', function () {
-//     return view('homepage/contact');
-// });
-
-// Route::get('homepage/service', function () {
-//     return view('homepage/service');
-// });
-
-
 Route::get('homepage/login', function () {
     return view('homepage/login');
 });
-
-// Route::get('homepage/testimonial', function () {
-//     return view('homepage/testimonial');
-// });
-
-
-
 
 Route::get('adminpage/AdminDashboard', function () {
     return view('adminpage/AdminDashboard');
@@ -141,6 +113,8 @@ Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::cl
 Route::get('/adminpage/BarangayIDTransaction', [DashboardController::class, 'showBarangayIDTransaction'])->name('id.transaction');
 Route::get('/adminpage/BarangayIndigencyTransaction', [DashboardController::class, 'showBarangayIndigencyTransaction'])->name('indigency.transaction');
 Route::get('/adminpage/BarangayPermitTransaction', [DashboardController::class, 'showBarangayPermitTransaction'])->name('permit.transaction');
+Route::post('/adminpage/AdminDashboard', [AuthController::class, 'updateProfileAdmin'])->name('adminpage.updateProfileAdmin');
+
 Route::delete('/adminpage/deleteTransaction/{id}', [DashboardController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
 // residentpage routes
 Route::post('/residentpage/resident', [DocumentController::class, 'store'])->name('resident.store');

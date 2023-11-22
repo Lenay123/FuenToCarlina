@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Session;
 use App\Models\Service;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 
 class AuthController extends Controller
@@ -53,20 +55,28 @@ class AuthController extends Controller
     //     return redirect(route('login'))->with("error", "Login details are not valid");
     // }
     
-
-
-
-    function loginPost(Request $request){
+    function loginPost(Request $request)
+    {
         $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
     
         $credentials = $request->only('email', 'password');
-        
+    
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            
+    
+            // Check if the user is an admin
+            if ($user->role === 'admin') {
+                // Check if the remember_token has been updated
+                if ($user->getRememberToken()) {
+                    Auth::logout();
+                    return redirect(route('login'))->with("error", "Old password is not valid. Please use your new password.");
+                }
+            }
+    
+            // Redirect based on the user's role
             switch ($user->role) {
                 case 'user':
                     return redirect()->intended(route('residentpage.resident'));
@@ -84,21 +94,100 @@ class AuthController extends Controller
             }
         }
     
-        // If no user is authenticated, check for hardcoded admin credentials
-        $adminUsername = 'admin@gmail.com';
-        $adminPassword = 'admin123';
-    
-        if ($request->email === $adminUsername && $request->password === $adminPassword) {
-            // Admin login successful
-            auth()->loginUsingId(1); // Replace 1 with the actual admin user ID
-            return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+    // If no user is authenticated, check for hardcoded admin credentials
+    $adminUsername = 'admin@gmail.com';
+    $adminPassword = 'admin123';
+
+    if ($request->email === $adminUsername && Hash::check($request->password, $adminPassword)) {
+        // Admin login successful
+
+        // Check if admin user already exists in the database
+        $admin = User::where('email', $adminUsername)->first();
+
+        if (!$admin) {
+            // Create admin user if not exists
+            $admin = User::create([
+                'first_name' => 'Almar',
+                'last_name' => 'Gutierrez',
+                'middle_name' => 'L.',
+                'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
+                'contact_number' => '09095432419',
+                'gender' => 'Male',
+                'address' => 'Proper Nabunturan Barili Cebu',
+                'email' => $adminUsername,
+                'password' => Hash::make($adminPassword),
+                // Add other profile information as needed
+            ]);
         }
-    
-        return redirect(route('login'))->with("error", "Login details are not valid");
+
+        // Check if both email and password need to be updated
+        if (Hash::check($adminPassword, $admin->password) && $request->email === $adminUsername) {
+            Auth::login($admin);
+
+            return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+        } else {
+            Auth::logout();
+            return redirect(route('login'))->with("error", "Old email or password is not valid. Please use your new email and password.");
+        }
+    }
+
+    return redirect(route('login'))->with("error", "Login details are not valid");
+
     }
     
 
-
+    public function updateProfileAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'contact_number' => 'required',
+            'email' => 'required|email',
+            'birthday' => 'required|date',
+            'address' => 'required',
+            'gender' => 'required',
+            'new_password' => 'nullable|min:6|confirmed',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $admin = User::where('email', $request->email)->first();
+    
+        if (!$admin) {
+            // Admin not found, handle accordingly
+            // You might want to redirect back with an error message
+            return redirect()->back()->with('error', 'Admin not found');
+        }
+    
+        $dataToUpdate = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'middle_name' => $request->middle_name,
+            'birthday' => $request->birthday,
+            'contact_number' => $request->contact_number,
+            'gender' => $request->gender,
+            'address' => $request->address,
+        ];
+    
+        // Update password only if a new password is provided
+        if ($request->filled('new_password')) {
+            $dataToUpdate['password'] = bcrypt($request->new_password);
+        }
+    
+        $admin->update($dataToUpdate);
+    
+        // Log the user out after updating the password
+        auth()->logout();
+    
+        // Redirect to login with a success message
+        return redirect()->route('login')->with('success', 'Password updated successfully. Please log in with your new password.');
+    }
+    
+    
+    
 
 
     function registrationPost(Request $request){
