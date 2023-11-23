@@ -322,14 +322,14 @@
                           <td>{{ $official->gender }}</td>
                           <td>{{ $official->created_at }}</td>
                           <td style="display: flex;">
-                          <a style="margin-bottom: -5px;" href="javascript:void(0);" class="edit-btn" data-bs-toggle="modal" data-bs-target="#UpdateOfficials">
+                          <a style="margin-bottom: -5px;" href="{{ route('adminpage.editOfficials', ['id' => $official->id]) }}">
                             <button type="button" class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></button>
                         </a>
 
-                              <form action="{{ route('adminpage.deleteResident', ['id' => $official->id]) }}" method="POST">
+                              <form action="{{ route('adminpage.deleteOfficial', ['id' => $official->id]) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
-                                  <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this resident?');">
+                                  <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this Official?');">
                                   <i class="fas fa-fw fa-trash-alt "></i>
                                   </button>
                               </form>
@@ -663,7 +663,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Officia?');">Save</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Official?');">Save</button>
             </div>
         </form>
     </div>

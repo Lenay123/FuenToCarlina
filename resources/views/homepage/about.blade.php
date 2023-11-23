@@ -66,8 +66,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav me-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
-                    <a href="{{route('about')}}" class="nav-item nav-link">About</a>
+                    <a href="/" class="nav-item nav-link ">Home</a>
+                    <a href="{{route('about')}}" class="nav-item nav-link active">About</a>
                     <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -113,7 +113,7 @@
 
 
     <!-- Fact Start -->
-    <div class="container-fluid fact bg-dark my-5 py-5">
+    <div class="container-fluid fact bg-dark my-5 py-5" style="background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, 0.4)), url('/img/bg.jpg') center center no-repeat;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">

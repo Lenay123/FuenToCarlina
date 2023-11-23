@@ -68,11 +68,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav me-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
+                    <a href="/" class="nav-item nav-link ">Home</a>
                     <a href="{{route('about')}}" class="nav-item nav-link">About</a>
                     <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu fade-up m-0">
                             <a href="{{route('barangayofficials')}}" class="dropdown-item">Barangay Officials</a>
                             <a href="{{route('testimonial')}}" class="dropdown-item">Testimonial</a>

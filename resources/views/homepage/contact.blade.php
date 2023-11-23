@@ -67,7 +67,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav me-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
+                    <a href="/" class="nav-item nav-link ">Home</a>
                     <a href="{{route('about')}}" class="nav-item nav-link">About</a>
                     <a href="{{route('service')}}" class="nav-item nav-link">Services</a>
                     <div class="nav-item dropdown">
@@ -78,7 +78,7 @@
                             <a href="{{route('activities')}}" class="dropdown-item">Activities</a>
                         </div>
                     </div>
-                    <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
+                    <a href="{{route('contact')}}" class="nav-item nav-link active">Contact</a>
                     <div class="nav-item dropdown">
                     <a href="{{route('login')}}" class="nav-item nav-link " >LOGIN</a>                        
                     </div>

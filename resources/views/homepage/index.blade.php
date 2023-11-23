@@ -53,7 +53,7 @@
                 </div>
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <i class="far fa-envelope-open text-primary me-2"></i>
-                    <p class="m-0">nabuntura.barili@gmail.com</p>
+                    <p class="m-0">nabunturan.barili@gmail.com</p>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square bg-white text-primary me-1" href="https://www.facebook.com/profile.php?id=100084244796789"><i class="fab fa-facebook-f"></i></a>
@@ -146,7 +146,7 @@
 
 
     <!-- Fact Start -->
-    <div class="container-fluid fact bg-dark my-5 py-5">
+    <div class="container-fluid fact bg-dark my-5 py-5" style="background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, 0.4)), url('/img/bg.jpg') center center no-repeat;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">

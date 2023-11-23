@@ -118,4 +118,28 @@ class OfficialController extends Controller
         return redirect('/adminpage/ManageOfficials')->with('success', 'Data updated');
     }
 
+
+    public function editOfficial($id) {
+        $official = Officials::find($id);
+    
+        if (!$official) {
+            return redirect()->route('adminpage.ManageOfficial')->with("error", "Official not found.");
+        }
+    
+        return view('adminpage.EditOfficials', compact('official'));
+    }
+    
+
+
+    public function deleteOfficial($id)
+    {
+        $official = Officials::find($id);
+    
+        if (!$official) {
+            return redirect()->route('adminpage.showOfficials')->with("error", "Official not found.");
+        }
+        $official->delete();
+        return redirect()->route('adminpage.showOfficials')->with("success", "Official deleted successfully.");
+    }
+
 }

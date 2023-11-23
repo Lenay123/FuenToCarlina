@@ -279,66 +279,74 @@
                    </div>
                @endif
                   <div class="container-fluid">
-                    <h1 class="h3 mb-2 text-gray-800">Barangay Activities</h1>
-                    <p class="mb-4">These are the Barangay Activities of Nabunturan Barili Cebu</p>
+                   
                     <!-- Main content -->
         
         
                <div class="card shadow mb-4">
                <div class="card-header" >
-                    <div class="col-md-12 bg-light text-right" >
-                    <a style="margin-bottom:-5px"data-bs-toggle="modal" data-bs-target="#Officials"> <button  type="button" class="btn btn-primary"> <i class="fa fa-plus"> </i>  Add Barangay Activities</button> </a>
-                    </div>
             </div>
-              
             <div class="card-body" >
               <div class="table-responsive">
-              <table class="data-table table nowrap">
-                  <thead class="thead-light">
-                      <tr>
-                          <th class="table-plus datatable-nosort">Photo</th>
-                          <th class="text-center">Activity Title</th> 
-                          <th class="text-center">Description</th>             
-                          <th class="text-center">Date Created</th>
-                          <th class="text-center">Action</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      @if ($activities->count() > 0)
-                      @foreach ($activities as $activity)
-                      <tr>
-                          <td><img src="/image/{{ $activity->image }}" alt="Document Image" width="100" height="100"></td>
-                          <td>{{ $activity->activity }}</td>
-                          <td>{{ $activity->description }}</td>
-                          <td>{{ $activity->created_at }}</td>
-                          <td style="display: flex;">
-                          <a style="margin-bottom: -5px;" href="{{ route('adminpage.editActivity', ['id' => $activity->id]) }}" >
-                            <button type="button" class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></button>
-                        </a>
+             <!-- UPDATE Activity -->
+             <form  method="POST" action="{{ route('adminpage.updateActivity', ['id' => $activity->id]) }}" enctype="multipart/form-data" id="editForm">
+            @csrf
+            @method('PUT')  
+                    <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col mb-0">
+                        <center> <img id="image" src="/image/{{ $activity->image }}" alt="Current Photo" style="max-width: 200px; max-height: 200px; margin-bottom: 10px;"></center>       
 
-                              <form action="{{ route('adminpage.deleteActivity', ['id' => $activity->id]) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this activity?');">
-                                  <i class="fas fa-fw fa-trash-alt "></i>
-                                  </button>
-                              </form>
-                          </td>
-      
-                      </tr>
-                      @endforeach
-                      @else
-                      <tr>
-                          <td colspan="5">There are no Activities yet! Add Some.</td>
-                      </tr>
-                      @endif
-                  </tbody>
-              </table>
-      
+                        <div class="row g-2">
+                        <div class="col mb-0">
+                        <label for="photo" class="form-label">Photo:</label> <br>
+                            <input type="file" class="form-control" name="image">
+                                <p class="text-muted">Leave it empty if you don't want to change the photo.</p>
+                            </div>
+                            <div class="col mb-0">
+                                <label for="emailBackdrop" class="form-label">Activity Title:</label>
+                                <input
+                                    type="first_name"
+                                    name="activity"
+                                    id="first_name"
+                                    class="form-control"
+                                    placeholder="first name"
+                                    value="{{ $activity->activity }}"
+                                />
+                            </div>
+                           
+                        </div>
+                        <div class="row g-2">
+                          <div class="col mb-0">
+                              <label for="emailBackdrop" class="form-label">Activity Description:</label>
+                              <textarea
+                                  name="description"
+                                  id="activity_description"
+                                  class="form-control"
+                                  placeholder="Activity description"
+                              >{{ $activity->description }}</textarea>
+                          </div>
+                      </div>
+
+
+
+
+
+                    </div> <br>
+
+                    <div class="row g-2">
+                      <div class="col mb-0">
+                           <a href="{{route('adminpage.showActivity')}}"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
+                          <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Update this Activity?');">Save</button>
+                      </div><br><br>
+                  </div>
+
+                </form><br>
+
               </div>
           </div>
       </div>
-      </div>
+      </div> 
                     </section>
 
             </div>
@@ -522,67 +530,6 @@
 </div>
 
 
-<!-- ADD Activities MODAL -->
-<div class="modal fade" id="Officials" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog"> 
-    <form id="addOfficials" class="modal-content" method="POST" action="{{ route('adminpage.AddActivity') }}" enctype="multipart/form-data">
-    @csrf
-    <div class="modal-header">
-                <h5 class="modal-title" id="OfficialsTitle">Add Barangay Activities</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <div class="row g-2">
-                    <div class="col mb-0">
-                    <label for="Photo" class="form-label">Photo:</label>
-										<input type="file" class="form-control" name="image" required>
-                    </div>
-                </div>
-           
-                <div class="row g-2">
-                    <div class="col mb-0">
-                        <label for="emailBackdrop" class="form-label">Activity Title</label>
-                        <input
-                            type="first_name"
-                            name="activity"
-                            id="activity"
-                            class="form-control"
-                            placeholder="Activity Title"
-                            
-                        />
-                    </div>
-                </div>
-                <div class="row g-2">
-                  <div class="col mb-0">
-                      <label for="emailBackdrop" class="form-label">Activity Description</label>
-                      <textarea
-                          name="description"
-                          id="description"
-                          class="form-control"
-                          placeholder="Enter activity description"
-                      ></textarea>
-                  </div>
-              </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Officia?');">Save</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 
 

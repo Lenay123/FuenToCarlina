@@ -54,8 +54,6 @@ class ActivityController extends Controller
     }
 
 
-
-
     public function deleteActivity($id)
     {
         $activities = Activity::find($id);
@@ -67,5 +65,53 @@ class ActivityController extends Controller
         return redirect()->route('adminpage.showActivity')->with("success", "Activity deleted successfully.");
     }
 
+    public function updateActivity(Request $request, $id)
+    {
+        // Validation rules
+        $this->validate($request, [
+            'activity' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+    
+        // Find the record to update
+        $activity = Activity::findOrFail($id);
+    
+        // Check if the record exists
+        if (!$activity) {
+            return back()->with('error', 'Record not found');
+        }
+    
+        // Update attributes
+        $data = $request->except(['_token', 'image']); // Exclude unnecessary fields
+        $activity->update($data);
+    
+        // Handle image upload
+        if ($image = $request->file('image')) {
+            if ($image->isValid()) {
+                $destinationPath = 'image/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $activity->image = $profileImage;
+                $activity->save(); // Save again after updating image
+            } else {
+                return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
+            }
+        }
+    
+        return redirect('/adminpage/ManageActivity')->with('success', 'Data updated');
+    }
+
+
+    public function editActivity($id) {
+        $activity = Activity::find($id);
+    
+        if (!$activity) {
+            return redirect()->route('adminpage.ManageActivity')->with("error", "Activity not found.");
+        }
+    
+        return view('adminpage.EditActivity', compact('activity'));
+    }
+    
 
 }

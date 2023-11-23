@@ -122,11 +122,17 @@ Route::get('/adminpage/BarangayPermitTransaction', [DashboardController::class, 
 Route::post('/adminpage/AdminDashboard', [AuthController::class, 'updateProfileAdmin'])->name('adminpage.updateProfileAdmin');
 Route::post('/adminpage/ManageOfficials', [OfficialController::class, 'AddOfficials'])->name('adminpage.AddOfficials');
 Route::get('/adminpage/ManageOfficials', [OfficialController::class, 'showOfficials'])->name('adminpage.showOfficials');
+Route::delete('/adminpage/DeleteOfficial/{id}', [OfficialController::class, 'deleteOfficial'])->name('adminpage.deleteOfficial');
 Route::match(['put', 'patch'], '/adminpage/ManageOfficials/{id}', [OfficialController::class, 'updateOfficials'])->name('adminpage.updateOfficials');
 Route::get('/adminpage/ManageActivity', [ActivityController::class, 'showActivity'])->name('adminpage.showActivity');
 Route::post('/adminpage/ManageActivity', [ActivityController::class, 'AddActivity'])->name('adminpage.AddActivity');
 Route::delete('/adminpage/DeleteActivity/{id}', [ActivityController::class, 'deleteActivity'])->name('adminpage.deleteActivity');
 
+Route::get('/adminpage/EditOfficial/{id}', [OfficialController::class, 'editOfficial'])->name('adminpage.editOfficials');
+Route::put('/adminpage/UpdateOfficial/{id}', [OfficialController::class, 'updateOfficial'])->name('adminpage.updateOfficial');
+
+Route::get('/adminpage/EditActivity/{id}', [ActivityController::class, 'editActivity'])->name('adminpage.editActivity');
+Route::put('/adminpage/UpdateActivity/{id}', [ActivityController::class, 'updateActivity'])->name('adminpage.updateActivity');
 
 
 
