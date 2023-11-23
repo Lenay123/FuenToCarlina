@@ -87,8 +87,6 @@
         </nav>
     </div>
     <!-- Navbar End -->
-
-
     <!-- Contact Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -99,43 +97,45 @@
                     <p class="mb-4">BE FUTURISTIC NOT BASIC
                         With your help, we’ll be able to integrate with other systems, and solve more issues to realize the most achievable impact. Let us build this together.</p>
                     <iframe class="position-relative w-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                        frameborder="0" style="height: 300px; border:0;" allowfullscreen="" aria-hidden="false"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15711.581035507234!2d123.48938672868586!3d10.107659014876079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33abdf63fca5665d%3A0x4646d7c4f9bea476!2sNabunturan%2C%20Barili%2C%20Cebu!5e0!3m2!1sen!2sph!4v1700721701529!5m2!1sen!2sph"                        frameborder="0" style="height: 300px; border:0;" allowfullscreen="" aria-hidden="false"
                         tabindex="0"></iframe>
                 </div>
                 <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="bg-light p-5 h-100 d-flex align-items-center">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                    <form action="{{ route('contact.submit') }}" method="post">
+                        @csrf
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control"  name="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control"name="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" name="message" placeholder="Leave a message here" style="height: 150px"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit" onclick="return confirm('Are you sure you want to send this feedback?');">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+
                     </div>
                 </div>
             </div>
@@ -208,7 +208,15 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script>
+    @if(Session::has('success'))
+        alert("{{ Session::get('success') }}");
+    @endif
 
+    @if(Session::has('error'))
+        alert("{{ Session::get('error') }}");
+    @endif
+</script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>

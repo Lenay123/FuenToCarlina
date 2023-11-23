@@ -9,9 +9,9 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\SecretaryUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StatusController;
-
-
-
+use App\Http\Controllers\OfficialController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,22 +54,28 @@ Route::get('adminpage/AddResidents', function () {
     return view('adminpage/AddResidents');
 });
 
-Route::get('adminpage/EditResident', function () {
-    return view('adminpage/edit/EditResident');
+
+Route::get('adminpage/ManageOfficials', function () {
+    return view('adminpage/ManageOfficials');
 });
 
 
-
+Route::get('adminpage/ManageActivity', function () {
+    return view('adminpage/ManageActivity');
+});
 
 
 
 // Homepage Routes
 Route::get('/homepage/about', [DocumentController::class, 'about'])->name('about');
 Route::get('/homepage/service', [DocumentController::class, 'service'])->name('service');
-Route::get('/homepage/activities', [DocumentController::class, 'activities'])->name('activities');
-Route::get('/homepage/barangayofficials', [DocumentController::class, 'barangayofficials'])->name('barangayofficials');
+Route::get('/homepage/activities', [ActivityController::class, 'showActivityHome'])->name('activities');
+Route::get('/homepage/barangayofficials', [OfficialController::class, 'showOfficialsHome'])->name('barangayofficials');
 Route::get('/homepage/testimonial', [DocumentController::class, 'about'])->name('testimonial');
-Route::get('/homepage/contact', [DocumentController::class, 'contact'])->name('contact');
+Route::get('/homepage/contact', [ContactController::class, 'contact'])->name('contact');
+Route::post('/homepage/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
+
+
 
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistrationController::class, 'registration'])->name('register');
@@ -114,6 +120,17 @@ Route::get('/adminpage/BarangayIDTransaction', [DashboardController::class, 'sho
 Route::get('/adminpage/BarangayIndigencyTransaction', [DashboardController::class, 'showBarangayIndigencyTransaction'])->name('indigency.transaction');
 Route::get('/adminpage/BarangayPermitTransaction', [DashboardController::class, 'showBarangayPermitTransaction'])->name('permit.transaction');
 Route::post('/adminpage/AdminDashboard', [AuthController::class, 'updateProfileAdmin'])->name('adminpage.updateProfileAdmin');
+Route::post('/adminpage/ManageOfficials', [OfficialController::class, 'AddOfficials'])->name('adminpage.AddOfficials');
+Route::get('/adminpage/ManageOfficials', [OfficialController::class, 'showOfficials'])->name('adminpage.showOfficials');
+Route::match(['put', 'patch'], '/adminpage/ManageOfficials/{id}', [OfficialController::class, 'updateOfficials'])->name('adminpage.updateOfficials');
+Route::get('/adminpage/ManageActivity', [ActivityController::class, 'showActivity'])->name('adminpage.showActivity');
+Route::post('/adminpage/ManageActivity', [ActivityController::class, 'AddActivity'])->name('adminpage.AddActivity');
+Route::delete('/adminpage/DeleteActivity/{id}', [ActivityController::class, 'deleteActivity'])->name('adminpage.deleteActivity');
+
+
+
+
+
 
 Route::delete('/adminpage/deleteTransaction/{id}', [DashboardController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
 // residentpage routes

@@ -246,7 +246,7 @@
 
 /*** Facts ***/
 .fact {
-    background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, .4)), url(/public/img/bg.jpg) center center no-repeat;
+    background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, .4)), url(/img/bg.jpg) center center no-repeat;
     background-size: cover;
 }
 

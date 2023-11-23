@@ -193,7 +193,7 @@
                             <p>To establish a modern and efficient document To establish a modern and efficient document To establish a modern and efficient document </p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
-                            <a href="" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
+                            <a href="{{route('login')}}" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
                         </div>
                         <div class="bg-light p-4">
                             <div class="d-flex align-items-center justify-content-center border border-5 border-white mb-4" style="width: 75px; height: 75px;">
@@ -203,7 +203,7 @@
                             <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
-                            <a href="" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
+                            <a href="{{route('login')}}" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
                         </div>
                         <div class="bg-light p-4">
                             <div class="d-flex align-items-center justify-content-center border border-5 border-white mb-4" style="width: 75px; height: 75px;">
@@ -213,7 +213,7 @@
                             <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
-                            <a href="" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
+                            <a href="{{route('login')}}" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
                         </div>
                         <div class="bg-light p-4">
                             <div class="d-flex align-items-center justify-content-center border border-5 border-white mb-4" style="width: 75px; height: 75px;">
@@ -223,7 +223,7 @@
                             <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
-                            <a href="" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
+                            <a href="{{route('login')}}" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
                         </div>
                     </div>
                 </div>

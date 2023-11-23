@@ -98,6 +98,20 @@
               </a>
             </li>
 
+            <li class="menu-item">
+              <a href="/adminpage/ManageOfficials" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div data-i18n="Front Pages">Manage Officials</div>
+              </a>
+            </li>
+            
+            <li class="menu-item">
+              <a href="/adminpage/ManageActivity" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div data-i18n="Front Pages">Manage Activity</div>
+              </a>
+            </li>
+
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">View Transactions</span>
             </li>

@@ -101,9 +101,6 @@
                     <p class="mb-4">It consists of 40 participants who are the sk chairman and organization president.
                         One of the participants is our beloved SK CHAIRMAN HON. FROILAN LLANES
                         Also accompanied by our active youth president. JOHN CHRISTIAN GIMARANGAN is also the president of an organization called JUNIOR RESPONDER</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>description 1</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>description 2</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>description 3</p>
                 </div>
 
                 <div class="col-lg-6 pt-4" style="min-height: 500px;">
@@ -117,105 +114,31 @@
     </div>
     
     <div class="container-xxl py-5">
-        <div class="container">
+    <div class="container">
+        @if ($activities->count() > 0)
             <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Activities 2</h1>
-                    <p class="mb-4">To design, develop, and implement an automated document processing system to streamline and improve the efficiency of document requests in Barangay Nabunturan, Barili, Cebu. The system aims to simplify the manual process and provide a user-friendly platform for residents to submit, track, and receive their requested documents.</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 1</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 2</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Decsription 3</p>
-                </div>
-                <div class="col-lg-6 pt-4" style="min-height: 500px;">
-                    <div class="position-relative h-100 wow fadeInUp" data-wow-delay="0.5s">
-                        <img class="position-absolute img-fluid w-100 h-100" src="/img/BASKET.jpg" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
-                        <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/img/BASKET2.jpg" style="object-fit: cover;" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Activities 3</h1>
-                    <p class="mb-4">To design, develop, and implement an automated document processing system to streamline and improve the efficiency of document requests in Barangay Nabunturan, Barili, Cebu. The system aims to simplify the manual process and provide a user-friendly platform for residents to submit, track, and receive their requested documents.</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 1</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 2</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Decsription 3</p>
-                </div>
-                <div class="col-lg-6 pt-4" style="min-height: 500px;">
-                    <div class="position-relative h-100 wow fadeInUp" data-wow-delay="0.5s">
-                        <img class="position-absolute img-fluid w-100 h-100" src="/img/about-1.jpg" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
-                        <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/img/about-2.jpg" style="object-fit: cover;" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Activities 4</h1>
-                    <p class="mb-4">To design, develop, and implement an automated document processing system to streamline and improve the efficiency of document requests in Barangay Nabunturan, Barili, Cebu. The system aims to simplify the manual process and provide a user-friendly platform for residents to submit, track, and receive their requested documents.</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 1</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 2</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Decsription 3</p>
-                </div>
-                <div class="col-lg-6 pt-4" style="min-height: 500px;">
-                    <div class="position-relative h-100 wow fadeInUp" data-wow-delay="0.5s">
-                        <img class="position-absolute img-fluid w-100 h-100" src="/img/home2.jpg" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
-                        <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/img/home.jpg" style="object-fit: cover;" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Activities 5</h1>
-                    <p class="mb-4">To design, develop, and implement an automated document processing system to streamline and improve the efficiency of document requests in Barangay Nabunturan, Barili, Cebu. The system aims to simplify the manual process and provide a user-friendly platform for residents to submit, track, and receive their requested documents.</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 1</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 2</p>
-                    <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Decsription 3</p>
-                </div>
-                <div class="col-lg-6 pt-4" style="min-height: 500px;">
-                    <div class="position-relative h-100 wow fadeInUp" data-wow-delay="0.5s">
-                        <img class="position-absolute img-fluid w-100 h-100" src="/img/kabataan.jpg" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
-                        <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/img/kabataan2.jpg" style="object-fit: cover;" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5">
+                @foreach ($activities as $activity)
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h1 class="mb-4">Activities 6</h1>
-                        <p class="mb-4">To design, develop, and implement an automated document processing system to streamline and improve the efficiency of document requests in Barangay Nabunturan, Barili, Cebu. The system aims to simplify the manual process and provide a user-friendly platform for residents to submit, track, and receive their requested documents.</p>
-                        <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 1</p>
-                        <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Description 2</p>
-                        <p class="fw-medium text-primary"><i class="fa fa-check text-success me-3"></i>Decsription 3</p>
+                        <h1 class="mb-4">{{ $activity->activity }}</h1>
+                        <p class="mb-4">{{ $activity->description }}</p>
                     </div>
                     <div class="col-lg-6 pt-4" style="min-height: 500px;">
                         <div class="position-relative h-100 wow fadeInUp" data-wow-delay="0.5s">
-                            <img class="position-absolute img-fluid w-100 h-100" src="/img/women.jpg" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
-                            <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/img/woman2.jpg" style="object-fit: cover;" alt="">
+                            <img class="position-absolute img-fluid w-100 h-100" src="/image/{{ $activity->image }}" style="object-fit: cover; padding: 0 0 50px 100px;" alt="">
+                            <img class="position-absolute start-0 bottom-0 img-fluid bg-white pt-2 pe-2 w-50 h-50" src="/image/{{ $activity->image }}" style="object-fit: cover;" alt="">
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-        </div>
-
+        @else
+          
+        @endif
     </div>
+</div>
+
+
+
+
     <!-- Activities End -->
 
         

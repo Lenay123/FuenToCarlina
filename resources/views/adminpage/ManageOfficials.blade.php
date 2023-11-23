@@ -28,7 +28,9 @@
       rel="stylesheet" />
 
     <link rel="stylesheet" href="/vendor/fonts/boxicons.css" />
-
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
  		<!-- CSS -->
      <link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
 		<link
@@ -56,6 +58,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- Page CSS -->
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -96,7 +99,7 @@
                        </li>
 
             <!-- Layouts -->
-            <li class="menu-item">
+            <li class="menu-item ">
               <a href="/adminpage/ManageResidents" class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Manage Resident</div>
@@ -110,7 +113,8 @@
                 <div data-i18n="Front Pages">Manage Secretary</div>
               </a>
             </li>
-            <li class="menu-item">
+
+            <li class="menu-item active open">
               <a href="{{route('adminpage.showOfficials')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-store"></i>
                 <div data-i18n="Front Pages">Manage Officials</div>
@@ -123,11 +127,12 @@
                 <div data-i18n="Front Pages">Manage Activity</div>
               </a>
             </li>
+
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">View Transactions</span>
             </li>
             <!-- Apps -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a
                 href="/adminpage/BarangayPermitTransaction"
               
@@ -137,9 +142,10 @@
             
               </a>
             </li>
-            <li class="menu-item ">
+            <li class="menu-item">
               <a
                 href="/adminpage/BarangayCertificateTransaction"
+              
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>
                 <div data-i18n="Chat">Barangay Certificate </div>
@@ -150,7 +156,7 @@
               <a
                 href="/adminpage/BarangayIndigencyTransaction"
               
-                class="menu-link ">
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
                 <div data-i18n="Calendar">Barangay Indigency </div>
              
@@ -250,78 +256,118 @@
             </div>
           </nav>
           @endif
-          <br>
-
+           <br>
+           @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
-          <div class="content-wrapper"> 
+          <div class="content-wrapper">
             <!-- Content -->
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Barangay Business Permit Requests History</h1>
-                <p class="mb-4">These are the transactions</p>
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-<div class="card-header py-3 d-flex justify-content-between align-items-center">
-    <h6 class="m-0 font-weight-bold text-primary">All</h6>
-    <div class="dropdown">
-    <select id="status-filter" class="form-select w-auto">
-                                    <option value="all" selected>All</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="cancelled">Cancelled</option>
-                                    <option value="Claimed">Claimed</option>
-                                </select>
-    </div>
-</div>
-<div class="card-body">
-    <div class="table-responsive">
-    <table class="data-table table nowrap" id="dataTable">
-            <thead>
-                <tr>
-                <th class="table-plus datatable-nosort">Requestors</th>
-                    <th>Requested Document</th>
-                    <th>Reference Number</th>
-                    <th>Status</th>
-                    <th>Requested date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($document_requests as $document_request)
-                    <tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}">
-                        <td>{{ $document_request->full_name }}</td>
-                        <td>{{ $document_request->document_type }}</td>
-                        <td>{{ $document_request->tracker_number }}</td>
-                        <td>{{ $document_request->status }}</td>
-                        <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
-                        <td>
-                            @if ($document_request->status === 'Pending' || $document_request->status === 'To be Claimed' || $document_request->status === 'In Progress')
-                                <button type="button" class="btn btn-danger" disabled>Delete</button>
-                            @else
-                            <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
-
-
-
-
+            <section>
+              <section>
+                @if(session('success'))
+                   <div class="alert alert-success">
+                          {{ session('success') }}
+                   </div>
+               @endif
+                  <div class="container-fluid">
+                    <h1 class="h3 mb-2 text-gray-800">Barangay Officials</h1>
+                    <p class="mb-4">These are the Barangay Officials of Nabunturan Barili Cebu</p>
+                    <!-- Main content -->
+        
+        
+               <div class="card shadow mb-4">
+               <div class="card-header" >
+                    <div class="col-md-12 bg-light text-right" >
+                    <a style="margin-bottom:-5px"data-bs-toggle="modal" data-bs-target="#Officials"> <button  type="button" class="btn btn-primary"> <i class="fa fa-plus"> </i>  Add Barangay Officials</button> </a>
+                    </div>
             </div>
+              
+            <div class="card-body" >
+              <div class="table-responsive">
+              <table class="data-table table nowrap">
+                  <thead class="thead-light">
+                      <tr>
+                          <th class="table-plus datatable-nosort">Photo</th>
+                          <th class="text-center">Full name</th> 
+                          <th class="text-center">Position</th>             
+                          <th class="text-center">Contact Number</th>
+                          <th class="text-center">Address</th>
+                          <th class="text-center">Email Address</th>
+                          <th class="text-center">DOB</th>
+                          <th class="text-center">Gender</th>
+                          <th class="text-center">Date Created</th>
+                          <th class="text-center">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @if ($officials->count() > 0)
+                      @foreach ($officials as $official)
+                      <tr>
+                          <td><img src="/image/{{ $official->image }}" alt="Document Image" width="100" height="100"></td>
+                          <td>{{ $official->first_name }} {{ $official->last_name }}</td>
+                          <td>{{ $official->position }}</td>
+                          <td>{{ $official->contact_number }}</td>
+                          <td>{{ $official->address }}</td>
+                          <td>{{ $official->email }}</td>
+                          <td>{{ $official->birthday }}</td>
+                          <td>{{ $official->gender }}</td>
+                          <td>{{ $official->created_at }}</td>
+                          <td style="display: flex;">
+                          <a style="margin-bottom: -5px;" href="javascript:void(0);" class="edit-btn" data-bs-toggle="modal" data-bs-target="#UpdateOfficials">
+                            <button type="button" class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></button>
+                        </a>
 
-
-
+                              <form action="{{ route('adminpage.deleteResident', ['id' => $official->id]) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this resident?');">
+                                  <i class="fas fa-fw fa-trash-alt "></i>
+                                  </button>
+                              </form>
+                          </td>
+      
+                      </tr>
+                      @endforeach
+                      @else
+                      <tr>
+                          <td colspan="5">There are no Officials.</td>
+                      </tr>
+                      @endif
+                  </tbody>
+              </table>
+      
+              </div>
+          </div>
+      </div>
+      </div>
+                    </section>
 
             </div>
             <!-- / Content -->
 
-
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with ❤️ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">FuenToCarlina</a>
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -334,6 +380,7 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+
                     <!-- Modal Backdrop -->
                     <div class="col-lg-4 col-md-3">
                       <div class="mt-3">
@@ -484,6 +531,148 @@
     </div>
 </div>
 
+
+<!-- ADD OFFICIALS MODAL -->
+<div class="modal fade" id="Officials" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog"> 
+    <form id="addOfficials" class="modal-content" method="POST" action="{{ route('adminpage.AddOfficials') }}" enctype="multipart/form-data">
+    @csrf
+    <div class="modal-header">
+                <h5 class="modal-title" id="OfficialsTitle">Add Barangay Officials</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="row g-2">
+                    <div class="col mb-0">
+                    <label for="Photo" class="form-label">Photo:</label>
+										<input type="file" class="form-control" name="image" required>
+                    </div>
+                    <div class="col mb-0">
+                    <label for="position" class="form-label">Position:</label>
+                        <select id="position" class="form-select" name="position">
+                            <option value="">Select Position</option>
+                            <option value="Barangay Kagawad">Barangay Kagawad</option>
+                            <option value="Barangay Captain">Barangay Captain</option>
+                            <option value="SK Chairman">SK Chairman</option>
+                            <option value="Barangay Secretary">Barangay Secretary</option>
+                            <option value="Barangay Treasurer">Barangay Treasurer</option>
+                        </select>
+                    </div>
+                </div>
+           
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Firstname</label>
+                        <input
+                            type="first_name"
+                            name="first_name"
+                            id="firstnameBackdrop"
+                            class="form-control"
+                            placeholder="first name"
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">Middle Name</label>
+                        <input
+                            type="middlename"
+                            name="middle_name"
+                            id="middlenameBackdrop"
+                            class="form-control"
+                            placeholder="middle name"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Lastname</label>
+                        <input
+                            type="lastname"
+                            name="last_name"
+                            id="lastnameBackdrop"
+                            class="form-control"
+                            placeholder="last name"
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">Contact Number</label>
+                        <input
+                            type="contact"
+                            name="contact_number"
+                            id="middlenameBackdrop"
+                            class="form-control"
+                            placeholder="Contact Number"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="emailBackdrop" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="emailBackdrop"
+                            class="form-control"
+                            name="email"
+                            placeholder="xxxx@xxx.xx"
+                            
+                        />
+                    </div>
+                    <div class="col mb-0">
+                        <label for="dobBackdrop" class="form-label">DOB</label>
+                        <input
+                            type="date"
+                            id="dobBackdrop"
+                            name="birthday"
+                            class="form-control"
+                        />
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="addressBackdrop" class="form-label">Address</label>
+                        <select id="addressBackdrop" class="form-select" name="address">
+                            <option value="">Select Address</option>
+                            <option value="Proper Nabunturan Barili Cebu" >Proper Nabunturan Barili Cebu</option>
+                            <option value="Sitio San Roque Nabunturan Barili Cebu" >Sitio San Roque Nabunturan Barili Cebu</option>
+                            <option value="Sitio Cabinay Nabunturan Barili Cebu" >Sitio Cabinay Nabunturan Barili Cebu</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                        <label for="genderBackdrop" class="form-label">Gender</label>
+                        <select id="genderBackdrop" class="form-select" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">male</option>
+                            <option value="female">female</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Officia?');">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
@@ -495,21 +684,6 @@
 
     <!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="/js/main copy.js"></script>
-
-    <!-- Page JS -->
-    <script src="/js/dashboards-analytics.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript -->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages -->
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="/vendors/scripts/core.js"></script>
@@ -524,65 +698,18 @@
 		<script src="/vendors/scripts/dashboard.js"></script>
     <!-- Page level plugins -->
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/js/demo/datatables-demo.js"></script>
-    <script>
-$(document).ready(function() {
-    // Retrieve the selected status from storage
-    const selectedStatus = localStorage.getItem('selectedStatus');
+    <!-- Vendors JS -->
+    <script src="/vendor/libs/apex-charts/apexcharts.js"></script>
+    
+    <!-- Main JS -->
+    <script src="/js/main copy.js"></script>
 
-    // Set the filter to the retrieved status
-    if (selectedStatus) {
-        $('#status-filter').val(selectedStatus);
+    <!-- Page JS -->
+    <script src="/js/dashboards-analytics.js"></script>
 
-        // Show or hide rows based on the selected status
-        updateTable(selectedStatus);
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-        // Update the text within the <h6> element
-        updateHeaderText(selectedStatus);
-    } else {
-        $('#no-data-row').hide();
-    }
 
-    // Handle filter change
-    $('#status-filter').on('change', function() {
-        const selectedStatus = $(this).val();
-
-        // Store the selected status in local storage
-        localStorage.setItem('selectedStatus', selectedStatus);
-
-        // Show or hide rows based on selected status
-        updateTable(selectedStatus);
-
-        // Update the text within the <h6> element
-        updateHeaderText(selectedStatus);
-    });
-});
-
-function updateTable(selectedStatus) {
-    if (selectedStatus === 'all') {
-        $('tr[data-status]').show();
-        $('#no-data-row').hide(); // Hide "No data" row
-    } else {
-        $('tr[data-status]').hide();
-        const matchingRows = $(`tr[data-status="${selectedStatus}"]`);
-        matchingRows.show();
-
-        // Show the "No data" row if there are no matching rows
-        if (matchingRows.length === 0) {
-            $('#no-data-row').show();
-        } else {
-            $('#no-data-row').hide();
-        }
-    }
-}
-
-function updateHeaderText(selectedStatus) {
-    if (selectedStatus === 'all') {
-        $('h6.m-0').text('All');
-    } else {
-        $('h6.m-0').text(selectedStatus);
-    }
-}
-</script>
   </body>
 </html>
