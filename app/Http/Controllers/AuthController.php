@@ -39,102 +39,6 @@ class AuthController extends Controller
     }
 
 
-
-
-    // function loginPost(Request $request){
-    //     $request->validate([
-    //         'email' => 'required',
-    //         'password' => 'required'
-
-    //     ]);
-
-    //     $credentials = $request->only('email', 'password');
-    //     if(Auth::attempt($credentials)){
-    //         return redirect()->intended(route('residentpage.resident'));
-    //     }
-    //     return redirect(route('login'))->with("error", "Login details are not valid");
-    // }
-    
-    // function loginPost(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required',
-    //         'password' => 'required'
-    //     ]);
-    
-    //     $credentials = $request->only('email', 'password');
-    
-    //     if (Auth::attempt($credentials)) {
-    //         $user = Auth::user();
-    
-    //         // Check if the user is an admin
-    //         if ($user->role === 'admin') {
-    //             // Check if the remember_token has been updated
-    //             $rememberTokenName = $user->getRememberTokenName();
-    //            if (!empty($user->$rememberTokenName)) {
-    //                 Auth::logout();
-    //                 return redirect(route('login'))->with("error", "Old password is not valid. Please use your new password.");
-    //             }
-    //         }
-    
-    //         // Redirect based on the user's role
-    //         switch ($user->role) {
-    //             case 'user':
-    //                 return redirect()->intended(route('residentpage.resident'));
-    //                 break;
-    //             case 'secretary':
-    //                 return redirect()->route('dashboard_secretary');
-    //                 break;
-    //             case 'admin':
-    //                 return redirect()->route('dashboard');
-    //                 break;
-    //             // Add more cases for other roles if needed
-    //             default:
-    //                 Auth::logout();
-    //                 return redirect(route('login'))->with("error", "Login details are not valid");
-    //         }
-    //     }
-    
-    // // If no user is authenticated, check for hardcoded admin credentials
-    // $adminUsername = 'admin@gmail.com';
-    // $adminPassword = 'admin123';
-
-    // if ($request->email === $adminUsername && Hash::check($request->password, $adminPassword)) {
-    //     // Admin login successful
-
-    //     // Check if admin user already exists in the database
-    //     $admin = User::where('email', $adminUsername)->first();
-
-    //     if (!$admin) {
-    //         // Create admin user if not exists
-    //         $admin = User::create([
-    //             'first_name' => 'Almar',
-    //             'last_name' => 'Gutierrez',
-    //             'middle_name' => 'L.',
-    //             'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
-    //             'contact_number' => '09095432419',
-    //             'gender' => 'Male',
-    //             'address' => 'Proper Nabunturan Barili Cebu',
-    //             'email' => $adminUsername,
-    //             'password' => Hash::make($adminPassword),
-    //             // Add other profile information as needed
-    //         ]);
-    //     }
-
-    //     // Check if both email and password need to be updated
-    //     if (Hash::check($request->password, $admin->password) && $request->email === $adminUsername) {
-    //         Auth::login($admin);
-
-    //         return redirect()->route('dashboard'); // Change to your actual admin dashboard route
-    //     } else {
-    //         Auth::logout();
-    //         return redirect(route('login'))->with("error", "Old email or password is not valid. Please use your new email and password.");
-    //     }
-    // }
-
-    // return redirect(route('login'))->with("error", "Login details are not valid");
-
-    // }
     
     function loginPost(Request $request)
     {
@@ -407,8 +311,59 @@ function adminpagelogout(){
 }
 
 
+public function updateProfileSecretary(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'first_name' => 'required',
+        'middle_name' => 'required',
+        'last_name' => 'required',
+        'contact_number' => 'required',
+        'email' => 'required|email',
+        'birthday' => 'required|date',
+        'address' => 'required',
+        'gender' => 'required',
+        'new_password' => 'nullable|min:6|confirmed',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    $secretary = User::where('email', $request->email)->first();
+
+    if (!$secretary) {
+        return redirect()->back()->with('error', 'Secretary not found');
+    }
+
+    $dataToUpdate = [
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'middle_name' => $request->middle_name,
+        'birthday' => $request->birthday,
+        'contact_number' => $request->contact_number,
+        'gender' => $request->gender,
+        'address' => $request->address,
+    ];
+
+    // Update password only if a new password is provided
+    if ($request->filled('new_password')) {
+        $dataToUpdate['password'] = bcrypt($request->new_password);
+    }
+
+    $secretary->update($dataToUpdate);
+
+    // Optionally, you might want to redirect to the secretary's profile or a success page
+    return redirect()->route('login')->with('success', 'Profile updated successfully.');
+}
+
+
+
+
+
 
 }
+
+
 
 
 

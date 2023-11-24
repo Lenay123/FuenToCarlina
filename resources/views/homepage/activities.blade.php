@@ -159,8 +159,7 @@
                     <h4 class="text-light mb-4">Opening Hours</h4>
                     <h6 class="text-light">Monday - Friday:</h6>
                     <p class="mb-4">09.00 AM - 05.00 PM</p>
-                    <h6 class="text-light">Saturday:</h6>
-                    <p class="mb-0">09.00 AM - 12.00 PM</p>
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>
@@ -171,7 +170,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <p>Nabunturan is a barangay in the municipality of Barili, in the province of Cebu. Its population as determined by the 2020 Census was 877. This represented 1.09% of the total population of Barili.</p>
                 </div>
             </div>
         </div>

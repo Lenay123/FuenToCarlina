@@ -141,7 +141,7 @@
 					    <ul class="app-menu footer-menu list-unstyled">
 						    <li class="nav-item">
 						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link" href="{{route('logout')}}">
+						        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">
 							        <span class="nav-icon">
 										<i class="fa-solid fa-right-from-bracket"></i>
 							        </span>
@@ -206,9 +206,12 @@
 								<thead>
 									<tr>
 										<th class="cell">Name</th>
+										<th class="cell">Photo</th>
 										<th class="cell">Requested Documents</th>
+										<th class="cell">ID Type</th>
 										<th class="cell">Date Requested</th>
 										<th class="cell">Date for Document <br>Pickup</th>
+										<th class="cell">Time for Document <br>Pickup</th>
 										<th class="cell">Reference Number</th>
 										<th class="cell">Status</th>
 										<th class="cell">Actions</th>
@@ -219,9 +222,24 @@
 									@foreach ($document_requests as $document_request)
 										<tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}" >
 										<td>{{$document_request->full_name}}</td>
+										<td>
+										@if ($document_request->document_type === 'Barangay ID')
+												<img src="/image/{{ $document_request->image }}" width="100" height="100">
+											@else
+												No image
+											@endif
+                						</td>
 											<td>{{$document_request->document_type}}</td>
+											<td>{{$document_request->id_type}}</td>
 											<td>{{$document_request->created_at}}</td>
 											<td>{{$document_request->document_date}}</td>
+											<td>
+												@if ($document_request->document_time)
+													{{ \Carbon\Carbon::createFromFormat('H:i', $document_request->document_time)->format('g:i A') }}
+												@else
+													No time specified
+												@endif
+											</td>
 											<td>{{$document_request->tracker_number}}</td>
 											<td>{{$document_request->status}}</td>
 													<td>

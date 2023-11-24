@@ -173,4 +173,5 @@ Route::put('/document-requests/{document_request}/claim', [DashboardController::
     ->name('claim-document');
     Route::put('/document-requests/{document_request}/claim', [DashboardController::class, 'claimDocumentPermit'])
     ->name('claimDocumentPermit');
+Route::post('/secretary/secretary_dashboard', [AuthController::class, 'updateProfileSecretary'])->name('secretary.updateProfileSecretary');
     

@@ -135,7 +135,7 @@
 					    <ul class="app-menu footer-menu list-unstyled">
 						    <li class="nav-item">
 						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link" href="{{route('logout')}}">
+						        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">
 							        <span class="nav-icon">
 										<i class="fa-solid fa-right-from-bracket"></i>
 							        </span>
@@ -232,23 +232,51 @@
 									</select> <br>
 
 									<div class="form-group">
-										<label for="document_date">Date for Document Pickup:</label>
-										<input type="date" class="form-control" name="document_date" required>
-										<p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> You cannot claim your requested document during WEEKENDS (Saturday & Sunday) and HOLIDAYS</p>
+									<label for="document_date">Date for Document Pickup:</label>
+									<input type="date" class="form-control" name="document_date" id="document_date" required>
 									</div>
 
-				
-									<label for="id_type" >Type of ID:</label>
-									<select id="id_type" name="id_type" class="form-control" required>
-										<option value="">Select an ID</option>
-										<option value="NSO with School ID">NSO with School ID</option>
-										<option value="NBI Clearance">NBI Clearance</option>
-										<option value="Voters ID">Voters ID</option>
-										<option value="Drivers License">Drivers License</option>
-										<option value="Voters Certificate">Voters Certificate</option>
-										<option value="National ID">National ID</option>
-										<option value="SSS">SSS</option>
-									</select>
+									<div class="form-group">
+										<label for="document_time" >Time for Document Pickup:</label>
+										<select class="form-control" name="document_time" required>
+											<option>Select Time</option>
+											<option value="09:00">9:00 AM</option>
+											<option value="09:30">9:30 AM</option>
+											<option value="10:00">10:00 AM</option>
+											<option value="10:30">10:30 AM</option>
+											<option value="11:00">11:00 AM</option>
+											<option value="11:30">11:30 AM</option>
+											<option value="12:00">12:00 PM</option>
+											<option value="12:30">12:30 PM</option>
+											<option value="13:00">1:00 PM</option>
+											<option value="13:30">1:30 PM</option>
+											<option value="14:00">2:00 PM</option>
+											<option value="14:30">2:30 PM</option>
+											<option value="15:00">3:00 PM</option>
+											<option value="15:30">3:30 PM</option>
+											<option value="16:00">4:00 PM</option>
+											<option value="16:30">4:30 PM</option>
+											<option value="17:00">5:00 PM</option>
+										</select>
+									</div>
+
+										<label for="id_type">Select an ID:</label>
+										<select id="id_type" name="id_type" class="form-control" required onchange="showOtherField()">
+											<option value="">Select an ID</option>
+											<option value="NSO with School ID">NSO with School ID</option>
+											<option value="NBI Clearance">NBI Clearance</option>
+											<option value="Voters ID">Voters ID</option>
+											<option value="Drivers License">Drivers License</option>
+											<option value="Voters Certificate">Voters Certificate</option>
+											<option value="National ID">National ID</option>
+											<option value="SSS">SSS</option>
+											<option value="Others">Others</option>
+										</select>
+
+									<div id="otherField" style="display:none;">
+										<label for="otherIdType">Specify Other ID:</label>
+										<input type="text" id="otherIdType" name="specific_id" class="form-control">
+									</div>
 									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> Note: Bring this document for verification</p></div> 
 				
 									<div class="form-group">
@@ -301,8 +329,50 @@
     
     <!-- Page Specific JS -->
     <script src="/js/app.js"></script> 
-<script>
-	
+	<script>
+    function showOtherField() {
+        var selectedValue = document.getElementById("id_type").value;
+        var otherField = document.getElementById("otherField");
+
+        if (selectedValue === "Others") {
+            otherField.style.display = "block";
+        } else {
+            otherField.style.display = "none";
+        }
+    }
+	document.addEventListener("DOMContentLoaded", function () {
+        var dateInput = document.getElementById("document_date");
+
+        // Function to check if a date is a weekend day
+        function isWeekend(date) {
+            var day = date.getDay();
+            return day === 0 || day === 6; // 0 is Sunday, 6 is Saturday
+        }
+
+        // Function to check if a date is before today
+        function isBeforeToday(date) {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0); // Set hours to 00:00:00 to compare only dates
+            return date < today;
+        }
+
+        // Disable weekends, holidays, and dates before today
+        dateInput.addEventListener("input", function () {
+            var selectedDate = new Date(dateInput.value);
+
+            if (isWeekend(selectedDate)) {
+                alert("Weekends are not allowed for document pickup.");
+                dateInput.value = ""; // Reset the date input
+            }
+
+            if (isBeforeToday(selectedDate)) {
+                alert("The document date must be today or a future date.");
+                dateInput.value = ""; // Reset the date input
+            }
+
+            // You can add logic to check for holidays and disable them here
+        });
+    });
 </script>
 </body>
 </html> 

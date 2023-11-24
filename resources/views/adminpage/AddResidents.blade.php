@@ -221,9 +221,9 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('adminpagelogout')}}">
+                      <a class="dropdown-item"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('adminpagelogout')}}">
                         <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Log Out</span>
+                        <span class="align-middle"  >Log Out</span>
                       </a>
                     </li>
                   </ul>
@@ -321,7 +321,7 @@
                               <a href="/adminpage/ManageResidents" class="btn btn-primary btn-block">Cancel</a>
                           </div>
                           <div class="col-md-2 col-sm-4 float-left"> <!-- Adjust column size for different screen sizes and align to the left -->
-                             <button  class="btn btn-primary btn-block" >ADD</button>
+                             <button  class="btn btn-primary btn-block" onclick="return confirm('Are you sure you want to Add this resident?');" >ADD</button>
                           </div>
                       </div>
                   </div>

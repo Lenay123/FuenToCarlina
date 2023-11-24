@@ -151,9 +151,7 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Opening Hours</h4>
                     <h6 class="text-light">Monday - Friday:</h6>
-                    <p class="mb-4">09.00 AM - 09.00 PM</p>
-                    <h6 class="text-light">Saturday - Sunday:</h6>
-                    <p class="mb-0">09.00 AM - 12.00 PM</p>
+                    <p class="mb-4">09.00 AM - 05.00 PM</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>
@@ -165,11 +163,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
+                    <p>Nabunturan is a barangay in the municipality of Barili, in the province of Cebu. Its population as determined by the 2020 Census was 877. This represented 1.09% of the total population of Barili.</p>
+                   
                 </div>
             </div>
         </div>

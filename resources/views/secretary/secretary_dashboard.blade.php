@@ -14,7 +14,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1, maximum-scale=1"
 		/>
-
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Google Font -->
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -73,7 +73,6 @@
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
-
 		<!-- End Google Tag Manager -->
 	</head>
 	<body>
@@ -81,10 +80,6 @@
 		<div class="header">
 			<div class="header-left">
 				<div class="menu-icon bi bi-list"></div>
-				<div
-					class="search-toggle-icon bi bi-search"
-					data-toggle="header_search"
-				></div>
 			</div>
 			<div class="header-right">
 
@@ -166,32 +161,26 @@
 					</div>
 				</div>
 				<div class="user-info-dropdown">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-						> 
-							<span class="user-icon">
-								<img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" />
-							</span>
-							@if(auth()->check())
-							<span class="user-name">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </span>
-							@endif
-						</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-						>
-							<a class="dropdown-item" href="profile.html"
-								><i class="dw dw-user1"></i> My Profile</a
-							>
-							<a class="dropdown-item" href="{{route('secretarylogout')}}"
-								><i class="dw dw-logout"></i> Log Out</a
-							>
+							<div class="dropdown">
+								<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+									<span class="user-icon">
+										<img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="" />
+									</span>
+									@if(auth()->check())
+									<span class="user-name">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span>
+									@endif
+								</a>
+								<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+									<!-- Open the modal when clicking on "My Profile" -->
+									<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#myProfileModal">
+										<i class="dw dw-user1"></i> My Profile
+									</a>
+									<a class="dropdown-item"  onclick="return confirm('Are you sure you want to Logout?');" href="{{ route('secretarylogout') }}">
+										<i class="dw dw-logout"></i> Log Out
+									</a>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
 					</div>
 				</div>
 			</div>
@@ -369,7 +358,7 @@
 
 		<div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="index.html">
+				<a href="#">
 				<h5>Barangay Connect</h5>
 				</a>
 				<div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -548,7 +537,7 @@
 				<div class="col-xl-7 mb-30">
 					<div class="card-box height-100-p pd-20 position-relative">
 						@if($document_requests->isNotEmpty())
-						<button id="exportChartButton" data-chart-id="barChart" style="position: absolute; top: 0; right: 0; margin-right:20px; margin-top: 3px;" class="btn btn-link position-absolute top-0 start-0 mt-3"><i class="dw dw-export"></i> Export</button>
+						<button id="exportChartButton" data-chart-id="barChart" style="position: absolute; top: 0; right: 0; margin-right:-250px; margin-top: 3px;" class="btn btn-link position-absolute top-0 start-0 mt-3"><i class="dw dw-export"></i> Export</button>
 						@endif
 						<h2 class="h4 mb-20">Transaction Status</h2>
 
@@ -564,7 +553,7 @@
 				<div class="col-xl-5 mb-30">
 					<div class="card-box height-100-p pd-20">
 						@if($document_requests->isNotEmpty())
-						<button id="exportChartButton1" data-chart-id="pieChart" style="position: absolute; top: 0; right: 0; margin-right:23px; margin-top: 3px;" class="btn btn-link position-absolute top-0 start-0 mt-3"><i class="dw dw-export"></i> Export</button>
+						<button id="exportChartButton1" data-chart-id="pieChart" style="position: absolute;  right: 0; margin-right:-270px; margin-top: -50px;" class="btn btn-link position-absolute top-0 start-0 mt-3"><i class="dw dw-export"></i> Export</button>
 						@endif
 						<h2 class="h4 mb-20">Requested Documents</h2>
 
@@ -631,6 +620,151 @@
 			</div>
 		</div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">My Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+				<form id="updateProfileForm" class="modal-content" method="POST" action="{{ route('secretary.updateProfileSecretary') }}">
+    @csrf
+				<div class="modal-body">
+					@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
+						<div class="row g-2">
+							<div class="col mb-0">
+								<label for="emailBackdrop" class="form-label">Firstname</label>
+								<input
+									type="first_name"
+									name="first_name"
+									id="firstnameBackdrop"
+									class="form-control"
+									placeholder="xxxx@xxx.xx"
+									value="{{ auth()->check() ? auth()->user()->first_name : '' }}"
+									
+								/>
+							</div>
+							<div class="col mb-0">
+								<label for="dobBackdrop" class="form-label">Middle Name</label>
+								<input
+									type="middlename"
+									name="middle_name"
+									id="middlenameBackdrop"
+									class="form-control"
+									value="{{ auth()->check() ? auth()->user()->middle_name : '' }}"
+								/>
+							</div>
+						</div>
+						<div class="row g-2">
+							<div class="col mb-0">
+								<label for="emailBackdrop" class="form-label">Lastname</label>
+								<input
+									type="lastname"
+									name="last_name"
+									id="lastnameBackdrop"
+									class="form-control"
+									placeholder="xxxx@xxx.xx"
+									value="{{ auth()->check() ? auth()->user()->last_name : '' }}"
+									
+								/>
+							</div>
+							<div class="col mb-0">
+								<label for="dobBackdrop" class="form-label">Contact Number</label>
+								<input
+									type="contact"
+									name="contact_number"
+									id="middlenameBackdrop"
+									class="form-control"
+									value="{{ auth()->check() ? auth()->user()->contact_number : '' }}"
+								/>
+							</div>
+						</div>
+						<div class="row g-2">
+							<div class="col mb-0">
+								<label for="emailBackdrop" class="form-label">Email</label>
+								<input
+									type="email"
+									id="emailBackdrop"
+									class="form-control"
+									name="email"
+									placeholder="xxxx@xxx.xx"
+									value="{{ auth()->check() ? auth()->user()->email : '' }}" 
+									
+								/>
+							</div>
+							<div class="col mb-0">
+								<label for="dobBackdrop" class="form-label">DOB</label>
+								<input
+									type="date"
+									id="dobBackdrop"
+									name="birthday"
+									class="form-control"
+									value="{{ auth()->check() ? auth()->user()->birthday : '' }}"
+								/>
+							</div>
+						</div>
+						<div class="row g-2">
+							<div class="col mb-0">
+								<label for="addressBackdrop" class="form-label">Address</label>
+								<select id="addressBackdrop" class="form-select" name="address">
+									<option value="">Select Address</option>
+									<option value="Proper Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
+									<option value="Sitio San Roque Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
+									<option value="Sitio Cabinay Nabunturan Barili Cebu" {{ auth()->check() && auth()->user()->address === 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+							<div class="col mb-0">
+								<label for="genderBackdrop" class="form-label">Gender</label>
+								<select id="genderBackdrop" class="form-select" name="gender">
+									<option value="">Select Gender</option>
+									<option value="male" {{ auth()->check() && auth()->user()->gender === 'male' ? 'selected' : '' }}>male</option>
+									<option value="female" {{ auth()->check() && auth()->user()->gender === 'female' ? 'selected' : '' }}>female</option>
+								</select>
+							</div>
+						</div>
+						<div class="row g-2">
+						<div class="col mb-0">
+							<label for="newPasswordBackdrop" class="form-label">New Password</label>
+							<input
+								type="password"
+								id="newPasswordBackdrop"
+								name="new_password"
+								class="form-control"
+								placeholder="Enter new password"
+							/>
+						</div>
+						<div class="col mb-0">
+							<label for="confirmPasswordBackdrop" class="form-label">Confirm Password</label>
+							<input
+								type="password"
+								id="confirmPasswordBackdrop"
+								name="new_password_confirmation"
+								class="form-control"
+								placeholder="Confirm new password"
+							/>
+						</div>
+					</div>
+					<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Update your Profile?');">Save Changes</button>
+                </div>
+					</div>
+					
+			</form>
+            
+            </div>
+        </div>
+    </div>
 
 		<!-- js -->
 		<script src="/vendors/scripts/core.js"></script>
@@ -643,6 +777,9 @@
 		<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/vendors/scripts/dashboard.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 		<!-- Google Tag Manager (noscript) -->
 		<noscript
 			><iframe

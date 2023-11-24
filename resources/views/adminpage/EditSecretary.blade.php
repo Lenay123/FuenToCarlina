@@ -221,7 +221,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('adminpagelogout')}}">
+                      <a class="dropdown-item"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('adminpagelogout')}}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

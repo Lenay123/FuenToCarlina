@@ -142,7 +142,7 @@
 					    <ul class="app-menu footer-menu list-unstyled">
 						    <li class="nav-item">
 						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link" href="{{route('logout')}}">
+						        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">
 							        <span class="nav-icon">
 										<i class="fa-solid fa-right-from-bracket"></i>
 							        </span>
@@ -270,10 +270,10 @@
 						    </div><!--//app-card-header-->
 						    <div class="app-card-body px-4">
 							    
-							    <div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
+							    <div class="intro"> This is a document issued by the barangay in the Philippines to certify that an individual or family qualifies as indigent or financially disadvantaged. </div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayIndigency') }}">Create New</a>
+							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayIndigency') }}">Request Now</a>
 						    </div><!--//app-card-footer-->
 						</div><!--//app-card-->
 				    </div><!--//col-->
@@ -297,10 +297,10 @@
 						    </div><!--//app-card-header-->
 						    <div class="app-card-body px-4">
 							    
-							    <div class="intro">Pellentesque varius, elit vel volutpat sollicitudin, lacus quam efficitur augue</div>
+							    <div class="intro"> This certificate holds significant importance as it serves as proof of residency within Barangay Nabunturan. </div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayCertificate') }}">Create New</a>
+							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayCertificate') }}">Request Now</a>
 						    </div><!--//app-card-footer-->
 						</div><!--//app-card-->
 				    </div><!--//col-->
@@ -324,10 +324,10 @@
 						    </div><!--//app-card-header-->
 						    <div class="app-card-body px-4">
 							    
-							    <div class="intro">Sed maximus, libero ac pharetra elementum, turpis nisi molestie neque, et tincidunt velit turpis non enim.</div>
+							    <div class="intro">This is a critical document required for individuals or entities engaging in business activities within a specific barangay in the Philippines. </div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayBusinessPermit') }}">Create New</a>
+							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayBusinessPermit') }}">Request Now</a>
 						    </div><!--//app-card-footer-->
 						</div><!--//app-card-->
 				    </div><!--//col-->
@@ -352,10 +352,10 @@
 						    </div><!--//app-card-header-->
 						    <div class="app-card-body px-4">
 							    
-							    <div class="intro">Sed maximus, libero ac pharetra elementum, turpis nisi molestie neque, et tincidunt velit turpis non enim.</div>
+							    <div class="intro">This is a valuable document that serves as proof of residence within Barangay Nabunturan, carrying significant importance in various aspects of daily life. </div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayID') }}">Create New</a>
+							   <a class="btn app-btn-secondary" href="{{ route('residentpage.barangayID') }}">Request Now</a>
 						    </div><!--//app-card-footer-->
 						</div><!--//app-card-->
 				    </div><!--//col-->

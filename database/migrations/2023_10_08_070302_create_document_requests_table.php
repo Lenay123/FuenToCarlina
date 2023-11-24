@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('tracker_number')->unique();
             $table->string('full_name');
             $table->text('purpose');
-            $table->enum('document_type', ['Barangay Indigency', 'Barangay Certificate', 'Barangay Business Permit', 'Barangay ID'], 500);
-            $table->enum('id_type', ['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate', 'National ID', 'SSS'], 500);
+            $table->enum('document_type', ['Barangay Indigency', 'Barangay Certificate', 'Barangay Business Permit', 'Barangay ID']);
+            $table->string('id_type'); // Change to VARCHAR
             $table->string('id_number');
             $table->string('status');
             $table->string('image')->nullable();
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->enum('gender', ['Male', 'Female'])->nullable();
             $table->date('document_date')->nullable();
             $table->string('contact_number')->nullable();
+            $table->string('document_time');
             $table->timestamps();
         });
         

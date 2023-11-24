@@ -113,8 +113,8 @@
                             <div class="d-flex align-items-center justify-content-center border border-5 border-white mb-4" style="width: 75px; height: 75px;">
                                 <i class="fa fa-water fa-2x text-primary"></i>
                             </div>
-                            <h4 class="mb-3">Barangay Clearance</h4>
-                            <p>To establish a modern and efficient document To establish a modern and efficient document To establish a modern and efficient document </p>
+                            <h4 class="mb-3">Barangay Business Permit</h4>
+                            <p>This is a critical document required for individuals or entities engaging in business activities within a specific barangay in the Philippines. This permit holds paramount importance as it signifies compliance with local regulations and allows businesses to operate legally at the community level. It is a fundamental prerequisite for obtaining higher-level business permits and licenses from municipal or city offices. </p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
                             <a href="/homepage/login" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
@@ -124,7 +124,7 @@
                                 <i class="fa fa-toilet fa-2x text-primary"></i>
                             </div>
                             <h4 class="mb-3">Barangay Indigency</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
+                            <p> This is a document issued by the barangay in the Philippines to certify that an individual or family qualifies as indigent or financially disadvantaged. It plays a crucial role in ensuring that those in need receive the necessary support, promoting inclusivity and addressing socio-economic disparities at the grassroots level..</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
                             <a href="/homepage/login" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
@@ -134,7 +134,7 @@
                                 <i class="fa fa-shower fa-2x text-primary"></i>
                             </div>
                             <h4 class="mb-3">Barangay Certificate</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
+                            <p>This certificate holds significant importance as it serves as proof of residency within Barangay Nabunturan. It is frequently required for various transactions, such as employment, business permits, and government-related services. This also plays a vital role in local governance, facilitating community engagement, participation in elections, and access to emergency services.</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
                             <a href="/homepage/login" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
@@ -144,7 +144,7 @@
                                 <i class="fa fa-tint fa-2x text-primary"></i>
                             </div>
                             <h4 class="mb-3">Barangay ID</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam justo.</p>
+                            <p> This is a valuable document that serves as proof of residence within Barangay Nabunturan, carrying significant importance in various aspects of daily life. It is essential for transactions such as opening a bank account, availing local community services, participating in elections and contributing to the efficient functioning of local governance structures.</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Quality Service</p>
                             <p class="text-primary fw-medium"><i class="fa fa-check text-success me-2"></i>Customer Satisfaction</p>
                             <a href="/homepage/login" class="btn bg-white text-primary w-100 mt-2">Request Now<i class="fa fa-arrow-right text-secondary ms-2"></i></a>
@@ -247,8 +247,6 @@
                     <h4 class="text-light mb-4">Opening Hours</h4>
                     <h6 class="text-light">Monday - Friday:</h6>
                     <p class="mb-4">09.00 AM - 05.00 PM</p>
-                    <h6 class="text-light">Saturday:</h6>
-                    <p class="mb-0">09.00 AM - 12.00 PM</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>
@@ -259,7 +257,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <p>Nabunturan is a barangay in the municipality of Barili, in the province of Cebu. Its population as determined by the 2020 Census was 877. This represented 1.09% of the total population of Barili.</p>
                 </div>
             </div>
         </div>

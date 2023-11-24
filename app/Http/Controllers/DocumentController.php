@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\DocumentRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DocumentController extends Controller
 {
@@ -17,21 +18,27 @@ class DocumentController extends Controller
             'purpose' => 'required',
             'id_number' => 'required',
             'business_name' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'document_type' => 'required|in:Barangay Indigency,Barangay Certificate,Barangay Business Permit,Barangay ID',
-            'id_type' => 'required|in:NSO with School ID,NBI Clearance,Voters ID,Drivers License,Voters Certificate,National ID,SSS',
+            'id_type' => ['required', Rule::in(['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate', 'National ID', 'SSS', 'Others'])],
+            'specific_id' => 'required_if:id_type,Others', // Assuming the specific ID input has the name 'specific_id'
             'birthday' => 'required|date',
             'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
             'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
             'gender' => 'nullable|in:Male,Female',
             'contact_number'=> 'nullable',
-            'document_date' => 'required|date|after_or_equal:today', // Ensure document_date is not in the past
-            'document_date' => function ($attribute, $value, $fail) {
-                $dayOfWeek = date('N', strtotime($value));
-                if ($dayOfWeek >= 6) { // 6 is Saturday, 7 is Sunday
-                    $fail('Weekends are not allowed for document pickup.');
-                }
-            },
+            'document_time' => 'required|in:09:00,09:30,10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00',
+            'document_date' => [
+                'required',
+                'date',
+                'after_or_equal:today', // Ensure document_date is not in the past
+                function ($attribute, $value, $fail) {
+                    $dayOfWeek = date('N', strtotime($value));
+                    if ($dayOfWeek >= 6) { // 6 is Saturday, 7 is Sunday
+                        $fail('Weekends are not allowed for document pickup.');
+                    }
+                },
+            ],
         ]);
         
         $userId = Auth::id();
@@ -44,7 +51,8 @@ class DocumentController extends Controller
         $emps->contact_number = $request->input('contact_number');
         $emps->document_type = $request->input('document_type');
         $emps->business_name = $request->input('business_name');
-        $emps->id_type = $request->input('id_type');
+        $emps->id_type = $request->input('id_type') === 'Others' ? 'Others ' . $request->input('specific_id') : $request->input('id_type');
+        $emps->document_time = $request->input('document_time'); // Assign the document_time field
         $emps->user_id = $userId;
         $emps->tracker_number = $trackerNumber;
         $emps->status = 'Pending'; // Default status

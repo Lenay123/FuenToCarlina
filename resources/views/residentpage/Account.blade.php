@@ -130,7 +130,7 @@
 					    <ul class="app-menu footer-menu list-unstyled">
 						    <li class="nav-item">
 						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link" href="{{route('logout')}}">
+						        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">
 							        <span class="nav-icon">
 										<i class="fa-solid fa-right-from-bracket"></i>
 							        </span>

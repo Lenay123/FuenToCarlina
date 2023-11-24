@@ -13,7 +13,6 @@ class DashboardController extends Controller
     {
         $userCount = User::where('role', 'user')->count();
         $secretaryCount = User::where('role', 'secretary')->count();
-        $adminCount = AdminUser::count();
     
         // Count all document requests
         $totalDocumentRequests = DocumentRequest::count();
@@ -35,7 +34,6 @@ class DashboardController extends Controller
         return view('/adminpage/AdminDashboard', compact(
             'userCount',
             'secretaryCount',
-            'adminCount',
             'totalDocumentRequests',
             'document_requests',
             'percentageGrowth',

@@ -244,7 +244,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('adminpagelogout')}}">
+                      <a class="dropdown-item"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('adminpagelogout')}}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -578,7 +578,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Officia?');">Save</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Add this Activity?');">Save</button>
             </div>
         </form>
     </div>
