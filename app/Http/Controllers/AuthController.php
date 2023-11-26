@@ -209,36 +209,54 @@ class AuthController extends Controller
             Auth::logout();
             return redirect()->route('login');
     }
+
     public function updateProfile(Request $request)
     {
         // Validate the incoming data
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'address' => 'nullable|in:' . implode(',', User::ADDRESS_OPTIONS),
+            'contact_number' => 'nullable|string|max:20',
+            'gender' => 'nullable|in:male,female',
+            'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
             'password' => 'nullable|min:8|confirmed',
+            'password' => 'nullable|min:8|confirmed',
+            'current_password' => 'required_with:password',
+        ], [
+            'password.min' => 'The new password must be at least 8 characters.',
+            'password.confirmed' => 'The new password confirmation does not match.',
         ]);
-
+    
         // Get the authenticated user
         $user = auth()->user();
-
-        // Update the user's name and email
+    
+        // Check if the current password is correct
+        if ($request->filled('current_password') && !Hash::check($request->input('current_password'), $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+    
+        // Update the user's name, email, and additional fields
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->middle_name = $request->input('middle_name');
+        $user->address = $request->input('address');
+        $user->contact_number = $request->input('contact_number');
+        $user->gender = $request->input('gender');
         $user->email = $request->input('email');
-
+    
         // Update the user's password if a new one was provided
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
-
+    
         // Save the user's updated information
         $user->save();
-
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Profile updated successfully.');
+    
+        // Redirect back with success or error message
+        $message = $request->filled('password') ? 'Password changed successfully.' : 'Profile updated successfully.';
+        return redirect()->back()->with('success', $message);
     }
 
 

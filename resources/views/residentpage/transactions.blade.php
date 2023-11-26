@@ -168,11 +168,7 @@
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 							    <div class="col-auto">
-								    <form class="table-search-form row gx-1 align-items-center">
-					                    <div class="col-auto">
-					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search.....">
-					                    </div>
-					                </form>
+								   
 					                
 							    </div><!--//col-->
 								<div class="col-auto">

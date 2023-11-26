@@ -299,8 +299,11 @@
                             @if ($document_request->status === 'Pending' || $document_request->status === 'To be Claimed' || $document_request->status === 'In Progress')
                                 <button type="button" class="btn btn-danger" disabled>Delete</button>
                             @else
-                            <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
-                            @endif
+                            <form method="POST" action="{{ route('adminpage.deletePermit', $document_request->id) }}" onsubmit="return confirm('Are you sure you want to delete this document request?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -451,6 +451,8 @@
                             <th>Request Status</th>
                             <th>Date Requested</th>
                             <th>Date for Document <br> Pickup</th>
+							<th>Time for Document <br> Pickup</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -463,6 +465,13 @@
                                 <td>{{ $document_request->id_number }}</td>
                                 <td>{{ $document_request->status }}</td>
                                 <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
+								<td>
+									@if ($document_request->document_time)
+													{{ \Carbon\Carbon::createFromFormat('H:i', $document_request->document_time)->format('g:i A') }}
+												@else
+													No time specified
+												@endif
+								</td>
                                 <td>{{ $document_request->document_date}}</td>
                                 <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed') disabled @endif>

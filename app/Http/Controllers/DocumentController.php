@@ -27,8 +27,19 @@ class DocumentController extends Controller
             'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
             'gender' => 'nullable|in:Male,Female',
             'contact_number'=> 'nullable',
-            'document_time' => 'required|in:09:00,09:30,10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00',
-            'document_date' => [
+            'document_time' => [
+                'required',
+                'in:09:00,09:30,10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00',
+                function ($attribute, $value, $fail) use ($request) {
+                    $selectedDate = $request->input('document_date');
+                    $currentTime = date('H:i');
+                    
+                    if ($selectedDate == now()->toDateString() && strtotime($value) <= strtotime($currentTime)) {
+                        $fail('The selected document time is invalid.');
+                    }
+                },
+            ],
+                'document_date' => [
                 'required',
                 'date',
                 'after_or_equal:today', // Ensure document_date is not in the past
@@ -75,8 +86,12 @@ class DocumentController extends Controller
         
     
         $emps->save();
-    
+        // $latestRequest = DocumentRequest::latest()->first();
+        // $latestTrackerNumber = $latestRequest ? $latestRequest->tracker_number : null;
+        // // $latestTrackerNumber = $emps->tracker_number;
+
         return redirect('/residentpage/TrackerNumber')->with('success', 'Data saved');
+
     }
     
 
@@ -182,7 +197,7 @@ class DocumentController extends Controller
     }
     public function testimonial()
     {
-        return view('testimonial.service');
+        return view('homepage.testimonial');
     }
 
 }

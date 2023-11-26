@@ -299,4 +299,54 @@ public function claimDocumentPermit(DocumentRequest $document_request)
 
     return redirect()->back()->with('success', 'Document marked as claimed');
 }
+
+public function deleteCertificate($id)
+{
+    $document_request = DocumentRequest::find($id);
+    
+    if (!$document_request) {
+        return redirect()->route('certificate.transaction')->with("error", "Document not found.");
+    }
+    $document_request->delete();
+    return redirect()->route('certificate.transaction')->with("success", "Document deleted successfully.");
+
+}
+
+public function deleteID($id)
+{
+    $document_request = DocumentRequest::find($id);
+    
+    if (!$document_request) {
+        return redirect()->route('id.transaction')->with("error", "Document not found.");
+    }
+    $document_request->delete();
+    return redirect()->route('id.transaction')->with("success", "Document deleted successfully.");
+
+}
+
+public function deleteIndigency($id)
+{
+    $document_request = DocumentRequest::find($id);
+    
+    if (!$document_request) {
+        return redirect()->route('indigency.transaction')->with("error", "Document not found.");
+    }
+    $document_request->delete();
+    return redirect()->route('indigency.transaction')->with("success", "Document deleted successfully.");
+
+}
+
+public function deletePermit($id)
+{
+    $document_request = DocumentRequest::find($id);
+    
+    if (!$document_request) {
+        return redirect()->route('permit.transaction')->with("error", "Document not found.");
+    }
+    $document_request->delete();
+    return redirect()->route('permit.transaction')->with("success", "Document deleted successfully.");
+
+}
+
+
 }

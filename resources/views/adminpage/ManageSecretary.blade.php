@@ -321,7 +321,7 @@
                       @endforeach
                       @else
                       <tr>
-                          <td colspan="5">There are no Residents.</td>
+                          <td colspan="5">There are no Secretary.</td>
                       </tr>
                       @endif
                   </tbody>

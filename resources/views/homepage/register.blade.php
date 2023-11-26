@@ -69,8 +69,13 @@
 
         <form method="POST" action="{{route('register.post')}}" method="POST">
             @csrf
+            {{-- <div class="form-group">
+                <label for="Photo">Profile Picture:</label>
+                <input type="file" class="form-control" name="image" accept="image/jpeg, image/png, image/jpg, image/gif">
+            </div> --}}
 
             <div class="row">
+                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="first_name">First Name:</label>
@@ -85,7 +90,7 @@
                     </div>
                 </div>
             </div>
-
+          
             <div class="form-group">
                 <label for="middle_name">Middle Name:</label>
                 <input type="text" class="form-control" name="middle_name">

@@ -71,7 +71,7 @@ Route::get('/homepage/about', [DocumentController::class, 'about'])->name('about
 Route::get('/homepage/service', [DocumentController::class, 'service'])->name('service');
 Route::get('/homepage/activities', [ActivityController::class, 'showActivityHome'])->name('activities');
 Route::get('/homepage/barangayofficials', [OfficialController::class, 'showOfficialsHome'])->name('barangayofficials');
-Route::get('/homepage/testimonial', [DocumentController::class, 'about'])->name('testimonial');
+Route::get('/homepage/testimonial', [DocumentController::class, 'testimonial'])->name('testimonial');
 Route::get('/homepage/contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('/homepage/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
 
@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('residentpage/resident', [AuthController::class, 'showResident'])->name('residentpage.resident');
     Route::get('residentpage/resident', [DocumentController::class, 'showStatus'])->name('residentpage.resident');
     Route::post('/residentpage/Account', [AuthController::class, 'updateProfile'])->name('residentpage.updateProfile');
+    
 
 });
 
@@ -134,6 +135,14 @@ Route::put('/adminpage/UpdateOfficial/{id}', [OfficialController::class, 'update
 Route::get('/adminpage/EditActivity/{id}', [ActivityController::class, 'editActivity'])->name('adminpage.editActivity');
 Route::put('/adminpage/UpdateActivity/{id}', [ActivityController::class, 'updateActivity'])->name('adminpage.updateActivity');
 
+Route::delete('/adminpage/DeleteCertificate/{id}', [DashboardController::class, 'deleteCertificate'])->name('adminpage.deleteCertificate');
+// Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showCertificate'])->name('adminpage.showCertificate');
+Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('adminpage.showBarangayCertificateTransaction');
+Route::delete('/adminpage/DeleteID/{id}', [DashboardController::class, 'deleteID'])->name('adminpage.deleteID');
+Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('adminpage.showBarangayCertificateTransaction');
+
+Route::delete('/adminpage/DeleteIndigency/{id}', [DashboardController::class, 'deleteIndigency'])->name('adminpage.deleteIndigency');
+Route::delete('/adminpage/DeletePermit/{id}', [DashboardController::class, 'deletePermit'])->name('adminpage.deletePermit');
 
 
 
@@ -150,6 +159,8 @@ Route::get('/residentpage/barangayIndigency', [DocumentController::class, 'baran
 Route::get('/residentpage/barangayBusinessPermit', [DocumentController::class, 'barangayBusinessPermit'])->name('residentpage.barangayBusinessPermit');
 Route::get('/residentpage/Account', [DocumentController::class, 'account'])->name('residentpage.Account');
 Route::get('/residentpage/barangayID', [DocumentController::class, 'barangayID'])->name('residentpage.barangayID');
+// Route::get('/residentpage/barangayBusinessPermit/{tracker_number}', [DocumentController::class, 'downloadTemplate'])->name('downloadTemplate');
+
 
 // Secretary Routes
 Route::group(['middleware' => 'auth'], function (){

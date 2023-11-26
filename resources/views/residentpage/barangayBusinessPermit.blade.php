@@ -18,12 +18,99 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="/css/portal.css">
 
 </head> 
+<style>
+.modal#statusSuccessModal .modal-content, 
+.modal#statusErrorsModal .modal-content {
+	border-radius: 10px;
+}
+.modal#statusSuccessModal .modal-content svg, 
+.modal#statusErrorsModal .modal-content svg {
+	width: 100px; 
+	display: block; 
+	margin: 0 auto;
+}
+.modal#statusSuccessModal .modal-content .path, 
+.modal#statusErrorsModal .modal-content .path {
+	stroke-dasharray: 1000; 
+	stroke-dashoffset: 0;
+}
+.modal#statusSuccessModal .modal-content .path.circle, 
+.modal#statusErrorsModal .modal-content .path.circle {
+	-webkit-animation: dash 0.9s ease-in-out; 
+	animation: dash 0.9s ease-in-out;
+}
+.modal#statusSuccessModal .modal-content .path.line, 
+.modal#statusErrorsModal .modal-content .path.line {
+	stroke-dashoffset: 1000; 
+	-webkit-animation: dash 0.95s 0.35s ease-in-out forwards; 
+	animation: dash 0.95s 0.35s ease-in-out forwards;
+}
+.modal#statusSuccessModal .modal-content .path.check, 
+.modal#statusErrorsModal .modal-content .path.check {
+	stroke-dashoffset: -100; 
+	-webkit-animation: dash-check 0.95s 0.35s ease-in-out forwards; 
+	animation: dash-check 0.95s 0.35s ease-in-out forwards;
+}
 
+@-webkit-keyframes dash { 
+	0% {
+		stroke-dashoffset: 1000;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes dash { 
+	0% {
+		stroke-dashoffset: 1000;
+	}
+	100%{
+		stroke-dashoffset: 0;
+	}
+}
+@-webkit-keyframes dash { 
+	0% {
+		stroke-dashoffset: 1000;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes dash { 
+	0% {
+		stroke-dashoffset: 1000;}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+@-webkit-keyframes dash-check { 
+	0% {
+		stroke-dashoffset: -100;
+	}
+	100% {
+		stroke-dashoffset: 900;
+	}
+}
+@keyframes dash-check {
+	0% {
+		stroke-dashoffset: -100;
+	}
+	100% {
+		stroke-dashoffset: 900;
+	}
+}
+.box00{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+</style>
 <body class="app">   	
     <header class="app-header fixed-top">	   	            
         <div class="app-header-inner">  
@@ -175,7 +262,7 @@
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
 		                <h3 class="section-title">General</h3>
-		                <div class="section-intro">Settings section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+		                <div class="section-intro">This is a critical document required for individuals or entities engaging in business activities within a specific barangay in the Philippines. </div>
 	                </div>
 	                <div class="col-12 col-md-8">
 				<div class="app-card app-card-settings shadow-sm p-4">
@@ -281,7 +368,9 @@
 
 						<div class="modal-footer">
 							<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
-							<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
+							<button type="submit" class="btn btn-primary" onclick="return validateForm();">Request</button>
+							{{-- <button type="submit" class="btn btn-success m-1">Request Now</button> --}}
+
 						</div>
 					</form>
 				</div><!--//app-card-body-->
@@ -295,6 +384,53 @@
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 
+		{{-- modal --}}
+		<div class="modal fade" id="statusSuccessModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center p-lg-4" style="height: 70vh;">
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+							<circle class="path circle" fill="none" stroke="#198754" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+							<polyline class="path check" fill="none" stroke="#198754" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+						</svg>
+						<h4 class="text-success mt-3">Successfully Requested!</h4>
+						<p class="mt-3">Here is your Reference Number:</p>
+						@php
+							try {
+								$latestRequest = \App\Models\DocumentRequest::latest()->first();
+								$latestTrackerNumber = $latestRequest ? $latestRequest->tracker_number : null;
+							} catch (\Exception $e) {
+								// Log or print the exception for debugging
+								dd($e->getMessage());
+								$latestTrackerNumber = null;
+							}
+						@endphp
+
+						@if ($latestTrackerNumber)
+							<p><h1><b>{{ $latestTrackerNumber }}</b></h1></p>
+						@else
+							<p>No tracker number found.</p>
+						@endif
+						<p class="mt-3" style="text-align: justify;">
+							Note: Please take a screenshot of your Reference Number! Your REFERENCE NUMBER shall serve as your GATE PASS when you enter the Barangay Document Processing Area.
+							To avoid inconvenience and long lines, please bring your REFERENCE NUMBER to the BARANGAY HALL. Thank you!
+						</p>
+		
+		
+						<a href="/residentpage/transactions">
+							<button class="btn btn-success" data-dismiss="modal"><span>Go to Transactions</span></button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
 
 
 	    <footer class="app-footer">
@@ -316,10 +452,173 @@
     <!-- Charts JS -->
     <script src="/plugins/chart.js/chart.min.js"></script> 
     <script src="/js/index-charts.js"></script> 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
     <!-- Page Specific JS -->
     <script src="/js/app.js"></script> 
 	<script>
+
+// function validateAndRequest() {
+//     // Add your validation logic here
+
+//     var fullName = document.querySelector('input[name="full_name"]').value;
+//     var businessName = document.querySelector('input[name="business_name"]').value;
+//     var birthday = document.querySelector('input[name="birthday"]').value;
+//     var address = document.querySelector('select[name="address"]').value;
+//     var civilStatus = document.querySelector('select[name="civil_status"]').value;
+//     var documentDate = document.querySelector('input[name="document_date"]').value;
+//     var documentTime = document.querySelector('select[name="document_time"]').value;
+//     var documentType = document.querySelector('select[name="document_type"]').value;
+//     var idType = document.querySelector('select[name="id_type"]').value;
+//     var otherIdType = document.querySelector('input[name="specific_id"]').value;
+//     var idNumber = document.querySelector('input[name="id_number"]').value;
+//     var purpose = document.querySelector('textarea[name="purpose"]').value;
+
+//     // Example: Check if fullName is not empty
+//     if (!fullName.trim()) {
+//         alert('Please fill in the Full Name field.');
+//         return;
+//     }
+
+//     if (!businessName.trim()) {
+//         alert('Please fill in the Business Name field.');
+//         return;
+//     }
+
+//     if (!birthday.trim()) {
+//         alert('Please fill in the Birthday field.');
+//         return;
+//     }
+
+//     if (!address.trim()) {
+//         alert('Please select an Address.');
+//         return;
+//     }
+
+//     if (!civilStatus.trim()) {
+//         alert('Please select a Civil Status.');
+//         return;
+//     }
+
+//     if (!documentDate.trim()) {
+//         alert('Please fill in the Document Date field.');
+//         return;
+//     }
+
+//     if (!documentTime.trim()) {
+//         alert('Please select a Document Time.');
+//         return;
+//     }
+
+//     if (!documentType.trim()) {
+//         alert('Please select a Document Type.');
+//         return;
+//     }
+
+//     if (!idType.trim()) {
+//         alert('Please select an ID Type.');
+//         return;
+//     }
+//     if (idType === 'Others' && !otherIdType.trim()) {
+//         alert('Please specify Other ID Type.');
+//         return;
+//     }
+
+//     if (!idNumber.trim()) {
+//         alert('Please fill in the ID Number field.');
+//         return;
+//     }
+
+//     if (!purpose.trim()) {
+//         alert('Please fill in the Purpose field.');
+//         return;
+//     }
+//     // Add similar checks for other fields
+
+//     // If all validations pass, then show the modal
+//     $('#statusSuccessModal').modal('show');
+	
+// }
+
+function validateForm() {
+            // Get values from form fields
+            var fullName = document.querySelector('input[name="full_name"]').value;
+			var businessName = document.querySelector('input[name="business_name"]').value;
+			var birthday = document.querySelector('input[name="birthday"]').value;
+			var address = document.querySelector('select[name="address"]').value;
+			var civilStatus = document.querySelector('select[name="civil_status"]').value;
+			var documentDate = document.querySelector('input[name="document_date"]').value;
+			var documentTime = document.querySelector('select[name="document_time"]').value;
+			var documentType = document.querySelector('select[name="document_type"]').value;
+			var idType = document.querySelector('select[name="id_type"]').value;
+			var otherIdType = document.querySelector('input[name="specific_id"]').value;
+			var idNumber = document.querySelector('input[name="id_number"]').value;
+			var purpose = document.querySelector('textarea[name="purpose"]').value;
+
+			// Example: Check if fullName is not empty
+			if (!fullName.trim()) {
+				alert('Please fill in the Full Name field.');
+				return;
+			}
+
+			if (!businessName.trim()) {
+				alert('Please fill in the Business Name field.');
+				return;
+			}
+
+			if (!birthday.trim()) {
+				alert('Please fill in the Birthday field.');
+				return;
+			}
+
+			if (!address.trim()) {
+				alert('Please select an Address.');
+				return;
+			}
+
+			if (!civilStatus.trim()) {
+				alert('Please select a Civil Status.');
+				return;
+			}
+
+			if (!documentDate.trim()) {
+				alert('Please fill in the Document Date field.');
+				return;
+			}
+
+			if (!documentTime.trim()) {
+				alert('Please select a Document Time.');
+				return;
+			}
+
+			if (!documentType.trim()) {
+				alert('Please select a Document Type.');
+				return;
+			}
+
+			if (!idType.trim()) {
+				alert('Please select an ID Type.');
+				return;
+			}
+			if (idType === 'Others' && !otherIdType.trim()) {
+				alert('Please specify Other ID Type.');
+				return;
+			}
+
+			if (!idNumber.trim()) {
+				alert('Please fill in the ID Number field.');
+				return;
+			}
+
+			if (!purpose.trim()) {
+				alert('Please fill in the Purpose field.');
+				return;
+			}
+
+            // Confirm before submitting the form
+            return confirm('Are you sure you want to Request this document?');
+        }
+		
     function showOtherField() {
         var selectedValue = document.getElementById("id_type").value;
         var otherField = document.getElementById("otherField");
@@ -357,7 +656,7 @@
             }
 
             if (isBeforeToday(selectedDate)) {
-                alert("The document date must be today or a future date.");
+                alert("The document pick up date must be today or a future date.");
                 dateInput.value = ""; // Reset the date input
             }
 

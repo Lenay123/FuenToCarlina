@@ -28,6 +28,110 @@
     <link id="theme-style" rel="stylesheet" href="/css/portal.css">
 
 </head> 
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+html,
+body {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.container-fostrap {
+  display: table-cell;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+.fostrap-logo {
+  width: 100px;
+  margin-bottom: 15px;
+}
+h1.heading {
+  color: #fff;
+  font-size: 1.15em;
+  font-weight: 900;
+  margin: 0 0 0.5em;
+  color: #505050;
+}
+@media (min-width: 450px) {
+  h1.heading {
+    font-size: 3.55em;
+  }
+}
+@media (min-width: 760px) {
+  h1.heading {
+    font-size: 3.05em;
+  }
+}
+@media (min-width: 900px) {
+  h1.heading {
+    font-size: 3.25em;
+    margin: 0 0 0.3em;
+  }
+}
+.card {
+  display: block;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.25s;
+}
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.img-card {
+  width: 100%;
+  height: 200px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  display: block;
+  overflow: hidden;
+}
+.img-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: all 0.25s ease;
+}
+.card-content {
+  padding: 15px;
+  text-align: left;
+}
+.card-title {
+  margin-top: 0px;
+  font-weight: 700;
+  font-size: 1.65em;
+}
+.card-title a {
+  color: #000;
+  text-decoration: none !important;
+}
+.card-read-more {
+  border-top: 1px solid #d4d4d4;
+}
+.card-read-more a {
+  text-decoration: none !important;
+  padding: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+
+</style>
 
 <body class="app">   	
     <header class="app-header fixed-top">	   	            
@@ -42,10 +146,6 @@
 					    </a>
 				    </div><!--//col-->
 		            <div class="app-search-box col">
-		                <form class="app-search-form">   
-							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
-				        </form>
 		            </div><!--//app-search-box-->
 		            
 		        
@@ -161,49 +261,44 @@
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
-	
-	<div class="content-box d-flex justify-content-center align-items-center" style="height: 100vh;">
-		<div class="container">
-			<div class="card" style="max-width: 800px; margin: 0 auto;">
-				<div class="card-body">
-					<div class="text-center">
-						<img src="../img/successfully.png" alt="Successfully Requested" id="modal-image" class="img-fluid" style="max-width: 100px">
-						<p class="modal-title"><strong>Successfully Requested</strong></p>
-						<p>Here is your Reference Number:</p>
-						@if ($tracker_number)
-							<p><h1><b>{{ $tracker_number->tracker_number }}</b></h1></p>
-						@else
-							<p>No tracker number found.</p>
-						@endif
-					</div>
-					<div class="description">
-						<strong>Note:</strong> We are processing your request; please check your SMS Notifications from time to time and also check your request STATUS on the TRANSACTIONS page. <br>
-					</div>
-				</div>
-			</div>
-	
-			<div class="card mt-3" style="max-width: 800px; margin: 0 auto;">
-				<div class="card-body">
-					<h7><b>Reminder:</b></h7>
-					<div class="description" style="text-align: justify;">
-						Please take a screenshot of your Reference Number! Your REFERENCE NUMBER shall serve as your GATE PASS when you enter the Barangay Document Processing Area. To avoid inconvenience and long lines, please bring your REFERENCE NUMBER to the BARANGAY HALL. Thank you!
-					</div>
-					<div class="text-center mt-3">
-						<a href="/residentpage/transactions">
-							<button type="button" class="btn btn-primary btn-lg">OK</button>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-    
-    
 
+	
+	
+  <section class="wrapper">
+    <div class="container-fostrap">
+
+      <div class="content">
+        <div class="container" >
+          <div class="row justify-content-center"> <!-- Center the content -->
+            <div class="col-xs-12 col-sm-4" >
+              <div class="card">
+                <a class="img-card" >
+                  <img src="https://xrc.bomboradyo.com/iloilo/2021/05/official-1.jpg" />
+                </a>
+                <div class="card-content">
+                  <h4 class="card-title">
+                    @if ($tracker_number)
+                    <p>Here is your Reference Number: <center>{{ $tracker_number->tracker_number }}</center></p>
+                    @else
+                      <p>No tracker number found.</p>
+                    @endif
+                  </h4>
+                  <p class="">
+                    Please take a screenshot of your Reference Number! Your REFERENCE NUMBER shall serve as your GATE PASS when you enter the Barangay Document Processing Area. To avoid inconvenience and long lines, please bring your REFERENCE NUMBER to the BARANGAY HALL. Thank you!
+                  </p>
+                </div>
+                <div class="card-read-more">
+                  <a href="/residentpage/transactions" class="btn btn-link btn-block">
+                    Go to Transaction
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 

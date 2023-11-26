@@ -177,7 +177,7 @@
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
 		                <h3 class="section-title">General</h3>
-		                <div class="section-intro">Settings section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+		                <div class="section-intro">This certificate holds significant importance as it serves as proof of residency within Barangay Nabunturan.  </div>
 	                </div>
 	                <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">
@@ -278,8 +278,8 @@
 				
 									<div class="modal-footer">
 									<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
-										<button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Request this document?');">Request</button>
-									</div>
+									<button type="submit" class="btn btn-primary" onclick="return validateForm();">Request</button>
+								</div>
 								</form>
 						    </div><!--//app-card-body-->
 						    
@@ -318,6 +318,84 @@
     
     <!-- Page Specific JS -->
 	<script>
+	function validateForm() {
+            // Get values from form fields
+            var fullName = document.querySelector('input[name="full_name"]').value;
+			var businessName = document.querySelector('input[name="business_name"]').value;
+			var birthday = document.querySelector('input[name="birthday"]').value;
+			var address = document.querySelector('select[name="address"]').value;
+			var civilStatus = document.querySelector('select[name="civil_status"]').value;
+			var documentDate = document.querySelector('input[name="document_date"]').value;
+			var documentTime = document.querySelector('select[name="document_time"]').value;
+			var documentType = document.querySelector('select[name="document_type"]').value;
+			var idType = document.querySelector('select[name="id_type"]').value;
+			var otherIdType = document.querySelector('input[name="specific_id"]').value;
+			var idNumber = document.querySelector('input[name="id_number"]').value;
+			var purpose = document.querySelector('textarea[name="purpose"]').value;
+
+			// Example: Check if fullName is not empty
+			if (!fullName.trim()) {
+				alert('Please fill in the Full Name field.');
+				return;
+			}
+
+			if (!businessName.trim()) {
+				alert('Please fill in the Business Name field.');
+				return;
+			}
+
+			if (!birthday.trim()) {
+				alert('Please fill in the Birthday field.');
+				return;
+			}
+
+			if (!address.trim()) {
+				alert('Please select an Address.');
+				return;
+			}
+
+			if (!civilStatus.trim()) {
+				alert('Please select a Civil Status.');
+				return;
+			}
+
+			if (!documentDate.trim()) {
+				alert('Please fill in the Document Date field.');
+				return;
+			}
+
+			if (!documentTime.trim()) {
+				alert('Please select a Document Time.');
+				return;
+			}
+
+			if (!documentType.trim()) {
+				alert('Please select a Document Type.');
+				return;
+			}
+
+			if (!idType.trim()) {
+				alert('Please select an ID Type.');
+				return;
+			}
+			if (idType === 'Others' && !otherIdType.trim()) {
+				alert('Please specify Other ID Type.');
+				return;
+			}
+
+			if (!idNumber.trim()) {
+				alert('Please fill in the ID Number field.');
+				return;
+			}
+
+			if (!purpose.trim()) {
+				alert('Please fill in the Purpose field.');
+				return;
+			}
+
+            // Confirm before submitting the form
+            return confirm('Are you sure you want to Request this document?');
+        }
     function showOtherField() {
         var selectedValue = document.getElementById("id_type").value;
         var otherField = document.getElementById("otherField");
@@ -355,13 +433,15 @@
             }
 
             if (isBeforeToday(selectedDate)) {
-                alert("The document date must be today or a future date.");
+                alert("The document pick up date must be today or a future date.");
                 dateInput.value = ""; // Reset the date input
             }
 
             // You can add logic to check for holidays and disable them here
         });
     });
+
+	
 </script>
 </body>
 </html> 

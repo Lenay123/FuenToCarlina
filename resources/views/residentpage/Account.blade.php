@@ -158,57 +158,195 @@
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
 		                <h3 class="section-title">General</h3>
-		                <div class="section-intro">Settings section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+		                <div class="section-intro">Your profile is your canvas; every edit is a stroke of self-expression, a step towards crafting the masterpiece of your digital presence.</div>
 	                </div>
 	                <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">
 						    
 						    <div class="app-card-body">
-								{{-- {{ route('residentpage.updateProfile') }} --}}
-								<form class="settings-form" method="POST" action="{{ route('residentpage.updateProfile') }}">
-									@csrf
-									<div class="mb-3">
-										<label for="name" class="form-label">First name:</label>
-										<input type="text" class="form-control" id="name" name="first_name" value="{{ auth()->user()->first_name }}" required>
-									</div>
 
-									<div class="mb-3">
-										<label for="name" class="form-label">Middle name:</label>
-										<input type="text" class="form-control" id="name" name="last_name" value="{{ auth()->user()->last_name }}" required>
-									</div>
-									<div class="mb-3">
-										<label for="name" class="form-label">Last name:</label>
-										<input type="text" class="form-control" id="name" name="middle_name" value="{{ auth()->user()->middle_name }}" required>
-									</div>
+								<div >
 
-									<div class="mb-3">
-										<label for="email" class="form-label">Email Address:</label>
-										<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>
-									</div>
+									  <div class="card-body pt-3">
+										<!-- Bordered Tabs -->
+										<ul class="nav nav-tabs ">
+						  
+										  <li class="nav-item">
+											<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+										  </li>
+						  
+										  <li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile & Change Password</button>
+										  </li>
+						  
+						
+						  
+										</ul>
+										<div class="tab-content pt-2">
+						  
+										  <div class="tab-pane fade show active profile-overview" id="profile-overview">
+											<h5 class="card-title">About</h5>
+											<p class="small fst-italic">"Elevate Your Profile: Transform your details and shape your identity. Empower the narrative of who you are with every update, crafting a dynamic and evolving reflection of yourself."</p>
+						  
+											<h5 class="card-title">Profile Details</h5>
+						  
+											<div class="row">
+											  <div class="col-lg-3 col-md-4 label ">Firstname:</div>
+											  <div class="col-lg-9 col-md-8">{{ auth()->user()->first_name }} </div>
+											</div>
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label ">Middlename:</div>
+												<div class="col-lg-9 col-md-8">{{ auth()->user()->middle_name }} </div>
+											  </div>
+											  <div class="row">
+												<div class="col-lg-3 col-md-4 label ">Lastname:</div>
+												<div class="col-lg-9 col-md-8"> {{ auth()->user()->last_name }} </div>
+											  </div>
+											  <div class="row">
+												<div class="col-lg-3 col-md-4 label ">Birthday:</div>
+												<div class="col-lg-9 col-md-8">
+													{{ \Carbon\Carbon::createFromFormat('Y-m-d', auth()->user()->birthday)->format('F j, Y') }}
+												</div>
+												
+												</div>
+											
+											<div class="row">
+											  <div class="col-lg-3 col-md-4 label">Address:</div>
+											  <div class="col-lg-9 col-md-8">{{ auth()->user()->address }}</div>
+											</div>
+						  
+											<div class="row">
+											  <div class="col-lg-3 col-md-4 label">Email:</div>
+											  <div class="col-lg-9 col-md-8">{{ auth()->user()->email }}</div>
+											</div>
+						  
+											<div class="row">
+											  <div class="col-lg-3 col-md-4 label">Gender</div>
+											  <div class="col-lg-9 col-md-8">{{ auth()->user()->gender }}</div>
+											</div>
+						  
+											<div class="row">
+											  <div class="col-lg-3 col-md-4 label">Contact Number:</div>
+											  <div class="col-lg-9 col-md-8">{{ auth()->user()->contact_number }}</div>
+											</div>
+						  
+										
+										  </div>
+										  @if ($errors->any())
+										  <div class="alert alert-danger">
+											  <ul>
+												  @foreach ($errors->all() as $error)
+													  <li>{{ $error }}</li>
+												  @endforeach
+											  </ul>
+										  </div>
+									  @endif
+										  <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+						  
+											<!-- Profile Edit Form -->
+											<form class="settings-form" method="POST" action="{{ route('residentpage.updateProfile') }}">
+												@csrf
+											
+											  {{-- <div class="row mb-3">
+												<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+												<div class="col-md-8 col-lg-9">
+												  <img src="assets/img/profile-img.jpg" alt="Profile">
+												  <div class="pt-2">
+													<a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+													<a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+												  </div>
+												</div>
+											  </div> --}}
+						  
+											  <div class="row mb-3">
+												<label for="fullName" class="col-md-4 col-lg-3 col-form-label">Firstname:</label>
+												<div class="col-md-8 col-lg-9">
+													<input type="text" class="form-control" id="fname" name="first_name" value="{{ auth()->user()->first_name }}" required>												</div>
+											  </div>
+						  
+						  
+											  <div class="row mb-3">
+												<label for="company" class="col-md-4 col-lg-3 col-form-label">Lastname:</label>
+												<div class="col-md-8 col-lg-9">
+													<input type="text" class="form-control" id="lname" name="last_name" value="{{ auth()->user()->last_name }}" required>												</div>
+											  </div>
+						  
+											  <div class="row mb-3">
+												<label for="Job" class="col-md-4 col-lg-3 col-form-label">Middlename:</label>
+												<div class="col-md-8 col-lg-9">
+													<input type="text" class="form-control" id="mname" name="middle_name" value="{{ auth()->user()->middle_name }}" required>												</div>
+											  </div>
+						  
+											  <div class="row mb-3">
+												<label for="Country" class="col-md-4 col-lg-3 col-form-label">Email:</label>
+												<div class="col-md-8 col-lg-9">
 
-									<div class="mb-3">
-										<label for="password">New Password:</label>
-										<div class="password-input">
-											<input type="password" class="form-control" name="password" required>
-											<span class="password-toggle">
-												<i class="far fa-eye" id="eye-icon-1"></i>
-											</span>
-										</div>
-									</div>
+													<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>												</div>
+											  </div>
+
+						  
+											  <div class="row mb-3">
+												<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
+												<div class="col-md-8 col-lg-9">
+													<input type="text" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>										</div>
+											  </div>
+						  
+											  <div class="row mb-3">
+												<label for="Email" class="col-md-4 col-lg-3 col-form-label">Gender</label>
+												<div class="col-md-8 col-lg-9">
+													<select class="form-control" name="gender" required >
+														<option value="male" @if (auth()->user()->gender === 'male') selected @endif>Male</option>
+														<option value="female" @if (auth()->user()->gender === 'female') selected @endif>Female</option>
+													</select>												</div>
+											  </div>
+						  						  
+											  <div class="row mb-3">
+												<label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+												<div class="col-md-8 col-lg-9">
+													<select class="form-control" name="address" required>
+														<option value="Proper Nabunturan Barili Cebu" @if (auth()->user()->address === 'Proper Nabunturan Barili Cebu') selected @endif>Proper Nabunturan, Barili, Cebu</option>
+														<option value="Sitio San Roque Nabunturan Barili Cebu" @if (auth()->user()->address === 'Sitio San Roque Nabunturan Barili Cebu') selected @endif>Sitio San Roque Nabunturan, Barili, Cebu</option>
+														<option value="Sitio Cabinay Nabunturan Barili Cebu" @if (auth()->user()->address === 'Sitio Cabinay Nabunturan Barili Cebu') selected @endif>Sitio Cabinay Nabunturan, Barili, Cebu</option>
+													</select>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="current_password" type="password" class="form-control" id="currentPassword">
+												</div>
+											</div>
 									
-									<div class="mb-3">
-										<label for="password_confirmation">Confirm Password:</label>
-										<div class="password-input">
-											<input type="password" class="form-control" name="password_confirmation" required>
-											<span class="password-toggle" id="password-toggle-2">
-												<i class="far fa-eye" id="eye-icon-2"></i>
-											</span>
-										</div>
-									</div>
+											<div class="row mb-3">
+												<label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="password" type="password" class="form-control" id="newPassword">
+												</div>
+											</div>
 									
-									<button type="submit" class="btn app-btn-primary" onclick="return confirm('Are you sure you want to Update your Profile?');">Save Changes</button>
-								</form>
-								
+											<div class="row mb-3">
+												<label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="password_confirmation" type="password" class="form-control" id="renewPassword">
+												</div>
+											</div>
+						  
+											  <div class="text-center">
+												<button type="submit" class="btn btn-primary">Save Changes</button>
+											  </div>
+											</form><!-- End Profile Edit Form -->
+						  
+										  </div>
+										</div>
+									
+
+									
+						  
+										</div><!-- End Bordered Tabs -->
+						  
+									  </div>
+									</div>
+
 						    </div><!--//app-card-body-->
 						    
 						</div><!--//app-card-->
@@ -216,7 +354,13 @@
                 </div><!--//row-->
                 <hr class="my-4">
 		    </div><!--//container-fluid-->
-	    </div><!--//app-content-->
+	    </div>
+
+
+
+
+		
+		<!--//app-content-->
 	    
 	    <footer class="app-footer">
 		    <div class="container text-center py-3">
