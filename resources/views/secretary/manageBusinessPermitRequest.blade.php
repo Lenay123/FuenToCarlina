@@ -548,8 +548,7 @@
                                                         </div>
            
                                                     <div style="text-align: right;">
-                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
-                                                    <p>Barangay Captain Almar Gutierrez</p>
+                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 60%; height: 50%; margin-right:50px">
                                                 </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -845,7 +844,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
                 </div>
             </div>
             <div style="text-align: right;">
-                <img id="signatureImage${documentId}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                <img id="signatureImage${documentId}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 40%; height: 10%; margin-right:50px">
               
             </div>
         `;

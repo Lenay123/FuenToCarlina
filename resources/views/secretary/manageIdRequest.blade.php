@@ -186,7 +186,7 @@
 
 
 .id-content-sign{
-    width: 18%;
+    width: 30%;
     height:100px;
     margin-top: 20%;
     display: flex;
@@ -625,14 +625,13 @@
                                                             </div>
                                                             <div class="id-title">
                                                                 <h2 style="margin-top: 10px;">BARANGAY RESIDENT'S CARD</h2>
-                                                            </div> <br> <br> <br>
-
+                                                            </div> <br>
                                                             <div class="id-content" style="margin-top:30px" >
                                                                 <div class="id-content-image">
                                                                     <img src="/image/{{ $document_request->image }}" alt="" style="width: 170px; border: 3px solid black;">
                                                                     <br><br>
                                                                 
-                                                                    <h4 style="border-top: 1px solid black; padding: 5px 20px;">Resident's Signature</h3>
+                                                                    <h4 style="border-top: 1px solid black; padding: 5px 20px; font-size:0.85rem;">Resident's Signature</h3>
                                                                 </div>
                                                                 <div class="id-content-info">
                                                                     <p style="font-size: 12px; margin: 0; padding: 1px;">LAST NAME, FIRST NAME, MI.</p>
@@ -651,7 +650,7 @@
                                                                 <div class="id-content-sign">
                                                                     <br><br>
                                                                     <p>
-                                                                        <img src="{{ asset('img/almarsig.png') }}" alt="" style="width: 100px; margin-bottom: -10px;">
+                                                                        <img src="{{ asset('img/almarsig.png') }}" alt="">
                                                                      
                                                                     </p>
                                                                 </div>
@@ -1008,7 +1007,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
 
 
             .id-content-sign{
-                width: 18%;
+				width: 30%;
                 height:100px;
                 margin-top: 20%;
                 display: flex;
