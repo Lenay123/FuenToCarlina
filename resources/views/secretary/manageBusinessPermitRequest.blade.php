@@ -548,7 +548,7 @@
                                                         </div>
            
                                                     <div style="text-align: right;">
-                                                    <img id="signatureImage{{ $document_request->id }}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/Captainsignature.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
                                                     <p>Barangay Captain Almar Gutierrez</p>
                                                 </div>
                                                 </div>
@@ -845,7 +845,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
                 </div>
             </div>
             <div style="text-align: right;">
-                <img id="signatureImage${documentId}" src="/img/signature.png" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                <img id="signatureImage${documentId}" src="{{ asset('img/Captainsignature.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
                 <p>Barangay Captain Almar Gutierrez</p>
             </div>
         `;

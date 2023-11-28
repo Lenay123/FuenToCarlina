@@ -651,7 +651,7 @@
                                                                 <div class="id-content-sign">
                                                                     <br><br>
                                                                     <p>
-                                                                        <img src="/img/signature.png" alt="" style="width: 100px; margin-bottom: -10px;">
+                                                                        <img src="{{ asset('img/Captainsignature.png') }}" alt="" style="width: 100px; margin-bottom: -10px;">
                                                                         <span style="border-top: 1px solid black; display: inline-block; width: 100px; margin-top: -8px;"></span>
                                                                         Barangay Captain Signature
                                                                     </p>
