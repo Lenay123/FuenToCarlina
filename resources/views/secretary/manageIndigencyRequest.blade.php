@@ -519,7 +519,7 @@
                                                         <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="3">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines.{{ $document_request->textarea_content }}</textarea>
                                                     </div>
                                                     <div style="text-align: right;">
-                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/Captainsignature.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
+                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
                                                    
                                                 </div>
 

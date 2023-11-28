@@ -651,7 +651,7 @@
                                                                 <div class="id-content-sign">
                                                                     <br><br>
                                                                     <p>
-                                                                        <img src="{{ asset('img/Captainsignature.png') }}" alt="" style="width: 100px; margin-bottom: -10px;">
+                                                                        <img src="{{ asset('img/almarsig.png') }}" alt="" style="width: 100px; margin-bottom: -10px;">
                                                                      
                                                                     </p>
                                                                 </div>
