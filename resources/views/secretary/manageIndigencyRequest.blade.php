@@ -520,7 +520,7 @@
                                                     </div>
                                                     <div style="text-align: right;">
                                                     <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/Captainsignature.png') }}" alt="Barangay Captain Signature" style="width: 100px; height: 50px; margin-right:50px">
-                                                    <p>Barangay Captain Almar Gutierrez</p>
+                                                   
                                                 </div>
 
                                                 </div>
