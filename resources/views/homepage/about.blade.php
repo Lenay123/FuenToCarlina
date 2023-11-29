@@ -79,7 +79,7 @@
                     </div>
                     <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
                     <div class="nav-item dropdown">
-                    <a href="{{route('login')}}" class="nav-item nav-link " >LOGIN</a>             
+                    <a href="{{ route('login') }}" class="nav-item nav-link" target="_blank">LOGIN</a>
                     </div>
                 </div>
             </div>
