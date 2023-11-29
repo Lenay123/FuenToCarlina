@@ -10,17 +10,20 @@ use App\Http\Controllers\Session;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\DocumentRequest;
 
 class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    function showResident(){
+    function showResident()
+    {
+        // Retrieve document requests with 'Pending' status
+        $document_requests = DocumentRequest::all();
 
-        $services = Service::all();
-        return view('residentpage.resident', ['services' => $services]);
+    
+        return view('residentpage.resident', compact('document_requests'));
     }
 
     function login(){

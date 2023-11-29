@@ -186,16 +186,11 @@
 							    <h4 class="stats-type mb-1">Pending</h4>
 
 								@php
-								$barangayIdCount = 0; // Initialize the count to 0
+								$barangayIdCount = $document_requests->where('status', 'Pending')->count();
 							@endphp
-							@foreach ($document_requests as $count)
-								@if ($count->status === 'Pending')
-									@php
-										$barangayIdCount = $count->count; // Update the count if a record is found
-									@endphp
-								@endif
-							@endforeach
-							    <div class="stats-figure">{{ $barangayIdCount }}</div>
+
+							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
@@ -206,16 +201,11 @@
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Cancelled</h4>
 								@php
-								$barangayIdCount = 0; // Initialize the count to 0
+								$barangayIdCount = $document_requests->where('status', 'cancelled')->count();
 							@endphp
-							@foreach ($document_requests as $count)
-								@if ($count->status === 'cancelled')
-									@php
-										$barangayIdCount = $count->count; // Update the count if a record is found
-									@endphp
-								@endif
-							@endforeach
-							    <div class="stats-figure">{{ $barangayIdCount }}</div>
+
+							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
@@ -226,16 +216,11 @@
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Claimed</h4>
 								@php
-								$barangayIdCount = 0; // Initialize the count to 0
+								$barangayIdCount = $document_requests->where('status', 'Claimed')->count();
 							@endphp
-							@foreach ($document_requests as $count)
-								@if ($count->status === 'Claimed')
-									@php
-										$barangayIdCount = $count->count; // Update the count if a record is found
-									@endphp
-								@endif
-							@endforeach
-							    <div class="stats-figure">{{ $barangayIdCount }}</div>
+
+							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
