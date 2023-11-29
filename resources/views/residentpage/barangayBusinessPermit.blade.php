@@ -127,7 +127,8 @@
 					<div class="app-utilities col-auto">
 						<div class="app-utility-item app-user-dropdown dropdown">
 							<a  id="user-dropdown-toggle" href="#" role="button" aria-expanded="false">
-								<i class="fas fa-user"></i> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+							<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" style="max-width: 200px; max-height: 200px; margin-bottom: 10px; border-radius: 50%;">
+{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
 							</a>
 						</div>
 					</div>

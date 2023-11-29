@@ -67,12 +67,12 @@
             @endif
         </div>
 
-        <form method="POST" action="{{route('register.post')}}" method="POST">
+        <form method="POST" action="{{route('register.post')}}" method="POST" enctype="multipart/form-data" >
             @csrf
-            {{-- <div class="form-group">
+             <div class="form-group">
                 <label for="Photo">Profile Picture:</label>
-                <input type="file" class="form-control" name="image" accept="image/jpeg, image/png, image/jpg, image/gif">
-            </div> --}}
+                <input type="file" class="form-control" name="image" required>       
+                 </div> 
 
             <div class="row">
                 
@@ -117,7 +117,7 @@
 
             <div class="form-group">
                 <label for="contact_number">Contact Number:</label>
-                <input type="text" class="form-control" name="contact_number" required>
+                <input type="number" class="form-control" name="contact_number" required>
             </div>
 
             <div class="form-group">

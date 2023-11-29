@@ -160,52 +160,52 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Password updated successfully. Please log in with your new password.');
     }
     
-    
-    
 
+public function registrationPost(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'middle_name' => 'nullable|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+        'birthday' => 'required|date',
+        'contact_number' => 'required|numeric',
+        'gender' => 'required|in:male,female',
+        'address' => 'required|in:Proper Nabunturan Barili Cebu, Sitio San Roque Nabunturan Barili Cebu, Sitio Cabinay Nabunturan Barili Cebu',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
+    ]);
 
-    function registrationPost(Request $request){
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'middle_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'birthday' => 'required|date',
-            'contact_number' => 'required|string|max:20',
-            'gender' => 'required|in:male,female',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
-            'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS), // Use the options from the model
+    $profileImage = null; // Initialize to null
 
-        ]);
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
+    // Handle image upload
+    if ($image = $request->file('image')) {
+        if ($image->isValid()) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
         } else {
-            $imagePath = null;
+            return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
         }
-
-        $user = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'middle_name' => $request->input('middle_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'birthday' => $request->input('birthday'),
-            'contact_number' => $request->input('contact_number'),
-            'gender' => $request->input('gender'),
-            'image' => $imagePath,
-            'address' => $request->input('address'),
-            'role' => 'user', // Default role for registered users
-        ]);
-
-        if(!$user){
-            return redirect(route('registration'))->with("error", "Try again");
-        }
-
-        return redirect()->route('login')->with("success", "Registration successful");
-
     }
+
+    $user = new User;
+    $user->first_name = $request->input('first_name');
+    $user->last_name = $request->input('last_name');
+    $user->middle_name = $request->input('middle_name');
+    $user->email = $request->input('email');
+    $user->password = Hash::make($request->input('password'));
+    $user->birthday = $request->input('birthday');
+    $user->contact_number = $request->input('contact_number');
+    $user->gender = $request->input('gender');
+    $user->address = $request->input('address');
+    $user->image = $profileImage; // Corrected variable name
+    $user->role = 'user'; // Default role for registered users
+
+    $user->save();
+
+    return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
+}
 
     function logout(){
             // Session::flush();
@@ -216,7 +216,7 @@ class AuthController extends Controller
     public function updateProfile(Request $request)
     {
         // Validate the incoming data
-        $request->validate([
+        $this->validate($request, [
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
             'middle_name' => 'nullable|string|max:255',
@@ -225,8 +225,8 @@ class AuthController extends Controller
             'gender' => 'nullable|in:male,female',
             'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
             'password' => 'nullable|min:8|confirmed',
-            'password' => 'nullable|min:8|confirmed',
             'current_password' => 'required_with:password',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg',
         ], [
             'password.min' => 'The new password must be at least 8 characters.',
             'password.confirmed' => 'The new password confirmation does not match.',
@@ -241,13 +241,20 @@ class AuthController extends Controller
         }
     
         // Update the user's name, email, and additional fields
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->middle_name = $request->input('middle_name');
-        $user->address = $request->input('address');
-        $user->contact_number = $request->input('contact_number');
-        $user->gender = $request->input('gender');
-        $user->email = $request->input('email');
+        $data = $request->except(['_token', 'image', 'password', 'current_password']); // Exclude unnecessary fields
+        $user->update($data);
+    
+        // Handle image upload
+        if ($image = $request->file('image')) {
+            if ($image->isValid()) {
+                $destinationPath = 'image/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $user->image = $profileImage;
+            } else {
+                return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
+            }
+        }
     
         // Update the user's password if a new one was provided
         if ($request->filled('password')) {
@@ -261,6 +268,7 @@ class AuthController extends Controller
         $message = $request->filled('password') ? 'Password changed successfully.' : 'Profile updated successfully.';
         return redirect()->back()->with('success', $message);
     }
+    
 
 
     

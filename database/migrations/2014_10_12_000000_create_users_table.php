@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->date('birthday');
-            $table->string('contact_number');
+            $table->unsignedBigInteger('contact_number')->nullable();
             $table->enum('address', ['Proper Nabunturan Barili Cebu', 'Sitio San Roque Nabunturan Barili Cebu', 'Sitio Cabinay Nabunturan Barili Cebu']);
             $table->enum('gender', ['male', 'female']);
             $table->string('image')->nullable();

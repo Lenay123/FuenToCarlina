@@ -36,7 +36,8 @@
 					<div class="app-utilities col-auto">
 						<div class="app-utility-item app-user-dropdown dropdown">
 							<a  id="user-dropdown-toggle" href="#" role="button" aria-expanded="false">
-								<i class="fas fa-user"></i> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+							<img  src="{{ asset('image/' . auth()->user()->image) }}" style="max-width: 200px; max-height: 200px; margin-bottom: 10px; border-radius: 50%;">
+{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
 							</a>
 						</div>
 					</div>
@@ -159,7 +160,18 @@
 	                <div class="col-12 col-md-4">
 		                <h3 class="section-title">General</h3>
 		                <div class="section-intro">Your profile is your canvas; every edit is a stroke of self-expression, a step towards crafting the masterpiece of your digital presence.</div>
-	                </div>
+					<br>
+						<div class="card" id="profileCard">
+							<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+							
+							<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" alt="Profile" style="width:100%; height:300px"> <br>
+							<h3>{{ auth()->user()->first_name }} {{ auth()->user()->middle_name }} {{ auth()->user()->last_name }}</h3>
+							<p>Barangay Resident</p>
+							
+							</div>
+						</div>
+					
+					</div>
 	                <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">
 						    
@@ -172,11 +184,11 @@
 										<ul class="nav nav-tabs ">
 						  
 										  <li class="nav-item">
-											<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+											<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" onclick="showProfileCard()">Overview</button>
 										  </li>
 						  
 										  <li class="nav-item">
-											<button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile & Change Password</button>
+											<button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" onclick="hideProfileCard()">Edit Profile & Change Password</button>
 										  </li>
 						  
 						
@@ -244,20 +256,19 @@
 										  <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 						  
 											<!-- Profile Edit Form -->
-											<form class="settings-form" method="POST" action="{{ route('residentpage.updateProfile') }}">
+											<form class="settings-form" method="POST" action="{{ route('residentpage.updateProfile') }}" enctype="multipart/form-data">
 												@csrf
-											
-											  {{-- <div class="row mb-3">
-												<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-												<div class="col-md-8 col-lg-9">
-												  <img src="assets/img/profile-img.jpg" alt="Profile">
-												  <div class="pt-2">
-													<a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-													<a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-												  </div>
+												<div class="row mb-3">
+													<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+													<div class="col-md-8 col-lg-9">
+														<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" style="width:70%; height:300px" alt="Profile">
+														<div class="pt-2">
+															<a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click();"><i class="fas fa-upload"></i></a>
+															<input type="file" id="fileInput" name="image" style="display: none;" onchange="previewImage(this);">
+															<button type="submit" class="btn btn-success btn-sm" title="Save"><i class="fas fa-save"></i> Save</button>
+														</div>
+													</div>
 												</div>
-											  </div> --}}
-						  
 											  <div class="row mb-3">
 												<label for="fullName" class="col-md-4 col-lg-3 col-form-label">Firstname:</label>
 												<div class="col-md-8 col-lg-9">
@@ -395,6 +406,45 @@
                 }
             });
         });
+
+  // Add an event listener to the file input to update the displayed file name
+  document.getElementById('fileInput').addEventListener('change', function() {
+    const fileName = this.files[0].name;
+    document.getElementById('fileName').innerText = fileName;
+  });
+  function showProfileCard() {
+        var card = document.getElementById('profileCard');
+        if (card) {
+            card.style.display = 'block'; // Set display to 'block' to show the card
+        }
+    }
+
+    function hideProfileCard() {
+        var card = document.getElementById('profileCard');
+        if (card) {
+            card.style.display = 'none'; // Set display to 'none' to hide the card
+        }
+    }
+
+	function previewImage(input) {
+        var img = document.getElementById('image');
+
+        if (img) {  // Check if the img element exists
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        } else {
+            console.error("Image element not found");
+        }
+    }
+
+
     </script>
 	
 </body>
