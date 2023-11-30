@@ -7,6 +7,8 @@
     <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <!-- Add Bootstrap CSS link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <style>
         .registration-container {
             max-width: 600px;
@@ -45,6 +47,7 @@
             text-align: center;
         }
     </style>
+    
 </head>
 <body>
     <div class="container mt-5 registration-container">
@@ -98,7 +101,8 @@
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" required>
+                <input type="email" class="form-control" name="email" id="emailInput" required>
+                <div id="emailFeedback" style="color: red;"></div>
             </div>
 
             <div class="form-group">
@@ -145,5 +149,22 @@
             <p>Already have an account? <a href="{{ route('login') }}" class="btn btn-link btn-login">Login</a></p>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+ var existingEmails = {!! json_encode($existingEmails) !!}; // Replace with actual existing emails from the server
+
+document.getElementById('emailInput').addEventListener('blur', function () {
+    var emailInput = this.value;
+
+    var emailFeedback = document.getElementById('emailFeedback');
+    emailFeedback.innerHTML = ''; // Clear previous feedback
+
+    // Check if the email is already taken using JavaScript
+    if (existingEmails.includes(emailInput)) {
+        emailFeedback.innerHTML = 'Email already taken';
+    }
+});
+    </script>
 </body>
 </html>

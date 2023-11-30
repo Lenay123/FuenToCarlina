@@ -164,7 +164,7 @@
 						<div class="card" id="profileCard">
 							<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 							
-							<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" alt="Profile" style="width:100%; height:300px"> <br>
+							<img  src="{{ asset('image/' . auth()->user()->image) }}" alt="Profile" style="width:100%; height:300px"> <br>
 							<h3>{{ auth()->user()->first_name }} {{ auth()->user()->middle_name }} {{ auth()->user()->last_name }}</h3>
 							<p>Barangay Resident</p>
 							
@@ -299,7 +299,7 @@
 											  <div class="row mb-3">
 												<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
 												<div class="col-md-8 col-lg-9">
-													<input type="text" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>										</div>
+													<input type="number" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>										</div>
 											  </div>
 						  
 											  <div class="row mb-3">
@@ -427,21 +427,13 @@
     }
 
 	function previewImage(input) {
-        var img = document.getElementById('image');
+        var reader = new FileReader();
 
-        if (img) {  // Check if the img element exists
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('image').src = e.target.result;
+        };
 
-                reader.onload = function (e) {
-                    img.src = e.target.result;
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        } else {
-            console.error("Image element not found");
-        }
+        reader.readAsDataURL(input.files[0]);
     }
 
 

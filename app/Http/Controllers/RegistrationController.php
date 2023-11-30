@@ -10,7 +10,9 @@ class RegistrationController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('homepage.register');
+        $existingEmails = User::pluck('email')->toArray();
+        return view('homepage.register', ['existingEmails' => $existingEmails]);
+
     }
 
     public function registration(Request $request)

@@ -172,8 +172,9 @@ public function registrationPost(Request $request)
         'birthday' => 'required|date',
         'contact_number' => 'required|numeric',
         'gender' => 'required|in:male,female',
-        'address' => 'required|in:Proper Nabunturan Barili Cebu, Sitio San Roque Nabunturan Barili Cebu, Sitio Cabinay Nabunturan Barili Cebu',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
+        // 'address' => 'required|in:Proper Nabunturan Barili Cebu, Sitio San Roque Nabunturan Barili Cebu, Sitio Cabinay Nabunturan Barili Cebu',
+        'address' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
     ]);
 
     $profileImage = null; // Initialize to null

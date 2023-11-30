@@ -20,7 +20,7 @@ class DocumentController extends Controller
             'business_name' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'document_type' => 'required|in:Barangay Indigency,Barangay Certificate,Barangay Business Permit,Barangay ID',
-            'id_type' => ['required', Rule::in(['NSO with School ID', 'NBI CLearance', 'Voters ID', 'Drivers License', 'Voters Certificate', 'National ID', 'SSS', 'Others'])],
+            'id_type' => 'required|string|max:255', // Adjust max:255 according to your needs
             'specific_id' => 'required_if:id_type,Others', // Assuming the specific ID input has the name 'specific_id'
             'birthday' => 'required|date',
             'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
