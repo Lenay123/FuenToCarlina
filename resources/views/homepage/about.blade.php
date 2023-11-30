@@ -207,7 +207,7 @@
                         <div class="team-text">
                             <div class="bg-light">
                                 <h5 class="fw-bold mb-0">Jeanne Cardiente</h5>
-                                <small>Documentation latestDocumentRequests</small>
+                                <small>Documentation Team Lead</small>
                             </div>
                             <div class="bg-primary">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
