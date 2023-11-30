@@ -23,8 +23,10 @@ class DocumentController extends Controller
             'id_type' => 'required|string|max:255', // Adjust max:255 according to your needs
             'specific_id' => 'required_if:id_type,Others', // Assuming the specific ID input has the name 'specific_id'
             'birthday' => 'required|date',
-            'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
-            'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
+            // 'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
+            // 'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
+            'address' => 'required|string|max:255',
+            'civil_status' => 'required|string|max:255',
             'gender' => 'nullable|in:Male,Female',
             'contact_number'=> 'nullable',
             'document_time' => [
@@ -33,12 +35,14 @@ class DocumentController extends Controller
                 function ($attribute, $value, $fail) use ($request) {
                     $selectedDate = $request->input('document_date');
                     $currentTime = date('H:i');
-                    
-                    if ($selectedDate == now()->toDateString() && strtotime($value) <= strtotime($currentTime)) {
+            
+                    // Assuming document_date is in the format 'Y-m-d'
+                    if ($selectedDate == now()->format('Y-m-d') && strtotime($value) <= strtotime($currentTime)) {
                         $fail('The selected document time is invalid.');
                     }
                 },
             ],
+            
                 'document_date' => [
                 'required',
                 'date',
