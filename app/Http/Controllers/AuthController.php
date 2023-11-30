@@ -161,52 +161,52 @@ class AuthController extends Controller
     }
     
 
-public function registrationPost(Request $request)
-{
-    $request->validate([
-        'first_name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'middle_name' => 'nullable|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|string|min:8|confirmed',
-        'birthday' => 'required|date',
-        'contact_number' => 'required|numeric',
-        'gender' => 'required|in:male,female',
-        // 'address' => 'required|in:Proper Nabunturan Barili Cebu, Sitio San Roque Nabunturan Barili Cebu, Sitio Cabinay Nabunturan Barili Cebu',
-        'address' => 'required|string|max:255',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-    ]);
-
-    $profileImage = null; // Initialize to null
-
-    // Handle image upload
-    if ($image = $request->file('image')) {
-        if ($image->isValid()) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-        } else {
-            return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
+    public function registrationPost(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'birthday' => 'required|date|before:' . now()->subYears(15)->format('Y-m-d'),
+            'contact_number' => 'required|numeric',
+            'gender' => 'required|in:male,female',
+            'address' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+    
+        $profileImage = null; // Initialize to null
+    
+        // Handle image upload
+        if ($image = $request->file('image')) {
+            if ($image->isValid()) {
+                $destinationPath = 'image/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+            } else {
+                return back()->with('error', 'File upload error: ' . $image->getErrorMessage());
+            }
         }
+    
+        $user = new User;
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->middle_name = $request->input('middle_name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->birthday = $request->input('birthday');
+        $user->contact_number = $request->input('contact_number');
+        $user->gender = $request->input('gender');
+        $user->address = $request->input('address');
+        $user->image = $profileImage; // Corrected variable name
+        $user->role = 'user'; // Default role for registered users
+    
+        $user->save();
+    
+        return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
-
-    $user = new User;
-    $user->first_name = $request->input('first_name');
-    $user->last_name = $request->input('last_name');
-    $user->middle_name = $request->input('middle_name');
-    $user->email = $request->input('email');
-    $user->password = Hash::make($request->input('password'));
-    $user->birthday = $request->input('birthday');
-    $user->contact_number = $request->input('contact_number');
-    $user->gender = $request->input('gender');
-    $user->address = $request->input('address');
-    $user->image = $profileImage; // Corrected variable name
-    $user->role = 'user'; // Default role for registered users
-
-    $user->save();
-
-    return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
-}
+    
 
     function logout(){
             // Session::flush();
@@ -222,7 +222,7 @@ public function registrationPost(Request $request)
             'last_name' => 'nullable|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'address' => 'nullable|in:' . implode(',', User::ADDRESS_OPTIONS),
-            'contact_number' => 'nullable|string|max:20',
+            'contact_number' => 'required|numeric',
             'gender' => 'nullable|in:male,female',
             'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
             'password' => 'nullable|min:8|confirmed',

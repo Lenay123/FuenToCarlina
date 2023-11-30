@@ -194,10 +194,13 @@
 									<div class="form-group">
 										<label for="birthday">Birthday:</label>
 										<input type="date" class="form-control" name="birthday" required>
+										<div class="text-danger birthday-feedback"></div>
 									</div>
+
 									<div class="form-group">
 										<label for="contact_number">Contact Number:</label>
-										<input type="number" class="form-control" name="contact_number" required>
+										<input type="text" class="form-control" name="contact_number" required>
+										<div class="text-danger contact-number-feedback"></div>
 									</div>
 
 									<div class="form-group">
@@ -455,6 +458,51 @@ function validateForm() {
     });
 
 
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactNumberInput = document.querySelector('input[name="contact_number"]');
+        const birthdayInput = document.querySelector('input[name="birthday"]');
+
+        contactNumberInput.addEventListener('input', function () {
+            validateContactNumber(this);
+        });
+
+        birthdayInput.addEventListener('input', function () {
+            validateBirthday(this);
+        });
+
+        function validateContactNumber(inputElement) {
+            const isValidFormat = validatePhoneNumber(inputElement.value);
+            updateValidationFeedback(inputElement, isValidFormat, 'Invalid phone number format');
+        }
+
+        function validateBirthday(inputElement) {
+            const isValidDate = isValidBirthday(inputElement.value);
+            updateValidationFeedback(inputElement, isValidDate, 'Invalid birthday');
+        }
+
+        function updateValidationFeedback(inputElement, isValid, message) {
+            const feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValid ? '' : message;
+            feedbackElement.style.color = isValid ? 'green' : 'red';
+        }
+
+        function isValidBirthday(birthday) {
+            const enteredDate = new Date(birthday);
+            const currentDate = new Date();
+            const minimumValidDate = new Date(currentDate);
+            minimumValidDate.setFullYear(currentDate.getFullYear() - 15); // Minimum valid age is 15
+
+            return !isNaN(enteredDate.getTime()) && enteredDate <= minimumValidDate;
+        }
+
+        function validatePhoneNumber(input_str) {
+            const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            return re.test(input_str);
+        }
+    });
 </script>
 </body>
 </html> 

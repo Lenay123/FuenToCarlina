@@ -277,9 +277,11 @@
 							<label for="exampleInputName1" class="form-label">Business name:</label>
 							<input type="name" class="form-control" name="business_name" value="" required>
 						</div>
+
 						<div class="form-group">
 							<label for="birthday">Birthday:</label>
 							<input type="date" class="form-control" name="birthday" required>
+							<div class="text-danger birthday-feedback"></div>
 						</div>
 
 						<div class="form-group">
@@ -457,89 +459,9 @@
 
     <!-- Page Specific JS -->
     <script src="/js/app.js"></script> 
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<script>
-
-// function validateAndRequest() {
-//     // Add your validation logic here
-
-//     var fullName = document.querySelector('input[name="full_name"]').value;
-//     var businessName = document.querySelector('input[name="business_name"]').value;
-//     var birthday = document.querySelector('input[name="birthday"]').value;
-//     var address = document.querySelector('select[name="address"]').value;
-//     var civilStatus = document.querySelector('select[name="civil_status"]').value;
-//     var documentDate = document.querySelector('input[name="document_date"]').value;
-//     var documentTime = document.querySelector('select[name="document_time"]').value;
-//     var documentType = document.querySelector('select[name="document_type"]').value;
-//     var idType = document.querySelector('select[name="id_type"]').value;
-//     var otherIdType = document.querySelector('input[name="specific_id"]').value;
-//     var idNumber = document.querySelector('input[name="id_number"]').value;
-//     var purpose = document.querySelector('textarea[name="purpose"]').value;
-
-//     // Example: Check if fullName is not empty
-//     if (!fullName.trim()) {
-//         alert('Please fill in the Full Name field.');
-//         return;
-//     }
-
-//     if (!businessName.trim()) {
-//         alert('Please fill in the Business Name field.');
-//         return;
-//     }
-
-//     if (!birthday.trim()) {
-//         alert('Please fill in the Birthday field.');
-//         return;
-//     }
-
-//     if (!address.trim()) {
-//         alert('Please select an Address.');
-//         return;
-//     }
-
-//     if (!civilStatus.trim()) {
-//         alert('Please select a Civil Status.');
-//         return;
-//     }
-
-//     if (!documentDate.trim()) {
-//         alert('Please fill in the Document Date field.');
-//         return;
-//     }
-
-//     if (!documentTime.trim()) {
-//         alert('Please select a Document Time.');
-//         return;
-//     }
-
-//     if (!documentType.trim()) {
-//         alert('Please select a Document Type.');
-//         return;
-//     }
-
-//     if (!idType.trim()) {
-//         alert('Please select an ID Type.');
-//         return;
-//     }
-//     if (idType === 'Others' && !otherIdType.trim()) {
-//         alert('Please specify Other ID Type.');
-//         return;
-//     }
-
-//     if (!idNumber.trim()) {
-//         alert('Please fill in the ID Number field.');
-//         return;
-//     }
-
-//     if (!purpose.trim()) {
-//         alert('Please fill in the Purpose field.');
-//         return;
-//     }
-//     // Add similar checks for other fields
-
-//     // If all validations pass, then show the modal
-//     $('#statusSuccessModal').modal('show');
-	
-// }
 
 function validateForm() {
             // Get values from form fields
@@ -665,6 +587,36 @@ function validateForm() {
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add an input event listener to perform real-time validation for the birthday
+        document.querySelector('input[name="birthday"]').addEventListener('input', function () {
+            validateBirthday(this);
+        });
+
+        // Function to validate the birthday
+        function validateBirthday(inputElement) {
+            var birthdayValue = inputElement.value;
+            var isValidDate = isValidBirthday(birthdayValue);
+
+            // Update the validation message
+            var feedbackElement = document.querySelector('.birthday-feedback');
+            feedbackElement.innerHTML = isValidDate ? '' : 'Invalid birthday';
+            feedbackElement.style.color = 'red';
+        }
+
+        // Function to check if the entered birthday is valid
+        function isValidBirthday(birthday) {
+            var enteredDate = new Date(birthday);
+            var currentDate = new Date();
+            var minimumValidDate = new Date(currentDate);
+            minimumValidDate.setFullYear(currentDate.getFullYear() - 15); // Minimum valid age is 15
+
+            return !isNaN(enteredDate.getTime()) && enteredDate <= minimumValidDate;
+        }
+    });
+</script>
+
 </body>
 </html> 
 

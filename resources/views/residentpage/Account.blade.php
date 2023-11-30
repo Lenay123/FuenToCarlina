@@ -295,12 +295,15 @@
 													<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>												</div>
 											  </div>
 
-						  
 											  <div class="row mb-3">
-												<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
-												<div class="col-md-8 col-lg-9">
-													<input type="number" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>										</div>
-											  </div>
+													<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
+													<div class="col-md-8 col-lg-9">
+														<input type="number" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>
+														<!-- Add a new div for validation feedback -->
+														<div class="text-danger contact-number-feedback"></div>
+													</div>
+												</div>
+
 						  
 											  <div class="row mb-3">
 												<label for="Email" class="col-md-4 col-lg-3 col-form-label">Gender</label>
@@ -438,6 +441,35 @@
 
 
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add an input event listener to perform real-time validation for the contact number
+        document.querySelector('input[name="contact_number"]').addEventListener('input', function () {
+            validateContactNumber(this);
+        });
+
+        // Function to validate the contact number
+        function validateContactNumber(inputElement) {
+            var contactNumber = inputElement.value;
+
+            // Use the provided function to validate the phone number
+            var isValidFormat = validatePhoneNumber(contactNumber);
+
+            // Update the validation message
+            var feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValidFormat ? '' : 'Invalid phone number format';
+            feedbackElement.style.color = 'red';
+        }
+
+        // Function to validate the phone number format
+        function validatePhoneNumber(input_str) {
+            var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            return re.test(input_str);
+        }
+    });
+</script>
+
+
 	
 </body>
 </html> 

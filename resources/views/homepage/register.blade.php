@@ -117,11 +117,13 @@
             <div class="form-group">
                 <label for="birthday">Birthday:</label>
                 <input type="date" class="form-control" name="birthday" required>
+                <div class="text-danger birthday-feedback"></div>
             </div>
 
             <div class="form-group">
                 <label for="contact_number">Contact Number:</label>
                 <input type="number" class="form-control" name="contact_number" required>
+                <div class="text-danger contact-number-feedback"></div>
             </div>
 
             <div class="form-group">
@@ -165,6 +167,66 @@ document.getElementById('emailInput').addEventListener('blur', function () {
         emailFeedback.innerHTML = 'Email already taken';
     }
 });
+
+
+
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add an input event listener to perform real-time validation for the contact number
+        document.querySelector('input[name="contact_number"]').addEventListener('input', function () {
+            validateContactNumber(this);
+        });
+
+        // Add an input event listener to perform real-time validation for the birthday
+        document.querySelector('input[name="birthday"]').addEventListener('input', function () {
+            validateBirthday(this);
+        });
+
+        // Function to validate the contact number
+        function validateContactNumber(inputElement) {
+            var contactNumber = inputElement.value;
+
+            // Use the provided function to validate the phone number
+            var isValidFormat = validatePhoneNumber(contactNumber);
+
+            // Update the validation message
+            var feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValidFormat ? '' : 'Invalid phone number format';
+            feedbackElement.style.color = 'red';
+        }
+
+        // Function to validate the birthday
+        function validateBirthday(inputElement) {
+            var birthdayValue = inputElement.value;
+            var isValidDate = isValidBirthday(birthdayValue);
+
+            // Update the validation message
+            var feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValidDate ? '' : 'Invalid birthday';
+            feedbackElement.style.color = 'red';
+        }
+
+        // Function to check if the entered birthday is valid
+        function isValidBirthday(birthday) {
+            var enteredDate = new Date(birthday);
+            var currentDate = new Date();
+            var minimumValidDate = new Date(currentDate);
+            minimumValidDate.setFullYear(currentDate.getFullYear() - 15); // Minimum valid age is 15
+
+            return !isNaN(enteredDate.getTime()) && enteredDate <= minimumValidDate;
+        }
+
+        // Function to validate the phone number format
+        function validatePhoneNumber(input_str) {
+            var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            return re.test(input_str);
+        }
+    });
+</script>
+
+
+
+
 </body>
 </html>

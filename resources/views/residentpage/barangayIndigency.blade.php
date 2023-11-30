@@ -191,9 +191,10 @@
 										<input type="name" class="form-control" name="full_name" value="" required>
 									</div>
 									<div class="form-group">
-										<label for="birthday">Birthday:</label>
-										<input type="date" class="form-control" name="birthday" required>
-									</div>
+							<label for="birthday">Birthday:</label>
+							<input type="date" class="form-control" name="birthday" required>
+							<div class="text-danger birthday-feedback"></div>
+						</div>
 
 									<div class="form-group">
 										<label for="address">Address:</label>
@@ -450,6 +451,36 @@ function validateForm() {
     });
 
 
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add an input event listener to perform real-time validation for the birthday
+        document.querySelector('input[name="birthday"]').addEventListener('input', function () {
+            validateBirthday(this);
+        });
+
+        // Function to validate the birthday
+        function validateBirthday(inputElement) {
+            var birthdayValue = inputElement.value;
+            var isValidDate = isValidBirthday(birthdayValue);
+
+            // Update the validation message
+            var feedbackElement = document.querySelector('.birthday-feedback');
+            feedbackElement.innerHTML = isValidDate ? '' : 'Invalid birthday';
+            feedbackElement.style.color = 'red';
+        }
+
+        // Function to check if the entered birthday is valid
+        function isValidBirthday(birthday) {
+            var enteredDate = new Date(birthday);
+            var currentDate = new Date();
+            var minimumValidDate = new Date(currentDate);
+            minimumValidDate.setFullYear(currentDate.getFullYear() - 15); // Minimum valid age is 15
+
+            return !isNaN(enteredDate.getTime()) && enteredDate <= minimumValidDate;
+        }
+    });
 </script>
 </body>
 </html> 

@@ -22,13 +22,11 @@ class DocumentController extends Controller
             'document_type' => 'required|in:Barangay Indigency,Barangay Certificate,Barangay Business Permit,Barangay ID',
             'id_type' => 'required|string|max:255', // Adjust max:255 according to your needs
             'specific_id' => 'required_if:id_type,Others', // Assuming the specific ID input has the name 'specific_id'
-            'birthday' => 'required|date',
-            // 'address' => 'required|in:Proper Nabunturan Barili Cebu,Sitio San Roque Nabunturan Barili Cebu,Sitio Cabinay Nabunturan Barili Cebu',
-            // 'civil_status' => 'required|in:Single,Married,Widowed,Divorced',
+            'birthday' => 'required|date|before:' . now()->subYears(15)->format('Y-m-d'),       
             'address' => 'required|string|max:255',
             'civil_status' => 'required|string|max:255',
             'gender' => 'nullable|in:Male,Female',
-            'contact_number'=> 'nullable',
+            'contact_number'=> 'nullable|numeric',
             'document_time' => [
                 'required',
                 'in:09:00,09:30,10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00',
