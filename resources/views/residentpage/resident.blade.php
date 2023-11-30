@@ -187,10 +187,12 @@
 							    <h4 class="stats-type mb-1">Pending</h4>
 
 								@php
-								$barangayIdCount = $document_requests->where('status', 'Pending')->count();
-							@endphp
+    // Assuming you have a relationship between User and DocumentRequest models
+    $user = auth()->user();
+    $pendingRequestsCount = $user->documentRequests()->where('status', 'Pending')->count();
+@endphp
 
-							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+<div class="stats-figure">{{ $pendingRequestsCount > 0 ? $pendingRequestsCount : 0 }}</div>
 
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
@@ -200,12 +202,14 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Cancelled</h4>
-								@php
-								$barangayIdCount = $document_requests->where('status', 'cancelled')->count();
-							@endphp
+							<h4 class="stats-type mb-1">Canceled</h4>
+							@php
+    $user = auth()->user();
+    $cancelledRequestsCount = $user->documentRequests()->where('status', 'cancelled')->count();
+@endphp
 
-							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+<div class="stats-figure">{{ $cancelledRequestsCount > 0 ? $cancelledRequestsCount : 0 }}</div>
+
 
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
@@ -217,10 +221,11 @@
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Claimed</h4>
 								@php
-								$barangayIdCount = $document_requests->where('status', 'Claimed')->count();
-							@endphp
+    $user = auth()->user();
+    $claimedRequestsCount = $user->documentRequests()->where('status', 'Claimed')->count();
+@endphp
 
-							<div class="stats-figure">{{ $barangayIdCount > 0 ? $barangayIdCount : 0 }}</div>
+<div class="stats-figure">{{ $claimedRequestsCount > 0 ? $claimedRequestsCount : 0 }}</div>
 
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
@@ -353,7 +358,7 @@
 	    <footer class="app-footer">
 		    <div class="container text-center py-3">
 		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank"> FuenToCarlina</a> for developers</small>
+            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" > FuenToCarlina</a> for developers</small>
 		       
 		    </div>
 	    </footer><!--//app-footer-->
