@@ -510,7 +510,7 @@
                                                             </div>
                                                 
                                                     <hr>
-                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY CERTIFICATE</h4> <br>
+                                                    <h4 style="text-align: center; font-weight: bold;">BARANGAY INDIGENCY</h4> <br>
                                                     <p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
                                                     <p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
                                                     <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
