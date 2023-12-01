@@ -82,55 +82,56 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="first_name">First Name:<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" required>
+                        <input type="text" class="form-control" name="first_name" id="first_name" value="{{ old('first_name') }}" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="last_name">Last Name:<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="last_name" id="last_name" required>
+                        <input type="text" class="form-control" name="last_name" id="last_name"value="{{ old('last_name') }}" required>
                     </div>
                 </div>
             </div>
           
             <div class="form-group">
                 <label for="middle_name">Middle Name:<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="middle_name">
+                <input type="text" class="form-control" name="middle_name" value="{{ old('middle_name') }}" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:<span class="text-danger">*</span></label>
-                <input type="email" class="form-control" name="email" id="emailInput" required>
+                <input type="email" class="form-control" name="email" id="emailInput" value="{{ old('email') }}" required>
                 <div id="emailFeedback" style="color: red;"></div>
             </div>
 
             <div class="form-group">
                 <label for="address">Address:<span class="text-danger">*</span></label>
                 <select class="form-control" name="address" required>
-                    <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan Barili Cebu</option>
-                    <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan Barili Cebu</option>
-                    <option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan Barili Cebu</option>
+                    <option value="Proper Nabunturan Barili Cebu" {{ old('address') == 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
+                    <option value="Sitio San Roque Nabunturan Barili Cebu" {{ old('address') == 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
+                    <option value="Sitio Cabinay Nabunturan Barili Cebu" {{ old('address') == 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="birthday">Birthday:<span class="text-danger">*</span></label>
-                <input type="date" class="form-control" name="birthday" required>
+                <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}">
                 <div class="text-danger birthday-feedback"></div>
             </div>
 
             <div class="form-group">
                 <label for="contact_number">Contact Number:<span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="contact_number" required>
+                <input type="number" class="form-control" name="contact_number" required value="{{ old('contact_number') }}">
                 <div class="text-danger contact-number-feedback"></div>
             </div>
 
             <div class="form-group">
                 <label for="gender">Gender:<span class="text-danger">*</span></label>
                 <select class="form-control" name="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+
                 </select>
             </div>
 
