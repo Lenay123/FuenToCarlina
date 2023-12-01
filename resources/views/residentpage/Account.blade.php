@@ -35,7 +35,7 @@
 					<div class="app-utilities col-auto">
 					<div class="app-utility-item app-user-dropdown dropdown">
 				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" style="max-width: 200px; max-height: 200px; margin-bottom: 10px; border-radius: 50%;">
+							<img src="{{ asset('image/' . auth()->user()->image) }}" style="max-width: 200px; max-height: 200px; margin-bottom: 10px; border-radius: 50%;">
 {{ auth()->user()->first_name }}   {{ auth()->user()->last_name }}</a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
 								<li><a class="dropdown-item" href="{{ route('residentpage.Account') }}">Account</a></li>
