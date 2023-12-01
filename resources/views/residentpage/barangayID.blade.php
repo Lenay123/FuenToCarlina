@@ -159,27 +159,27 @@
 						<form class="settings-form" action="{{ route('resident.store') }}" method="POST" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
-										<label for="exampleInputName1" class="form-label" >Full name:</label>
+										<label for="exampleInputName1" class="form-label" >Full name: <span class="text-danger">*</span></label>
 										<input type="name" class="form-control" name="full_name" value="" required>
 									</div>
 									<div class="form-group">
-										<label for="Photo" class="form-label">Photo:</label>
+										<label for="Photo" class="form-label">Photo: <span class="text-danger">*</span></label>
 										<input type="file" class="form-control" name="image" required>
 									</div>
 									<div class="form-group">
-										<label for="birthday">Birthday:</label>
+										<label for="birthday">Birthday: <span class="text-danger">*</span></label>
 										<input type="date" class="form-control" name="birthday" required>
 										<div class="text-danger birthday-feedback"></div>
 									</div>
 
 									<div class="form-group">
-										<label for="contact_number">Contact Number:</label>
+										<label for="contact_number">Contact Number: <span class="text-danger">*</span></label>
 										<input type="number" class="form-control" name="contact_number" required>
 										<div class="text-danger contact-number-feedback"></div>
 									</div>
 
 									<div class="form-group">
-										<label for="address">Address:</label>
+										<label for="address">Address: <span class="text-danger">*</span></label>
 										<select class="form-control" name="address" required>
 											<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
 											<option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
@@ -187,7 +187,7 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="civil_status">Civil Status:</label>
+										<label for="civil_status">Civil Status: <span class="text-danger">*</span></label>
 										<select class="form-control" name="civil_status" required>
 											<option value="Single">Single</option>
 											<option value="Married">Married</option>
@@ -198,25 +198,25 @@
 
 
 									<div class="form-group">
-										<label for="civil_status">Gender:</label>
+										<label for="civil_status">Gender: <span class="text-danger">*</span></label>
 										<select class="form-control" name="gender" required>
 											<option value="Male">Male</option>
 											<option value="Female">Female</option>
 										</select>
 									</div>
 
-									<label for="document_type" >Type of Document:</label>
+									<label for="document_type" >Type of Document: <span class="text-danger">*</span></label>
 									<select id="document_type" name="document_type" class="form-control">
 										<option value="Barangay ID">Barangay ID</option>
 									</select> <br>
 
 									<div class="form-group">
-									<label for="document_date">Date for Document Pickup:</label>
+									<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
 									<input type="date" class="form-control" name="document_date" id="document_date" required>
 									</div>
 
 									<div class="form-group">
-										<label for="document_time" >Time for Document Pickup:</label>
+										<label for="document_time" >Time for Document Pickup: <span class="text-danger">*</span></label>
 										<select class="form-control" name="document_time" required>
 											<option>Select Time</option>
 											<option value="09:00">9:00 AM</option>
@@ -239,7 +239,7 @@
 										</select>
 									</div>
 
-										<label for="id_type">Select an ID:</label>
+										<label for="id_type">Select an ID: <span class="text-danger">*</span></label>
 										<select id="id_type" name="id_type" class="form-control" required onchange="showOtherField()">
 											<option value="">Select an ID</option>
 											<option value="NSO with School ID">NSO with School ID</option>
@@ -259,12 +259,12 @@
 									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span> Note: Bring this document for verification</p></div> 
 				
 									<div class="form-group">
-										<label for="id_number" >ID Number:</label>
+										<label for="id_number" >ID Number: <span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="id_number" required>
 									</div>
 		
 									<div class="form-group">
-										<label for="purpose" class="form-label" >Purpose:</label>
+										<label for="purpose" class="form-label" >Purpose: <span class="text-danger">*</span></label>
 										<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required></textarea>
 										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
 		

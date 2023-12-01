@@ -73,7 +73,7 @@
         <form method="POST" action="{{route('register.post')}}" method="POST" enctype="multipart/form-data" >
             @csrf
              <div class="form-group">
-                <label for="Photo">Profile Picture:</label>
+                <label for="Photo">Profile Picture:<span class="text-danger">*</span></label>
                 <input type="file" class="form-control" name="image" required>       
                  </div> 
 
@@ -81,32 +81,32 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="first_name">First Name:</label>
+                        <label for="first_name">First Name:<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="first_name" id="first_name" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="last_name">Last Name:</label>
+                        <label for="last_name">Last Name:<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="last_name" id="last_name" required>
                     </div>
                 </div>
             </div>
           
             <div class="form-group">
-                <label for="middle_name">Middle Name:</label>
+                <label for="middle_name">Middle Name:<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="middle_name">
             </div>
 
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">Email:<span class="text-danger">*</span></label>
                 <input type="email" class="form-control" name="email" id="emailInput" required>
                 <div id="emailFeedback" style="color: red;"></div>
             </div>
 
             <div class="form-group">
-                <label for="address">Address:</label>
+                <label for="address">Address:<span class="text-danger">*</span></label>
                 <select class="form-control" name="address" required>
                     <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan Barili Cebu</option>
                     <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan Barili Cebu</option>
@@ -115,19 +115,19 @@
             </div>
 
             <div class="form-group">
-                <label for="birthday">Birthday:</label>
+                <label for="birthday">Birthday:<span class="text-danger">*</span></label>
                 <input type="date" class="form-control" name="birthday" required>
                 <div class="text-danger birthday-feedback"></div>
             </div>
 
             <div class="form-group">
-                <label for="contact_number">Contact Number:</label>
+                <label for="contact_number">Contact Number:<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" name="contact_number" required>
                 <div class="text-danger contact-number-feedback"></div>
             </div>
 
             <div class="form-group">
-                <label for="gender">Gender:</label>
+                <label for="gender">Gender:<span class="text-danger">*</span></label>
                 <select class="form-control" name="gender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -135,12 +135,12 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Password:<span class="text-danger">*</span></label>
                 <input type="password" class="form-control" name="password" required>
             </div>
 
             <div class="form-group">
-                <label for="password_confirmation">Confirm Password:</label>
+                <label for="password_confirmation">Confirm Password:<span class="text-danger">*</span></label>
                 <input type="password" class="form-control" name="password_confirmation" required>
             </div>
 
