@@ -38,13 +38,16 @@
 				    </div><!--//col-->
 		            
 					<div class="app-utilities col-auto">
-						<div class="app-utility-item app-user-dropdown dropdown">
-							<a  id="user-dropdown-toggle" href="#" role="button" aria-expanded="false">
+					<div class="app-utility-item app-user-dropdown dropdown">
+				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
 							<img id="image" src="{{ asset('image/' . auth()->user()->image) }}" style="max-width: 200px; max-height: 200px; margin-bottom: 10px; border-radius: 50%;">
-{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
-							</a>
-						</div>
-					</div>
+{{ auth()->user()->first_name }}   {{ auth()->user()->last_name }}</a>
+				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+								<li><a class="dropdown-item" href="{{ route('residentpage.Account') }}">Account</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">Log Out</a></li>
+							</ul>
+			            </div><!--//app-user-dropdown--> 
 		            </div><!--//app-utilities-->
 		        </div><!--//row-->
 	            </div><!--//app-header-content-->
@@ -116,35 +119,7 @@
 					    </li><!--//nav-item-->			    
 				    </ul><!--//app-menu-->
 			    </nav><!--//app-nav-->
-			    <div class="app-sidepanel-footer">
-				    <nav class="app-nav app-nav-footer">
-					    <ul class="app-menu footer-menu list-unstyled">
-						    <li class="nav-item">
-						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link" href="{{ route('residentpage.Account') }}">
-							        <span class="nav-icon">
-							            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	  <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
-	  <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
-	</svg>
-							        </span>
-			                        <span class="nav-link-text">Settings</span>
-						        </a><!--//nav-link-->
-					    </ul><!--//footer-menu-->
-				    </nav>
-					<nav class="app-nav app-nav-footer">
-					    <ul class="app-menu footer-menu list-unstyled">
-						    <li class="nav-item">
-						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-						        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout?');" href="{{route('logout')}}">
-							        <span class="nav-icon">
-										<i class="fa-solid fa-right-from-bracket"></i>
-							        </span>
-			                        <span class="nav-link-text">Logout</span>
-						        </a><!--//nav-link-->
-					    </ul><!--//footer-menu-->
-				    </nav>
-			    </div><!--//app-sidepanel-footer-->
+
 		       
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
@@ -199,7 +174,7 @@
 
 									<div class="form-group">
 										<label for="contact_number">Contact Number:</label>
-										<input type="text" class="form-control" name="contact_number" required>
+										<input type="number" class="form-control" name="contact_number" required>
 										<div class="text-danger contact-number-feedback"></div>
 									</div>
 
@@ -462,44 +437,53 @@ function validateForm() {
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const contactNumberInput = document.querySelector('input[name="contact_number"]');
-        const birthdayInput = document.querySelector('input[name="birthday"]');
-
-        contactNumberInput.addEventListener('input', function () {
+        // Add an input event listener to perform real-time validation for the contact number
+        document.querySelector('input[name="contact_number"]').addEventListener('input', function () {
             validateContactNumber(this);
         });
 
-        birthdayInput.addEventListener('input', function () {
+        // Add an input event listener to perform real-time validation for the birthday
+        document.querySelector('input[name="birthday"]').addEventListener('input', function () {
             validateBirthday(this);
         });
 
+        // Function to validate the contact number
         function validateContactNumber(inputElement) {
-            const isValidFormat = validatePhoneNumber(inputElement.value);
-            updateValidationFeedback(inputElement, isValidFormat, 'Invalid phone number format');
+            var contactNumber = inputElement.value;
+
+            // Use the provided function to validate the phone number
+            var isValidFormat = validatePhoneNumber(contactNumber);
+
+            // Update the validation message
+            var feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValidFormat ? '' : 'Invalid phone number format';
+            feedbackElement.style.color = 'red';
         }
 
+        // Function to validate the birthday
         function validateBirthday(inputElement) {
-            const isValidDate = isValidBirthday(inputElement.value);
-            updateValidationFeedback(inputElement, isValidDate, 'Invalid birthday');
+            var birthdayValue = inputElement.value;
+            var isValidDate = isValidBirthday(birthdayValue);
+
+            // Update the validation message
+            var feedbackElement = inputElement.nextElementSibling;
+            feedbackElement.innerHTML = isValidDate ? '' : 'Invalid birthday';
+            feedbackElement.style.color = 'red';
         }
 
-        function updateValidationFeedback(inputElement, isValid, message) {
-            const feedbackElement = inputElement.nextElementSibling;
-            feedbackElement.innerHTML = isValid ? '' : message;
-            feedbackElement.style.color = isValid ? 'green' : 'red';
-        }
-
+        // Function to check if the entered birthday is valid
         function isValidBirthday(birthday) {
-            const enteredDate = new Date(birthday);
-            const currentDate = new Date();
-            const minimumValidDate = new Date(currentDate);
+            var enteredDate = new Date(birthday);
+            var currentDate = new Date();
+            var minimumValidDate = new Date(currentDate);
             minimumValidDate.setFullYear(currentDate.getFullYear() - 15); // Minimum valid age is 15
 
             return !isNaN(enteredDate.getTime()) && enteredDate <= minimumValidDate;
         }
 
+        // Function to validate the phone number format
         function validatePhoneNumber(input_str) {
-            const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
             return re.test(input_str);
         }
     });
