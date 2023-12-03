@@ -8,6 +8,13 @@
     <!-- Add Bootstrap CSS link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Add Bootstrap CSS and JS (make sure JS comes after jQuery) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
         .registration-container {
@@ -52,23 +59,7 @@
 <body>
     <div class="container mt-5 registration-container">
         <h2>Registration Form</h2>
-        <div class="mt-5">
-            @if($errors->any())
-                <div class="col-12">
-                    @foreach($errors->all() as $error)
-                        <div class="alert alert-danger">{{$error}}</div>
-                    @endforeach
-                </div>
-            @endif
 
-            @if(session()->has('error'))
-            <div class="alert alert-danger">{{session('error')}}</div>
-            @endif
-
-            @if(session()->has('success'))
-            <div class="alert alert-success">{{session('success')}}</div>
-            @endif
-        </div>
 
         <form method="POST" action="{{route('register.post')}}" method="POST" enctype="multipart/form-data" >
             @csrf
@@ -116,10 +107,18 @@
 
             <div class="form-group">
                 <label for="birthday">Birthday:<span class="text-danger">*</span></label>
-                <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}">
+                <div class="input-group">
+                  <input type="date" class="form-control" name="birthday" required value="{{ old('birthday') }}">
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="fas fa-calendar"></i>
+                    </span>
+                  </div>
+                </div>
                 <div class="text-danger birthday-feedback"></div>
-            </div>
-
+              </div>
+              
+              
             <div class="form-group">
                 <label for="contact_number">Contact Number:<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" name="contact_number" required value="{{ old('contact_number') }}">
@@ -135,15 +134,25 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group position-relative">
                 <label for="password">Password:<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" name="password" required>
-            </div>
-
-            <div class="form-group">
+                <div class="input-group">
+                  <input type="password" class="form-control" name="password" id="id_password" required>
+                  <span class="toggle-password">
+                    <i class="far fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                  </span>
+                </div>
+              </div>
+              
+              <div class="form-group position-relative">
                 <label for="password_confirmation">Confirm Password:<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" name="password_confirmation" required>
-            </div>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="password_confirmation" id="id_password_confirmation" required>
+                  <span class="toggle-password">
+                    <i class="far fa-eye" id="togglePasswordConfirmation" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                  </span>
+                </div>
+              </div>
 
             <button type="submit" class="btn btn-primary btn-register">Register</button>
         </form>
@@ -152,7 +161,59 @@
             <p>Already have an account? <a href="{{ route('login') }}" class="btn btn-link btn-login">Login</a></p>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Your existing form and HTML content -->
+
+<!-- Modal for displaying validation errors -->
+<div class="modal fade" id="validationErrorModal" tabindex="-1" role="dialog" aria-labelledby="validationErrorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="validationErrorModalLabel">Validation Errors</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Display validation errors here -->
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Trigger the validation error modal if there are validation errors
+        @if ($errors->any())
+            $('#validationErrorModal').modal('show');
+        @endif
+
+        // Trigger the success modal if registration is successful
+        @if (session()->has('success'))
+            $('#successModal').modal('show');
+        @endif
+    });
+</script>
+
 
     <script>
  var existingEmails = {!! json_encode($existingEmails) !!}; // Replace with actual existing emails from the server
@@ -197,13 +258,13 @@ document.getElementById('emailInput').addEventListener('blur', function () {
             feedbackElement.style.color = 'red';
         }
 
-        // Function to validate the birthday
+      // Function to validate the birthday
         function validateBirthday(inputElement) {
             var birthdayValue = inputElement.value;
             var isValidDate = isValidBirthday(birthdayValue);
 
             // Update the validation message
-            var feedbackElement = inputElement.nextElementSibling;
+            var feedbackElement = inputElement.closest('.form-group').querySelector('.birthday-feedback');
             feedbackElement.innerHTML = isValidDate ? '' : 'Invalid birthday';
             feedbackElement.style.color = 'red';
         }
@@ -225,7 +286,30 @@ document.getElementById('emailInput').addEventListener('blur', function () {
         }
     });
 </script>
-
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
+  
+    togglePassword.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
+  
+    const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
+    const passwordConfirmation = document.querySelector('#id_password_confirmation');
+  
+    togglePasswordConfirmation.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = passwordConfirmation.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordConfirmation.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
+  </script>
+  
 
 
 

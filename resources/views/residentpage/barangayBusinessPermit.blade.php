@@ -247,18 +247,25 @@
 						@csrf
 						<div class="form-group">
 							<label for="exampleInputName1" class="form-label">Full name: <span class="text-danger">*</span></label>
-							<input type="name" class="form-control" name="full_name" value="" required>
+							<input type="name" class="form-control" name="full_name" value="" required style="border: 0.5px solid #B0AEAE;">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputName1" class="form-label">Business name: <span class="text-danger">*</span></label>
-							<input type="name" class="form-control" name="business_name" value="" required>
+							<input type="name" class="form-control" name="business_name" value="" required style="border: 0.5px solid #B0AEAE;">
 						</div>
 
 						<div class="form-group">
-							<label for="birthday">Birthday: <span class="text-danger">*</span></label>
-							<input type="date" class="form-control" name="birthday" required>
+							<label for="birthday">Birthday:<span class="text-danger">*</span></label>
+							<div class="input-group">
+							  <input type="date" class="form-control" name="birthday" required style="border: 0.5px solid #B0AEAE;">
+							  <div class="input-group-append">
+								<span class="input-group-text">
+								  <i class="fas fa-calendar"></i>
+								</span>
+							  </div>
+							</div>
 							<div class="text-danger birthday-feedback"></div>
-						</div>
+						  </div>
 
 						<div class="form-group">
 							<label for="address">Address: <span class="text-danger">*</span></label>
@@ -270,7 +277,7 @@
 						</div>
 						<div class="form-group">
 										<label for="civil_status">Civil Status: <span class="text-danger">*</span></label>
-										<select class="form-control" name="civil_status" required>
+										<select class="form-control" name="civil_status" required style="border: 0.5px solid #B0AEAE;">
 											<option value="Single">Single</option>
 											<option value="Married">Married</option>
 											<option value="Widowed">Widowed</option>
@@ -279,13 +286,20 @@
 									</div>
 
 									<div class="form-group">
-									<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
-									<input type="date" class="form-control" name="document_date" id="document_date" required>
+										<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
+										<div class="input-group">
+											<input type="date" class="form-control" name="document_date" id="document_date" required style="border: 0.5px solid #B0AEAE;">
+											<div class="input-group-append">
+												<span class="input-group-text">
+													<i class="fas fa-calendar"></i> <!-- FontAwesome calendar icon -->
+												</span>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-group">
 										<label for="document_time" >Time for Document Pickup: <span class="text-danger">*</span></label>
-										<select class="form-control" name="document_time" required>
+										<select class="form-control" name="document_time" required style="border: 0.5px solid #B0AEAE;">
 											<option>Select Time</option>
 											<option value="09:00">9:00 AM</option>
 											<option value="09:30">9:30 AM</option>
@@ -310,12 +324,12 @@
 
 
 						<label for="document_type">Type of Document: <span class="text-danger">*</span></label>
-						<select id="document_type" name="document_type" class="form-control">
+						<select id="document_type" name="document_type" class="form-control" style="border: 0.5px solid #B0AEAE;">
 							<option value="Barangay Business Permit">Barangay Business Permit</option>
 						</select> <br>
 
 						<label for="id_type">Select an ID: <span class="text-danger">*</span></label>
-							<select id="id_type" name="id_type" class="form-control" required onchange="showOtherField()">
+							<select id="id_type" name="id_type" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="showOtherField()">
 								<option value="">Select an ID</option>
 								<option value="NSO with School ID">NSO with School ID</option>
 								<option value="NBI Clearance">NBI Clearance</option>
@@ -329,28 +343,29 @@
 
 						<div id="otherField" style="display:none;">
 							<label for="otherIdType">Specify Other ID:</label>
-							<input type="text" id="otherIdType" name="specific_id" class="form-control">
+							<input type="text" id="otherIdType" name="specific_id" class="form-control" required style="border: 0.5px solid #B0AEAE;">
 						</div>
 
 						<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
 
 						<div class="form-group">
 							<label for="id_number">ID Number: <span class="text-danger">*</span></label>
-							<input type="text" class="form-control" name="id_number" required>
+							<input type="text" class="form-control" name="id_number" required style="border: 0.5px solid #B0AEAE;">
 						</div>
 
 						<div class="form-group">
 							<label for="purpose" class="form-label">Purpose: <span class="text-danger">*</span></label>
-							<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required></textarea>
+							<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required style="border: 0.5px solid #B0AEAE;"></textarea>
 							<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
 						</div>
 
 						<div class="modal-footer">
 							<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
+							<!-- Add a space between buttons -->
+							<span style="margin-right: 10px;"></span>
 							<button type="submit" class="btn btn-primary" onclick="return validateForm();">Request</button>
-							{{-- <button type="submit" class="btn btn-success m-1">Request Now</button> --}}
-
 						</div>
+						
 					</form>
 				</div><!--//app-card-body-->
 			</div>

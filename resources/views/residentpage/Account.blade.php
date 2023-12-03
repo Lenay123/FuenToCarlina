@@ -179,7 +179,7 @@
 						  
 											<div class="row">
 											  <div class="col-lg-3 col-md-4 label ">Firstname:</div>
-											  <div class="col-lg-9 col-md-8">{{ auth()->user()->first_name }} </div>
+											  <div class="col-lg-9 col-md-8" >{{ auth()->user()->first_name }} </div>
 											</div>
 											<div class="row">
 												<div class="col-lg-3 col-md-4 label ">Middlename:</div>
@@ -247,33 +247,33 @@
 											  <div class="row mb-3">
 												<label for="fullName" class="col-md-4 col-lg-3 col-form-label">Firstname:</label>
 												<div class="col-md-8 col-lg-9">
-													<input type="text" class="form-control" id="fname" name="first_name" value="{{ auth()->user()->first_name }}" required>												</div>
+													<input type="text" class="form-control" id="fname" name="first_name" value="{{ auth()->user()->first_name }}" required style="border: 0.5px solid #B0AEAE;">												</div>
 											  </div>
 						  
 						  
 											  <div class="row mb-3">
 												<label for="company" class="col-md-4 col-lg-3 col-form-label">Lastname:</label>
 												<div class="col-md-8 col-lg-9">
-													<input type="text" class="form-control" id="lname" name="last_name" value="{{ auth()->user()->last_name }}" required>												</div>
+													<input type="text" class="form-control" id="lname" name="last_name" value="{{ auth()->user()->last_name }}" required style="border: 0.5px solid #B0AEAE;">												</div>
 											  </div>
 						  
 											  <div class="row mb-3">
 												<label for="Job" class="col-md-4 col-lg-3 col-form-label">Middlename:</label>
 												<div class="col-md-8 col-lg-9">
-													<input type="text" class="form-control" id="mname" name="middle_name" value="{{ auth()->user()->middle_name }}" required>												</div>
+													<input type="text" class="form-control" id="mname" name="middle_name" value="{{ auth()->user()->middle_name }}" required style="border: 0.5px solid #B0AEAE;">												</div>
 											  </div>
 						  
 											  <div class="row mb-3">
 												<label for="Country" class="col-md-4 col-lg-3 col-form-label">Email:</label>
 												<div class="col-md-8 col-lg-9">
 
-													<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>												</div>
+													<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required style="border: 0.5px solid #B0AEAE;">												</div>
 											  </div>
 
 											  <div class="row mb-3">
 													<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
 													<div class="col-md-8 col-lg-9">
-														<input type="number" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required>
+														<input type="number" class="form-control" name="contact_number" value="{{ auth()->user()->contact_number }}" required style="border: 0.5px solid #B0AEAE;">
 														<!-- Add a new div for validation feedback -->
 														<div class="text-danger contact-number-feedback"></div>
 													</div>
@@ -283,7 +283,7 @@
 											  <div class="row mb-3">
 												<label for="Email" class="col-md-4 col-lg-3 col-form-label">Gender</label>
 												<div class="col-md-8 col-lg-9">
-													<select class="form-control" name="gender" required >
+													<select class="form-control" name="gender" required style="border: 0.5px solid #B0AEAE;">
 														<option value="male" @if (auth()->user()->gender === 'male') selected @endif>Male</option>
 														<option value="female" @if (auth()->user()->gender === 'female') selected @endif>Female</option>
 													</select>												</div>
@@ -292,7 +292,7 @@
 											  <div class="row mb-3">
 												<label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
 												<div class="col-md-8 col-lg-9">
-													<select class="form-control" name="address" required>
+													<select class="form-control" name="address" required style="border: 0.5px solid #B0AEAE;">
 														<option value="Proper Nabunturan Barili Cebu" @if (auth()->user()->address === 'Proper Nabunturan Barili Cebu') selected @endif>Proper Nabunturan, Barili, Cebu</option>
 														<option value="Sitio San Roque Nabunturan Barili Cebu" @if (auth()->user()->address === 'Sitio San Roque Nabunturan Barili Cebu') selected @endif>Sitio San Roque Nabunturan, Barili, Cebu</option>
 														<option value="Sitio Cabinay Nabunturan Barili Cebu" @if (auth()->user()->address === 'Sitio Cabinay Nabunturan Barili Cebu') selected @endif>Sitio Cabinay Nabunturan, Barili, Cebu</option>
@@ -302,21 +302,21 @@
 											<div class="row mb-3">
 												<label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="current_password" type="password" class="form-control" id="currentPassword">
+													<input name="current_password" type="password" class="form-control" id="currentPassword" required style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 									
 											<div class="row mb-3">
 												<label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="password" type="password" class="form-control" id="newPassword">
+													<input name="password" type="password" class="form-control" id="newPassword" required style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 									
 											<div class="row mb-3">
 												<label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="password_confirmation" type="password" class="form-control" id="renewPassword">
+													<input name="password_confirmation" type="password" class="form-control" id="renewPassword" required style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 						  
