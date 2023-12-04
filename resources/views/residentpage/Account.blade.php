@@ -302,21 +302,21 @@
 											<div class="row mb-3">
 												<label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="current_password" type="password" class="form-control" id="currentPassword" required style="border: 0.5px solid #B0AEAE;">
+													<input name="current_password" type="password" class="form-control" id="currentPassword"  style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 									
 											<div class="row mb-3">
 												<label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="password" type="password" class="form-control" id="newPassword" required style="border: 0.5px solid #B0AEAE;">
+													<input name="password" type="password" class="form-control" id="newPassword"  style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 									
 											<div class="row mb-3">
 												<label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="password_confirmation" type="password" class="form-control" id="renewPassword" required style="border: 0.5px solid #B0AEAE;">
+													<input name="password_confirmation" type="password" class="form-control" id="renewPassword"  style="border: 0.5px solid #B0AEAE;">
 												</div>
 											</div>
 						  
