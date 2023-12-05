@@ -18,6 +18,9 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="/css/portal.css">
@@ -125,25 +128,7 @@
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
-    <center>
-		<div class="mt-5">
-			@if($errors->any())
-				<div class="col-12">
-					@foreach($errors->all() as $error)
-						<div class="alert alert-danger">{{$error}}</div>
-					@endforeach
-				</div>
-			@endif
-		
-			@if(session()->has('error'))
-				<div class="alert alert-danger">{{ session('error') }}</div>
-			@endif
-		
-			@if(session()->has('success'))
-				<div class="alert alert-success">{{ session('success') }}</div>
-			@endif
-		</div>
-	</center>
+
     
     <div class="app-wrapper">
 	    
@@ -162,14 +147,14 @@
 									@csrf
 									<div class="form-group">
 										<label for="exampleInputName1" class="form-label" >Full name: <span class="text-danger">*</span></label>
-										<input type="name" class="form-control" name="full_name" value="" required style="border: 0.5px solid #B0AEAE;">
+										<input type="name" class="form-control" name="full_name"  required style="border: 0.5px solid #B0AEAE;" value="{{ old('full_name') }}">
 									</div>
 
 
 									<div class="form-group">
 										<label for="birthday">Birthday:<span class="text-danger">*</span></label>
 										<div class="input-group">
-										  <input type="date" class="form-control" name="birthday" required style="border: 0.5px solid #B0AEAE;">
+										  <input type="date" class="form-control" name="birthday" required style="border: 0.5px solid #B0AEAE;" value="{{ old('birthday') }}">
 										  <div class="input-group-append">
 											<span class="input-group-text">
 											  <i class="fas fa-calendar"></i>
@@ -183,18 +168,18 @@
 									<div class="form-group">
 										<label for="address">Address: <span class="text-danger">*</span></label>
 										<select class="form-control" name="address" required style="border: 0.5px solid #B0AEAE;">
-											<option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
-											<option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
-											<option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
-										</select>
+										<option value="Proper Nabunturan Barili Cebu" {{ old('address') == 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
+										<option value="Sitio San Roque Nabunturan Barili Cebu" {{ old('address') == 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
+										<option value="Sitio Cabinay Nabunturan Barili Cebu" {{ old('address') == 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
+															</select>
 									</div>
 									<div class="form-group">
 										<label for="civil_status">Civil Status: <span class="text-danger">*</span></label>
 										<select class="form-control" name="civil_status" required style="border: 0.5px solid #B0AEAE;">
-											<option value="Single">Single</option>
-											<option value="Married">Married</option>
-											<option value="Widowed">Widowed</option>
-											<option value="Divorced">Divorced</option>
+											<option value="Single" {{ old('civil_status') == 'Single' ? 'selected' : '' }}>Single</option>
+											<option value="Married"{{ old('civil_status') == 'Married' ? 'selected' : '' }}>Married</option>
+											<option value="Widowed" {{ old('civil_status') == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+											<option value="Divorced" {{ old('civil_status') == 'Divorced' ? 'selected' : '' }}>Divorced</option>
 										</select>
 									</div>
 
@@ -207,7 +192,7 @@
 									<div class="form-group">
 										<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
 										<div class="input-group">
-											<input type="date" class="form-control" name="document_date" id="document_date" required style="border: 0.5px solid #B0AEAE;">
+											<input type="date" class="form-control" name="document_date" id="document_date" required style="border: 0.5px solid #B0AEAE;" value="{{ old('document_date') }}">
 											<div class="input-group-append">
 												<span class="input-group-text">
 													<i class="fas fa-calendar"></i> <!-- FontAwesome calendar icon -->
@@ -221,53 +206,55 @@
 										<label for="document_time" >Time for Document Pickup: <span class="text-danger">*</span></label>
 										<select class="form-control" name="document_time" required style="border: 0.5px solid #B0AEAE;">
 											<option>Select Time</option>
-											<option value="09:00">9:00 AM</option>
-											<option value="09:30">9:30 AM</option>
-											<option value="10:00">10:00 AM</option>
-											<option value="10:30">10:30 AM</option>
-											<option value="11:00">11:00 AM</option>
-											<option value="11:30">11:30 AM</option>
-											<option value="12:00">12:00 PM</option>
-											<option value="12:30">12:30 PM</option>
-											<option value="13:00">1:00 PM</option>
-											<option value="13:30">1:30 PM</option>
-											<option value="14:00">2:00 PM</option>
-											<option value="14:30">2:30 PM</option>
-											<option value="15:00">3:00 PM</option>
-											<option value="15:30">3:30 PM</option>
-											<option value="16:00">4:00 PM</option>
-											<option value="16:30">4:30 PM</option>
-											<option value="17:00">5:00 PM</option>
+											<option value="09:00" {{ old('document_time') == '09:00' ? 'selected' : '' }}>9:00 AM</option>
+											<option value="09:30" {{ old('document_time') == '09:30' ? 'selected' : '' }}>9:30 AM</option>
+											<option value="10:00" {{ old('document_time') == '10:00' ? 'selected' : '' }}>10:00 AM</option>
+											<option value="10:30" {{ old('document_time') == '10:30' ? 'selected' : '' }}>10:30 AM</option>
+											<option value="11:00" {{ old('document_time') == '11:00' ? 'selected' : '' }}>11:00 AM</option>
+											<option value="11:30" {{ old('document_time') == '11:30' ? 'selected' : '' }}>11:30 AM</option>
+											<option value="12:00" {{ old('document_time') == '12:00' ? 'selected' : '' }}>12:00 PM</option>
+											<option value="12:30" {{ old('document_time') == '12:30' ? 'selected' : '' }}>12:30 PM</option>
+											<option value="13:00" {{ old('document_time') == '13:00' ? 'selected' : '' }}>1:00 PM</option>
+											<option value="13:30" {{ old('document_time') == '13:30' ? 'selected' : '' }}>1:30 PM</option>
+											<option value="14:00" {{ old('document_time') == '14:00' ? 'selected' : '' }}>2:00 PM</option>
+											<option value="14:30" {{ old('document_time') == '14:30' ? 'selected' : '' }}>2:30 PM</option>
+											<option value="15:00" {{ old('document_time') == '15:00' ? 'selected' : '' }}>3:00 PM</option>
+											<option value="15:30" {{ old('document_time') == '15:30' ? 'selected' : '' }}>3:30 PM</option>
+											<option value="16:00" {{ old('document_time') == '16:00' ? 'selected' : '' }}>4:00 PM</option>
+											<option value="16:30" {{ old('document_time') == '16:30' ? 'selected' : '' }}>4:30 PM</option>
+											<option value="17:00" {{ old('document_time') == '17:00' ? 'selected' : '' }}>5:00 PM</option>
+
 										</select>
 									</div>
 
 									<label for="id_type">Select an ID: <span class="text-danger">*</span></label>
 										<select id="id_type" name="id_type" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="showOtherField()">
 											<option value="">Select an ID</option>
-											<option value="NSO with School ID">NSO with School ID</option>
-											<option value="NBI Clearance">NBI Clearance</option>
-											<option value="Voters ID">Voters ID</option>
-											<option value="Drivers License">Drivers License</option>
-											<option value="Voters Certificate">Voters Certificate</option>
-											<option value="National ID">National ID</option>
-											<option value="SSS">SSS</option>
-											<option value="Others">Others</option>
+											<option value="NSO with School ID" {{ old('id_type') == 'NSO with School ID' ? 'selected' : '' }}>NSO with School ID</option>
+											<option value="NBI Clearance" {{ old('id_type') == 'NBI Clearance' ? 'selected' : '' }}>NBI Clearance</option>
+											<option value="Voters ID" {{ old('id_type') == 'Voters ID' ? 'selected' : '' }}>Voters ID</option>
+											<option value="Drivers License" {{ old('id_type') == 'Drivers License' ? 'selected' : '' }}>Drivers License</option>
+											<option value="Voters Certificate" {{ old('id_type') == 'Voters Certificate' ? 'selected' : '' }}>Voters Certificate</option>
+											<option value="National ID" {{ old('id_type') == 'National ID' ? 'selected' : '' }}>National ID</option>
+											<option value="SSS" {{ old('id_type') == 'SSS' ? 'selected' : '' }}>SSS</option>
+											<option value="Others" {{ old('id_type') == 'Others' ? 'selected' : '' }}>Others</option>
+
 										</select>
 
 									<div id="otherField" style="display:none;">
 										<label for="otherIdType">Specify Other ID:</label>
-										<input type="text" id="otherIdType" name="specific_id" class="form-control" required style="border: 0.5px solid #B0AEAE;">
+										<input type="text" id="otherIdType" name="specific_id" class="form-control"  style="border: 0.5px solid #B0AEAE;" value="{{ old('specific_id') }}">
 									</div>
 									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
 					
 									<div class="form-group">
 										<label for="id_number" >ID Number: <span class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="id_number" required style="border: 0.5px solid #B0AEAE;">
+										<input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}" required style="border: 0.5px solid #B0AEAE;">
 									</div>
 		
 									<div class="form-group">
 										<label for="purpose" class="form-label" >Purpose: <span class="text-danger">*</span></label>
-										<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required style="border: 0.5px solid #B0AEAE;"></textarea>
+										<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required style="border: 0.5px solid #B0AEAE;">{{ old('purpose') }}</textarea>
 										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
 		
 									</div>
@@ -275,7 +262,7 @@
 										<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>
 										<!-- Add a space between buttons -->
 										<span style="margin-right: 10px;"></span>
-										<button type="submit" class="btn btn-primary" onclick="return validateForm();">Request</button>
+										<button type="submit" class="btn btn-primary">Request</button>
 									</div>
 								</form>
 						    </div><!--//app-card-body-->
@@ -299,10 +286,73 @@
 	    
     </div><!--//app-wrapper-->    
     
-    
-    
+<!-- Error Modal -->
+<div class="modal" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="close" aria-label="Close" onclick="closeErrorModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeErrorModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openErrorModal() {
+        $('#errorModal').modal('show');
+    }
+
+    function closeErrorModal() {
+        $('#errorModal').modal('hide');
+    }
+
+    // Call openErrorModal function when there are errors
+    @if($errors->any())
+        $(document).ready(function() {
+            openErrorModal();
+        });
+    @endif
+</script>
+
+
 	    
     </div><!--//app-wrapper-->    					
+	<center>
+    <div class="mt-5">
+        @if($errors->any())
+            <div class="col-12">
+                @foreach($errors->all() as $error)
+                    <div class="alert alert-danger">{{$error}}</div>
+                @endforeach
+                <script>
+                    // Show error modal if there are errors
+                    $(document).ready(function() {
+                        $('#errorModal').modal('show');
+                    });
+                </script>
+            </div>
+        @endif
+
+        @if(session()->has('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+    </div>
+</center>
 
  
     <!-- Javascript -->          
@@ -321,94 +371,21 @@
     
     <!-- Page Specific JS -->
 	<script>
-	function validateForm() {
-            // Get values from form fields
-            var fullName = document.querySelector('input[name="full_name"]').value;
-			var businessName = document.querySelector('input[name="business_name"]').value;
-			var birthday = document.querySelector('input[name="birthday"]').value;
-			var address = document.querySelector('select[name="address"]').value;
-			var civilStatus = document.querySelector('select[name="civil_status"]').value;
-			var documentDate = document.querySelector('input[name="document_date"]').value;
-			var documentTime = document.querySelector('select[name="document_time"]').value;
-			var documentType = document.querySelector('select[name="document_type"]').value;
-			var idType = document.querySelector('select[name="id_type"]').value;
-			var otherIdType = document.querySelector('input[name="specific_id"]').value;
-			var idNumber = document.querySelector('input[name="id_number"]').value;
-			var purpose = document.querySelector('textarea[name="purpose"]').value;
 
-			// Example: Check if fullName is not empty
-			if (!fullName.trim()) {
-				alert('Please fill in the Full Name field.');
-				return;
-			}
+		
+function showOtherField() {
+		var idType = document.querySelector('select[name="id_type"]').value;
+		var otherField = document.getElementById('otherField');
+		
+		// Show the field if the selected ID type is "Others"
+		otherField.style.display = (idType === 'Others') ? 'block' : 'none';
+	}
 
-			if (!businessName.trim()) {
-				alert('Please fill in the Business Name field.');
-				return;
-			}
-
-			if (!birthday.trim()) {
-				alert('Please fill in the Birthday field.');
-				return;
-			}
-
-			if (!address.trim()) {
-				alert('Please select an Address.');
-				return;
-			}
-
-			if (!civilStatus.trim()) {
-				alert('Please select a Civil Status.');
-				return;
-			}
-
-			if (!documentDate.trim()) {
-				alert('Please fill in the Document Date field.');
-				return;
-			}
-
-			if (!documentTime.trim()) {
-				alert('Please select a Document Time.');
-				return;
-			}
-
-			if (!documentType.trim()) {
-				alert('Please select a Document Type.');
-				return;
-			}
-
-			if (!idType.trim()) {
-				alert('Please select an ID Type.');
-				return;
-			}
-			if (idType === 'Others' && !otherIdType.trim()) {
-				alert('Please specify Other ID Type.');
-				return;
-			}
-
-			if (!idNumber.trim()) {
-				alert('Please fill in the ID Number field.');
-				return;
-			}
-
-			if (!purpose.trim()) {
-				alert('Please fill in the Purpose field.');
-				return;
-			}
-
-            // Confirm before submitting the form
-            return confirm('Are you sure you want to Request this document?');
-        }
-    function showOtherField() {
-        var selectedValue = document.getElementById("id_type").value;
-        var otherField = document.getElementById("otherField");
-
-        if (selectedValue === "Others") {
-            otherField.style.display = "block";
-        } else {
-            otherField.style.display = "none";
-        }
-    }
+	// Trigger the function on page load and whenever the ID type changes
+	document.addEventListener('DOMContentLoaded', function () {
+		showOtherField();  // Show/hide on page load
+		document.querySelector('select[name="id_type"]').addEventListener('change', showOtherField);  // Show/hide on change
+	});
 	
 	document.addEventListener("DOMContentLoaded", function () {
         var dateInput = document.getElementById("document_date");
