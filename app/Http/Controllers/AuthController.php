@@ -11,7 +11,8 @@ use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use App\Models\DocumentRequest;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 class AuthController extends Controller
 {
     /**
@@ -201,12 +202,39 @@ class AuthController extends Controller
         $user->address = $request->input('address');
         $user->image = $profileImage; // Corrected variable name
         $user->role = 'user'; // Default role for registered users
-    
+       // Generate and send OTP
+       $otp = rand(100000, 999999);
+       $user->otp = $otp;
         $user->save();
-    
-        return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
+        Mail::to($user->email)->send(new WelcomeMail($otp, $user->first_name));
+        return redirect()->route('otp.verification', ['userId' => $user->id]);
+
+        // return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
-    
+    // Inside your OTP verification controller
+        public function verifyOTP(Request $request)
+        {
+            // Retrieve user and OTP from request
+            $user = User::findOrFail($request->input('user'));
+            $enteredOTP = $request->input('otp');
+
+            // Verify OTP
+            if ($enteredOTP == $user->otp) {
+                // Clear OTP and complete registration
+                $user->otp = null;
+                $user->save();
+
+                // Redirect to login or another page
+                return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
+            } else {
+                // Invalid OTP, redirect back with an error message
+                return redirect()->back()->with('error', 'Invalid OTP. Please try again.');
+            }
+        }
+public function showOTP(){
+    return redirect()->route('otp.verification');
+  
+}
 
     function logout(){
             // Session::flush();

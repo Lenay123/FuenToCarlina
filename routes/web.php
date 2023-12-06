@@ -12,6 +12,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OtpVerificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -165,3 +166,8 @@ Route::group(['middleware' => ['auth', 'role:secretary']], function () {
         ->name('claimDocumentPermit');
     Route::post('/secretary/secretary_dashboard', [AuthController::class, 'updateProfileSecretary'])->name('secretary.updateProfileSecretary');
 });
+
+
+
+Route::get('/otp-verification/{userId}', [OtpVerificationController::class, 'show'])->name('otp.verification');
+Route::post('/otp-verification', 'RegistrationController@verifyOTP');

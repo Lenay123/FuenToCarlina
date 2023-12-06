@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('address', ['Proper Nabunturan Barili Cebu', 'Sitio San Roque Nabunturan Barili Cebu', 'Sitio Cabinay Nabunturan Barili Cebu']);
             $table->enum('gender', ['male', 'female']);
             $table->string('image')->nullable();
+            $table->string('otp')->nullable();
             $table->enum('role', ['admin', 'user', 'secretary']);
             $table->rememberToken();
             $table->timestamps();
