@@ -44,11 +44,77 @@ class AuthController extends Controller
 
 
     
+    // function loginPost(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'password' => 'required'
+    //     ]);
+    
+    //     $credentials = $request->only('email', 'password');
+    
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+    
+    //         // Check if the user is an admin
+    //         if ($user->role === 'admin') {
+    //             // You may add additional checks for admin login if needed
+    //             return redirect()->route('dashboard');
+    //         }
+    
+    //         // Redirect based on the user's role
+    //         switch ($user->role) {
+    //             case 'user':
+    //                 return redirect()->intended(route('residentpage.resident'));
+    //             case 'secretary':
+    //                 return redirect()->route('dashboard_secretary');
+    //             // Add more cases for other roles if needed
+    //             default:
+    //                 Auth::logout();
+    //                 return redirect(route('login'))->with("error", "Login details are not valid");
+    //         }
+    //     }
+    
+    //     // If no user is authenticated, check for hardcoded admin credentials
+    //     $adminUsername = 'admin@gmail.com';
+    //     $adminPassword = 'admin123';
+    
+    //     if ($request->email === $adminUsername && $request->password === $adminPassword) {
+    //         // Admin login successful
+    
+    //         // Check if admin user already exists in the database
+    //         $admin = User::where('email', $adminUsername)->first();
+    
+    //         if (!$admin) {
+    //             // Create admin user if not exists
+    //             $admin = User::create([
+    //                 'first_name' => 'Almar',
+    //                 'last_name' => 'Gutierrez',
+    //                 'middle_name' => 'L.',
+    //                 'birthday' => Carbon::parse('October 1, 1990')->format('Y-m-d'),
+    //                 'contact_number' => '09095432419',
+    //                 'gender' => 'male',
+    //                 'address' => 'Proper Nabunturan Barili Cebu',
+    //                 'role'=> 'admin',
+    //                 'email' => $adminUsername,
+    //                 'password' => Hash::make($adminPassword),
+    //                 // Add other profile information as needed
+    //             ]);
+    //         }
+    
+    //         Auth::login($admin);
+    
+    //         return redirect()->route('dashboard'); // Change to your actual admin dashboard route
+    //     }
+    
+    //     return redirect(route('login'))->with("error", "Login details are not valid");
+    // }
+ 
     function loginPost(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
     
         $credentials = $request->only('email', 'password');
@@ -56,14 +122,16 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
     
-            // Check if the user is an admin
-            if ($user->role === 'admin') {
-                // You may add additional checks for admin login if needed
-                return redirect()->route('dashboard');
+            // Check if the user is not an admin or secretary and has not verified their email
+            if (!in_array($user->role, ['admin', 'secretary']) && !$user->hasVerifiedEmail()) {
+                Auth::logout();
+                return redirect(route('login'))->with("error", "Invalid Credentials.");
             }
     
             // Redirect based on the user's role
             switch ($user->role) {
+                case 'admin':
+                    return redirect()->route('dashboard');
                 case 'user':
                     return redirect()->intended(route('residentpage.resident'));
                 case 'secretary':
@@ -80,13 +148,9 @@ class AuthController extends Controller
         $adminPassword = 'admin123';
     
         if ($request->email === $adminUsername && $request->password === $adminPassword) {
-            // Admin login successful
-    
-            // Check if admin user already exists in the database
             $admin = User::where('email', $adminUsername)->first();
     
             if (!$admin) {
-                // Create admin user if not exists
                 $admin = User::create([
                     'first_name' => 'Almar',
                     'last_name' => 'Gutierrez',
@@ -98,7 +162,6 @@ class AuthController extends Controller
                     'role'=> 'admin',
                     'email' => $adminUsername,
                     'password' => Hash::make($adminPassword),
-                    // Add other profile information as needed
                 ]);
             }
     
@@ -108,8 +171,9 @@ class AuthController extends Controller
         }
     
         return redirect(route('login'))->with("error", "Login details are not valid");
-    }
-
+    } 
+    
+    
 
     public function updateProfileAdmin(Request $request)
     {
@@ -211,13 +275,6 @@ class AuthController extends Controller
 
         // return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
-
-    
-
-public function showOTP(){
-    return redirect()->route('otp.verification');
-  
-}
 
     function logout(){
             // Session::flush();

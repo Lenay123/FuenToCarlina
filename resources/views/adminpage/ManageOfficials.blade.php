@@ -323,7 +323,7 @@
                           <td>{{ $official->created_at }}</td>
                           <td style="display: flex;">
                           <a style="margin-bottom: -5px;" href="{{ route('adminpage.editOfficials', ['id' => $official->id]) }}">
-                            <button type="button" class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></button>
+                            <button type="button"class="btn btn-sm btn-primary mr-2"><i class="fas fa-fw fa-edit"></i></button>
                         </a>
 
                               <form action="{{ route('adminpage.deleteOfficial', ['id' => $official->id]) }}" method="POST">

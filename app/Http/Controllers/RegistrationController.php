@@ -109,7 +109,8 @@ class RegistrationController extends Controller
         if (!$user) {
             return redirect(route('/adminpage/AddResident'))->with("error", "Try again");
         }
-    
+        $user->markEmailAsVerified();
+
         return redirect()->route('adminpage.storeResident')->with("success", "Resident is added successfully");
     }
     

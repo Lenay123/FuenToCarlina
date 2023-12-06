@@ -268,12 +268,6 @@
 										</select>
 									</div>
 
-
-									<label for="document_type" >Type of Document: <span class="text-danger">*</span></label>
-									<select id="document_type" name="document_type" class="form-control" style="border: 0.5px solid #B0AEAE;">
-										<option value="Barangay Certificate">Barangay Certificate</option>
-									</select><br>
-
 									<div class="form-group">
 										<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
 										<div class="input-group">

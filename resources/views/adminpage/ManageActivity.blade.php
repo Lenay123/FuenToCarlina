@@ -311,19 +311,21 @@
                           <td>{{ $activity->activity }}</td>
                           <td>{{ $activity->description }}</td>
                           <td>{{ $activity->created_at }}</td>
-                          <td style="display: flex;">
-                          <a style="margin-bottom: -5px;" href="{{ route('adminpage.editActivity', ['id' => $activity->id]) }}" >
-                            <button type="button" class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></button>
-                        </a>
+                          <td>
+                              <a href="{{ route('adminpage.editActivity', ['id' => $activity->id]) }}" class="text-center">
+                                  <button type="button" class="btn btn-sm btn-primary mr-2"><i class="fas fa-fw fa-edit"></i></button>
+                              </a>
 
                               <form action="{{ route('adminpage.deleteActivity', ['id' => $activity->id]) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
                                   <button type="submit" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this activity?');">
-                                  <i class="fas fa-fw fa-trash-alt "></i>
+                                      <i class="fas fa-fw fa-trash-alt"></i>
                                   </button>
                               </form>
                           </td>
+
+
       
                       </tr>
                       @endforeach
