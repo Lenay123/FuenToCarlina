@@ -170,4 +170,4 @@ Route::group(['middleware' => ['auth', 'role:secretary']], function () {
 
 
 Route::get('/otp-verification/{userId}', [OtpVerificationController::class, 'show'])->name('otp.verification');
-Route::post('/otp-verification', 'RegistrationController@verifyOTP');
+// Route::post('/otp-verification', [AuthController::class, 'verifyOtP'])->name('verifyotp');

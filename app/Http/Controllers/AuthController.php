@@ -211,26 +211,9 @@ class AuthController extends Controller
 
         // return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
-    // Inside your OTP verification controller
-        public function verifyOTP(Request $request)
-        {
-            // Retrieve user and OTP from request
-            $user = User::findOrFail($request->input('user'));
-            $enteredOTP = $request->input('otp');
 
-            // Verify OTP
-            if ($enteredOTP == $user->otp) {
-                // Clear OTP and complete registration
-                $user->otp = null;
-                $user->save();
+    
 
-                // Redirect to login or another page
-                return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
-            } else {
-                // Invalid OTP, redirect back with an error message
-                return redirect()->back()->with('error', 'Invalid OTP. Please try again.');
-            }
-        }
 public function showOTP(){
     return redirect()->route('otp.verification');
   
