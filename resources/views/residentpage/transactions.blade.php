@@ -139,6 +139,7 @@
 				    <div class="col-auto">
 			            <h1 class="app-page-title mb-0">Transactions</h1>
 				    </div>
+
 				    <div class="col-auto">
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
@@ -146,15 +147,30 @@
 								   
 					                
 							    </div><!--//col-->
+
+
+
 								<div class="col-auto">
 									<select id="status-filter" class="form-select w-auto">
-										<option value="all" selected>All</option>
+									<option value="all" selected>Select Status</option>
+										<option value="all" >All</option>
 										<option value="Pending">Pending</option>
 										<option value="cancelled">Cancelled</option>
 										<option value="Claimed">Claimed</option>
 									</select>
 								</div>
+								<div class="col-auto">
+									<select id="document-filter" class="form-select" onchange="filterDocuments()" >
+										<option value="all" selected>Select Document </option>
+										<option value="all" >All</option>
+										<option value="Barangay Indigency"> Certificate </option>
+										<option value="Barangay Certificate">Indigency </option>
+										<option value="Barangay Business Permit">Permit </option>
+										<option value="Barangay ID">ID </option>
 
+									</select>
+								</div>
+								
 
 						    </div><!--//row-->
 					    </div><!--//table-utilities-->
@@ -174,7 +190,14 @@
 						    <div class="app-card-body">
 							    <div class="table-responsive">
 								<table class="table app-table-hover mb-0 text-left" id="document-list">
-								<thead>
+								<thead> <br>
+								<div class="col-auto">
+									<!-- Search input field with search icon -->
+									<div class="input-group">
+										<input type="text" id="search" class="form-control col-md-28" placeholder="Search..." style= "border: 1px solid rgba(128, 128, 128, 0.5)">
+										<span class="input-group-text"><i class="fas fa-search"></i></span>
+									</div>
+								</div> <br>
 									<tr>
 										<th class="cell">Name</th>
 										<th class="cell">Photo</th>
@@ -191,7 +214,7 @@
 									<tbody>
 									@if(!empty($document_requests) && $document_requests->count())
 									@foreach ($document_requests as $document_request)
-										<tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}" >
+										<tr data-status="{{ $document_request->status }}" data-id="{{ $document_request->id }}" data-document-type="{{ $document_request->document_type }}">
 										<td>{{$document_request->full_name}}</td>
 										<td>
 										@if ($document_request->document_type === 'Barangay ID')
@@ -214,6 +237,7 @@
 											<td>{{$document_request->tracker_number}}</td>
 											<td>{{$document_request->status}}</td>
 													<td>
+														
 														<form method="POST" action="{{ route('document_requests.cancel', $document_request) }}">
 															@csrf
 															@method('PATCH')
@@ -277,7 +301,11 @@
 											</tr>
 										@endif
 									</tbody>
-								</table>
+								
+
+								</table> <br>
+							<center><p id="no-requests-message" style="display: none;">No requests for the selected document type.</p>
+							<p id="no-results-message" style="display: none;">No results found.</p></center>	
 
 						        </div><!--//table-responsive-->
 						       
@@ -410,6 +438,78 @@
         }
 
     });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("search");
+        const table = document.getElementById("document-list");
+        const tableRows = table.getElementsByTagName("tr");
+        const noResultsMessage = document.getElementById("no-results-message");
+
+        searchInput.addEventListener("input", function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let resultsFound = false;
+
+            for (let i = 1; i < tableRows.length; i++) {
+                const cells = tableRows[i].getElementsByTagName("td");
+                let found = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
+
+                    if (cellText.toLowerCase().indexOf(searchTerm) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    tableRows[i].style.display = "";
+                    resultsFound = true;
+                } else {
+                    tableRows[i].style.display = "none";
+                }
+            }
+
+            // Display no results message if no matches are found
+            if (!resultsFound) {
+                noResultsMessage.style.display = "block";
+            } else {
+                noResultsMessage.style.display = "none";
+            }
+        });
+    });
+</script>
+
+<script>
+    function filterDocuments() {
+        var selectedDocument = document.getElementById("document-filter").value;
+        var documentRows = document.querySelectorAll("#document-list tbody tr");
+
+        documentRows.forEach(function(row) {
+            var documentType = row.getAttribute("data-document-type");
+
+            if (selectedDocument === "all" || selectedDocument === documentType) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+
+        // Show a message if there are no requests for the selected document type
+        var noRequestsMessage = document.getElementById("no-requests-message");
+        var requestsExist = Array.from(documentRows).some(function(row) {
+            return row.style.display !== "none";
+        });
+
+        if (requestsExist) {
+            noRequestsMessage.style.display = "none";
+        } else {
+            noRequestsMessage.style.display = "block";
+        }
+    }
 </script>
 </body>
 </html> 
