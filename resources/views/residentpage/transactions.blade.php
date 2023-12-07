@@ -197,7 +197,7 @@
 										@if ($document_request->document_type === 'Barangay ID')
 												<img src="/image/{{ $document_request->image }}" width="100" height="100">
 											@else
-												No image
+											No image in this request
 											@endif
                 						</td>
 											<td>{{$document_request->document_type}}</td>
