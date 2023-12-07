@@ -66,10 +66,10 @@
             <div class="card bg-white mb-5 mt-5 border-0" style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02);">
                 <div class="card-body p-5 text-center">
                 @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                     <h4>Verify your Account</h4>
                     <p>Your code was sent to you via email</p>
                     <form method="post" action="{{ route('verify.otp', ['userId' => $user->id]) }}">
@@ -83,16 +83,15 @@
                             <input type="text" name="otp[]" maxlength="1" disabled />
                         </div>
                         <center>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary">
-                                    Verify
-                                </button>
-                                <a href="{{ route('register') }}">
-                                    <button class="btn btn-secondary">
-                                        Cancel
-                                    </button>
-                                </a>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Verify
+                            </button>
+                            <!-- Change the Cancel button to a link without a form -->
+                            <a href="{{ route('register') }}" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                        </div>
                         </center>
                     </form>
                     <p class="resend text-muted mb-0">

@@ -41,12 +41,24 @@
 </style>
 <link rel="stylesheet" href="/css/login.css">
 <body>
+@if(session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
     <div class="vertical-line"></div>
     <section>
+
         <div class="container">
             <div class="user signinBx">
                 <div class="imgBx"><img src="{{ asset('img/image (5).png') }}" alt="" id="responsive-image"/></div>
                 <div class="formBx">
+ 
                     <form action="{{ route('login.post') }}" method="POST">
                         @csrf
                         <h2>Sign In</h2>
@@ -75,26 +87,7 @@
         </div>
     </section>
     <!-- Modal -->
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if(session()->has('error'))
-                        {{ session('error') }}
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Bootstrap and other scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -109,13 +102,6 @@
             password.setAttribute('type', type);
             // toggle the eye slash icon
             this.classList.toggle('fa-eye-slash');
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            @if(session()->has('error'))
-                $('#errorModal').modal('show');
-            @endif
         });
     </script>
 </body>

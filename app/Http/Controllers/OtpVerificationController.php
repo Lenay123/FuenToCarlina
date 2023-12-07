@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -19,17 +19,18 @@ class OtpVerificationController extends Controller
         return view('homepage/otp_verification', compact('user'));
     }
 
+
     public function verifyOtp(Request $request, $userId)
     {
         $user = Auth::loginUsingId($userId);
-    
+        
         $request->validate([
             'otp' => 'required|array|min:6|max:6',
         ]);
-    
+        
         // Concatenate the array elements into a string
         $otpString = implode('', $request->input('otp'));
-    
+        
         if ($otpString == $user->otp) {
             $user->otp = null;
             $user->email_verified_at = now();
@@ -38,8 +39,14 @@ class OtpVerificationController extends Controller
             // Log in the user
             Auth::login($user);
     
+            // Flash a success message to the session
+            session()->flash('success', 'Account successfully verified.');
+    
             return redirect('/login'); // Redirect to the home page or wherever you want after verification
         }
+    
+        // If OTP is invalid, flash an error message to the session
+        session()->flash('error', 'Invalid OTP');
     
         return back()->withErrors(['otp' => 'Invalid OTP']);
     }
