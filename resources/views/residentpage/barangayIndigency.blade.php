@@ -19,10 +19,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="/css/portal.css">
 
 </head> 
+<style>
+	body {
+		font-family: 'Poppins', sans-serif;
+	}
+</style>
 
 <body class="app">   	
     <header class="app-header fixed-top">	   	            
@@ -59,7 +67,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span class="logo-text">Barangay Connect</span></a>
+		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span class="logo-text" style="font-size:1rem">Barangay Connect</span></a>
 	
 		        </div><!--//app-branding-->  
 		        

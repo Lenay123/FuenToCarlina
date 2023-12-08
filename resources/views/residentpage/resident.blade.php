@@ -23,13 +23,18 @@
     <script src="https://kit.fontawesome.com/515e3f1675.js" crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/515e3f1675.js" crossorigin="anonymous"></script>
-    
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="/css/portal.css">
 
 </head> 
-
+<style>
+	body {
+		font-family: 'Poppins', sans-serif;
+	}
+</style>
 
 <body class="app">   	
     <header class="app-header fixed-top">	   	            
@@ -65,7 +70,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span class="logo-text">Barangay Connect</span></a>
+		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span style="font-size:1rem" class="logo-text">Barangay Connect</span></a>
 	
 		        </div><!--//app-branding-->  
 		        

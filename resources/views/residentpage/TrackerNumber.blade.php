@@ -29,7 +29,7 @@
 
 </head> 
 <style>
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap);
 
 html,
 body {
@@ -38,8 +38,8 @@ body {
   height: 100%;
   width: 100%;
   background: #fff;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+    font-weight: 400;
 }
 
 .wrapper {
@@ -170,7 +170,7 @@ h1.heading {
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span class="logo-text">Barangay Connect</span></a>
+		            <a class="app-logo" href=""><img class="logo-icon me-2" src="{{ asset('img/image (5).png') }}" alt="logo"><span class="logo-text" style="font-size:1rem">Barangay Connect</span></a>
 	
 		        </div><!--//app-branding-->  
 		        
