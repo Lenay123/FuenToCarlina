@@ -59,8 +59,16 @@
 <body>
     <div class="container mt-5 registration-container">
         <h2>Registration Form</h2>
-
-
+        @if(session('script'))
+        {!! session('script') !!}
+    @endif
+    
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
+    
         <form method="POST" action="{{route('register.post')}}" method="POST" enctype="multipart/form-data" >
             @csrf
              <div class="form-group">
@@ -94,6 +102,7 @@
                 <label for="email">Email:<span class="text-danger">*</span></label>
                 <input type="email" class="form-control" name="email" id="emailInput" value="{{ old('email') }}" required>
                 <div id="emailFeedback" style="color: red;"></div>
+                
             </div>
 
             <div class="form-group">

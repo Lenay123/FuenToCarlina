@@ -241,31 +241,33 @@
 										</div>
 									</div>
 
-										<div class="form-group">
-											<label for="id_type"><b>Select an ID:</b> <span class="text-danger">*</span></label>
-											<div class="input-group">	
-											<select id="id_type" name="id_type" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="showOtherField()">
-											<option value="">Select an ID</option>
-											<option value="NSO with School ID" {{ old('id_type') == 'NSO with School ID' ? 'selected' : '' }}>NSO with School ID</option>
-											<option value="NBI Clearance" {{ old('id_type') == 'NBI Clearance' ? 'selected' : '' }}>NBI Clearance</option>
-											<option value="Voters ID" {{ old('id_type') == 'Voters ID' ? 'selected' : '' }}>Voters ID</option>
-											<option value="Drivers License" {{ old('id_type') == 'Drivers License' ? 'selected' : '' }}>Drivers License</option>
-											<option value="Voters Certificate" {{ old('id_type') == 'Voters Certificate' ? 'selected' : '' }}>Voters Certificate</option>
-											<option value="National ID" {{ old('id_type') == 'National ID' ? 'selected' : '' }}>National ID</option>
-											<option value="SSS" {{ old('id_type') == 'SSS' ? 'selected' : '' }}>SSS</option>
-											<option value="Others" {{ old('id_type') == 'Others' ? 'selected' : '' }}>Others</option>
-
-										</select>
-										<div class="input-group-append">
-											<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
-										</div>
-										<div id="otherField" style="display:none;">
-											<label for="otherIdType"><b>Specify Other ID:</b></label>
-											<input type="text" id="otherIdType" name="specific_id" class="form-control"  style="border: 0.5px solid #B0AEAE;" value="{{ old('specific_id') }}">
-										</div>						
-									</div>
-									<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
-
+									<div class="form-group">
+										<label for="id_type"><b>Select an ID:</b> <span class="text-danger">*</span></label>
+										<div class="input-group">	
+										<select id="id_type" name="id_type" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="showOtherField()">
+												<option value="">Select an ID</option>
+												<option value="NSO with School ID" {{ old('id_type') == 'NSO with School ID' ? 'selected' : '' }}>NSO with School ID</option>
+												<option value="NBI Clearance" {{ old('id_type') == 'NBI Clearance' ? 'selected' : '' }}>NBI Clearance</option>
+												<option value="Voters ID" {{ old('id_type') == 'Voters ID' ? 'selected' : '' }}>Voters ID</option>
+												<option value="Drivers License" {{ old('id_type') == 'Drivers License' ? 'selected' : '' }}>Drivers License</option>
+												<option value="Voters Certificate" {{ old('id_type') == 'Voters Certificate' ? 'selected' : '' }}>Voters Certificate</option>
+												<option value="National ID" {{ old('id_type') == 'National ID' ? 'selected' : '' }}>National ID</option>
+												<option value="SSS" {{ old('id_type') == 'SSS' ? 'selected' : '' }}>SSS</option>
+												<option value="Others" {{ old('id_type') == 'Others' ? 'selected' : '' }}>Others</option>
+	
+											</select>
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
+											</div>
+										</div></div>
+	
+							<div id="otherField" style="display:none;">
+								<label for="otherIdType"><b>Specify Other ID:</b></label>
+								<input type="text" id="otherIdType" name="specific_id" class="form-control"  value="{{ old('specific_id') }}" style="border: 0.5px solid #B0AEAE;">
+							</div>
+	
+							<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
+							
 
 								
 									<div class="form-group">
@@ -285,7 +287,7 @@
 											<option value="school_enrollment" {{ old('purpose') == 'school_enrollment' ? 'selected' : '' }}>School Enrollment</option>
 											<option value="government_transaction" {{ old('purpose') == 'government_transaction' ? 'selected' : '' }}>Government Transaction</option>
 											<option value="scholarship_application" {{ old('purpose') == 'scholarship_application' ? 'selected' : '' }}>Scholarship Application</option>
-											<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Other</option>
+											<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Others</option>
 											<!-- Add more options as needed -->
 										</select>
 										<div class="input-group-append">
@@ -388,27 +390,6 @@
 
 	    
     </div><!--//app-wrapper-->    					
-	<center>
-    <div class="mt-5">
-        @if($errors->any())
-            <div class="col-12">
-                @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{{$error}}</div>
-                @endforeach
-                <script>
-                    // Show error modal if there are errors
-                    $(document).ready(function() {
-                        $('#errorModal').modal('show');
-                    });
-                </script>
-            </div>
-        @endif
-
-        @if(session()->has('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-    </div>
-</center>
 
  
     <!-- Javascript -->          

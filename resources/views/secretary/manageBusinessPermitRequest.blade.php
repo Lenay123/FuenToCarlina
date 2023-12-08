@@ -509,10 +509,10 @@
                                                                     
                                                                 </div>
                                                                 <div class="id-logo-box2" > <br>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Republic of the Philippines</h5>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h5>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h5>
-
+																	<h6 style="text-align: center; font-weight: bold; margin: 0; ">Republic of the Philippines</h6>
+																	<h6 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h6>
+																	<h6 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h6>
+				
                                                                 </div>
 
                                                                 <div class="id-logo-box3">
@@ -532,33 +532,29 @@
 																upon payment of the required license fee(s) (Quarterly/Semi-Annually).
 															@else
 																No business permit request found.
-															@endif <br>
-                                                          <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="1">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines. 
-                                                         {{ $document_request->textarea_content }}</textarea> <br>
+															@endif <br> <br>
+															<p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }} , at Barangay Nabunturan, Barili, Cebu Philippines. 
+																<br>
 
 
 														 <div class="row g-3 align-items-center">
+                                                    
                                                         <div class="col-auto">
-                                                            <label  class="col-form-label" >Date Issued:</label>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <input type="date"  id="inputDateIssued{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
+															<label  class="col-form-label" ><b>Date Issued:</b> {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }}</label>
                                                         </div>
                                                         
                                                         </div>
                                                         <div class="row g-3 align-items-center">
+                                                       
                                                         <div class="col-auto">
-                                                            <label  class="col-form-label" >Date Expired</label>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <input type="date" id="inputDateExpired{{ $document_request->id }}" class="form-control" aria-describedby="passwordHelpInline">
-                                                        </div>
+															<label  class="col-form-label" ><b>Date Expired: </b> {{ \Carbon\Carbon::parse($document_request->document_date)->addYear()->format('F j, Y') }}
+															</div>
                                                         
                                                         </div>
            
                                                     <div style="text-align: right;">
-                                                    <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 60%; height: 50%; margin-right:50px">
-                                                </div>
+														<img style="width:200px; height:120px" id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 60%; height: 50%; margin-right:50px">
+													</div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -797,10 +793,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
 
         // Retrieve input values
         var permitNumber = document.querySelector("#inputPermitNumber" + documentId).value;
-        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
-        var dateIssued = document.querySelector("#inputDateIssued" + documentId).value;
-        var dateExpired = document.querySelector("#inputDateExpired" + documentId).value;
-
+       
         // Create a new HTML structure with the input values
         var printContent = `
             <style>
@@ -839,18 +832,18 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
     No business permit request found.
 @endif
             <div class="form-outline">
-                <p>${textAreaValue}</p>
-            </div>
+				<p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }} , at Barangay Nabunturan, Barili, Cebu Philippines. 
+				</div>
             <br>
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
-                    <label class="col-form-label">Date Issued:<b> ${new Date(dateIssued).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}</b></label>
+					<label  class="col-form-label" ><b>Date Issued:</b> {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }}</label>
                 </div>
             </div>
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
-                    <label class="col-form-label">Date Expired: <b>${new Date(dateExpired).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}</b></label>
-                </div>
+					<label  class="col-form-label" ><b>Date Expired: </b> {{ \Carbon\Carbon::parse($document_request->document_date)->addYear()->format('F j, Y') }}
+					</div>
             </div>
             <div style="text-align: right;">
                 <img id="signatureImage${documentId}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 40%; height: 10%; margin-right:50px">

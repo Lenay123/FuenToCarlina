@@ -12,6 +12,8 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SoftDeleteController;
+
 use App\Http\Controllers\OtpVerificationController;
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +94,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::post('/residentpage/account', [AuthController::class, 'updateProfile'])->name('residentpage.updateProfile');
     Route::post('/residentpage/resident', [DocumentController::class, 'store'])->name('resident.store');
     Route::get('/residentpage/transactions', [DocumentController::class, 'showTransactions']);
-    Route::delete('/delete/{document_request}', DocumentController::class .'@delete')->name('delete.request');
+    Route::delete('/delete/{document_request}', [SoftDeleteController::class, 'deleting'])->name('delete.request');
     Route::patch('/residentpage/transactions/{document_request}/cancel', DocumentController::class .'@cancel')->name('document_requests.cancel');
     Route::get('/residentpage/barangayCertificate', [DocumentController::class, 'barangayCertificate'])->name('residentpage.barangayCertificate');
     Route::get('/residentpage/barangayIndigency', [DocumentController::class, 'barangayIndigency'])->name('residentpage.barangayIndigency');
@@ -159,7 +161,7 @@ Route::group(['middleware' => ['auth', 'role:secretary']], function () {
     Route::get('/secretary/manageIdRequest', [DashboardController::class, 'showBarangayIdRequests'])->name('id.requests');
     Route::get('/secretary/manageBusinessPermitRequest', [DashboardController::class, 'showBarangayBusinessPermitRequests'])->name('business_permit.requests');
     Route::get('/secretary/request_history', [DashboardController::class, 'showAllTransactions'])->name('requests.history');
-    Route::delete('/secretary/request_history/{document_request}', [DashboardController::class, 'destroy'])->name('document_requests.destroy');
+    Route::delete('/secretary/request_history/{document_request}', [SoftDeleteController::class, 'destroy'])->name('document_requests.destroy');
     Route::put('/document-requests/{document_request}/claim', [DashboardController::class, 'claimDocument'])
         ->name('claim-document');
         Route::put('/document-requests/{document_request}/claim', [DashboardController::class, 'claimDocumentPermit'])

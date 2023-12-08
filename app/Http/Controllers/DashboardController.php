@@ -88,20 +88,16 @@ class DashboardController extends Controller
 
         public function showBarangayIndigencyRequests()
         {
-            $document_requests = DocumentRequest::where('document_type', 'Barangay Indigency')
-                ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
+            // Retrieve all records (active and soft-deleted) with the specified document type
+            $document_requests = DocumentRequest::withTrashed()
+                ->where('document_type', 'Barangay Indigency')
                 ->get();
-        
-            $latestDocumentRequests = DocumentRequest::where('document_type', 'Barangay Indigency')
-                ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-                ->latest()
-                ->get();
-        
+            
             // You can add a variable to check if there's a new request
             $isNewRequest = false;
         
-            if ($latestDocumentRequests->isNotEmpty()) {
-                $latestRequest = $latestDocumentRequests[0];
+            if ($document_requests->isNotEmpty()) {
+                $latestRequest = $document_requests->first(); // Retrieve the latest request from the collection
                 $requestorName = $latestRequest->full_name;
                 $requestedDocument = $latestRequest->document_type;
                 $requestedTracker = $latestRequest->tracker_number;
@@ -114,57 +110,50 @@ class DashboardController extends Controller
             }
             
         
-            return view('secretary.manageIndigencyRequest', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
+            return view('secretary.manageIndigencyRequest', compact('document_requests','requestorName', 'requestedDocument', 'isNewRequest'));
         }
         
     
-    public function showBarangayCertificateRequests()
-    {
-        $document_requests = DocumentRequest::where('document_type', 'Barangay Certificate')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->get();
-    
-        $latestDocumentRequests = DocumentRequest::where('document_type', 'Barangay Certificate')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->latest()
-            ->get();
-    
-        // You can add a variable to check if there's a new request
-        $isNewRequest = false;
-    
-        if ($latestDocumentRequests->isNotEmpty()) {
-            $latestRequest = $latestDocumentRequests[0];
-            $requestorName = $latestRequest->full_name;
-            $requestedDocument = $latestRequest->document_type;
-            $requestedTracker = $latestRequest->tracker_number;
-    
-            // Check if the request is very recent (e.g., within a minute)
-            $isNewRequest = $latestRequest->created_at->gt(now()->subMinute());
-        } else {
-            $requestorName = 'Unknown Requestor';
-            $requestedDocument = 'Unknown Document';
+        public function showBarangayCertificateRequests()
+        {
+            // Retrieve all records (active and soft-deleted) with the specified document type
+            $document_requests = DocumentRequest::withTrashed()
+                ->where('document_type', 'Barangay Certificate')
+                ->get();
+            
+            // You can add a variable to check if there's a new request
+            $isNewRequest = false;
+        
+            if ($document_requests->isNotEmpty()) {
+                $latestRequest = $document_requests->first(); // Retrieve the latest request from the collection
+                $requestorName = $latestRequest->full_name;
+                $requestedDocument = $latestRequest->document_type;
+                $requestedTracker = $latestRequest->tracker_number;
+        
+                // Check if the request is very recent (e.g., within a minute)
+                $isNewRequest = $latestRequest->created_at->gt(now()->subMinute());
+            } else {
+                $requestorName = 'Unknown Requestor';
+                $requestedDocument = 'Unknown Document';
+            }
+        
+            return view('secretary.manageCertificateRequest', compact('document_requests', 'requestorName', 'requestedDocument', 'isNewRequest'));
         }
-    
-        return view('secretary.manageCertificateRequest', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
-    }
+        
     
 
     public function showBarangayIDRequests()
     {
-        $document_requests = DocumentRequest::where('document_type', 'Barangay ID')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->get();
-    
-        $latestDocumentRequests = DocumentRequest::where('document_type', 'Barangay ID')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->latest()
-            ->get();
-    
+        // Retrieve all records (active and soft-deleted) with the specified document type
+        $document_requests = DocumentRequest::withTrashed()
+        ->where('document_type', 'Barangay ID')
+        ->get();
+        
         // You can add a variable to check if there's a new request
         $isNewRequest = false;
     
-        if ($latestDocumentRequests->isNotEmpty()) {
-            $latestRequest = $latestDocumentRequests[0];
+        if ($document_requests->isNotEmpty()) {
+            $latestRequest = $document_requests->first(); // Retrieve the latest request from the collection
             $requestorName = $latestRequest->full_name;
             $requestedDocument = $latestRequest->document_type;
             $requestedTracker = $latestRequest->tracker_number;
@@ -176,26 +165,24 @@ class DashboardController extends Controller
             $requestedDocument = 'Unknown Document';
         }
     
-        return view('secretary.manageIdRequest', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
+        return view('secretary.manageIdRequest', compact('document_requests', 'requestorName', 'requestedDocument', 'isNewRequest'));
     }
+    
+    
     
 
     public function showBarangayBusinessPermitRequests()
     {
-        $document_requests = DocumentRequest::where('document_type', 'Barangay Business Permit')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
+        // Retrieve all records (active and soft-deleted) with the specified document type
+        $document_requests = DocumentRequest::withTrashed()
+            ->where('document_type', 'Barangay Business Permit')
             ->get();
-    
-        $latestDocumentRequests = DocumentRequest::where('document_type', 'Barangay Business Permit')
-            ->whereNotIn('status', ['delete', 'deleted']) // Exclude records with "delete" and "deleted" statuses
-            ->latest()
-            ->get();
-    
+        
         // You can add a variable to check if there's a new request
         $isNewRequest = false;
     
-        if ($latestDocumentRequests->isNotEmpty()) {
-            $latestRequest = $latestDocumentRequests[0];
+        if ($document_requests->isNotEmpty()) {
+            $latestRequest = $document_requests->first(); // Retrieve the latest request from the collection
             $requestorName = $latestRequest->full_name;
             $requestedDocument = $latestRequest->document_type;
             $requestedTracker = $latestRequest->tracker_number;
@@ -207,15 +194,18 @@ class DashboardController extends Controller
             $requestedDocument = 'Unknown Document';
         }
     
-        return view('secretary.manageBusinessPermitRequest', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument', 'isNewRequest'));
+        return view('secretary.manageBusinessPermitRequest', compact('document_requests', 'requestorName', 'requestedDocument', 'isNewRequest'));
     }
+    
 
     
     public function showAllTransactions()
     {
-        $document_requests = DocumentRequest::whereIn('status', ['Claimed', 'cancelled', 'delete'])->get();
-        $latestDocumentRequests = DocumentRequest::latest()->get();
-        
+        $document_requests = DocumentRequest::withTrashed()
+        ->whereIn('status', ['Claimed', 'cancelled', 'delete'])
+        ->get();
+
+    $latestDocumentRequests = DocumentRequest::latest()->get();
         // You can add a variable to check if there's a new request
         $isNewRequest = false;
     
@@ -234,19 +224,7 @@ class DashboardController extends Controller
         return view('secretary.request_history', compact('document_requests', 'latestDocumentRequests', 'requestorName', 'requestedDocument','isNewRequest'));
     }
 
-    public function destroy($id)
-    {
-        $document_request = DocumentRequest::find($id);
-    
-        if (!$document_request) {
-            return redirect()->route('requests.history')->with('error', 'Document request not found');
-        }
-    
-        // Update the status to "deleted" instead of deleting the record
-        $document_request->update(['status' => 'deleted']);
-    
-        return redirect()->route('requests.history')->with('success', 'Document request deleted successfully');
-    }
+
     
 
     public function showBarangayIndigencyTransaction()

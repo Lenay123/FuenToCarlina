@@ -505,10 +505,10 @@
                                                                     
                                                                 </div>
                                                                 <div class="id-logo-box2" > <br>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Republic of the Philippines</h5>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h5>
-                                                                <h5 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h5>
-
+																	<h6 style="text-align: center; font-weight: bold; margin: 0; ">Republic of the Philippines</h6>
+																	<h6 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h6>
+																	<h6 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h6>
+				
                                                                 </div>
 
                                                                 <div class="id-logo-box3">
@@ -523,7 +523,7 @@
                                                     <p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
                                                     <p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
                                                     <div class="form-outline">
-                                                        <textarea class="form-control" id="textAreaExample{{ $document_request->id }}" rows="3">Issued this 5TH day of January 2020, at Barangay Nabunturan, Barili, Cebu Philippines.{{ $document_request->textarea_content }}</textarea>
+                                                        <p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }}, at Barangay Nabunturan, Barili, Cebu Philippines.</p>
                                                     </div>
                                                     <div style="text-align: right;">
                                                     <img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 40%; height: 10%; margin-right:50px">
@@ -758,11 +758,6 @@ document.addEventListener("DOMContentLoaded", function() {
 document.querySelectorAll(".printButton").forEach(function (printButton) {
     printButton.addEventListener("click", function () {
         var documentId = this.getAttribute("data-document-id");
-        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").cloneNode(true);
-        var textAreaValue = document.querySelector("#textAreaExample" + documentId).value;
-
-        // Modify the modal content with the textAreaValue
-        modalBody.querySelector(".form-outline").innerHTML = '<p>' + textAreaValue + '</p';
 
         var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
@@ -782,7 +777,10 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         printWindow.document.head.appendChild(styleElement);
 
         printWindow.document.write('</head><body>');
-        printWindow.document.write(modalBody.innerHTML); // Extract the modified modal body content
+
+        // Include the modal body directly in the print window
+        var modalBody = document.querySelector("#myModal" + documentId + " .modal-body").innerHTML;
+        printWindow.document.write(modalBody);
 
         printWindow.document.write('</body></html>');
         printWindow.document.close();
@@ -794,6 +792,7 @@ document.querySelectorAll(".printButton").forEach(function (printButton) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
     });
 });
+
 </script>
 	</body>
 </html>

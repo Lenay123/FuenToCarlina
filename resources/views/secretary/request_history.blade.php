@@ -74,16 +74,134 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<!-- End Google Tag Manager -->
 	</head>
-    <style>
-    .id-logo{
-    height: 16vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
+	<style>
 
-</style>
+
+		.id-logo1{
+			height: 16vh;
+			width: 100%;
+			background-color: rgb(7, 64, 117);
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+		}
+		.id-logo{
+			height: 16vh;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+		}
+		
+		.id-logo-box1{
+			width: 20%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.id-logo-box2{
+			width: 60%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding-top: 10px;
+			color: white;
+			
+			
+		}
+		
+		.id-logo-box2 h1{
+			font-size: 1.5rem;
+		}
+		
+		.id-logo-box2 h3{
+			font-size: 1rem;
+		}
+		.id-logo-box2 h4{
+			font-size: 1rem;
+		}
+		
+		.id-logo-box3{
+			width: 20%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.id-title{
+			background-color: skyblue;
+			height: 7vh;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		
+		}
+		
+		.id-content {
+			height: 50vh;
+			width: 100%;
+			display: flex;
+			background-color: white;
+			justify-content: space-around;
+			align-items: center;
+			
+		}
+		
+		.id-content-image{
+			width: 30%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		
+		}
+		
+		
+		.id-content-info{
+			background-color: white;
+			width: 50%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		
+			
+		}
+		
+		.id-content-info p{
+			font-size: 12px;
+		
+			padding-left: 10px;
+		
+		
+		}
+		
+		.id-content-info h3{
+			font-size: 16px;
+			padding-left: 10px;
+		}
+		
+		.id-content-info h1{
+			font-size: 20px;
+			padding-left: 10px;
+		}
+		
+		
+		.id-content-sign{
+			width: 30%;
+			height:100px;
+			margin-top: 20%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
+			
+		}
+		</style>
 	<body>
 
 		<div class="header">
@@ -471,11 +589,9 @@
 													<td>{{ $document_request->created_at->format('Y/m/d') }}</td>
 												
 													<td>
-														<form action="{{ route('document_requests.destroy', $document_request->id) }}" method="POST">
-															@csrf
-															@method('DELETE')
-															<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this document request?')">Remove</button>
-														</form>
+														<button type="button" class="btn btn-danger viewButton" data-toggle="modal" data-target="#myModal{{ $document_request->id }}">
+															<i class="bi bi-eye"></i>
+														</button>
 													</td>
 												</tr>
 											@endforeach
@@ -638,6 +754,227 @@
             </div>
         </div>
     </div>
+
+
+	{{-- modal --}}
+	@foreach ($document_requests as $document_request)
+    <div class="modal fade" id="myModal{{ $document_request->id }}">
+        <div class="modal-dialog" style="max-width: 750px;">
+            <div class="modal-content">
+                <div class="modal-body" style="max-height: 1000px;">
+                    @if($document_request->document_type === 'Barangay ID')
+                        <section id="printContent">
+							<div class="modal-dialog" style="max-width: 750px;">
+								<div class="modal-content">
+								<div class="modal-body" style="max-height: 1000px;">
+									<section id="printContent" >
+											<div class="id-container">
+												<div class="id-logo1" >
+													<div class="id-logo-box1">
+														<img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+														
+													</div>
+													<div class="id-logo-box2" > <br>
+														<h1 style="color: white; margin: 0;">REPUBLIC OF THE PHILIPPINES</h1>
+														<h3 style="color: white; margin: 0;">Barili Cebu, Barangay Nabunturan</h3>
+													</div>
+
+													<div class="id-logo-box3">
+														<img src="/img/sklogo.png" alt="" style="width: 200px;">
+													</div>
+												</div>
+												<div class="id-title">
+													<h2 style="margin-top: 10px;">BARANGAY RESIDENT'S CARD</h2>
+												</div> <br>
+												<div class="id-content" style="margin-top:30px" >
+													<div class="id-content-image">
+														<img src="/image/{{ $document_request->image }}" alt="" style="width: 170px; border: 3px solid black;">
+														<br><br>
+													
+														<h4 style="border-top: 1px solid black; padding: 5px 20px; font-size:0.85rem;">Resident's Signature</h3>
+													</div>
+													<div class="id-content-info">
+														<p style="font-size: 12px; margin: 0; padding: 1px;">LAST NAME, FIRST NAME, MI.</p>
+														<H1 style="font-size: 20px; margin: 0; padding: 1px;">{{ $document_request->full_name }}</H1>
+														<p style="font-size: 12px; margin: 0; padding: 1px;">DATE OF BIRTH</p>
+														<h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->birthday }}</h3>
+														<P style="font-size: 12px; margin: 0; padding: 1px;">MOBILE NUMBER</P>
+														<h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->contact_number }}</h3>
+														<p style="font-size: 12px; margin: 0; padding: 1px;">ADDRESS</p>
+														<h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->address }}</h3>
+														<p style="font-size: 12px; margin: 0; padding: 1px;">CIVIL STATUS</p>
+														<h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->civil_status }}</h3>
+														<p style="font-size: 12px; margin: 0; padding: 1px;">GENDER</p>
+														<h3 style="font-size: 16px; margin: 0; padding: 1px;">{{ $document_request->gender }}</h3>
+													</div> <br> 
+													<div class="id-content-sign">
+														<br><br>
+														<p>
+															<img src="{{ asset('img/almarsig.png') }}" alt="">
+														 
+														</p>
+													</div>
+
+
+
+												</div>
+											</div>
+										</section>
+							</div>
+                        </section>
+                    @elseif($document_request->document_type === 'Barangay Business Permit')
+                        <section id="printContent">
+                            <!-- Your content for Barangay Business Permit -->
+							<div class="modal-dialog" style="max-width: 700px;">
+								<div class="modal-content">
+								<div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+									<div class="id-logo" >
+													<div class="id-logo-box1">
+														<img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+														
+													</div>
+													<div class="id-logo-box2" > <br>
+													<h6 style="text-align: center; font-weight: bold; margin: 0; ">Republic of the Philippines</h6>
+													<h6 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h6>
+													<h6 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h6>
+
+													</div>
+
+													<div class="id-logo-box3">
+														<img src="/img/sklogo.png" alt="" style="width: 200px;">
+													</div>
+												</div>
+									
+										<hr>
+										<h4 style="text-align: center; font-weight: bold;">BARANGAY BUSINESS PERMIT</h4> <br>
+										@if(isset($document_request))
+													Is hereby granted to {{ $document_request->full_name }} living in {{ $document_request->address }},
+													to operate the business named {{ $document_request->business_name }},
+													upon payment of the required license fee(s) (Quarterly/Semi-Annually).
+												@else
+													No business permit request found.
+												@endif <br> <br>
+											 <p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }} , at Barangay Nabunturan, Barili, Cebu Philippines. 
+											</p>
+
+
+											 <div class="row g-3 align-items-center">
+											<div class="col-auto">
+												<label  class="col-form-label" ><b>Date Issued:</b> {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }}</label>
+											</div>
+											</div>
+											<div class="row g-3 align-items-center">
+											<div class="col-auto">
+												<label  class="col-form-label" ><b>Date Expired: </b> {{ \Carbon\Carbon::parse($document_request->document_date)->addYear()->format('F j, Y') }}
+												</label>
+											</div>
+											
+											</div>
+
+										<div style="text-align: right;">
+										<img style="width:200px; height:120px" id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 60%; height: 50%; margin-right:50px">
+									</div>
+									</div>
+
+										</div>
+										
+
+							</div>
+                        </section>
+                    @elseif($document_request->document_type === 'Barangay Indigency')
+                        <section id="printContent">
+                            <!-- Your content for Barangay Indigency -->
+
+							<div class="modal-dialog" style="max-width: 700px;">
+								<div class="modal-content">
+									<div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+									<div class="id-logo" >
+													<div class="id-logo-box1">
+														<img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+														
+													</div>
+													<div class="id-logo-box2" > <br>
+														<h6 style="text-align: center; font-weight: bold; margin: 0; ">Republic of the Philippines</h6>
+														<h6 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h6>
+														<h6 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h6>
+	
+													</div>
+
+													<div class="id-logo-box3">
+														<img src="/img/sklogo.png" alt="" style="width: 200px;">
+													</div>
+												</div>
+									
+										<hr>
+										<h4 style="text-align: center; font-weight: bold;">BARANGAY INDIGENCY</h4> <br>
+										<p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
+										<p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
+										<p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
+										<p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
+										<div class="form-outline"> 
+											<p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }} , at Barangay Nabunturan, Barili, Cebu Philippines. 
+											</div>
+										<div style="text-align: right;">
+										<img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 40%; height: 10%; margin-right:50px">
+								
+								</div>
+							</div>
+						</div>
+                        </section>
+                    @elseif($document_request->document_type === 'Barangay Certificate')
+                        <section id="printContent">
+                            <!-- Your content for Barangay Certificate -->
+							<div class="modal-dialog" style="max-width: 700px;">
+								<div class="modal-content">
+									<div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+									<div class="id-logo" >
+													<div class="id-logo-box1">
+														<img src="/img/nabunturanlogo.png" alt="" style="width: 200px;">
+														
+													</div>
+													<div class="id-logo-box2" > <br>
+														<h6 style="text-align: center; font-weight: bold; margin: 0; ">Republic of the Philippines</h6>
+														<h6 style="text-align: center; font-weight: bold; margin: 0;">Office of the Barangay Local Government</h6>
+														<h6 style="text-align: center; font-weight: bold; margin: 0;">Barangay Nabunturan Barili Cebu</h6>
+	
+													</div>
+
+													<div class="id-logo-box3">
+														<img src="/img/sklogo.png" alt="" style="width: 200px;">
+													</div>
+												</div>
+									
+										<hr>
+										<h4 style="text-align: center; font-weight: bold;">BARANGAY CERTIFICATE</h4> <br>
+										<p style="text-align: left;">TO WHOM IT MAY CONCERN:</p>
+										<p>This is to CERTIFY that <strong><u>{{ $document_request->full_name }}</u></strong>, of a legal age, <u>{{ $document_request->civil_status }}</u>, born on <u>{{ \Carbon\Carbon::parse($document_request->birthday)->format('F d, Y') }}</u>, is a resident of <u>{{ $document_request->address }}</u>.</p>
+										<p>This is to certify further that the above-mentioned name and his/her family is classified as 'INDIGENT' in this barangay.</p>
+										<p>This certification is being issued upon request for <u>{{ $document_request->purpose }}</u> from the City Mayor's Office and for whatever legal purpose/s it may serve him/her best.</p>
+										<div class="form-outline">
+											<p>Issued this on {{ \Carbon\Carbon::parse($document_request->document_date)->format('F j, Y') }} , at Barangay Nabunturan, Barili, Cebu Philippines. 
+											</div>
+										<div style="text-align: right;">
+										<img id="signatureImage{{ $document_request->id }}" src="{{ asset('img/almarsig.png') }}" alt="Barangay Captain Signature" style="width: 40%; height: 10%; margin-right:50px">
+									  
+									</div>
+
+									</div>
+									
+								</div>
+							</div>
+                        </section>
+                    @else
+                        <p>Document type not recognized</p>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closeButton" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 
 		<!-- js -->
 		<script src="/vendors/scripts/core.js"></script>

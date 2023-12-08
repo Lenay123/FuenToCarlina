@@ -374,7 +374,7 @@
 												<option value="school_enrollment" {{ old('purpose') == 'school_enrollment' ? 'selected' : '' }}>School Enrollment</option>
 												<option value="government_transaction" {{ old('purpose') == 'government_transaction' ? 'selected' : '' }}>Government Transaction</option>
 												<option value="scholarship_application" {{ old('purpose') == 'scholarship_application' ? 'selected' : '' }}>Scholarship Application</option>
-												<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Other</option>
+												<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Others</option>
 												<!-- Add more options as needed -->
 											</select>
 											<div class="input-group-append">
@@ -391,7 +391,7 @@
 										</div>
 									
 										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
-									</div>
+									
 									
 									<script>
 										function toggleOtherField() {
@@ -472,27 +472,7 @@
 
 	    
     </div><!--//app-wrapper-->    					
-	<center>
-    <div class="mt-5">
-        @if($errors->any())
-            <div class="col-12">
-                @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{{$error}}</div>
-                @endforeach
-                <script>
-                    // Show error modal if there are errors
-                    $(document).ready(function() {
-                        $('#errorModal').modal('show');
-                    });
-                </script>
-            </div>
-        @endif
 
-        @if(session()->has('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-    </div>
-</center>
 
 		
 		

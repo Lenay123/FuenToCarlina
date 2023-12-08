@@ -30,6 +30,7 @@ return new class extends Migration
             $table->date('document_date')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('document_time');
+            $table->softDeletes();
             $table->timestamps();
         });
         

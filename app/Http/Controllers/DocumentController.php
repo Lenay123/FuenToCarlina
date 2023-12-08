@@ -5,9 +5,13 @@ use App\Models\DocumentRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class DocumentController extends Controller
 {
+    use SoftDeletes;
+
 
     public function store(Request $request)
     {
@@ -108,12 +112,7 @@ class DocumentController extends Controller
         return view('/residentpage/transactions', compact('document_requests'));
     }
     
-    
-    public function delete(DocumentRequest $document_request)
-    {
-        $document_request->update(['status' => 'delete']);
-        return redirect('/residentpage/transactions')->with('success', 'Request has been Deleted successfully');
-    }
+
 
     public function showTrackerNumber()
     {

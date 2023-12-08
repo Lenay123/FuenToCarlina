@@ -297,7 +297,7 @@
 											<option value="school_enrollment" {{ old('purpose') == 'school_enrollment' ? 'selected' : '' }}>School Enrollment</option>
 											<option value="government_transaction" {{ old('purpose') == 'government_transaction' ? 'selected' : '' }}>Government Transaction</option>
 											<option value="scholarship_application" {{ old('purpose') == 'scholarship_application' ? 'selected' : '' }}>Scholarship Application</option>
-											<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Other</option>
+											<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Others</option>
 											<!-- Add more options as needed -->
 										</select>
 										<div class="input-group-append">

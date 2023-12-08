@@ -286,9 +286,9 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-																		<form action="{{ route('delete.request', $document_request->id) }}" method="post">
+																		<form action="{{ route('delete.request', $document_request->id) }}" method="POST">
 																			@csrf
-																			@method('delete')
+																			@method('DELETE')
 																			<button type="submit" class="btn btn-danger">Yes</button>
 																		</form>
 																	</div>

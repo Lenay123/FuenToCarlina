@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -224,15 +224,17 @@ class AuthController extends Controller
         // Redirect to login with a success message
         return redirect()->route('login')->with('success', 'Password updated successfully. Please log in with your new password.');
     }
-    
+ 
+
 
     public function registrationPost(Request $request)
     {
+        
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required|string|min:8|confirmed',
             'birthday' => 'required|date|before:' . now()->subYears(15)->format('Y-m-d'),
             'contact_number' => 'required|numeric',
@@ -241,6 +243,31 @@ class AuthController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
     
+        // Check if the email is already taken by a verified or unverified user
+        $existingUser = User::where('email', $request->input('email'))->first();
+    
+        if ($existingUser) {
+            if ($existingUser->email_verified_at) {
+                // If the email is taken and already verified, show an alert
+                return back()->with('error', 'The email has already been taken');
+            }
+    
+            // If the email is taken but not verified, generate and send a new OTP
+            $otp = rand(100000, 999999);
+            $existingUser->otp = $otp;
+            $existingUser->save();
+    
+            // Send the new OTP (implement your mailing logic here)
+            Mail::to($existingUser->email)->send(new WelcomeMail($otp, $existingUser->first_name));
+    
+            return redirect()->route('otp.verification', ['userId' => $existingUser->id]);
+        }
+
+        $validDate = date_create_from_format('Y-m-d', $request->input('birthday'));
+            if (!$validDate) {
+                return back()->with('error', 'Invalid birthday format. Please use DD-MM-YYYY.');
+            }
+        // If the email is not taken, proceed with the regular user registration logic
         $profileImage = null; // Initialize to null
     
         // Handle image upload
@@ -266,16 +293,22 @@ class AuthController extends Controller
         $user->address = $request->input('address');
         $user->image = $profileImage; // Corrected variable name
         $user->role = 'user'; // Default role for registered users
-       // Generate and send OTP
-       $otp = rand(100000, 999999);
-       $user->otp = $otp;
+    
+        // Generate and send OTP
+        $otp = rand(100000, 999999);
+        $user->otp = $otp;
+    
         $user->save();
+    
+        // Send the OTP (implement your mailing logic here)
         Mail::to($user->email)->send(new WelcomeMail($otp, $user->first_name));
+    
         return redirect()->route('otp.verification', ['userId' => $user->id]);
-
-        // return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
-
+    
+    
+    
+    
     function logout(){
             // Session::flush();
             Auth::logout();
