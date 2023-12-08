@@ -172,8 +172,8 @@
 									<select id="document-filter" class="form-select" onchange="filterDocuments()" >
 										<option value="all" selected>Select Document </option>
 										<option value="all" >All</option>
-										<option value="Barangay Indigency"> Certificate </option>
-										<option value="Barangay Certificate">Indigency </option>
+										<option value="Barangay Certificate"> Certificate </option>
+										<option value="Barangay Indigency">Indigency </option>
 										<option value="Barangay Business Permit">Permit </option>
 										<option value="Barangay ID">ID </option>
 
