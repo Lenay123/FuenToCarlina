@@ -105,29 +105,30 @@
         </div>
 
         @if ($officials->count() > 0)
-            <div class="row g-4">
-                @foreach ($officials as $official)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" img src="/image/{{ $official->image }}" alt="" style="width: 300px;
-                                height: 300px; 
-                                object-fit: cover; ">
+        <div class="row g-4">
+            @foreach ($officials as $official)
+                <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="/image/{{ $official->image }}" alt="" style="width: 100%; height: 200px; object-fit: cover;">
+
+                        </div>
+                        <div class="team-text">
+                            <div class="bg-light">
+                                <h5 class="fw-bold mb-0">{{ $official->first_name }} {{ $official->last_name }}</h5>
+                                <small>{{ $official->position }}</small>
                             </div>
-                            <div class="team-text">
-                                <div class="bg-light">
-                                    <h5 class="fw-bold mb-0">{{ $official->first_name }} {{ $official->last_name }}</h5>
-                                    <small>{{ $official->position }}</small>
-                                </div>
-                                <div class="bg-primary">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
+                            <div class="bg-primary">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
+        </div>
+        
             </div>
         @else
             <div class="text-center">
