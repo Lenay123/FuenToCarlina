@@ -237,7 +237,7 @@
 						</div>
 
 						<div class="form-group">
-										<label for="birthday">Birthday:<span class="text-danger">*</span></label>
+										<label for="birthday"><b>Birthday:</b><span class="text-danger">*</span></label>
 										<div class="input-group">
 										  <input type="date" class="form-control" name="birthday" required style="border: 0.5px solid #B0AEAE;" value="{{ old('birthday') }}">
 										  <div class="input-group-append">
@@ -251,25 +251,37 @@
 
 
 									<div class="form-group">
-										<label for="address">Address: <span class="text-danger">*</span></label>
+										<label for="address"><b>Address: </b> <span class="text-danger">*</span></label>
+										<div class="input-group">
 										<select class="form-control" name="address" required style="border: 0.5px solid #B0AEAE;">
 										<option value="Proper Nabunturan Barili Cebu" {{ old('address') == 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
 										<option value="Sitio San Roque Nabunturan Barili Cebu" {{ old('address') == 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
 										<option value="Sitio Cabinay Nabunturan Barili Cebu" {{ old('address') == 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
 															</select>
+															<div class="input-group-append">
+																<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
+															</div>
+														</div>
+													
 									</div>
 									<div class="form-group">
-										<label for="civil_status">Civil Status: <span class="text-danger">*</span></label>
+										<label for="civil_status"><b>Civil Status:</b> <span class="text-danger">*</span></label>
+										<div class="input-group">
 										<select class="form-control" name="civil_status" required style="border: 0.5px solid #B0AEAE;">
 											<option value="Single" {{ old('civil_status') == 'Single' ? 'selected' : '' }}>Single</option>
 											<option value="Married"{{ old('civil_status') == 'Married' ? 'selected' : '' }}>Married</option>
 											<option value="Widowed" {{ old('civil_status') == 'Widowed' ? 'selected' : '' }}>Widowed</option>
 											<option value="Divorced" {{ old('civil_status') == 'Divorced' ? 'selected' : '' }}>Divorced</option>
 										</select>
+								
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
 									</div>
+								</div>
+							</div>
 
 									<div class="form-group">
-										<label for="document_date">Date for Document Pickup: <span class="text-danger">*</span></label>
+										<label for="document_date"><b>Date for Document Pickup:</b> <span class="text-danger">*</span></label>
 										<div class="input-group">
 											<input type="date" class="form-control" name="document_date" id="document_date" required style="border: 0.5px solid #B0AEAE;" value="{{ old('document_date') }}">
 											<div class="input-group-append">
@@ -281,7 +293,9 @@
 									</div>
 
 									<div class="form-group">
-										<label for="document_time" >Time for Document Pickup: <span class="text-danger">*</span></label>
+										
+										<label for="document_time" ><b>Time for Document Pickup:</b> <span class="text-danger">*</span></label>
+										<div class="input-group">
 										<select class="form-control" name="document_time" required style="border: 0.5px solid #B0AEAE;">
 											<option>Select Time</option>
 											<option value="09:00" {{ old('document_time') == '09:00' ? 'selected' : '' }}>9:00 AM</option>
@@ -303,17 +317,22 @@
 											<option value="17:00" {{ old('document_time') == '17:00' ? 'selected' : '' }}>5:00 PM</option>
 
 										</select>
+										<div class="input-group-append">
+											<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
+										</div>
 									</div>
+								</div>
 
 
 
-
-						<label for="document_type">Type of Document: <span class="text-danger">*</span></label>
+						<label for="document_type"><b>Type of Document:</b> <span class="text-danger">*</span></label>
 						<select id="document_type" name="document_type" class="form-control" style="border: 0.5px solid #B0AEAE;">
 							<option value="Barangay Business Permit">Barangay Business Permit</option>
 						</select> <br>
 
-						<label for="id_type">Select an ID: <span class="text-danger">*</span></label>
+						<div class="form-group">
+						<label for="id_type"><b>Select an ID:</b> <span class="text-danger">*</span></label>
+						<div class="input-group">
 										<select id="id_type" name="id_type" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="showOtherField()">
 											<option value="">Select an ID</option>
 											<option value="NSO with School ID" {{ old('id_type') == 'NSO with School ID' ? 'selected' : '' }}>NSO with School ID</option>
@@ -326,25 +345,67 @@
 											<option value="Others" {{ old('id_type') == 'Others' ? 'selected' : '' }}>Others</option>
 
 										</select>
-
+										<div class="input-group-append">
+											<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
+										</div>
+									</div>
+								</div>
 						<div id="otherField" style="display:none;">
-							<label for="otherIdType">Specify Other ID:</label>
+							<label for="otherIdType"><b>Specify Other ID:</b></label>
 							<input type="text" id="otherIdType" name="specific_id" class="form-control"  style="border: 0.5px solid #B0AEAE;" value="{{ old('specific_id') }}">
 						</div>
 
 						<div class="description"><p style="color: red; font-size: 12px;"><span class="info-icon">&#9432;</span>Note: Bring this document for verification when claiming the requested document</p></div>
 						
 						<div class="form-group">
-										<label for="id_number" >ID Number: <span class="text-danger">*</span></label>
+										<label for="id_number" ><b>ID Number:</b> <span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}" required style="border: 0.5px solid #B0AEAE;">
 									</div>
-		
+
 									<div class="form-group">
-										<label for="purpose" class="form-label" >Purpose: <span class="text-danger">*</span></label>
-										<textarea name="purpose" id="purpose" class="form-control" cols="20" rows="2" required style="border: 0.5px solid #B0AEAE;">{{ old('purpose') }}</textarea>
-										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
-		
+										<label for="purpose" class="form-label"><b>Purpose: </b><span class="text-danger">*</span></label>
+										<div class="input-group">
+											<select name="purpose" id="purpose" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="toggleOtherField()">
+												<option value="" selected disabled>Select a Purpose</option>
+												<option value="residency_verification" {{ old('purpose') == 'residency_verification' ? 'selected' : '' }}>Residency Verification</option>
+												<option value="business_permit" {{ old('purpose') == 'business_permit' ? 'selected' : '' }}>Business Permit Application</option>
+												<option value="legal_documentation" {{ old('purpose') == 'legal_documentation' ? 'selected' : '' }}>Legal Documentation</option>
+												<option value="community_service" {{ old('purpose') == 'community_service' ? 'selected' : '' }}>Community Service</option>
+												<option value="school_enrollment" {{ old('purpose') == 'school_enrollment' ? 'selected' : '' }}>School Enrollment</option>
+												<option value="government_transaction" {{ old('purpose') == 'government_transaction' ? 'selected' : '' }}>Government Transaction</option>
+												<option value="scholarship_application" {{ old('purpose') == 'scholarship_application' ? 'selected' : '' }}>Scholarship Application</option>
+												<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Other</option>
+												<!-- Add more options as needed -->
+											</select>
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
+											</div>
+										</div>
 									</div>
+									
+									
+										<!-- Additional field for custom purpose -->
+										<div id="otherPurposeField" style="display: none;">
+											<label for="otherPurpose" class="form-label">Other Purpose:</label>
+											<input style="border: 0.5px solid #B0AEAE;" type="text" name="otherPurpose" id="otherPurpose" class="form-control" value="{{ old('otherPurpose') }}">
+										</div>
+									
+										<div class="description">I certify that all information on this form is true and correct. I understand that any incorrect, false, or misleading statement is punishable by law.</div>
+									</div>
+									
+									<script>
+										function toggleOtherField() {
+											var purposeSelect = document.getElementById('purpose');
+											var otherPurposeField = document.getElementById('otherPurposeField');
+									
+											if (purposeSelect.value === 'other') {
+												otherPurposeField.style.display = 'block';
+											} else {
+												otherPurposeField.style.display = 'none';
+											}
+										}
+									</script>
+									
 
 						<div class="modal-footer">
 							<a href="/residentpage/resident"><button type="button" class="btn btn-secondary">Cancel</button></a>

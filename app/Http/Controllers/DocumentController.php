@@ -59,7 +59,7 @@ class DocumentController extends Controller
         $emps = new DocumentRequest;
     
         $emps->full_name = $request->input('full_name');
-        $emps->purpose = $request->input('purpose');
+        $emps->purpose = $request->input('purpose') === 'other' ? 'Others ' . $request->input('otherPurpose') : $request->input('purpose');
         $emps->id_number = $request->input('id_number');
         $emps->contact_number = $request->input('contact_number');
         $emps->document_type = $request->input('document_type');

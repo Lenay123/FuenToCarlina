@@ -449,9 +449,9 @@
                             <th>ID Number</th>
                             <th>Request Status</th>
                             <th>Date Requested</th>
-                            <th>Date for Document <br> Pickup</th>
 							<th>Time for Document <br> Pickup</th>
-
+                            <th>Date for Document <br> Pickup</th>
+							<th>Purpose</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -472,6 +472,13 @@
 												@endif
 								</td>
                                 <td>{{ $document_request->document_date}}</td>
+								<td>
+									@if($document_request->purpose === 'other')
+										{{ $document_request->other_purpose ?? 'N/A' }}
+									@else
+										{{ $document_request->purpose }}
+									@endif
+								</td>
                                 <td>
                                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{ $document_request->id }}" @if ($document_request->status === 'cancelled' || $document_request->status === 'Claimed') disabled @endif>
                                      <i class="micon bi bi-printer"></i>

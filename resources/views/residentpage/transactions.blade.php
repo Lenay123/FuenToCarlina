@@ -208,6 +208,7 @@
 										<th class="cell">Time for Document <br>Pickup</th>
 										<th class="cell">Reference Number</th>
 										<th class="cell">Status</th>
+										<th class="cell">Purpose</th>
 										<th class="cell">Actions</th>
 									</tr>
 								</thead>
@@ -236,6 +237,13 @@
 											</td>
 											<td>{{$document_request->tracker_number}}</td>
 											<td>{{$document_request->status}}</td>
+											<td>
+												@if($document_request->purpose === 'other')
+													{{ $document_request->purpose }}: {{ $document_request->other_inputted_value ?? 'N/A' }}
+												@else
+													{{ $document_request->purpose }}
+												@endif
+											</td>
 													<td>
 														
 														<form method="POST" action="{{ route('document_requests.cancel', $document_request) }}">
