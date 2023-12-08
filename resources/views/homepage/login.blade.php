@@ -7,9 +7,12 @@
     <link rel="icon" href="{{ asset('img/image (5).png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-</head>
 <style>
+body {
+    font-family: 'Poppins', sans-serif;
+ }
   /* CSS styles for the alert container */
 .alert-container {
     margin: 10px 0;

@@ -15,8 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
         .registration-container {
             max-width: 600px;
             margin: 0 auto;
@@ -24,13 +28,17 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 30px rgba(19, 3, 3, 0.1);
         }
 
         .registration-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: #a7556c; /* Add your desired background color here */
+        color: #fff; /* Set the text color to contrast with the background */
+        padding: 10px; /* Add padding for better visual appearance */
+        border-radius: 5px; /* Optionally, add border-radius for rounded corners */
+    }
 
         .registration-container form label {
             font-weight: bold;

@@ -20,13 +20,17 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 
 <body>
     <!-- Spinner Start -->
@@ -101,13 +105,13 @@
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/Home3.jpg" alt="">
+                <img class="img-fluid" src="{{ asset('img/Home3.jpg')}}" style="object-fit: cover;">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(68, 65, 65, 0.4);">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Providing long lasting impact to communities by enabling a holistic and data driven transformation of local leaderships from the Barangays to LGU's.</p>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Providing long-lasting impact to communities by enabling a holistic and data-driven transformation of local leaderships from the Barangays to LGU's.</p>
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
                                 <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
                             </div>
@@ -115,8 +119,45 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Additional slides -->
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{ asset('/img/bg.jpg')}}" style="object-fit: cover;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(68, 65, 65, 0.4);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-10 col-lg-8">
+                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Empowering Communities, Transforming Leadership: A Data-Driven Journey from Barangays to LGUs for Lasting Impact</p>
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
+                                <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{ asset('/img/budgetmanage.jpg')}}" style="object-fit: cover;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(68, 65, 65, 0.4);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-10 col-lg-8">
+                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Simplify Your Document Requests: Easy Online Process for Quick and Convenient Transactions.</p>
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
+                                <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Add more slides as needed -->
+    
         </div>
     </div>
+    
     <!-- Carousel End -->
 
 
@@ -184,7 +225,7 @@
                         <h6 class="text-secondary text-uppercase">Our Services</h6>
                         <h1 class="mb-5">Explore Our Services</h1>
                     </div>
-                    <div class="owl-carousel service-carousel position-relative wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="" data-wow-delay="0.1s">
                         <div class="bg-light p-4">
                             <div class="d-flex align-items-center justify-content-center border border-5 border-white mb-4" style="width: 75px; height: 75px;">
                                 <i class="fa fa-water fa-2x text-primary"></i>
@@ -241,7 +282,7 @@
                 <h6 class="text-secondary text-uppercase">Testimonial</h6>
                 <h1 class="mb-5">Our Clients Say!</h1>
             </div>
-            <div class="owl-carousel testimonial-carousel position-relative wow fadeInUp" data-wow-delay="0.1s">
+            <div class="" data-wow-delay="0.1s">
                 <div class="testimonial-item text-center">
                     <div class="testimonial-text bg-light text-center p-4 mb-4">
                         <p class="mb-0">It's not just about the services they provide; it's the way Barangay Nabunturan Barili Cebu builds relationships. Their team is responsive, knowledgeable, and always willing to go the extra mile.</p>
@@ -345,6 +386,22 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+    // Initialize Owl Carousel
+    $(document).ready(function(){
+        $('.header-carousel').owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 4000, // Set the autoplay interval in milliseconds (5 seconds in this example)
+            animateOut: 'fadeOut', // Set the animation type
+            dots: false, // Set to true if you want to show navigation dots
+        });
+    });
+</script>
 </body>
 
 </html>

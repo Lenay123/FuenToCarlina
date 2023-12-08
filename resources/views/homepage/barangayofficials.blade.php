@@ -27,7 +27,13 @@
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
 </head>
-
+<style>
+     .team-image {
+        width: 300px; /* Set the desired width */
+        height: 300px; /* Set the desired height */
+        object-fit: cover; /* Maintain aspect ratio and cover container */
+    }
+</style>
 <body>
 
 
