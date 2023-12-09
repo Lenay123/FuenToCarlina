@@ -282,6 +282,7 @@
                 <th class="table-plus datatable-nosort">Requestors</th>
                     <th>Requested Document</th>
                     <th>Reference Number</th>
+                    <th>Purpose</th>
                     <th>Status</th>
                     <th>Requested date</th>
                     <th>Action</th>
@@ -293,6 +294,14 @@
                         <td>{{ $document_request->full_name }}</td>
                         <td>{{ $document_request->document_type }}</td>
                         <td>{{ $document_request->tracker_number }}</td>
+                        <td>
+                          @if($document_request->purpose === 'other')
+                            {{ $document_request->other_purpose ?? 'N/A' }}
+                          @else
+                            {{ $document_request->purpose }}
+                          @endif
+                        </td>
+                        
                         <td>{{ $document_request->status }}</td>
                         <td>{{ $document_request->created_at->format('Y/m/d') }}</td>
                         <td>
