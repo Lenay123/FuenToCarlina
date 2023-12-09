@@ -304,16 +304,12 @@
                           </div>
                           <span class="fw-medium d-block mb-1">Barangay Indigency</span>
                           @php
-                          $barangayIdCount = 0; // Initialize the count to 0
+                          $barangayIndigenyCount = \App\Models\DocumentRequest::withTrashed()
+                              ->where('document_type', 'Barangay Indigency')
+                              ->count() ?? 0;
                       @endphp
-                      @foreach ($document_requests as $count)
-                          @if ($count->document_type === 'Barangay Indigency')
-                              @php
-                                  $barangayIdCount = $count->count; // Update the count if a record is found
-                              @endphp
-                          @endif
-                      @endforeach
-                          <h3 class="card-title mb-2">{{ $barangayIdCount }}</h3>
+                      
+                          <h3 class="card-title mb-2">{{ $barangayIndigenyCount }}</h3>
                           <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
                         </div>
                       </div>
@@ -345,16 +341,12 @@
                           </div>
                           <span>Barangay Business Permit</span>
                           @php
-                          $barangayIdCount = 0; // Initialize the count to 0
+                          $barangayBusinessPermitCount = \App\Models\DocumentRequest::withTrashed()
+                              ->where('document_type', 'Barangay Business Permit')
+                              ->count() ?? 0;
                       @endphp
-                      @foreach ($document_requests as $count)
-                          @if ($count->document_type === 'Barangay Business Permit')
-                              @php
-                                  $barangayIdCount = $count->count; // Update the count if a record is found
-                              @endphp
-                          @endif
-                      @endforeach
-                          <h3 class="card-title text-nowrap mb-1">{{ $barangayIdCount }}</h3>
+                      
+                          <h3 class="card-title text-nowrap mb-1">{{ $barangayBusinessPermitCount }}</h3>
                           <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
                         </div>
                       </div>
@@ -409,15 +401,11 @@
                           </div>
                           <span class="d-block mb-1">Barangay ID</span>
                           @php
-                          $barangayIdCount = 0; // Initialize the count to 0
-                      @endphp
-                      @foreach ($document_requests as $count)
-                          @if ($count->document_type === 'Barangay ID')
-                              @php
-                                  $barangayIdCount = $count->count; // Update the count if a record is found
-                              @endphp
-                          @endif
-                      @endforeach
+                              $barangayIdCount = \App\Models\DocumentRequest::withTrashed()
+                                  ->where('document_type', 'Barangay ID')
+                                  ->count() ?? 0;
+                          @endphp
+
                           <h3 class="card-title text-nowrap mb-2">{{ $barangayIdCount }}</h3>
                           <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
                         </div>
@@ -447,16 +435,12 @@
                           </div>
                           <span class="fw-medium d-block mb-1">Barangay Certificate</span>
                           @php
-                          $barangayIdCount = 0; // Initialize the count to 0
+                          $barangayCertificateCount = \App\Models\DocumentRequest::withTrashed()
+                              ->where('document_type', 'Barangay Certificate')
+                              ->count() ?? 0;
                       @endphp
-                      @foreach ($document_requests as $count)
-                          @if ($count->document_type === 'Barangay Certificate')
-                              @php
-                                  $barangayIdCount = $count->count; // Update the count if a record is found
-                              @endphp
-                          @endif
-                      @endforeach
-                          <h3 class="card-title mb-2">{{ $barangayIdCount }}</h3>
+                      
+                          <h3 class="card-title mb-2">{{  $barangayCertificateCount }}</h3>
                           <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
                         </div>
                       </div>
@@ -736,86 +720,98 @@ document.getElementById('exportChartButton1').addEventListener('click', function
 });
 
 
-    var ctxPie = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctxPie, {
-        type: 'pie',
-        data: {
-            labels: @json($document_requests->pluck('document_type')),
-            datasets: [{
-                data: @json($document_requests->pluck('count')),
-                backgroundColor: [
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#FF6384',
-                    '#4BC0C0',
-                    '#9966FF',
-                    // Add more colors as needed
-                ],
-            }],
-        },
-        options: {
-            responsive: true,
-        }
-    });
+// Fetch the data including soft-deleted requests
+var pieChartData = @json(\App\Models\DocumentRequest::withTrashed()
+    ->select('document_type', \DB::raw('COUNT(*) as count'))
+    ->groupBy('document_type')
+    ->get());
 
-
-     // Function to generate random colors
-     function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+var ctxPie = document.getElementById('pieChart').getContext('2d');
+var pieChart = new Chart(ctxPie, {
+    type: 'pie',
+    data: {
+        labels: pieChartData.map(item => item.document_type),
+        datasets: [{
+            data: pieChartData.map(item => item.count),
+            backgroundColor: [
+                '#36A2EB',
+                '#FFCE56',
+                '#FF6384',
+                '#4BC0C0',
+                '#9966FF',
+                // Add more colors as needed
+            ],
+        }],
+    },
+    options: {
+        responsive: true,
     }
+});
 
-    // Get the status labels and counts from PHP
-    var statusLabels = @json($statusCounts->pluck('status'));
-    var statusCounts = @json($statusCounts->pluck('count'));
 
-    // Exclude "delete" and "deleted" statuses
-    var excludedStatuses = ['delete', 'deleted'];
-    var filteredStatusLabels = statusLabels.filter(function (status) {
-        return !excludedStatuses.includes(status.toLowerCase());
-    });
-    var filteredStatusCounts = statusCounts.filter(function (_, index) {
-        return !excludedStatuses.includes(statusLabels[index].toLowerCase());
-    });
+// Function to generate random colors
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
-    // Generate an array of random colors for the remaining statuses
-    var backgroundColors = filteredStatusLabels.map(function() {
-        return getRandomColor();
-    });
+// Fetch the status labels and counts including soft-deleted records
+var statusData = @json(\App\Models\DocumentRequest::withTrashed()
+    ->select('status', \DB::raw('COUNT(*) as count'))
+    ->groupBy('status')
+    ->get());
 
-    var ctxBar = document.getElementById('barChart').getContext('2d');
-    var barChart = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: filteredStatusLabels,
-            datasets: [{
-                label: 'Number of Requests',
-                data: filteredStatusCounts,
-                backgroundColor: backgroundColors,
-            }],
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Status',
-                    },
+// Extract labels and counts
+var statusLabels = statusData.map(item => item.status);
+var statusCounts = statusData.map(item => item.count);
+
+// Exclude "delete" and "deleted" statuses
+var excludedStatuses = ['delete', 'deleted'];
+var filteredStatusLabels = statusLabels.filter(function (status) {
+    return !excludedStatuses.includes(status.toLowerCase());
+});
+var filteredStatusCounts = statusCounts.filter(function (_, index) {
+    return !excludedStatuses.includes(statusLabels[index].toLowerCase());
+});
+
+// Generate an array of random colors for the remaining statuses
+var backgroundColors = filteredStatusLabels.map(function() {
+    return getRandomColor();
+});
+
+var ctxBar = document.getElementById('barChart').getContext('2d');
+var barChart = new Chart(ctxBar, {
+    type: 'bar',
+    data: {
+        labels: filteredStatusLabels,
+        datasets: [{
+            label: 'Number of Requests',
+            data: filteredStatusCounts,
+            backgroundColor: backgroundColors,
+        }],
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Status',
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Requests',
-                    },
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Number of Requests',
                 },
             },
         },
-    });
+    },
+});
 
 </script>
                   

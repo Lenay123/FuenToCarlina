@@ -286,19 +286,19 @@ body {
 									<div class="form-group">
 										<label for="purpose" class="form-label"><b>Purpose:</b> <span class="text-danger">*</span></label>
 										<div class="input-group">
-										<select name="purpose" id="purpose" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="toggleOtherField()">
-											<option value="" selected disabled>Select a Purpose</option>
-											<option value="residency_verification" {{ old('purpose') == 'residency_verification' ? 'selected' : '' }}>Residency Verification</option>
-											<option value="business_permit" {{ old('purpose') == 'business_permit' ? 'selected' : '' }}>Business Permit Application</option>
-											<option value="legal_documentation" {{ old('purpose') == 'legal_documentation' ? 'selected' : '' }}>Legal Documentation</option>
-											<option value="community_service" {{ old('purpose') == 'community_service' ? 'selected' : '' }}>Community Service</option>
-											<option value="school_enrollment" {{ old('purpose') == 'school_enrollment' ? 'selected' : '' }}>School Enrollment</option>
-											<option value="government_transaction" {{ old('purpose') == 'government_transaction' ? 'selected' : '' }}>Government Transaction</option>
-											<option value="scholarship_application" {{ old('purpose') == 'scholarship_application' ? 'selected' : '' }}>Scholarship Application</option>
-											<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Others</option>
-											<!-- Add more options as needed -->
-										</select>
-										<div class="input-group-append">
+											<select name="purpose" id="purpose" class="form-control" required style="border: 0.5px solid #B0AEAE;" onchange="toggleOtherField()">
+												<option value="" selected disabled>Select a Purpose</option>
+												<option value="Residency Verification" {{ old('purpose') == 'Residency Verification' ? 'selected' : '' }}>Residency Verification</option>
+												<option value="Business Permit Application" {{ old('purpose') == 'Business Permit Application' ? 'selected' : '' }}>Business Permit Application</option>
+												<option value="Legal Documentation" {{ old('purpose') == 'Legal Documentation' ? 'selected' : '' }}>Legal Documentation</option>
+												<option value="Community Service" {{ old('purpose') == 'Community Service' ? 'selected' : '' }}>Community Service</option>
+												<option value="School Enrollment" {{ old('purpose') == 'School Enrollment' ? 'selected' : '' }}>School Enrollment</option>
+												<option value="Government Transaction" {{ old('purpose') == 'Government Transaction' ? 'selected' : '' }}>Government Transaction</option>
+												<option value="Scholarship Application" {{ old('purpose') == 'Scholarship Application' ? 'selected' : '' }}>Scholarship Application</option>
+												<option value="other" {{ old('purpose') == 'other' ? 'selected' : '' }}>Others</option>
+												<!-- Add more options as needed -->
+											</select>
+											<div class="input-group-append">
 											<span class="input-group-text"><i class="fas fa-caret-down"></i></span>
 										</div>
 									</div>
