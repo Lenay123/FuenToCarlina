@@ -229,34 +229,43 @@ class DashboardController extends Controller
 
     public function showBarangayIndigencyTransaction()
     {
-    $document_requests = DocumentRequest::where('document_type', 'Barangay Indigency')->get();
-
-    return view('adminpage.BarangayIndigencyTransaction', compact('document_requests'));
-
+        $document_requests = DocumentRequest::withTrashed()
+            ->where('document_type', 'Barangay Indigency')
+            ->get();
+    
+        return view('adminpage.BarangayIndigencyTransaction', compact('document_requests'));
     }
+    
 
     public function showBarangayCertificateTransaction()
     {
-    $document_requests = DocumentRequest::where('document_type', 'Barangay Certificate')->get();
-
-    return view('adminpage.BarangayCertificateTransaction', compact('document_requests'));
-
+        $document_requests = DocumentRequest::withTrashed()
+            ->where('document_type', 'Barangay Certificate')
+            ->get();
+    
+        return view('adminpage.BarangayCertificateTransaction', compact('document_requests'));
     }
+
 
     public function showBarangayIDTransaction()
     {
-    $document_requests = DocumentRequest::where('document_type', 'Barangay ID')->get();
-
-    return view('adminpage.BarangayIDTransaction', compact('document_requests'));
-
+        $document_requests = DocumentRequest::withTrashed()
+            ->where('document_type', 'Barangay ID')
+            ->get();
+    
+        return view('adminpage.BarangayIDTransaction', compact('document_requests'));
     }
+    
 
     public function showBarangayPermitTransaction()
     {
-        $document_requests = DocumentRequest::where('document_type', 'Barangay Business Permit')->get();
+        $document_requests = DocumentRequest::withTrashed()
+            ->where('document_type', 'Barangay Business Permit')
+            ->get();
     
         return view('adminpage.BarangayPermitTransaction', compact('document_requests'));
     }
+    
     
     // change of status
    
