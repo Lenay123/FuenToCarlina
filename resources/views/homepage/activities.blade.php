@@ -25,7 +25,11 @@
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
 </head>
-
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+ }
+ </style>
 <body>
 
 

@@ -25,6 +25,11 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <style>
+
+body {
+    font-family: 'Poppins', sans-serif;
+ }
+
      .team-image {
         width: 300px; /* Set the desired width */
         height: 300px; /* Set the desired height */
