@@ -122,7 +122,7 @@
             
             <!-- Additional slides -->
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{ asset('/img/bg.jpg')}}" style="object-fit: cover;">
+                <img class="img-fluid" src="{{ asset('/img/bg2.jpg')}}" style="object-fit: cover;">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(68, 65, 65, 0.4);">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -187,7 +187,7 @@
 
 
     <!-- Fact Start -->
-    <div class="container-fluid fact bg-dark my-5 py-5" style="background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, 0.4)), url('/img/bg.jpg') center center no-repeat;">
+    <div class="container-fluid fact bg-dark my-5 py-5" style="background: linear-gradient(rgba(89, 86, 86, 0.4), rgba(0, 0, 0, 0.4)), url('/img/bg2.jpg') center center no-repeat;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
