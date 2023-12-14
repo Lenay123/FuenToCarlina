@@ -124,7 +124,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/adminpage/EditResident/{id}', [RegistrationController::class, 'editResident'])->name('adminpage.editResident');
     Route::put('/adminpage/UpdateResident/{id}', [RegistrationController::class, 'updateResident'])->name('adminpage.updateResident');
     Route::get('/adminpage/AdminDashboard', [DashboardController::class, 'showCount'])->name('dashboard');
-    Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('certificate.transaction');
     Route::get('/adminpage/BarangayIDTransaction', [DashboardController::class, 'showBarangayIDTransaction'])->name('id.transaction');
     Route::get('/adminpage/BarangayIndigencyTransaction', [DashboardController::class, 'showBarangayIndigencyTransaction'])->name('indigency.transaction');
     Route::get('/adminpage/BarangayPermitTransaction', [DashboardController::class, 'showBarangayPermitTransaction'])->name('permit.transaction');
@@ -140,12 +139,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::put('/adminpage/UpdateOfficial/{id}', [OfficialController::class, 'updateOfficial'])->name('adminpage.updateOfficial');
     Route::get('/adminpage/EditActivity/{id}', [ActivityController::class, 'editActivity'])->name('adminpage.editActivity');
     Route::put('/adminpage/UpdateActivity/{id}', [ActivityController::class, 'updateActivity'])->name('adminpage.updateActivity');
-    Route::delete('/adminpage/DeleteCertificate/{id}', [DashboardController::class, 'deleteCertificate'])->name('adminpage.deleteCertificate');
+    Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('adminpage.showBarangayCertificateTransaction');
     Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('adminpage.showBarangayCertificateTransaction');
     Route::delete('/adminpage/DeleteID/{id}', [DashboardController::class, 'deleteID'])->name('adminpage.deleteID');
-    Route::get('/adminpage/BarangayCertificateTransaction', [DashboardController::class, 'showBarangayCertificateTransaction'])->name('adminpage.showBarangayCertificateTransaction');
+    Route::delete('/adminpage/DeleteCertificate/{id}', [DashboardController::class, 'deleteCertificate'])->name('adminpage.deleteCertificate');
     Route::delete('/adminpage/DeleteIndigency/{id}', [DashboardController::class, 'deleteIndigency'])->name('adminpage.deleteIndigency');
-    Route::delete('/adminpage/DeletePermit/{id}', [DashboardController::class, 'deletePermit'])->name('adminpage.deletePermit');
+    Route::delete('/adminpage/deletePermit/{id}', [DashboardController::class, 'deletePermit'])->name('adminpage.deletePermit');
     Route::delete('/adminpage/deleteTransaction/{id}', [DashboardController::class, 'deleteTransaction'])->name('adminpage.deleteTransaction');
 });
 

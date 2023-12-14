@@ -311,8 +311,9 @@
                             <form method="POST" action="{{ route('adminpage.deletePermit', $document_request->id) }}" onsubmit="return confirm('Are you sure you want to delete this document request?')">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-danger">Delete</button>
-                          </form>                            @endif
+                              <button type="submit" class="btn btn-danger" onclick="console.log('Form submitted!')">Delete</button>
+                            </form>                          
+                            @endif
                         </td>
                     </tr>
                 @endforeach
