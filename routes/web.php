@@ -13,6 +13,7 @@ use App\Http\Controllers\OfficialController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SoftDeleteController;
+use App\Http\Controllers\ForgotPassword;
 
 use App\Http\Controllers\OtpVerificationController;
 /*
@@ -77,6 +78,10 @@ Route::get('/homepage/barangayofficials', [OfficialController::class, 'showOffic
 Route::get('/homepage/testimonial', [DocumentController::class, 'testimonial'])->name('testimonial');
 Route::get('/homepage/contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('/homepage/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
+Route::get('/homepage/resetpassword', [ForgotPassword::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('/homepage/resetpassword', [ForgotPassword::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('resetpassword/{token}', [ForgotPassword::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPassword::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 
