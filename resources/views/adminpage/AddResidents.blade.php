@@ -265,54 +265,54 @@
                 <div class="card-body" >
                 <form style="margin-left: 20px; margin-right: 20px;" class="row g-3" action="{{ route('adminpage.storeResident') }}" method="POST" enctype="multipart/form-data">
                   @csrf
-                      <div class="col-md-6">
-                        <label for="firstname" class="form-label">First Name:</label>
-                        <input style=" border: 1px solid rgb(96, 90, 90);"  type="text" class="form-control" name="first_name" required>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="lastname" class="form-label">Last Name:</label>
-                        <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="last_name" required>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="lastname" class="form-label">Middle Name:</label>
-                        <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="middle_name" required>
-                      </div>
-                      <div class="col-md-6">
-                          <label for="email" class="form-label">Email:</label>
-                          <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="email" required>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="inputPassword4" class="form-label">Phone:</label>
-                          <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="contact_number" required>
-                        </div>
-                        <div class="col-md-6">
-                              <label for="address" >Address:</label>
-                              <select class="form-control" name="address" required style=" border: 1px solid rgb(96, 90, 90);">
-                                  <option value="Proper Nabunturan Barili Cebu">Proper Nabunturan, Barili, Cebu</option>
-                                  <option value="Sitio San Roque Nabunturan Barili Cebu">Sitio San Roque Nabunturan, Barili, Cebu</option>
-                                  <option value="Sitio Cabinay Nabunturan Barili Cebu">Sitio Cabinay Nabunturan, Barili, Cebu</option>
+                  <div class="col-md-6">
+                    <label for="firstname" class="form-label">First Name:</label>
+                    <input style=" border: 1px solid rgb(96, 90, 90);"  type="text" class="form-control" name="first_name"  value="{{ old('first_name') }}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastname" class="form-label">Last Name:</label>
+                    <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}"  required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastname" class="form-label">Middle Name:</label>
+                    <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="middle_name" value="{{ old('middle_name') }}"  required>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="email" class="form-label">Email:</label>
+                      <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="email" value="{{ old('email') }}"  required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label">Phone:</label>
+                      <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="contact_number" value="{{ old('contact_number') }}"  required>
+                    </div>
+                    <div class="col-md-6">
+                          <label for="address" >Address:</label>
+                          <select class="form-control" name="address" required style=" border: 1px solid rgb(96, 90, 90);">
+                            <option value="Proper Nabunturan Barili Cebu" {{ old('address') == 'Proper Nabunturan Barili Cebu' ? 'selected' : '' }}>Proper Nabunturan Barili Cebu</option>
+                            <option value="Sitio San Roque Nabunturan Barili Cebu" {{ old('address') == 'Sitio San Roque Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio San Roque Nabunturan Barili Cebu</option>
+                            <option value="Sitio Cabinay Nabunturan Barili Cebu" {{ old('address') == 'Sitio Cabinay Nabunturan Barili Cebu' ? 'selected' : '' }}>Sitio Cabinay Nabunturan Barili Cebu</option>
                               </select>
-                          </div>
-                          <div class="col-md-6">
-                          <label for="birthday">Birthday:</label>
-                          <input type="date" class="form-control" name="birthday" required  style=" border: 1px solid rgb(96, 90, 90);">
                       </div>
-                          <div class="col-md-6">
-                              <label for="gender">Gender:</label>
-                              <select class="form-control" name="gender" required style=" border: 1px solid rgb(96, 90, 90);">
-                                  <option value="male">Male</option>
-                                  <option value="female">Female</option>
-                              </select>
-                          </div>
                       <div class="col-md-6">
-                              <label for="password">Password:</label>
-                              <input type="password" class="form-control" name="password" required style=" border: 1px solid rgb(96, 90, 90);">
-                          </div>
-      
-                          <div class="col-md-6">
-                              <label for="password_confirmation">Confirm Password:</label>
-                              <input type="password" class="form-control" name="password_confirmation" required style=" border: 1px solid rgb(96, 90, 90);">
-                          </div>
+                      <label for="birthday">Birthday:</label>
+                      <input type="date" class="form-control" name="birthday" required  value="{{ old('birthday') }}" style=" border: 1px solid rgb(96, 90, 90);">
+                  </div>
+                      <div class="col-md-6">
+                          <label for="gender">Gender:</label>
+                          <select class="form-control" name="gender" required style=" border: 1px solid rgb(96, 90, 90);">
+                            <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                          </select>
+                      </div>
+                  <div class="col-md-6">
+                          <label for="password">Password:</label>
+                          <input type="password" class="form-control" name="password" required style=" border: 1px solid rgb(96, 90, 90);">
+                      </div>
+        
+                      <div class="col-md-6">
+                          <label for="password_confirmation">Confirm Password:</label>
+                          <input type="password" class="form-control" name="password_confirmation" required style=" border: 1px solid rgb(96, 90, 90);">
+                      </div>
                       <br><br><br><br>
                       <div class="container">
                   <div class="row">
