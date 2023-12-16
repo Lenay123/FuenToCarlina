@@ -53,12 +53,13 @@
         }
 
         .left-box {
-            height: 100px;
-            overflow: hidden;
+            display: none; /* hide the left-box in mobile view */
         }
-
         .right-box {
             padding: 20px;
+        }
+        .featured-image {
+            display: none; /* hide the featured image in mobile view */
         }
     }
 </style>
@@ -68,7 +69,7 @@
         <!-- Login Container -->
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
             <!-- Left Box -->
-            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #C70039;">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
                 <div class="featured-image mb-3">
                     <img src="{{ asset('img/image (5).png') }}" class="img-fluid" style="width: 250px;">
                 </div>
@@ -91,7 +92,7 @@
                     <form action="{{ route('login.post') }}" method="POST">
                         @csrf
                         <div class="header-text mb-4">
-                            <h2>Hello, Again</h2>
+                            <h2>Hello, Again!</h2>
                             <p>We are happy to have you back.</p>
                         </div>
 
