@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserCredentialsEmail;
+use App\Mail\SecretaryCreated;
+
 
 class RegistrationController extends Controller
 {
@@ -79,13 +83,49 @@ class RegistrationController extends Controller
         return view('adminpage.AddSecretary');
     }
     
+    // public function storeResident(Request $request)
+    // {
+    //     $request->validate([
+    //         'first_name' => 'required|string|max:255',
+    //         'last_name' => 'required|string|max:255',
+    //         'middle_name' => 'nullable|string|max:255',
+    //         'email' => 'required|email|unique:secretaries|unique:users', // Check both 'secretaries' and 'users' tables
+    //         'password' => 'required|string|min:8|confirmed',
+    //         'birthday' => 'required|date',
+    //         'contact_number' => 'required|numeric',
+    //         'gender' => 'required|in:male,female',
+    //         'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS),
+    //     ]);        
+    
+    //     $user = User::create([
+    //         'first_name' => $request->input('first_name'),
+    //         'last_name' => $request->input('last_name'),
+    //         'middle_name' => $request->input('middle_name'),
+    //         'email' => $request->input('email'),
+    //         'password' => Hash::make($request->input('password')),
+    //         'birthday' => $request->input('birthday'),
+    //         'contact_number' => $request->input('contact_number'),
+    //         'gender' => $request->input('gender'),
+    //         'address' => $request->input('address'),
+    //         'role' => 'user',
+    //     ]);
+    
+    //     if (!$user) {
+    //         return redirect(route('/adminpage/AddResident'))->with("error", "Try again");
+    //     }
+    //     $user->markEmailAsVerified();
+
+    //     return redirect()->route('adminpage.storeResident')->with("success", "Resident is added successfully");
+    // }
+    
+
     public function storeResident(Request $request)
     {
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:secretaries|unique:users', // Check both 'secretaries' and 'users' tables
+            'email' => 'required|email|unique:secretaries|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'birthday' => 'required|date',
             'contact_number' => 'required|numeric',
@@ -109,12 +149,22 @@ class RegistrationController extends Controller
         if (!$user) {
             return redirect(route('/adminpage/AddResident'))->with("error", "Try again");
         }
+    
+        $password = $request->input('password');
+    
+        // Send email to the user with their credentials
+        try {
+            Mail::to($user->email)->send(new UserCredentialsEmail($user, $password));
+        } catch (\Exception $e) {
+                // Log the exception for debugging
+                \Log::error('Email sending failed: ' . $e->getMessage());
+            return redirect()->route('adminpage.storeResident')->with("error", "Error sending email");
+        }
+    
         $user->markEmailAsVerified();
-
+    
         return redirect()->route('adminpage.storeResident')->with("success", "Resident is added successfully");
     }
-    
-
 
 
     public function deleteResident($id)
@@ -182,7 +232,7 @@ class RegistrationController extends Controller
             'gender' => 'required|in:male,female',
             'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS),
         ]);
-    
+
         $secretary = User::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -195,11 +245,15 @@ class RegistrationController extends Controller
             'address' => $request->input('address'),
             'role' => 'secretary',
         ]);
-    
+
         if (!$secretary) {
             return redirect(route('/adminpage/AddSecretary'))->with("error", "Try again");
         }
-    
+
+        // Send email to the newly created secretary
+
+        Mail::to($secretary->email)->send(new SecretaryCreated($secretary, $request->input('password')));
+
         return redirect()->route('adminpage.storeSecretary')->with("success", "Secretary is added successfully");
     }
     

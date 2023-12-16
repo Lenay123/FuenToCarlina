@@ -237,28 +237,28 @@
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
-          <div class="content-wrapper">
+         
             <!-- Content -->
             <div class="mt-5">
-              @if($errors->any())
+              @if($errors->any() || session()->has('error') || session()->has('success'))
                   <div class="col-12">
-                      @foreach($errors->all() as $error)
-                          <div class="alert alert-danger">{{$error}}</div>
-    
-                      @endforeach
+                      @if($errors->any())
+                          @foreach($errors->all() as $error)
+                              <div class="alert alert-danger">{{$error}}</div>
+                          @endforeach
+                      @endif
+          
+                      @if(session()->has('error'))
+                          <div class="alert alert-danger">{{session('error')}}</div>
+                      @endif
+          
+                      @if(session()->has('success'))
+                          <div class="alert alert-success">{{session('success')}}</div>
+                      @endif
                   </div>
               @endif
-    
-              @if(session()->has('error'))
-              <div class="alert alert-danger">{{session('error')}}</div>
-    
-              @endif
-    
-              @if(session()->has('success'))
-              <div class="alert alert-success">{{session('success')}}</div>
-    
-              @endif
           </div>
+          <div class="content-wrapper">
     
             <div class="card" style="margin-left:10px; margin-right:10px">
         <div class="card-body" >
