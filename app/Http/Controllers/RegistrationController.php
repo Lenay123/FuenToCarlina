@@ -228,7 +228,7 @@ class RegistrationController extends Controller
             'email' => 'required|email|unique:secretaries|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'birthday' => 'required|date',
-            'contact_number' => 'required|string|max:20',
+            'contact_number' => 'required|numeric|max:11',
             'gender' => 'required|in:male,female',
             'address' => 'required|in:' . implode(',', User::ADDRESS_OPTIONS),
         ]);

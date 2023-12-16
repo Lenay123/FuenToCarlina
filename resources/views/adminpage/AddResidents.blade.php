@@ -283,7 +283,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">Phone:</label>
-                      <input style=" border: 1px solid rgb(96, 90, 90);" type="text" class="form-control" name="contact_number" value="{{ old('contact_number') }}"  required>
+                      <input style=" border: 1px solid rgb(96, 90, 90);" type="number" class="form-control" name="contact_number" value="{{ old('contact_number') }}"  required>
                     </div>
                     <div class="col-md-6">
                           <label for="address" >Address:</label>
