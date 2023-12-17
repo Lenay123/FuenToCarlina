@@ -87,10 +87,10 @@
                     <div class="input-group mb-3">
                         <input type="text" id="email_address" class="form-control" name="email" required autofocus placeholder="Please input email">
                         <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                        @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                        @endif
                     </div>
+                    @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                @endif
                     
                     <div class="input-group mb-3">
                         <input type="password" id="password" class="form-control" name="password" required autofocus placeholder="Input Password">
