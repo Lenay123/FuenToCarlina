@@ -19,7 +19,7 @@ class ForgotPassword extends Controller
     {
        return view('homepage.resetpassword');
     }
-
+    
     public function submitForgetPasswordForm(Request $request)
     {
         // Validate the email format and check if it exists in the users table
@@ -82,7 +82,6 @@ public function submitResetPasswordForm(Request $request)
         'password' => 'required|string|min:6|confirmed',
     ]);
 
-    // Check if the reset password entry is valid
     $resetPasswordEntry = DB::table('reset_password')
         ->where('email', $request->email)
         ->where('token', $request->token)
@@ -94,18 +93,9 @@ public function submitResetPasswordForm(Request $request)
         return redirect()->back()->withInput()->with('error', 'Invalid or expired token!');
     }
 
-    // Find the user associated with the email and token
-    $user = User::where('email', $request->email)
-        ->where('reset_password_token', $request->token)
-        ->first();
-
-    // Verify that the user with the specific token exists
-    if (!$user) {
-        return redirect()->back()->withInput()->with('error', 'Invalid email address or token!');
-    }
-
     // Update the user's password
-    $user->update(['password' => Hash::make($request->password)]);
+    $user = User::where('email', $request->email)
+        ->update(['password' => Hash::make($request->password)]);
 
     // Mark the token as used
     DB::table('reset_password')
