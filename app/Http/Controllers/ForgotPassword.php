@@ -9,6 +9,10 @@ use Hash;
 use Carbon\Carbon; 
 use App\Models\User; 
 use Mail; 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\View;
+
 class ForgotPassword extends Controller
 {
     public function showForgetPasswordForm()
@@ -17,9 +21,22 @@ class ForgotPassword extends Controller
     }
     public function submitForgetPasswordForm(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
+        // Validate the email format and check if it exists in the users table
+        $validator = Validator::make($request->all(), [
+            'email' => [
+                'required',
+                'email',
+                Rule::exists('users')->where(function ($query) use ($request) {
+                    $query->where('email', $request->email);
+                }),
+            ],
         ]);
+    
+        if ($validator->fails()) {
+            // Set a custom session variable to indicate invalid email
+            session()->flash('invalidEmail', 'Invalid email address.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     
         $token = Str::random(64);
     

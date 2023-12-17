@@ -49,7 +49,9 @@
 
     @media only screen and (max-width: 768px) {
         .box-area {
-            margin: 0 10px;
+            margin: 0 6px;
+            max-width: none;
+        height: auto; /* Reset height for small screens */
         }
 
         .left-box {
@@ -67,7 +69,7 @@
     <!-- Main Container -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <!-- Login Container -->
-        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="row border rounded-5 p-1 bg-white shadow box-area">
             <!-- Left Box -->
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
                 <div class="featured-image mb-3">
@@ -162,24 +164,21 @@
                         <!-- Email Input -->
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input type="email" id="email" class="form-control" name="email" required>
+                            
                         </div>
     
                         <button type="submit" class="btn btn-primary" >Submit</button>
                     </form>
-    
-                    <!-- Success Message -->
-                    <div id="forgotPasswordSuccess" style="display: none;" class="alert alert-success mt-3">
-                        Password reset email sent successfully. Please check your email.
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    <script>
+        @if(session('invalidEmail'))
+            alert("{{ session('invalidEmail') }}");
+        @endif
+    </script>
 
     
     <script>
