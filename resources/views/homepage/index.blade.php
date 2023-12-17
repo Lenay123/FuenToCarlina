@@ -111,8 +111,8 @@ body {
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Providing long-lasting impact to communities by enabling a holistic and data-driven transformation of local leaderships from the Barangays to LGU's.</p>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Nabunturan, Barili, Cebu</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Nabunturan is a barangay in the municipality of Barili, in the province of Cebu. Its population as determined by the 2020 Census was 877. This represented 1.09% of the total population of Barili.</p>
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
                                 <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
                             </div>
@@ -128,7 +128,7 @@ body {
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Nabunturan, Barili, Cebu</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Empowering Communities, Transforming Leadership: A Data-Driven Journey from Barangays to LGUs for Lasting Impact</p>
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
                                 <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
@@ -144,7 +144,7 @@ body {
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Barangay Connect.</h1>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Nabunturan, Barili, Cebu</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Simplify Your Document Requests: Easy Online Process for Quick and Convenient Transactions.</p>
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">YOU CAN APPLY,  ANYTIME,  ANYWHERE</h5>
                                 <a href="homepage/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Request Now</a>
